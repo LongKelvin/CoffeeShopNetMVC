@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CoffeeShop.Models.Models
 {
     [Table("OrderDetails")]
-    public class OrderDetail 
+    public class OrderDetail
     {
         [Key]
         [Column(Order = 1)]
@@ -20,7 +20,7 @@ namespace CoffeeShop.Models.Models
 
         [Display(Name = "Quantity")]
         public int? Quantity { get; set; } // int, null
-      
+
         public virtual Order Order { get; set; }
 
         public virtual Product Product { get; set; }

@@ -3,7 +3,8 @@ using CoffeeShop.Models.Models;
 
 namespace CoffeeShop.Data.Repositories
 {
-    public interface IProductRepository : IRepository<Product>
+    public interface ISupportOnlineRepository : IRepository<SupportOnline>
+
     {
     }
 }
