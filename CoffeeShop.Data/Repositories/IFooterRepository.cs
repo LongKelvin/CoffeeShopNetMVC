@@ -1,6 +1,6 @@
 ﻿namespace CoffeeShop.Data.Repositories
 {
-    public interface IProductRepository
+    public interface IFooterRepository
     {
     }
 }

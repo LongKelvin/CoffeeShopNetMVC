@@ -1,6 +1,7 @@
 ﻿namespace CoffeeShop.Data.Repositories
 {
-    public interface IProductRepository
+    public interface ITagRepository
+
     {
     }
 }
