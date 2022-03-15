@@ -3,7 +3,7 @@ using CoffeeShop.Models.Models;
 
 namespace CoffeeShop.Data.Repositories
 {
-    public interface ISlideRepository : IRepository<Slide>
+    public interface IVisitorStatisticRepository : IRepository<VisitorStatistic>
 
     {
     }

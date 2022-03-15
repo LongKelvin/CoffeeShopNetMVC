@@ -79,11 +79,11 @@
     <Compile Include="Repositories\ISupportOnlineRepository.cs" />
     <Compile Include="Repositories\IMenuGroupRepository.cs" />
     <Compile Include="Repositories\ISystemConfigRepository.cs" />
-    <Compile Include="Repositories\IVisitorStaticRepository.cs" />
+    <Compile Include="Repositories\IVisitorStatisticRepository.cs" />
     <Compile Include="Repositories\ITagRepository.cs" />
     <Compile Include="Repositories\ISlideRepository.cs" />
     <Compile Include="Repositories\ProductCategoryRepository.cs" />
-    <Compile Include="Repositories\VisitorStaticRepository.cs" />
+    <Compile Include="Repositories\VisitorStatisticRepository.cs" />
     <Compile Include="Repositories\SystemConfigRepository.cs" />
     <Compile Include="Repositories\SupportOnlineRepository.cs" />
     <Compile Include="Repositories\SlideRepository.cs" />
