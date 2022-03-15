@@ -61,7 +61,16 @@
     <Compile Include="Insfrastructure\IUnitOfWork.cs" />
     <Compile Include="Insfrastructure\RepositoryBase.cs" />
     <Compile Include="Insfrastructure\UnitOfWork.cs" />
+    <Compile Include="Migrations\202203150441578_InitialDatabase.cs" />
+    <Compile Include="Migrations\202203150441578_InitialDatabase.designer.cs">
+      <DependentUpon>202203150441578_InitialDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IProductCategoryRepository.cs" />
+    <Compile Include="Repositories\IProductRepository.cs" />
+    <Compile Include="Repositories\ProductCategoryRepository.cs" />
+    <Compile Include="Repositories\ProductRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -78,7 +87,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repositories\" />
+    <EmbeddedResource Include="Migrations\202203150441578_InitialDatabase.resx">
+      <DependentUpon>202203150441578_InitialDatabase.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
