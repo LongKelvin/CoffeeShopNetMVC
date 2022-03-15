@@ -2,7 +2,6 @@ using CoffeeShop.Models.Abstract;
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,9 +12,8 @@ namespace CoffeeShop.Models.Models
     {
         public Post()
         {
-         this.Tags = new HashSet<Tag>();   
+            this.Tags = new HashSet<Tag>();
         }
-
 
         [MaxLength(250)]
         [StringLength(250)]
@@ -93,7 +91,6 @@ namespace CoffeeShop.Models.Models
         [ForeignKey("ID")]
         public virtual PostCategory PostCategory { get; set; }
 
-      
         public virtual ICollection<Tag> Tags { get; set; }
     }
 }

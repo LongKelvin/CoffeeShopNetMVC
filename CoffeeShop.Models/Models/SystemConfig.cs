@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,8 +6,6 @@ namespace CoffeeShop.Models.Models
     [Table("SystemConfigs")]
     public class SystemConfig : BaseEntity
     {
-       
-
         [MaxLength(50)]
         [StringLength(50)]
         [Display(Name = "Code")]

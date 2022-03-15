@@ -2,21 +2,19 @@ using CoffeeShop.Models.Abstract;
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoffeeShop.Models.Models
 {
     [Table("ProductCategories")]
-    public class ProductCategory : BaseEntity, IAuditable,ISeoable,ISwitchable
+    public class ProductCategory : BaseEntity, IAuditable, ISeoable, ISwitchable
     {
         public ProductCategory()
         {
             this.Products = new HashSet<Product>();
         }
 
-       
         [MaxLength(250)]
         [StringLength(250)]
         [Required(ErrorMessage = "Name is required")]

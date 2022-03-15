@@ -2,7 +2,6 @@ using CoffeeShop.Models.Abstract;
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -70,8 +69,6 @@ namespace CoffeeShop.Models.Models
         [StringLength(500)]
         [Display(Name = "Description")]
         public string Description { get; set; } // nvarchar(500), null
-
-       
 
         [MaxLength(250)]
         [StringLength(250)]

@@ -1,8 +1,5 @@
 using CoffeeShop.Models.Abstract;
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,8 +8,6 @@ namespace CoffeeShop.Models.Models
     [Table("Pages")]
     public class Page : BaseEntity, ISeoable, ISwitchable
     {
-       
-
         [MaxLength(250)]
         [StringLength(250)]
         [Display(Name = "Name")]

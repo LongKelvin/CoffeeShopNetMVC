@@ -1,13 +1,11 @@
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoffeeShop.Models.Models
 {
     [Table("Tags")]
-    public class Tag 
+    public class Tag
     {
         public Tag()
         {
@@ -32,7 +30,6 @@ namespace CoffeeShop.Models.Models
         [Display(Name = "Type")]
         public string Type { get; set; } // varchar(50), null
 
-      
         public virtual ICollection<Post> Posts { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }

@@ -2,7 +2,6 @@ using CoffeeShop.Models.Abstract;
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,7 +14,6 @@ namespace CoffeeShop.Models.Models
         {
             this.OrderDetails = new HashSet<OrderDetail>();
             this.Tags = new HashSet<Tag>();
-           
         }
 
         [MaxLength(250)]
@@ -105,7 +103,5 @@ namespace CoffeeShop.Models.Models
 
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
-
-       
     }
 }

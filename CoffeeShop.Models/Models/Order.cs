@@ -2,7 +2,6 @@ using CoffeeShop.Models.Abstract;
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,7 +14,6 @@ namespace CoffeeShop.Models.Models
         {
             this.OrderDetails = new HashSet<OrderDetail>();
         }
-
 
         [MaxLength(250)]
         [StringLength(250)]
@@ -65,6 +63,7 @@ namespace CoffeeShop.Models.Models
         [Required(ErrorMessage = "Payment Status is required")]
         [Display(Name = "Payment Status")]
         public string PaymentStatus { get; set; } // nvarchar(50), not null
+
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public bool Status { get; set; }
     }
