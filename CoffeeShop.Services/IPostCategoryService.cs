@@ -17,7 +17,7 @@ namespace CoffeeShop.Services
         void Delete(int id);
         IEnumerable<PostCategory> GetAll();
         IEnumerable<PostCategory> GetAllPaging(int page, int pageSize, out int totalRow);
-        IEnumerable<PostCategory> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow);
+        IEnumerable<PostCategory> GetAllByParentId(int parentId);
         PostCategory GetById(int id);
         void SaveChanges();
     }

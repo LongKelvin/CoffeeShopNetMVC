@@ -40,7 +40,7 @@ namespace CoffeeShop.Services
         public IEnumerable<Post> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow)
         {
             //TODO: Select all post by tag
-            return _postRepository.GetMultiPaging(x => x.Status == true, out totalRow, page, pageSize);
+            return _postRepository.GetAllByTag(tag, out totalRow, page, pageSize);
         }
 
         public IEnumerable<Post> GetAllPaging(int page, int pageSize, out int totalRow)
@@ -61,6 +61,11 @@ namespace CoffeeShop.Services
         public void Update(Post post)
         {
             _postRepository.Update(post);
+        }
+
+        public IEnumerable<Post> GetAllByCategoryPaging(int categoryId, int page, int pageSize, out int totalRow)
+        {
+            return _postRepository.GetMultiPaging(x => x.Status == true && x.CategoryID == categoryId, out totalRow, page, pageSize,new string[] { "PostCategory" });
         }
     }
 }

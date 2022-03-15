@@ -37,11 +37,11 @@ namespace CoffeeShop.Services
             return _postCategoryRepository.GetAll();
         }
 
-        public IEnumerable<PostCategory> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow)
-        {
-            //TODO: Select all PostCategory by tag
-            return _postCategoryRepository.GetMultiPaging(x => x.Status == true, out totalRow, page, pageSize);
-        }
+        //public IEnumerable<PostCategory> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow)
+        //{
+        //    //TODO: Select all PostCategory by tag
+        //    return _postCategoryRepository.GetMultiPaging(x => x.Status == true, out totalRow, page, pageSize);
+        //}
 
         public IEnumerable<PostCategory> GetAllPaging(int page, int pageSize, out int totalRow)
         {
@@ -61,6 +61,11 @@ namespace CoffeeShop.Services
         public void Update(PostCategory postCategory)
         {
             _postCategoryRepository.Update(postCategory);
+        }
+
+        public IEnumerable<PostCategory> GetAllByParentId(int parentId)
+        {
+            return _postCategoryRepository.GetMulti(x => x.Status == true && x.ParentID == parentId);
         }
     }
 }

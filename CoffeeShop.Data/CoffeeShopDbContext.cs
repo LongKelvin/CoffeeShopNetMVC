@@ -13,7 +13,7 @@ namespace CoffeeShop.Data
     {
         public CoffeeShopDbContext() : base("CoffeeShopConnection")
         {
-            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.LazyLoadingEnabled = true;
 
         }
 
