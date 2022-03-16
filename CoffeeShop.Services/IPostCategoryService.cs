@@ -6,13 +6,13 @@ namespace CoffeeShop.Services
 {
     public interface IPostCategoryService
     {
-        void Add(PostCategory postCategory);
+        PostCategory Add(PostCategory postCategory);
 
         void Update(PostCategory postCategory);
 
-        void Delete(PostCategory postCategory);
+        PostCategory Delete(PostCategory postCategory);
 
-        void Delete(int id);
+        PostCategory Delete(int id);
 
         IEnumerable<PostCategory> GetAll();
 

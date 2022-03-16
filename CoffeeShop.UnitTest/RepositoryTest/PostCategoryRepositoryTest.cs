@@ -5,6 +5,7 @@ using System;
 using CoffeeShop.Data.Insfrastructure;
 using CoffeeShop.Data.Repositories;
 using CoffeeShop.Models.Models;
+using System.Linq;
 
 namespace CoffeeShop.UnitTest
 {
@@ -43,6 +44,7 @@ namespace CoffeeShop.UnitTest
             Assert.IsNotNull(createPostCategory);
             Assert.IsNotNull(loadedPostCategory);
             Assert.AreEqual(createPostCategory.Name, loadedPostCategory.Name);
+    
         }
 
         [TestMethod]
@@ -51,7 +53,16 @@ namespace CoffeeShop.UnitTest
             var result = postCategoryRepository.GetById(1);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("Test", result.Alias);
+            Assert.AreEqual("Test-PostCategory", result.Name);
+        }
+
+        [TestMethod]
+        public void PostCategory_GetAll()
+        {
+            var result = postCategoryRepository.GetAll();
+
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.ToList().Count() > 0, "Expected post category count to be greater than 0.");
         }
     }
 }
