@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace CoffeeShop.Data.Insfrastructure
@@ -13,6 +11,7 @@ namespace CoffeeShop.Data.Insfrastructure
         void Update(T entity);
 
         T Delete(T entity);
+
         T Delete(int id);
 
         void DeleteMulti(Expression<Func<T, bool>> where);

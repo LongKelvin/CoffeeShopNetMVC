@@ -40,7 +40,7 @@ namespace CoffeeShop.Services
         public IEnumerable<Footer> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow)
         {
             //TODO: Select all Footer by tag
-            return _footerRepository.GetMultiPaging( null, out totalRow, page, pageSize);
+            return _footerRepository.GetMultiPaging(null, out totalRow, page, pageSize);
         }
 
         public IEnumerable<Footer> GetAllPaging(int page, int pageSize, out int totalRow)

@@ -1,20 +1,17 @@
 ﻿using CoffeeShop.Models.Models;
 
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Entity.Migrations;
 
 namespace CoffeeShop.Data
 {
-    public class CoffeeShopDbContext: DbContext
+    public class CoffeeShopDbContext : DbContext
     {
         public CoffeeShopDbContext() : base("CoffeeShopConnection")
         {
-            this.Configuration.LazyLoadingEnabled = true;
-
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<CoffeeShopDbContext, CoffeeShop.Data.Migrations.Configuration>());
+            this.Configuration.LazyLoadingEnabled = false;
+            
         }
 
         public virtual DbSet<Footer> Footers { get; set; }
@@ -64,7 +61,8 @@ namespace CoffeeShop.Data
             modelBuilder.Entity<Post>()
                 .HasMany(e => e.Tags)
                 .WithMany(e => e.Posts)
-                .Map(m => m.ToTable("PostTags").MapLeftKey("PostID").MapRightKey("TagID"));
+                .Map(m => m.ToTable("PostTags")
+                .MapLeftKey("PostID").MapRightKey("TagID"));
 
             modelBuilder.Entity<ProductCategory>()
                 .Property(e => e.Alias)
@@ -87,7 +85,8 @@ namespace CoffeeShop.Data
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.Tags)
                 .WithMany(e => e.Products)
-                .Map(m => m.ToTable("ProductTags").MapLeftKey("ProductID").MapRightKey("TagID"));
+                .Map(m => m.ToTable("ProductTags")
+                .MapLeftKey("ProductID").MapRightKey("TagID"));
 
             modelBuilder.Entity<Tag>()
                 .Property(e => e.ID)
@@ -101,6 +100,5 @@ namespace CoffeeShop.Data
                 .Property(e => e.IPAddress)
                 .IsUnicode(false);
         }
-
     }
 }

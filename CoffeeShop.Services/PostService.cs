@@ -65,7 +65,7 @@ namespace CoffeeShop.Services
 
         public IEnumerable<Post> GetAllByCategoryPaging(int categoryId, int page, int pageSize, out int totalRow)
         {
-            return _postRepository.GetMultiPaging(x => x.Status == true && x.CategoryID == categoryId, out totalRow, page, pageSize,new string[] { "PostCategory" });
+            return _postRepository.GetMultiPaging(x => x.Status == true && x.CategoryID == categoryId, out totalRow, page, pageSize, new string[] { "PostCategory" });
         }
     }
 }
