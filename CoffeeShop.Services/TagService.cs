@@ -34,7 +34,7 @@ namespace CoffeeShop.Services
 
         public IEnumerable<Tag> GetAll()
         {
-            return _tagRepository.GetAll(new string[] { "Posts","Products" });
+            return _tagRepository.GetAll(new string[] { "Posts", "Products" });
         }
 
         public IEnumerable<Tag> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow)

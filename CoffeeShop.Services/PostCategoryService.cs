@@ -17,19 +17,19 @@ namespace CoffeeShop.Services
             _postCategoryRepository = postCategoryRepository;
         }
 
-        public void Add(PostCategory postCategory)
+        public PostCategory Add(PostCategory postCategory)
         {
-            _postCategoryRepository.Add(postCategory);
+            return _postCategoryRepository.Add(postCategory);
         }
 
-        public void Delete(PostCategory postCategory)
+        public PostCategory Delete(PostCategory postCategory)
         {
-            _postCategoryRepository.Delete(postCategory);
+            return _postCategoryRepository.Delete(postCategory);
         }
 
-        public void Delete(int id)
+        public PostCategory Delete(int id)
         {
-            _postCategoryRepository.Delete(id);
+            return _postCategoryRepository.Delete(id);
         }
 
         public IEnumerable<PostCategory> GetAll()
@@ -60,7 +60,7 @@ namespace CoffeeShop.Services
 
         public void Update(PostCategory postCategory)
         {
-            _postCategoryRepository.Update(postCategory);
+             _postCategoryRepository.Update(postCategory);
         }
 
         public IEnumerable<PostCategory> GetAllByParentId(int parentId)

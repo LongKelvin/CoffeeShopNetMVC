@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CoffeeShop.Data.Insfrastructure
 {
@@ -39,7 +35,6 @@ namespace CoffeeShop.Data.Insfrastructure
 
         protected virtual void DisposeCore()
         {
-
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using CoffeeShop.Models.Models;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace CoffeeShop.Data.Insfrastructure
 {
-    public abstract class RepositoryBase<T>: IRepository<T> where T : class
+    public abstract class RepositoryBase<T> : IRepository<T> where T : class
     {
         #region Properties
 
@@ -147,7 +145,6 @@ namespace CoffeeShop.Data.Insfrastructure
         {
             return dataContext.Set<T>().Count<T>(predicate) > 0;
         }
-
 
         #endregion Implementation
     }
