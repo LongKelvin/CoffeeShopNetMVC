@@ -1,7 +1,12 @@
-﻿using CoffeeShop.Models.Models;
+﻿using AutoMapper;
+
+using CoffeeShop.Models.Models;
 using CoffeeShop.Services;
 using CoffeeShop.Web.Infrastucture.Core;
+using CoffeeShop.Web.Infrastucture.Extensions;
+using CoffeeShop.Web.Models;
 
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -11,7 +16,7 @@ namespace CoffeeShop.Web.Api
     [RoutePrefix("api/PostCategory")]
     public class PostCategoryController : ApiControllerBase
     {
-        private IPostCategoryService _postCategoryService;
+        private readonly IPostCategoryService _postCategoryService;
 
         public PostCategoryController(IErrorService errorService, IPostCategoryService postCategoryService)
             : base(errorService)
@@ -20,7 +25,7 @@ namespace CoffeeShop.Web.Api
         }
 
         [Route("Create")]
-        public HttpResponseMessage Create(HttpRequestMessage request, PostCategory postCategory)
+        public HttpResponseMessage Create(HttpRequestMessage request, PostCategoryViewModel postCategoryVM)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -31,7 +36,9 @@ namespace CoffeeShop.Web.Api
                     return response;
                 }
 
-                var category = _postCategoryService.Add(postCategory);
+                var newPostCatenogy = Mapper.Map<PostCategory>(postCategoryVM);
+
+                var category = _postCategoryService.Add(newPostCatenogy);
                 _postCategoryService.SaveChanges();
 
                 response = request.CreateResponse(HttpStatusCode.Created, category);
@@ -41,7 +48,7 @@ namespace CoffeeShop.Web.Api
         }
 
         [Route("Update")]
-        public HttpResponseMessage Update(HttpRequestMessage request, PostCategory postCategory)
+        public HttpResponseMessage Update(HttpRequestMessage request, PostCategoryViewModel postCategoryVM)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -52,7 +59,15 @@ namespace CoffeeShop.Web.Api
                     return response;
                 }
 
-                _postCategoryService.Update(postCategory);
+                var loadedPostCategory = _postCategoryService.GetById(postCategoryVM.ID);
+                if (loadedPostCategory == null)
+                {
+                    request.CreateErrorResponse(HttpStatusCode.NotFound, ModelState);
+                    return response;
+                }
+
+                loadedPostCategory.UpdatePostCategory(postCategoryVM);
+                _postCategoryService.Update(loadedPostCategory);
                 _postCategoryService.SaveChanges();
 
                 response = request.CreateResponse(HttpStatusCode.OK);
@@ -62,7 +77,7 @@ namespace CoffeeShop.Web.Api
         }
 
         [Route("Delete")]
-        public HttpResponseMessage Delete(HttpRequestMessage request, PostCategory postCategory)
+        public HttpResponseMessage Delete(HttpRequestMessage request, PostCategoryViewModel postCategoryVM)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -73,23 +88,19 @@ namespace CoffeeShop.Web.Api
                     return response;
                 }
 
-                _postCategoryService.Delete(postCategory);
+                var loadedPostCategory = _postCategoryService.GetById(postCategoryVM.ID);
+                if (loadedPostCategory == null)
+                {
+                    request.CreateErrorResponse(HttpStatusCode.NotFound, ModelState);
+                    return response;
+                }
+
+                _postCategoryService.Delete(loadedPostCategory);
                 _postCategoryService.SaveChanges();
 
                 response = request.CreateResponse(HttpStatusCode.OK);
 
                 return response;
-            });
-        }
-
-        [Route("GetAll")]
-        public HttpResponseMessage GetAll(HttpRequestMessage request)
-        {
-            return CreateHttpResponse(request, () =>
-            {
-                var listPostCategory = _postCategoryService.GetAll();
-                return request.CreateResponse(HttpStatusCode.OK, listPostCategory);
-
             });
         }
 
@@ -111,6 +122,20 @@ namespace CoffeeShop.Web.Api
                 response = request.CreateResponse(HttpStatusCode.OK);
 
                 return response;
+            });
+        }
+
+        [Route("GetAll")]
+        public HttpResponseMessage GetAll(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                var listPostCategory = _postCategoryService.GetAll();
+
+                //Map object using Automapper
+                var listPostCategotyVM = Mapper.Map<List<PostCategoryViewModel>>(listPostCategory);
+
+                return request.CreateResponse(HttpStatusCode.OK, listPostCategory);
             });
         }
     }

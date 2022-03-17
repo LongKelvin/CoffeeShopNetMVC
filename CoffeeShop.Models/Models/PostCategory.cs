@@ -38,20 +38,20 @@ namespace CoffeeShop.Models.Models
         public string MetaDescription { get; set; } // nvarchar(250), null
 
         [Display(Name = "Create Date")]
-        public DateTime? CreateDate { get; set; } // datetime, null
+        public DateTime? CreatedDate { get; set; } // datetime, null
 
         [MaxLength(50)]
         [StringLength(50)]
         [Display(Name = "Create By")]
-        public string CreateBy { get; set; } // nvarchar(50), null
+        public string CreatedBy { get; set; } // nvarchar(50), null
 
         [Display(Name = "Update Date")]
-        public DateTime? UpdateDate { get; set; } // datetime, null
+        public DateTime? UpdatedDate { get; set; } // datetime, null
 
         [MaxLength(50)]
         [StringLength(50)]
         [Display(Name = "Update By")]
-        public string UpdateBy { get; set; } // nvarchar(50), null
+        public string UpdatedBy { get; set; } // nvarchar(50), null
 
         [Required(ErrorMessage = "Status is required")]
         [Display(Name = "Status")]

@@ -19,7 +19,7 @@ namespace CoffeeShop.Data.Repositories
             //use linq staments
             var query = from post in DbContext.Posts
                         where post.Tags.Any(t => t.ID.ToLower().Equals(tag.ToLower()))
-                        orderby post.CreateDate descending
+                        orderby post.CreatedDate descending
                         select post;
 
             //Or linq lambda
