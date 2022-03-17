@@ -65,8 +65,18 @@
     <Compile Include="Migrations\202203161159516_InitialDb.designer.cs">
       <DependentUpon>202203161159516_InitialDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202203170330274_AddErrorTable.cs" />
+    <Compile Include="Migrations\202203170330274_AddErrorTable.designer.cs">
+      <DependentUpon>202203170330274_AddErrorTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203171251546_ModifySomeEntity.cs" />
+    <Compile Include="Migrations\202203171251546_ModifySomeEntity.designer.cs">
+      <DependentUpon>202203171251546_ModifySomeEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ErrorRepository.cs" />
+    <Compile Include="Repositories\IErrorRepository.cs" />
     <Compile Include="Repositories\IOrderRepository.cs" />
     <Compile Include="Repositories\IPageRepository.cs" />
     <Compile Include="Repositories\IPostCategoryRepository.cs" />
@@ -117,6 +127,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202203161159516_InitialDb.resx">
       <DependentUpon>202203161159516_InitialDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203170330274_AddErrorTable.resx">
+      <DependentUpon>202203170330274_AddErrorTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203171251546_ModifySomeEntity.resx">
+      <DependentUpon>202203171251546_ModifySomeEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

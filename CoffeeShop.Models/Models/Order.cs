@@ -45,12 +45,12 @@ namespace CoffeeShop.Models.Models
         public string CustomerMessage { get; set; } // nvarchar(500), null
 
         [Display(Name = "Create Date")]
-        public DateTime? CreateDate { get; set; } // datetime, null
+        public DateTime? CreatedDate { get; set; } // datetime, null
 
         [MaxLength(50)]
         [StringLength(50)]
         [Display(Name = "Create By")]
-        public string CreateBy { get; set; } // nvarchar(50), null
+        public string CreatedBy { get; set; } // nvarchar(50), null
 
         [MaxLength(250)]
         [StringLength(250)]

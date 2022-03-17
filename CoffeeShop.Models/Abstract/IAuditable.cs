@@ -4,9 +4,9 @@ namespace CoffeeShop.Models.Abstract
 {
     public interface IAuditable
     {
-        DateTime? CreateDate { get; set; }
-        string CreateBy { get; set; }
-        DateTime? UpdateDate { get; set; }
-        string UpdateBy { get; set; }
+        DateTime? CreatedDate { get; set; }
+        string CreatedBy { get; set; }
+        DateTime? UpdatedDate { get; set; }
+        string UpdatedBy { get; set; }
     }
 }

@@ -29,6 +29,7 @@ namespace CoffeeShop.Data
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<VisitorStatistic> VisitorStatistics { get; set; }
         public virtual DbSet<Slide> Slides { get; set; }
+        public virtual DbSet<Error> Errors { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
