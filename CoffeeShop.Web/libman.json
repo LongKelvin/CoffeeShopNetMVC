@@ -4,7 +4,11 @@
   "libraries": [
     {
       "library": "angular.js@1.8.2",
-      "destination": "Scripts/plugins/angular.js/"
+      "destination": "Assets/Admin/lib/angular.js/"
+    },
+    {
+      "library": "angular-ui-router@1.0.30",
+      "destination": "Assets/Admin/lib/angular-ui-router/"
     }
   ]
 }
