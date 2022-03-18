@@ -9,6 +9,29 @@
     {
       "library": "angular-ui-router@1.0.30",
       "destination": "Assets/Admin/lib/angular-ui-router/"
+    },
+    {
+      "library": "jquery@3.6.0",
+      "destination": "Assets/Admin/lib/jquery/"
+    },
+    {
+      "library": "bootstrap@5.1.3",
+      "destination": "Assets/Admin/lib/bootstrap/"
+    },
+    {
+      "library": "slim-scroll@1.3.3",
+      "destination": "Assets/Admin/lib/slim-scroll/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "fastclick@1.0.6",
+      "destination": "Assets/Admin/lib/fastclick/"
     }
-  ]
+  ,
+{
+  "provider": "cdnjs",
+  "library": "font-awesome@6.1.0",
+  "destination": "Assets/Admin/lib/font-awesome/"
+}
+]
 }

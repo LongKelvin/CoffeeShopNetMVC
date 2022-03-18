@@ -3,12 +3,12 @@
 
     angular
         .module('app')
-        .controller('productAddController', productAddController);
+        .controller('ProductAddController', ProductAddController);
 
     productAddController.$inject = ['$scope'];
 
     function productAddController($scope) {
-        $scope.title = 'productAddController';
+        $scope.title = 'ProductAddController';
 
         activate();
 

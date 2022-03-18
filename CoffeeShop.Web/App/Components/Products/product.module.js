@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('product', [
+    angular.module('Product', [
         // Angular modules 
         'ngRoute'
 
