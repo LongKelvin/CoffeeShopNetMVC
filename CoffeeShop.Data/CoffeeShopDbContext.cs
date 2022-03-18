@@ -1,11 +1,14 @@
 ﻿using CoffeeShop.Models.Models;
 
+using Microsoft.AspNet.Identity.EntityFramework;
+
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Reflection;
 
 namespace CoffeeShop.Data
 {
-    public class CoffeeShopDbContext : DbContext
+    public class CoffeeShopDbContext : IdentityDbContext<ApplicationUser>
     {
         public CoffeeShopDbContext() : base("CoffeeShopConnection")
         {
@@ -30,6 +33,11 @@ namespace CoffeeShop.Data
         public virtual DbSet<VisitorStatistic> VisitorStatistics { get; set; }
         public virtual DbSet<Slide> Slides { get; set; }
         public virtual DbSet<Error> Errors { get; set; }
+
+        public static CoffeeShopDbContext Create()
+        {
+            return new CoffeeShopDbContext();
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -100,6 +108,12 @@ namespace CoffeeShop.Data
             modelBuilder.Entity<VisitorStatistic>()
                 .Property(e => e.IPAddress)
                 .IsUnicode(false);
+
+            //Identity 
+            modelBuilder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId }).ToTable("ApplicationUserRoles");
+            modelBuilder.Entity<IdentityUserLogin>().HasKey(i => i.UserId).ToTable("ApplicationUserLogins");
+            modelBuilder.Entity<IdentityRole>().ToTable("ApplicationRoles");
+            modelBuilder.Entity<IdentityUserClaim>().HasKey(i => i.UserId).ToTable("ApplicationUserClaims");
         }
     }
 }
