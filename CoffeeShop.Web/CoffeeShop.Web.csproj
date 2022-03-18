@@ -270,11 +270,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\app.routes.js" />
+    <Content Include="App\app.js" />
+    <Content Include="App\Components\Products\product.module.js" />
+    <Content Include="App\Components\Products\productAddController.js" />
+    <Content Include="App\Components\Products\productAddView.html" />
+    <Content Include="App\Components\Products\productEditController.js" />
+    <Content Include="App\Components\Products\productEditView.html" />
+    <Content Include="App\Components\Products\productListController.js" />
+    <Content Include="App\Components\Products\productListView.html" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\plugins\angular.js\angular-csp.css" />
-    <Content Include="Scripts\plugins\angular.js\angular-csp.min.css" />
-    <Content Include="Scripts\plugins\angular.js\angular.js" />
-    <Content Include="Scripts\plugins\angular.js\angular.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -285,15 +290,33 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\Components\ApplicationGroups\" />
+    <Folder Include="App\Components\ApplicationRoles\" />
+    <Folder Include="App\Components\ApplicationUsers\" />
+    <Folder Include="App\Components\Home\" />
+    <Folder Include="App\Components\Login\" />
+    <Folder Include="App\Components\Order\" />
+    <Folder Include="App\Components\ProductCategories\" />
+    <Folder Include="App\Components\Statistics\" />
+    <Folder Include="App\Shared\Directives\" />
+    <Folder Include="App\Shared\Filters\" />
+    <Folder Include="App\Shared\Modules\" />
+    <Folder Include="App\Shared\Services\" />
+    <Folder Include="App\Shared\Views\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Assets\admin\" />
-    <Folder Include="Assets\client\" />
-    <Folder Include="Scripts\spa\" />
+    <Folder Include="Assets\Admin\css\skins\" />
+    <Folder Include="Assets\Admin\images\" />
+    <Folder Include="Assets\Admin\js\pages\" />
+    <Folder Include="Assets\Admin\lib\" />
+    <Folder Include="Assets\Admin\templates\" />
+    <Folder Include="Assets\Client\css\" />
+    <Folder Include="Assets\Client\images\" />
+    <Folder Include="Assets\Client\js\" />
+    <Folder Include="Assets\Client\templates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="libman.json" />
     <None Include="packages.config" />
-    <Content Include="Scripts\plugins\angular.js\angular.min.js.map" />
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
