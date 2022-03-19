@@ -1,9 +1,7 @@
-﻿(function () {
-    'use strict';
+﻿(function (app) {
+   
 
-    angular
-        .module('app')
-        .controller('ProductEditController', ProductEditController);
+    app.controller('ProductEditController', ProductEditController);
 
     ProductEditController.$inject = ['$scope'];
 
@@ -14,4 +12,4 @@
 
         function activate() { }
     }
-})();
+})(angular.module('CoffeeShop.Products'));

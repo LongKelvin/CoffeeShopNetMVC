@@ -1,17 +1,15 @@
-﻿(function () {
+﻿(function (app) {
     'use strict';
 
-    angular
-        .module('app')
-        .controller('ProductAddController', ProductAddController);
+    app.controller('ProductAddController', ProductAddController);
 
-    productAddController.$inject = ['$scope'];
+    ProductAddController.$inject = ['$scope'];
 
-    function productAddController($scope) {
+    function ProductAddController($scope) {
         $scope.title = 'ProductAddController';
 
         activate();
 
         function activate() { }
     }
-})();
+})(angular.module('CoffeeShop.Products'));

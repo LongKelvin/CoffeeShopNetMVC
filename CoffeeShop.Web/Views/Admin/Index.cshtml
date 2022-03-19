@@ -16,7 +16,7 @@
     <link href="~/Assets/Admin/css/adminlte.min.css" rel="stylesheet" />
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" ng-app="CoffeeShop">
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->
@@ -193,7 +193,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-                        with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -222,6 +222,26 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a ui-sref="Products" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Products List
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a ui-sref="ProductAdd" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Product Add
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a href="../widgets.html" class="nav-link">
@@ -834,7 +854,10 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            
+            <div ui-view>  @*Render body from angularJS*@
+                
+
+            </div>
         </div>
         <!-- /.content-wrapper -->
 
@@ -862,8 +885,17 @@
 
     <script src="~/Assets/Admin/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-
     @*<script src="~/Assets/Admin/js/demo.js"></script>*@
-</body>
 
+    @*angularJs embed sources*@
+    <script src="~/Assets/Admin/lib/angular.js/angular.js"></script>
+    <script src="~/Assets/Admin/lib/angular-ui-router/angular-ui-router.js"></script>
+    <script src="~/App/Shared/Modules/CoffeeShop.Common.js"></script>
+    <script src="~/App/Components/Products/Products.Module.js"></script>
+    <script src="~/App/app.js"></script>
+    <script src="~/App/Components/Products/productAddController.js"></script>
+    <script src="~/App/Components/Products/productListController.js"></script>
+    <script src="~/App/Components/Products/productEditController.js"></script>
+    <script src="~/App/Components/Home/HomeController.js"></script>
+</body>
 </html>
