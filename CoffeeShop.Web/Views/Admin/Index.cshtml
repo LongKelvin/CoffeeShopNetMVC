@@ -224,65 +224,65 @@
                             </ul>
                         </li>
 
-                        @*<li class="nav-item">
-                                <a ui-sref="Products" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
-                                    <p>
-                                        Products List
-                                        <span class="right badge badge-danger">New</span>
-                                    </p>
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            <a ui-sref="Products" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Products List
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a ui-sref="ProductAdd" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
-                                    <p>
-                                        Product Add
-                                        <span class="right badge badge-danger">New</span>
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a ui-sref="ProductCategory" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
-                                    <p>
-                                        Products Category List
-                                        <span class="right badge badge-danger">New</span>
-                                    </p>
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            <a ui-sref="ProductAdd" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Product Add
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a ui-sref="ProductCategory" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Products Category List
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a ui-sref="ProductCategoryAdd" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
-                                    <p>
-                                        Product Category Add
-                                        <span class="right badge badge-danger">New</span>
-                                    </p>
-                                </a>
-                            </li>*@
-
+                        <li class="nav-item">
+                            <a ui-sref="ProductCategoryAdd" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Product Category Add
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+                        
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
-                                    @CoffeeShop.Web.Lang.Resource.Products
+                                    Sản phẩm
                                     <i class="fas fa-angle-left right"></i>
                                     <span class="badge badge-info right">6</span>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a ui-sref="Products" class="nav-link">
+                                    <a href="../layout/top-nav.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p> @CoffeeShop.Web.Lang.Resource.ProductList</p>
+                                        <p>Top Navigation</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a ui-sref="ProductCategory" class="nav-link">
+                                    <a href="../layout/top-nav-sidebar.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>@CoffeeShop.Web.Lang.Resource.ProductCategoryList</p>
+                                        <p>Top Navigation + Sidebar</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -867,6 +867,8 @@
         <div class="content-wrapper">
             <div ui-view>
                 @*Render body from angularJS*@
+
+
             </div>
         </div>
         <!-- /.content-wrapper -->
@@ -916,6 +918,7 @@
     <script src="~/App/Components/Products/productAddController.js"></script>
     <script src="~/App/Components/Products/productListController.js"></script>
     <script src="~/App/Components/Products/productEditController.js"></script>
+
 
     <script src="~/App/Components/ProductCategories/ProductCategoryAddController.js"></script>
     <script src="~/App/Components/ProductCategories/ProductCategoryEditController.js"></script>

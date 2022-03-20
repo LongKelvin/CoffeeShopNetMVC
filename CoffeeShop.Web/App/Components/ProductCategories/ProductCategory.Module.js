@@ -15,17 +15,17 @@
         $stateProvider
             .state('ProductCategory', {
                 url: "/ProductCategory",
-                templateUrl: "/App/Components/ProductCategories/ProductCategoryListView.cshtml",
+                templateUrl: "/App/Components/ProductCategories/ProductCategoryListView.html",
                 controller: "ProductListController"
             })
             .state('ProductCategoryAdd', {
                 url: "/ProductCategory/Add",
-                templateUrl: "/App/Components/ProductCategories/ProductCategoryAddView.cshtml",
+                templateUrl: "/App/Components/ProductCategories/ProductCategoryAddView.html",
                 controller: "ProductAddController"
             })
             .state('ProductCategoryEdit', {
                 url: "/ProductCategory/Edit",
-                templateUrl: "/App/Components/ProductCategories/ProductCategoryEditView.cshtml",
+                templateUrl: "/App/Components/ProductCategories/ProductCategoryEditView.html",
                 controller: "ProductEditController"
             });
     }

@@ -16,7 +16,7 @@
     function config($stateProvider, $urlRouterProvider) {
         $stateProvider.state('Home', {
             url: "/Admin",
-            templateUrl: "/App/Components/Home/HomeView.cshtml",
+            templateUrl: "/App/Components/Home/HomeView.html",
             controller: "HomeController"
         });
 
