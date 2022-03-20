@@ -275,6 +275,15 @@
     <Content Include="App\app.js" />
     <Content Include="App\Components\Home\HomeController.js" />
     <Content Include="App\Components\Home\HomeView.html" />
+    <Content Include="App\Components\ProductCategories\ProductCategory.Module.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App\Components\ProductCategories\ProductCategoryAddController.js" />
+    <Content Include="App\Components\ProductCategories\ProductCategoryAddView.html" />
+    <Content Include="App\Components\ProductCategories\ProductCategoryEditController.js" />
+    <Content Include="App\Components\ProductCategories\ProductCategoryEditView.html" />
+    <Content Include="App\Components\ProductCategories\ProductCategoryListController.js" />
+    <Content Include="App\Components\ProductCategories\ProductCategoryListView.html" />
     <Content Include="App\Components\Products\Products.Module.js" />
     <Content Include="App\Components\Products\ProductAddController.js" />
     <Content Include="App\Components\Products\ProductAddView.html" />
@@ -283,6 +292,7 @@
     <Content Include="App\Components\Products\ProductListController.js" />
     <Content Include="App\Components\Products\ProductListView.html" />
     <Content Include="App\Shared\Modules\CoffeeShop.Common.js" />
+    <Content Include="App\Shared\Services\ApiServices.js" />
     <Content Include="Assets\Admin\css\adminlte.css" />
     <Content Include="Assets\Admin\css\adminlte.min.css" />
     <Content Include="Assets\Admin\css\alt\adminlte.components.css" />
@@ -429,11 +439,9 @@
     <Folder Include="App\Components\ApplicationUsers\" />
     <Folder Include="App\Components\Login\" />
     <Folder Include="App\Components\Orders\" />
-    <Folder Include="App\Components\ProductCategories\" />
     <Folder Include="App\Components\Statistics\" />
     <Folder Include="App\Shared\Directives\" />
     <Folder Include="App\Shared\Filters\" />
-    <Folder Include="App\Shared\Services\" />
     <Folder Include="App\Shared\Views\" />
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Admin\css\skins\" />
@@ -442,6 +450,7 @@
     <Folder Include="Assets\Client\images\" />
     <Folder Include="Assets\Client\js\" />
     <Folder Include="Assets\Client\templates\" />
+    <Folder Include="Lang\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="libman.json" />

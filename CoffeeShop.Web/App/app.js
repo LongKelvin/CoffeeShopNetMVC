@@ -5,7 +5,9 @@
 
         // Custom modules
         'CoffeeShop.Common',
-        'CoffeeShop.Products'
+        'CoffeeShop.Products',
+        /*'CoffeeShop.ProductCategory'*/
+        'CoffeeShop.ProductCategory'
 
     ]).config(config);
 
