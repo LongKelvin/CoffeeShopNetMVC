@@ -124,6 +124,7 @@
     <Content Include="App\Components\Products\ProductEditView.html" />
     <Content Include="App\Components\Products\ProductListController.js" />
     <Content Include="App\Components\Products\ProductListView.html" />
+    <Content Include="App\Shared\Filters\StatusFilter.js" />
     <Content Include="App\Shared\Modules\CoffeeShop.Common.js" />
     <Content Include="App\Shared\Services\ApiServices.js" />
     <Content Include="Assets\Admin\css\adminlte.css" />
@@ -274,7 +275,6 @@
     <Folder Include="App\Components\Orders\" />
     <Folder Include="App\Components\Statistics\" />
     <Folder Include="App\Shared\Directives\" />
-    <Folder Include="App\Shared\Filters\" />
     <Folder Include="App\Shared\Views\" />
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Admin\css\skins\" />
