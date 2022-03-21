@@ -130,7 +130,6 @@
     <Content Include="App\Shared\Filters\StatusFilter.js" />
     <Content Include="App\Shared\Modules\CoffeeShop.Common.js" />
     <Content Include="App\Shared\Services\ApiServices.js" />
-    <Content Include="App\Shared\Services\PagerService.js" />
     <Content Include="Assets\Admin\css\adminlte.css" />
     <Content Include="Assets\Admin\css\adminlte.min.css" />
     <Content Include="Assets\Admin\css\alt\adminlte.components.css" />
@@ -218,8 +217,6 @@
     <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.esm.min.js" />
     <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.js" />
     <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.min.js" />
-    <Content Include="Assets\Admin\lib\dir-pagination\dirPagination.js" />
-    <Content Include="Assets\Admin\lib\dir-pagination\dirPagination.tpl.html" />
     <Content Include="Assets\Admin\lib\fastclick\fastclick.js" />
     <Content Include="Assets\Admin\lib\fastclick\fastclick.min.js" />
     <Content Include="Assets\Admin\lib\font-awesome\css\all.css" />
