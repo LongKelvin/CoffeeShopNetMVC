@@ -1,11 +1,12 @@
 ﻿namespace CoffeeShop.Data.Migrations
 {
-using CoffeeShop.Models.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity;
+    using CoffeeShop.Models.Models;
+
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     using System;
-    using System.Data.Entity;
+    using System.Collections.Generic;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -24,6 +25,7 @@ using Microsoft.AspNet.Identity;
             //  to avoid creating duplicate seed data.
 
             CreateUser(context);
+            CreateProductCategorySample(context);
         }
 
         private void CreateUser(CoffeeShopDbContext context)
@@ -39,7 +41,6 @@ using Microsoft.AspNet.Identity;
                 EmailConfirmed = true,
                 BirthDay = new DateTime(1999, 10, 10),
                 FullName = "Adminstrators"
-
             };
             if (manager.Users.Count(x => x.UserName == "admin") == 0)
             {
@@ -55,7 +56,22 @@ using Microsoft.AspNet.Identity;
 
                 manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
             }
+        }
 
+        private void CreateProductCategorySample(CoffeeShopDbContext context)
+        {
+            if (context.ProductCategories.Count() == 0)
+            {
+                List<ProductCategory> listProductCategory = new List<ProductCategory>()
+            {
+                new ProductCategory() { Name="Cà phê pha máy",Alias="cf-phamay",Status=true },
+                 new ProductCategory() { Name="Cà phê phin",Alias="cf-phin",Status=true },
+                  new ProductCategory() { Name="Cà phê hạt",Alias="cf-hat",Status=true },
+                   new ProductCategory() { Name="Dụng cụ pha Cà Phê",Alias="cf-dungcu",Status=true }
+            };
+                context.ProductCategories.AddRange(listProductCategory);
+                context.SaveChanges();
+            }
         }
     }
 }

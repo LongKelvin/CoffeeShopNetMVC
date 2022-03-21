@@ -2,13 +2,11 @@
 (function () {
     angular.module('CoffeeShop.Common', [
         // Angular modules 
-       
 
         // Custom modules 
 
         // 3rd Party Modules
         'ui.router'
-
 
     ]);
 })();

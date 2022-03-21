@@ -1,0 +1,17 @@
+﻿<div class="card-tools">
+    <!--<div>
+        Item per page: <input ng-model="pageSize">
+        <h1>Page Size: {{pageSize}}</h1>
+    </div>-->
+    <ul class="pagination pagination-sm float-right">
+        <li class="page-item"><a class="page-link" ng-disabled="page==0" ng-click="search(0)">««</a></li>
+        <li class="page-item"><a class="page-link" ng-disabled="page==0" ng-click="search(page-1)">«</a></li>
+
+        <li class="page-item" ng-repeat="n in range()" ng-class="{active: n == page}">
+            <a class="page-link" ng-click="search(n)" ng-if="n != page">{{n+1}}</a>
+            <span class="page-link" ng-if="n == page">{{n+1}}</span>
+        </li>
+        <li class="page-item"><a class="page-link" ng-style="page==pagesCount - 1 && {'cursor':'not-allowed','pointer-events': 'none'}" ng-click="search(pagePlus(1))">»</a></li>
+        <li class="page-item"><a class="page-link" ng-style="page==pagesCount - 1 && {'cursor':'not-allowed','pointer-events': 'none'}" ng-click="search(pagesCount - 1)">»»</a></li>
+    </ul>
+</div>

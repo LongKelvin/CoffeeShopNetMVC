@@ -5,7 +5,8 @@
 
         // Custom modules
         'CoffeeShop.Common',
-        'CoffeeShop.Products'
+        'CoffeeShop.Products',
+        'CoffeeShop.ProductCategory',
 
     ]).config(config);
 
@@ -18,6 +19,6 @@
             controller: "HomeController"
         });
 
-        $urlRouterProvider.otherwise('/Admin')
+        $urlRouterProvider.otherwise('/Admin');
     }
 })();
