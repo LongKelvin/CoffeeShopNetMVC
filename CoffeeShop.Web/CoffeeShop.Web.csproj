@@ -90,6 +90,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastucture\Core\ApiControllerBase.cs" />
+    <Compile Include="Infrastucture\Core\PaginationSet.cs" />
     <Compile Include="Infrastucture\Extensions\EntityExtensions.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -124,9 +125,12 @@
     <Content Include="App\Components\Products\ProductEditView.html" />
     <Content Include="App\Components\Products\ProductListController.js" />
     <Content Include="App\Components\Products\ProductListView.html" />
+    <Content Include="App\Shared\Directives\PagerDirective.html" />
+    <Content Include="App\Shared\Directives\PagerDirective.js" />
     <Content Include="App\Shared\Filters\StatusFilter.js" />
     <Content Include="App\Shared\Modules\CoffeeShop.Common.js" />
     <Content Include="App\Shared\Services\ApiServices.js" />
+    <Content Include="App\Shared\Services\PagerService.js" />
     <Content Include="Assets\Admin\css\adminlte.css" />
     <Content Include="Assets\Admin\css\adminlte.min.css" />
     <Content Include="Assets\Admin\css\alt\adminlte.components.css" />
@@ -214,6 +218,8 @@
     <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.esm.min.js" />
     <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.js" />
     <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Assets\Admin\lib\dir-pagination\dirPagination.js" />
+    <Content Include="Assets\Admin\lib\dir-pagination\dirPagination.tpl.html" />
     <Content Include="Assets\Admin\lib\fastclick\fastclick.js" />
     <Content Include="Assets\Admin\lib\fastclick\fastclick.min.js" />
     <Content Include="Assets\Admin\lib\font-awesome\css\all.css" />
@@ -274,7 +280,6 @@
     <Folder Include="App\Components\Login\" />
     <Folder Include="App\Components\Orders\" />
     <Folder Include="App\Components\Statistics\" />
-    <Folder Include="App\Shared\Directives\" />
     <Folder Include="App\Shared\Views\" />
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Admin\css\skins\" />
@@ -452,6 +457,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AngularJS.Utils.Pagination">
+      <Version>0.11.1</Version>
+    </PackageReference>
     <PackageReference Include="Antlr">
       <Version>3.5.0.2</Version>
     </PackageReference>

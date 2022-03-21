@@ -2,7 +2,6 @@
 <!--<section class="content-header">
     <h1>
         Danh mục sản phẩm
-
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
@@ -15,16 +14,6 @@
     <div class="card">
         <div class="card-header">
             <h2 class="card-title"> <strong>Danh mục loại Sản phẩm</strong></h2>
-
-            <div class="card-tools">
-                <ul class="pagination pagination-sm float-right">
-                    <li class="page-item"><a class="page-link" href="#">«</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">»</a></li>
-                </ul>
-            </div>
         </div>
         <!-- /.card-header -->
         <div class="card-body p-0">
@@ -39,7 +28,6 @@
                         <th style="width: 10%">Trạng thái</th>
                         <th style="width: 10%">Thao tác</th>
                     </tr>
-
                 </thead>
                 <tbody>
                     <tr ng-repeat="item in productCategories">
@@ -57,16 +45,20 @@
                             </span>
                         </td>
                         <td>
-                            <button class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></button>
-                            <button class="btn  btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                            <button class="btn btn-sm btn-outline-primary"><i class="fa fa-pencil"></i></button>
+                            <button class="btn  btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
                         </td>
                     </tr>
-
                 </tbody>
             </table>
+        </div>
+        <div class="card-header">
+            <div class="card-title">
+
+                <div><span> <strong>Trang: {{page+1}} - Tổng số bản ghi: {{totalCount}}</strong> </span></div>
+            </div>
+            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="getProductCagories(page)"></pager-directive>
         </div>
         <!-- /.card-body -->
     </div>
 </section><!-- /.content -->
-
-
