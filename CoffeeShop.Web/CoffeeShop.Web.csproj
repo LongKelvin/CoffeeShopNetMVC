@@ -74,11 +74,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Api\AccountController.cs" />
     <Compile Include="Api\PostCategoryController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />
@@ -435,7 +430,6 @@
     <Content Include="Assets\Admin\lib\font-awesome\webfonts\fa-solid-900.woff2" />
     <Content Include="Assets\Admin\lib\font-awesome\webfonts\fa-v4compatibility.ttf" />
     <Content Include="Assets\Admin\lib\font-awesome\webfonts\fa-v4compatibility.woff2" />
-    <Fakes Include="Fakes\WebGrease.fakes" />
     <None Include="packages.config" />
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>

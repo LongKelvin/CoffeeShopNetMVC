@@ -1,13 +1,29 @@
-﻿(function(app) {
+﻿/// <reference path="../../shared/services/apiservices.js" />
+
+(function (app) {
     app.controller('ProductCategoryListController', ProductCategoryListController);
 
-    ProductCategoryListController.$inject = ['$scope'];
+    ProductCategoryListController.$inject = ['$scope', 'ApiServices'];
 
-    function ProductCategoryListController($scope) {
+    function ProductCategoryListController($scope, ApiServices) {
         $scope.title = 'ProductCategoryListController';
 
-        activate();
+        $scope.productCategories = [];
 
-        function activate() {}
+        $scope.getProductCagories = getProductCagories;
+
+        function getProductCagories() {
+            try {
+                ApiServices.get('/api/ProductCategory/GetAll', null, function (result) {
+                    $scope.productCategories = result.data;
+                }, function () {
+                    console.log('Load productcategory failed.');
+                });
+            }
+            catch {
+                console.log("Exception in getProductCategoies function")
+            }
+        }
+        $scope.getProductCagories();
     }
 })(angular.module('CoffeeShop.ProductCategory'));

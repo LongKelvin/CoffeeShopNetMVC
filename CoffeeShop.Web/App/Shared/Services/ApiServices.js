@@ -16,9 +16,9 @@
         function get(url, params, success, failure) {
             $http.get(url, params).then(function (result) {
                 success(result);
-            }), function (error) {
+            }, function (error) {
                 failure(error);
-            }
+            });
         }
     }
 })(angular.module('CoffeeShop.Common'));

@@ -16,17 +16,17 @@
             .state('ProductCategory', {
                 url: "/ProductCategory",
                 templateUrl: "/App/Components/ProductCategories/ProductCategoryListView.html",
-                controller: "ProductListController"
+                controller: "ProductCategoryListController"
             })
             .state('ProductCategoryAdd', {
                 url: "/ProductCategory/Add",
                 templateUrl: "/App/Components/ProductCategories/ProductCategoryAddView.html",
-                controller: "ProductAddController"
+                controller: "ProductCategoryAddController"
             })
             .state('ProductCategoryEdit', {
                 url: "/ProductCategory/Edit",
                 templateUrl: "/App/Components/ProductCategories/ProductCategoryEditView.html",
-                controller: "ProductEditController"
+                controller: "ProductCategoryEditController"
             });
     }
 })();
