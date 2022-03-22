@@ -14,14 +14,18 @@
         $scope.productCategories = [];
         $scope.page = 0;
         $scope.pagesCount = 0;
+        $scope.keyWord = '';
         //asign function to get productCategory
         $scope.getProductCagories = getProductCagories;
 
         function getProductCagories(page, pageSize) {
             page = page || 0;
             pageSize = pageSize || 20;
+            
+
             var config = {
                 params: {
+                    keyWord: $scope.keyWord,
                     page: page,
                     pageSize: pageSize
                 }

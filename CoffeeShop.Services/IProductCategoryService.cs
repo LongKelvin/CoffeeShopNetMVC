@@ -15,8 +15,9 @@ namespace CoffeeShop.Services
         void Delete(int id);
 
         IEnumerable<ProductCategory> GetAll();
+        IEnumerable<ProductCategory> GetAll(string keyWord);
 
-        IEnumerable<ProductCategory> GetAllPaging(int page, int pageSize, out int totalRow);
+        IEnumerable<ProductCategory> GetAllPaging(string keyWord,int page, int pageSize, out int totalRow);
 
         IEnumerable<ProductCategory> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow);
 

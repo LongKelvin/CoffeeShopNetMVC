@@ -25,19 +25,20 @@ namespace CoffeeShop.Web.Api
 
         // GET api/<controller>
         [Route("GetAll")]
-        public HttpResponseMessage GetAll(HttpRequestMessage request, int page, int pageSize = 20)
+        public HttpResponseMessage GetAll(HttpRequestMessage request, string keyWord, int page, int pageSize = 20)
         {
             return CreateHttpResponse(request, () =>
             {
                 //Init totalRow
                 int totalRow = 0;
                 //Get All ProductCategory
-                var listProductCategory = _productCategoryService.GetAll();
+
+                var listProductCategory = _productCategoryService.GetAll(keyWord);
 
                 totalRow = listProductCategory.Count();
 
                 //Order by
-                var query = listProductCategory.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
+                 var query = listProductCategory.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
 
                 //Map object using Automapper
                 var listProductCategotyVM = Mapper.Map<List<ProductCategoryViewModel>>(query);

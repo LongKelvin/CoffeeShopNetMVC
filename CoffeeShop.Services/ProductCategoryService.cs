@@ -43,9 +43,13 @@ namespace CoffeeShop.Services
             return _productCategoryRepository.GetMultiPaging(x => x.Status == true, out totalRow, page, pageSize);
         }
 
-        public IEnumerable<ProductCategory> GetAllPaging(int page, int pageSize, out int totalRow)
+        public IEnumerable<ProductCategory> GetAllPaging(string keyWord, int page, int pageSize, out int totalRow)
         {
-            return _productCategoryRepository.GetMultiPaging(x => x.Status == true, out totalRow, page, pageSize);
+            if (string.IsNullOrEmpty(keyWord))
+                return _productCategoryRepository.GetMultiPaging(null, out totalRow, page, pageSize);
+
+            return _productCategoryRepository.GetMultiPaging(x => x.Name.Contains(keyWord) ||
+            x.Alias.Contains(keyWord), out totalRow, page, pageSize);
         }
 
         public ProductCategory GetById(int id)
@@ -61,6 +65,14 @@ namespace CoffeeShop.Services
         public void Update(ProductCategory productCategory)
         {
             _productCategoryRepository.Update(productCategory);
+        }
+
+        public IEnumerable<ProductCategory> GetAll(string keyWord)
+        {
+            if (string.IsNullOrEmpty(keyWord))
+                return GetAll();
+
+            return _productCategoryRepository.GetMulti(x => x.Name.Contains(keyWord) || x.Alias.Contains(keyWord));
         }
     }
 }

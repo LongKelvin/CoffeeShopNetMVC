@@ -16,6 +16,36 @@
             <h2 class="card-title"> <strong>Danh mục loại Sản phẩm</strong></h2>
         </div>
         <!-- /.card-header -->
+        <div class="row card-header">
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <input ng-model="keyWord"  type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm ..."
+                           aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button ng-click="getProductCagories()" class="btn btn-outline-primary" type="button">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-5">
+                <div class="mb-3 float-right justify-content-around ">
+                    <h5 class="card-title">
+                        <strong>
+                            Trang <span class="text-primary">{{page+1}}</span> / <span class="text-primary">{{pagesCount}}</span>
+                        </strong>
+                    </h5>
+                    <br />
+                    <h5 class="card-title">
+                        <strong>
+                            Tổng số bản ghi: <span class="text-primary">{{totalCount}}</span>
+                        </strong>
+                    </h5>
+                </div>
+            </div>
+        </div>
+
         <div class="card-body p-0">
             <table class="table">
                 <thead>
@@ -58,5 +88,4 @@
 
         <!-- /.card-body -->
     </div>
-  
 </section><!-- /.content -->
