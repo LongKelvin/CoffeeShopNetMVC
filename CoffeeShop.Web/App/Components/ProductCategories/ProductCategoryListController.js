@@ -16,10 +16,10 @@
         $scope.pagesCount = 0;
         //asign function to get productCategory
         $scope.getProductCagories = getProductCagories;
-        
-        function getProductCagories(page) {
+
+        function getProductCagories(page, pageSize) {
             page = page || 0;
-            pageSize = $scope.pageSize || 10;
+            pageSize = pageSize || 20;
             var config = {
                 params: {
                     page: page,
@@ -29,7 +29,7 @@
             try {
                 ApiServices.get('/api/ProductCategory/GetAll', config, function (result) {
                     if (result.data.TotalCount == 0) {
-                        notificationService.displayWarning('Không có dữ liệu để tải lên.');
+                        notificationService.displayWarning('No data to display');
                     }
 
                     $scope.productCategories = result.data.Items;
@@ -48,14 +48,6 @@
             }
         }
 
-        $scope.pageChanged = function (newPage, pageSize) {
-            if ($scope.page !== newPage) {
-                getProductCagories($scope.page, pageSize)
-            }
-        };
-
         $scope.getProductCagories();
-
-        
-        }
-    }) (angular.module('CoffeeShop.ProductCategory'));
+    }
+})(angular.module('CoffeeShop.ProductCategory'));

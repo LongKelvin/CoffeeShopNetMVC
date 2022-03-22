@@ -25,7 +25,7 @@ namespace CoffeeShop.Web.Api
 
         // GET api/<controller>
         [Route("GetAll")]
-        public HttpResponseMessage GetAll(HttpRequestMessage request, int page, int pageSize = 25)
+        public HttpResponseMessage GetAll(HttpRequestMessage request, int page, int pageSize = 20)
         {
             return CreateHttpResponse(request, () =>
             {

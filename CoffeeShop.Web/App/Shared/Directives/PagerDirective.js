@@ -10,7 +10,7 @@
                 pagesCount: '@',
                 totalCount: '@',
                 searchFunc: '&',
-                customPath: '@'
+                customPath: '@',
             },
             replace: true,
             restrict: 'E',
@@ -19,7 +19,7 @@
                 '$scope', function ($scope) {
                     $scope.search = function (i) {
                         if ($scope.searchFunc) {
-                            $scope.searchFunc({ page: i });
+                            $scope.searchFunc({ page: i, pageSize: $scope.pageSize });
                         }
                     };
 
@@ -41,6 +41,12 @@
 
                     $scope.pagePlus = function (count) {
                         return +$scope.page + count;
+                    };
+
+                    $scope.updateRecordPerPage = function () {
+                        console.log("selected item:", $scope.pageSize);
+                        //get result from searchFunc
+                        $scope.searchFunc({ page: $scope.page, pageSize: $scope.pageSize });
                     }
                 }]
         }

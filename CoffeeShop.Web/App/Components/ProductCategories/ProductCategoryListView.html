@@ -10,7 +10,7 @@
     </ol>
 </section>-->
 <!-- Main content -->
-<section class="content">
+<section class="content overflow-hidden">
     <div class="card">
         <div class="card-header">
             <h2 class="card-title"> <strong>Danh mục loại Sản phẩm</strong></h2>
@@ -52,13 +52,11 @@
                 </tbody>
             </table>
         </div>
-        <div class="card-header">
-            <div class="card-title">
 
-                <div><span> <strong>Trang: {{page+1}} - Tổng số bản ghi: {{totalCount}}</strong> </span></div>
-            </div>
-            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="getProductCagories(page)"></pager-directive>
-        </div>
+        <!--Pager directives-->
+        <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" pageSize="3" search-func="getProductCagories(page, pageSize)"></pager-directive>
+
         <!-- /.card-body -->
     </div>
+  
 </section><!-- /.content -->
