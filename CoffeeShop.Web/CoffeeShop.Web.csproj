@@ -130,6 +130,7 @@
     <Content Include="App\Shared\Filters\StatusFilter.js" />
     <Content Include="App\Shared\Modules\CoffeeShop.Common.js" />
     <Content Include="App\Shared\Services\ApiServices.js" />
+    <Content Include="App\Shared\Services\NotificationService.js" />
     <Content Include="Assets\Admin\css\adminlte.css" />
     <Content Include="Assets\Admin\css\adminlte.min.css" />
     <Content Include="Assets\Admin\css\alt\adminlte.components.css" />
@@ -260,6 +261,9 @@
     <Content Include="Assets\Admin\lib\jquery\jquery.slim.min.js" />
     <Content Include="Assets\Admin\lib\slim-scroll\slimscroll.js" />
     <Content Include="Assets\Admin\lib\slim-scroll\slimscroll.min.js" />
+    <Content Include="Assets\Admin\lib\toastr.js\toastr.css" />
+    <Content Include="Assets\Admin\lib\toastr.js\toastr.min.css" />
+    <Content Include="Assets\Admin\lib\toastr.js\toastr.min.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -432,6 +436,7 @@
     <Content Include="Assets\Admin\lib\font-awesome\webfonts\fa-solid-900.woff2" />
     <Content Include="Assets\Admin\lib\font-awesome\webfonts\fa-v4compatibility.ttf" />
     <Content Include="Assets\Admin\lib\font-awesome\webfonts\fa-v4compatibility.woff2" />
+    <Content Include="Assets\Admin\lib\toastr.js\toastr.js.map" />
     <None Include="packages.config" />
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>

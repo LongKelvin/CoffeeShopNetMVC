@@ -1,11 +1,12 @@
-﻿/// <reference path="../../shared/services/apiservices.js" />
+﻿/// <reference path="../../shared/services/notificationservice.js" />
+/// <reference path="../../shared/services/apiservices.js" />
 
 (function (app) {
     app.controller('ProductCategoryListController', ProductCategoryListController);
 
-    ProductCategoryListController.$inject = ['$scope', 'ApiServices'];
+    ProductCategoryListController.$inject = ['$scope', 'ApiServices','NotificationService'];
 
-    function ProductCategoryListController($scope, ApiServices) {
+    function ProductCategoryListController($scope, ApiServices, NotificationService) {
         //setup Controller
         $scope.title = 'ProductCategoryListController';
 
@@ -33,7 +34,7 @@
             try {
                 ApiServices.get('/api/ProductCategory/GetAll', config, function (result) {
                     if (result.data.TotalCount == 0) {
-                        notificationService.displayWarning('No data to display');
+                        NotificationService.displayWarning('No data to display');
                     }
 
                     $scope.productCategories = result.data.Items;
@@ -44,11 +45,14 @@
                 },
                     function () {
                         console.log('Load productcategory failed.');
+                        NotificationService.displayError('Load productcategory failed.');
                     });
             }
             catch (e) {
                 console.log("Exception in getProductCategoies function: ")
                     (console.error || console.log).call(console, e.stack || e);
+
+                NotificationService.displayError('Something went wrong, please try again later');
             }
         }
 
