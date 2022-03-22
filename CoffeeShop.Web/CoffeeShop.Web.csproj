@@ -145,6 +145,7 @@
     <Content Include="Assets\Admin\css\alt\adminlte.pages.min.css" />
     <Content Include="Assets\Admin\css\alt\adminlte.plugins.css" />
     <Content Include="Assets\Admin\css\alt\adminlte.plugins.min.css" />
+    <Content Include="Assets\Admin\custom-css\main-page.css" />
     <Content Include="Assets\Admin\img\AdminLTELogo.png" />
     <Content Include="Assets\Admin\img\avatar.png" />
     <Content Include="Assets\Admin\img\avatar2.png" />
@@ -255,6 +256,8 @@
     <Content Include="Assets\Admin\lib\font-awesome\sprites\brands.svg" />
     <Content Include="Assets\Admin\lib\font-awesome\sprites\regular.svg" />
     <Content Include="Assets\Admin\lib\font-awesome\sprites\solid.svg" />
+    <Content Include="Assets\Admin\lib\icheck-bootstrap\icheck-bootstrap.css" />
+    <Content Include="Assets\Admin\lib\icheck-bootstrap\icheck-bootstrap.min.css" />
     <Content Include="Assets\Admin\lib\jquery\jquery.js" />
     <Content Include="Assets\Admin\lib\jquery\jquery.min.js" />
     <Content Include="Assets\Admin\lib\jquery\jquery.slim.js" />

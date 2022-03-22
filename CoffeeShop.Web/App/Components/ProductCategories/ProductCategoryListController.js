@@ -4,9 +4,14 @@
 (function (app) {
     app.controller('ProductCategoryListController', ProductCategoryListController);
 
-    ProductCategoryListController.$inject = ['$scope', 'ApiServices','NotificationService'];
+    ProductCategoryListController.$inject = [
+        '$scope',
+        'ApiServices',
+        'NotificationService',
+        '$stateParams',
+        '$state'];
 
-    function ProductCategoryListController($scope, ApiServices, NotificationService) {
+    function ProductCategoryListController($scope, ApiServices, NotificationService/*, $stateParams, $state*/) {
         //setup Controller
         $scope.title = 'ProductCategoryListController';
 
@@ -22,7 +27,6 @@
         function getProductCagories(page, pageSize) {
             page = page || 0;
             pageSize = pageSize || 20;
-            
 
             var config = {
                 params: {
@@ -56,6 +60,11 @@
             }
         }
 
+        //function goToProductCategoryAddView() {
+        //    $state.go('ProductCategoryAdd')
+        //}
+
+        //excute when page loading done such as PageLoad
         $scope.getProductCagories();
     }
 })(angular.module('CoffeeShop.ProductCategory'));

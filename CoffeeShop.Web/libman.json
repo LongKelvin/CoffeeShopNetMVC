@@ -33,6 +33,10 @@
     {
       "library": "toastr.js@2.1.4",
       "destination": "Assets/Admin/lib/toastr.js/"
+    },
+    {
+      "library": "icheck-bootstrap@3.0.1",
+      "destination": "Assets/Admin/lib/icheck-bootstrap/"
     }
   ]
 }

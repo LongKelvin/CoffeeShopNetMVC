@@ -1,0 +1,11 @@
+﻿.space-around{
+    margin-left: 5px;
+    margin-right: 5px;
+   /* gap: 10px 20px;*/
+}
+
+.display-flex{
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+}

@@ -2,7 +2,7 @@
     'use strict';
     app.service('NotificationService', NotificationService);
 
-    ToastrService.$inject = ['$http'];
+    NotificationService.$inject = ['$http'];
 
     function NotificationService($http) {
         toastr.options = {
