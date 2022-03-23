@@ -29,11 +29,9 @@ namespace CoffeeShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                HttpResponseMessage response = null;
                 if (!ModelState.IsValid)
                 {
-                    request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-                    return response;
+                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
                 }
 
                 var newPostCatenogy = Mapper.Map<PostCategory>(postCategoryVM);
@@ -41,9 +39,7 @@ namespace CoffeeShop.Web.Api
                 var category = _postCategoryService.Add(newPostCatenogy);
                 _postCategoryService.SaveChanges();
 
-                response = request.CreateResponse(HttpStatusCode.Created, category);
-
-                return response;
+                return request.CreateResponse(HttpStatusCode.Created, category);
             });
         }
 

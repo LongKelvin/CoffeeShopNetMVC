@@ -1,17 +1,52 @@
-﻿<div class="card-tools">
-    <!--<div>
-        Item per page: <input ng-model="pageSize">
-        <h1>Page Size: {{pageSize}}</h1>
-    </div>-->
-    <ul class="pagination pagination-sm float-right">
-        <li class="page-item"><a class="page-link" ng-disabled="page==0" ng-click="search(0)">««</a></li>
-        <li class="page-item"><a class="page-link" ng-disabled="page==0" ng-click="search(page-1)">«</a></li>
+﻿<!--<div class="card-header">-->
+<!--<div class="card-title">
+    <span> <strong>Trang: {{page+1}} - Tổng số bản ghi: {{totalCount}}</strong> </span>
 
-        <li class="page-item" ng-repeat="n in range()" ng-class="{active: n == page}">
-            <a class="page-link" ng-click="search(n)" ng-if="n != page">{{n+1}}</a>
-            <span class="page-link" ng-if="n == page">{{n+1}}</span>
-        </li>
-        <li class="page-item"><a class="page-link" ng-style="page==pagesCount - 1 && {'cursor':'not-allowed','pointer-events': 'none'}" ng-click="search(pagePlus(1))">»</a></li>
-        <li class="page-item"><a class="page-link" ng-style="page==pagesCount - 1 && {'cursor':'not-allowed','pointer-events': 'none'}" ng-click="search(pagesCount - 1)">»»</a></li>
-    </ul>
+    <div class="form-row-col-md-6 w-100">
+    </div>
+</div>-->
+
+<div class="card-header row">
+    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 space-vertical">
+        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
+            <span class="col-sm-8 col-xs-8 "><strong>Bản ghi / Trang:&nbsp;</strong> </span>
+            <select class="custom-select col-sm-4 col-xs-4 w-50 "
+                    ng-init=" pageSize = '20'"
+                    ng-model="pageSize"
+                    ng-change="updateRecordPerPage(pageSize)">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="150">150</option>
+                <option value="200">200</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-lg-6 col-xs-12 col-sm-12">
+        <div class="dataTables_paginate paging_simple_numbers float-lg-right align-items-sm-center col-xs-12 col-sm-12">
+            <ul class="pagination">
+                <li class="paginate_button page-item ">
+                    <a ng-disabled="page==0" ng-click="search(0)" class="page-link">First</a>
+                </li>
+                <li class="paginate_button page-item previous">
+                    <a ng-disabled="page==0" ng-click="search(page-1)" class="page-link">Previous</a>
+                </li>
+                <li class="paginate_button page-item " ng-repeat="n in range()" ng-class="{active: n == page}">
+                    <a class="page-link" ng-click="search(n)" ng-if="n != page">{{n+1}}</a>
+                    <span class="page-link" ng-if="n == page">{{n+1}}</span>
+                </li>
+
+                <li class="paginate_button page-item next">
+                    <a class="page-link" ng-style="page==pagesCount - 1 && {'cursor':'not-allowed','pointer-events': 'none'}" ng-click="search(pagePlus(1))">Next</a>
+                </li>
+                <li class="paginate_button page-item next">
+                    <a class="page-link" ng-style="page==pagesCount - 1 && {'cursor':'not-allowed','pointer-events': 'none'}" ng-click="search(pagePlus(1))">Last</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

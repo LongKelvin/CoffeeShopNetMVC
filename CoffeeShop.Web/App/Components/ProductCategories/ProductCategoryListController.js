@@ -1,11 +1,17 @@
-﻿/// <reference path="../../shared/services/apiservices.js" />
+﻿/// <reference path="../../shared/services/notificationservice.js" />
+/// <reference path="../../shared/services/apiservices.js" />
 
 (function (app) {
     app.controller('ProductCategoryListController', ProductCategoryListController);
 
-    ProductCategoryListController.$inject = ['$scope', 'ApiServices'];
+    ProductCategoryListController.$inject = [
+        '$scope',
+        'ApiServices',
+        'NotificationService',
+        '$stateParams',
+        '$state'];
 
-    function ProductCategoryListController($scope, ApiServices) {
+    function ProductCategoryListController($scope, ApiServices, NotificationService/*, $stateParams, $state*/) {
         //setup Controller
         $scope.title = 'ProductCategoryListController';
 
@@ -14,14 +20,17 @@
         $scope.productCategories = [];
         $scope.page = 0;
         $scope.pagesCount = 0;
+        $scope.keyWord = '';
         //asign function to get productCategory
         $scope.getProductCagories = getProductCagories;
-        
-        function getProductCagories(page) {
+
+        function getProductCagories(page, pageSize) {
             page = page || 0;
-            pageSize = $scope.pageSize || 10;
+            pageSize = pageSize || 20;
+
             var config = {
                 params: {
+                    keyWord: $scope.keyWord,
                     page: page,
                     pageSize: pageSize
                 }
@@ -29,7 +38,7 @@
             try {
                 ApiServices.get('/api/ProductCategory/GetAll', config, function (result) {
                     if (result.data.TotalCount == 0) {
-                        notificationService.displayWarning('Không có dữ liệu để tải lên.');
+                        NotificationService.displayWarning('No data to display');
                     }
 
                     $scope.productCategories = result.data.Items;
@@ -40,22 +49,22 @@
                 },
                     function () {
                         console.log('Load productcategory failed.');
+                        NotificationService.displayError('Load productcategory failed.');
                     });
             }
             catch (e) {
                 console.log("Exception in getProductCategoies function: ")
                     (console.error || console.log).call(console, e.stack || e);
+
+                NotificationService.displayError('Something went wrong, please try again later');
             }
         }
 
-        $scope.pageChanged = function (newPage, pageSize) {
-            if ($scope.page !== newPage) {
-                getProductCagories($scope.page, pageSize)
-            }
-        };
+        //function goToProductCategoryAddView() {
+        //    $state.go('ProductCategoryAdd')
+        //}
 
+        //excute when page loading done such as PageLoad
         $scope.getProductCagories();
-
-        
-        }
-    }) (angular.module('CoffeeShop.ProductCategory'));
+    }
+})(angular.module('CoffeeShop.ProductCategory'));

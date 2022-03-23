@@ -14,9 +14,23 @@
     <!-- Theme style -->
 
     <link href="~/Assets/Admin/css/adminlte.min.css" rel="stylesheet" />
-</head>
 
-<body class="hold-transition sidebar-mini" ng-app="CoffeeShop">
+    @*Toastr css*@
+    <link href="~/Assets/Admin/lib/toastr.js/toastr.css" rel="stylesheet" />
+    @*custom css*@
+    <link href="~/Assets/Admin/custom-css/main-page.css" rel="stylesheet" />
+
+    @*Library*@
+    <link href="~/Assets/Admin/lib/icheck-bootstrap/icheck-bootstrap.css" rel="stylesheet" />
+    <link href="~/Assets/Admin/lib/select2/css/select2.css" rel="stylesheet" />
+    @*<link href="~/Assets/Admin/lib/select2-bootstrap-css/select2-bootstrap.css" rel="stylesheet" />
+
+    <link href="~/Assets/Admin/lib/select2-bootstrap-css/select2-bootstrap.css" rel="stylesheet" />
+    <link href="~/Assets/Admin/lib/select2-bootstrap-theme/select2-bootstrap.css" rel="stylesheet" />
+    <link href="~/Assets/Admin/lib/select2-bootstrap-5-theme/select2-bootstrap-5-theme.css" rel="stylesheet" />*@
+    <link href="~/Assets/Admin/lib/select2-bootstrap4-theme/select2-bootstrap4.css" rel="stylesheet" />
+</head>
+<body id="main-body" class="hold-transition sidebar-mini" ng-app="CoffeeShop">
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->
@@ -870,6 +884,7 @@
     @*CoffeeShop.Module & Services*@
     <script src="~/App/Shared/Modules/CoffeeShop.Common.js"></script>
     <script src="~/App/Shared/Services/ApiServices.js"></script>
+    <script src="~/App/Shared/Services/NotificationService.js"></script>
     <script src="~/App/Components/Products/Products.Module.js"></script>
     <script src="~/App/Components/ProductCategories/ProductCategory.Module.js"></script>
     <script src="~/App/app.js"></script>
@@ -891,8 +906,10 @@
     @*AngularJS Directive*@
     <script src="~/App/Shared/Directives/PagerDirective.js"></script>
 
-    @*dirPagination library*@
-    <script src="~/Assets/Admin/lib/dir-pagination/dirPagination.js"></script>
+    @*library*@
+    @*<script src="~/Assets/Admin/lib/dir-pagination/dirPagination.js"></script>*@
+    <script src="~/Assets/Admin/lib/toastr.js/toastr.min.js"></script>
+    <script src="~/Assets/Admin/lib/select2/js/select2.full.js"></script>
     
 </body>
 </html>

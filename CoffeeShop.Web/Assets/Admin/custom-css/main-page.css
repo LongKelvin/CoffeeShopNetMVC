@@ -1,0 +1,49 @@
+﻿.space-around{
+    margin-left: 5px;
+    margin-right: 5px;
+   /* gap: 10px 20px;*/
+}
+
+.display-flex{
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+}
+
+@media only screen and (max-width: 480px)
+{
+    .optional-sm
+    {
+        display: none;
+    }
+
+    .reponsive-button{
+        width: 40%;
+        justify-content: center;
+    }
+    .space-around
+    {
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        justify-content: space-around;
+    }
+
+    .space-vertical{
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    .padding-between-items{
+        padding:5px;
+    }
+}
+
+@media screen and (min-width:768px) and (max-width:1024px)
+{
+    #main-body.sidebar-collapse .sidebar-closed
+    {
+        display:block;
+    }
+}
