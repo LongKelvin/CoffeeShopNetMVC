@@ -17,9 +17,9 @@ namespace CoffeeShop.Services
             _productCategoryRepository = productCategoryRepository;
         }
 
-        public void Add(ProductCategory productCategory)
+        public ProductCategory Add(ProductCategory productCategory)
         {
-            _productCategoryRepository.Add(productCategory);
+            return _productCategoryRepository.Add(productCategory);
         }
 
         public void Delete(ProductCategory productCategory)

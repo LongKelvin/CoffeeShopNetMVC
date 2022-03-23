@@ -6,7 +6,7 @@ namespace CoffeeShop.Services
 {
     public interface IProductCategoryService
     {
-        void Add(ProductCategory productCategory);
+        ProductCategory Add(ProductCategory productCategory);
 
         void Update(ProductCategory productCategory);
 

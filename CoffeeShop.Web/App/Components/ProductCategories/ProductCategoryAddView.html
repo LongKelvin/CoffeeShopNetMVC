@@ -20,232 +20,194 @@
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <div class="row">
-            <!-- left column -->
-            <div class="col-md-6">
-                <!-- general form elements -->
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Quick Example</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
-                    <form>
+        <form>
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-6">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin chính</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                <label ng-model="productCategory.Name">Tên danh mục</label>
+                                <input type="text" class="form-control" placeholder="Tên danh mục ...">
                             </div>
+
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label>Thứ tự hiển thị</label>
+                                <input ng-model="productCategory.DisplayOrder" type="number" class="form-control" placeholder="Hiển thị ở vị trí 1 2 3 ...">
                             </div>
+
                             <div class="form-group">
-                                <label for="exampleInputFile">File input</label>
+                                <label>Danh mục cha</label>
+                                <select ng-model="productCategory.ParentID" id="parentIdDropdown" class=" form-control w-100"
+                                        ng-options="option.ID as option.Name for option in parentCategories">
+
+                                </select>
+                            </div>
+
+                            <!-- textarea -->
+                            <div class="form-group">
+                                <label>Mô tả ngắn về danh mục</label>
+                                <textarea ng-model="productCategory.Description" class="form-control" rows="2" placeholder="Mô tả ngắn về danh mục ..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputFile">Hình ảnh</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                        <input ng-model="productCategory.Images" type="file" class="custom-file-input" id="productCategoryImagesInput" multiple="multiple">
+                                        <label class="custom-file-label" for="productCategoryImagesInput">Chọn files</label>
                                     </div>
                                     <div class="input-group-append">
-                                        <span class="input-group-text">Upload</span>
+                                        <span class="input-group-text">Tải lên</span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
                             </div>
                         </div>
                         <!-- /.card-body -->
-
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-
-                <!-- general form elements disabled -->
-                <div class="card card-warning">
-                    <div class="card-header">
-                        <h3 class="card-title">General Elements</h3>
                     </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <form>
+                </div>
+
+                <div class="col-md-6">
+
+                    <!-- general form elements disabled -->
+                    <div class="card card-lightblue">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin SEO</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
                             <div class="row">
                                 <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label ng-model="productCategory.Alias">Tiêu đề SEO</label>
+                                        <input type="text" class="form-control" placeholder="Tiêu đề SEO ...">
+                                    </div>
                                     <!-- text input -->
                                     <div class="form-group">
-                                        <label>Text</label>
-                                        <input type="text" class="form-control" placeholder="Enter ...">
+                                        <label>Từ khóa SEO</label>
+                                        <input ng-model="productCategory.MetaKeyword" type="text" class="form-control" placeholder="Chọn vài từ để làm từ khóa ...">
+                                    </div>
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Từ khóa mô tả</label>
+                                        <input ng-model="productCategory.MetaDescription" type="text" class="form-control" placeholder="Từ khóa mô tả về danh mục ...">
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <!-- textarea -->
-                                    <div class="form-group">
-                                        <label>Textarea</label>
-                                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                    <!-- general form elements disabled -->
+                    <!--<div class="card card-dark">
+                    <div class="card-header">
+                        <h3 class="card-title">Lịch sử chỉnh sửa</h3>
+                    </div>-->
+                    <!-- /.card-header -->
+                    <!--<div class="card-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label ng-model="productCategory.CreatedBy">Người tạo</label>
+                                    <input type="text" class="form-control"  required disabled>
+                                </div>-->
+                    <!-- text input -->
+                    <!--<div class="form-group">
+                            <label>Ngày tạo</label>
+                            <input ng-model="productCategory.CreatedDate" type="text" class="form-control" disabled>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label ng-model="productCategory.Alias">Người chỉnh sửa gần nhất</label>
+                            <input type="text" class="form-control" disabled>
+                        </div>-->
+                    <!-- text input -->
+                    <!--<div class="form-group">
+                                        <label>Thời gian chỉnh sửa</label>
+                                        <input type="text" class="form-control" disabled>
                                     </div>
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </div>-->
                     <!-- /.card-body -->
-                </div>
+                    <!--</div>-->
 
-                <div class="card card-success">
-                    <div class="card-header">
-                        <h3 class="card-title">iCheck Bootstrap - Checkbox &amp; Radio Inputs</h3>
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý danh mục</h3>
+                        </div>
+                        <div class="card-body">
+                            <!-- Minimal style -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <!-- checkbox -->
+                                    <div class="form-group clearfix">
+                                        <div class="icheck-success d-inline">
+                                            <input type="checkbox" id="checkboxActive"
+                                                   ng-model="productCategory.Status" ng-checked="productCategory.Status==true">
+                                            <label for="checkboxActive">
+                                                Kích hoạt danh mục
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <!-- checkbox -->
+                                    <div class="form-group clearfix">
+                                        <div class="icheck-belizehole d-inline">
+                                            <input type="checkbox" id="checkboxHomeFlag"
+                                                   ng-model="productCategory.HomeFlag" ng-checked="productCategory.HomeFlag==true">
+                                            <label for="checkboxHomeFlag">
+                                                Hiển thị trên trang chủ
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+
+                        </div>
+                        <!-- /.card-body -->
                     </div>
-                    <div class="card-body">
-                        <!-- Minimal style -->
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <!-- checkbox -->
-                                <div class="form-group clearfix">
-                                    <div class="icheck-primary d-inline">
-                                        <input type="checkbox" id="checkboxPrimary1" checked="">
-                                        <label for="checkboxPrimary1">
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary d-inline">
-                                        <input type="checkbox" id="checkboxPrimary2">
-                                        <label for="checkboxPrimary2">
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary d-inline">
-                                        <input type="checkbox" id="checkboxPrimary3" disabled="">
-                                        <label for="checkboxPrimary3">
-                                            Primary checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <!-- radio -->
-                                <div class="form-group clearfix">
-                                    <div class="icheck-primary d-inline">
-                                        <input type="radio" id="radioPrimary1" name="r1" checked="">
-                                        <label for="radioPrimary1">
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary d-inline">
-                                        <input type="radio" id="radioPrimary2" name="r1">
-                                        <label for="radioPrimary2">
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary d-inline">
-                                        <input type="radio" id="radioPrimary3" name="r1" disabled="">
-                                        <label for="radioPrimary3">
-                                            Primary radio
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Minimal red style -->
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <!-- checkbox -->
-                                <div class="form-group clearfix">
-                                    <div class="icheck-danger d-inline">
-                                        <input type="checkbox" checked="" id="checkboxDanger1">
-                                        <label for="checkboxDanger1">
-                                        </label>
-                                    </div>
-                                    <div class="icheck-danger d-inline">
-                                        <input type="checkbox" id="checkboxDanger2">
-                                        <label for="checkboxDanger2">
-                                        </label>
-                                    </div>
-                                    <div class="icheck-danger d-inline">
-                                        <input type="checkbox" disabled="" id="checkboxDanger3">
-                                        <label for="checkboxDanger3">
-                                            Danger checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <!-- radio -->
-                                <div class="form-group clearfix">
-                                    <div class="icheck-danger d-inline">
-                                        <input type="radio" name="r2" checked="" id="radioDanger1">
-                                        <label for="radioDanger1">
-                                        </label>
-                                    </div>
-                                    <div class="icheck-danger d-inline">
-                                        <input type="radio" name="r2" id="radioDanger2">
-                                        <label for="radioDanger2">
-                                        </label>
-                                    </div>
-                                    <div class="icheck-danger d-inline">
-                                        <input type="radio" name="r2" disabled="" id="radioDanger3">
-                                        <label for="radioDanger3">
-                                            Danger radio
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Minimal red style -->
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <!-- checkbox -->
-                                <div class="form-group clearfix">
-                                    <div class="icheck-success d-inline">
-                                        <input type="checkbox" checked="" id="checkboxSuccess1">
-                                        <label for="checkboxSuccess1">
-                                        </label>
-                                    </div>
-                                    <div class="icheck-success d-inline">
-                                        <input type="checkbox" id="checkboxSuccess2">
-                                        <label for="checkboxSuccess2">
-                                        </label>
-                                    </div>
-                                    <div class="icheck-success d-inline">
-                                        <input type="checkbox" disabled="" id="checkboxSuccess3">
-                                        <label for="checkboxSuccess3">
-                                            Success checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <!-- radio -->
-                                <div class="form-group clearfix">
-                                    <div class="icheck-success d-inline">
-                                        <input type="radio" name="r3" checked="" id="radioSuccess1">
-                                        <label for="radioSuccess1">
-                                        </label>
-                                    </div>
-                                    <div class="icheck-success d-inline">
-                                        <input type="radio" name="r3" id="radioSuccess2">
-                                        <label for="radioSuccess2">
-                                        </label>
-                                    </div>
-                                    <div class="icheck-success d-inline">
-                                        <input type="radio" name="r3" disabled="" id="radioSuccess3">
-                                        <label for="radioSuccess3">
-                                            Success radio
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.card-body -->
                 </div>
+                <!--/.col (right) -->
             </div>
-            <!--/.col (right) -->
-        </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Lưu danh mục</button>
+                <button ui-sref="ProductCategory" class="btn btn-outline-secondary space-around">Hủy bỏ</button>
+            </div>
+        </form>
         <!-- /.row -->
     </div><!-- /.container-fluid -->
 </section>
 <!-- /.content -->
+
+<script>
+    $(document).ready(function () {
+        $('#parentIdDropdown').select2({
+            theme: 'bootstrap4'
+        });
+
+        $('#parentIdDropdown').val('Danh mục gốc'); // Select the option with a value of 'US'
+        $('#parentIdDropdown').trigger('change'); // Notify any JS components that the value changed
+
+        //Initialize Select2 Elements
+        console.log('Load library done!')
+    });
+</script>

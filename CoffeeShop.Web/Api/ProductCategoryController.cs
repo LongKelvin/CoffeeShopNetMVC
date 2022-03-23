@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 
+using CoffeeShop.Models.Models;
 using CoffeeShop.Services;
 using CoffeeShop.Web.Infrastucture.Core;
 using CoffeeShop.Web.Models;
@@ -38,7 +39,7 @@ namespace CoffeeShop.Web.Api
                 totalRow = listProductCategory.Count();
 
                 //Order by
-                 var query = listProductCategory.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
+                var query = listProductCategory.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
 
                 //Map object using Automapper
                 var listProductCategotyVM = Mapper.Map<List<ProductCategoryViewModel>>(query);
@@ -55,6 +56,42 @@ namespace CoffeeShop.Web.Api
                 };
 
                 return request.CreateResponse(HttpStatusCode.OK, paginationSetResult);
+            });
+        }
+
+        [Route("Create")]
+        public HttpResponseMessage Create(HttpRequestMessage request, ProductCategoryViewModel model)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                    return response;
+                }
+
+                var newProductCatenogy = Mapper.Map<ProductCategory>(model);
+
+                var result = _productCategoryService.Add(newProductCatenogy);
+                _productCategoryService.SaveChanges();
+
+                return request.CreateResponse(HttpStatusCode.Created, result);
+            });
+        }
+
+        [Route("GetAllParents")]
+        [HttpGet]
+        public HttpResponseMessage GetAll(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                var model = _productCategoryService.GetAll();
+
+                var responseData = Mapper.Map<List<ProductCategory>, List<ProductCategoryViewModel>>(model.ToList());
+
+                var response = request.CreateResponse(HttpStatusCode.OK, responseData);
+                return response;
             });
         }
     }

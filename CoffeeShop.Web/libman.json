@@ -37,6 +37,23 @@
     {
       "library": "icheck-bootstrap@3.0.1",
       "destination": "Assets/Admin/lib/icheck-bootstrap/"
+    },
+    {
+      "library": "select2@4.0.13",
+      "destination": "Assets/Admin/lib/select2/"
+    },
+    {
+      "library": "select2-bootstrap-5-theme@1.2.0",
+      "destination": "Assets/Admin/lib/select2-bootstrap-5-theme/"
+    },
+    {
+      "library": "select2-bootstrap-css@1.4.6",
+      "destination": "Assets/Admin/lib/select2-bootstrap-css/"
+    },
+    {
+      "library": "select2-bootstrap-theme@0.1.0-beta.10",
+      "destination": "Assets/Admin/lib/select2-bootstrap-theme/"
     }
+   
   ]
 }
