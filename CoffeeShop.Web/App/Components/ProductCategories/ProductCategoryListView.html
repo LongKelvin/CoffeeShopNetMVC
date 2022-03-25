@@ -120,17 +120,16 @@
 
 <script>
 
-
-
     $(function () {
 
         $(window).bind("resize", function () {
-           // console.log($(this).width())
+            // console.log($(this).width())
             if ($(this).width() <= 1024) {
                 $('#main-body').addClass('sidebar-collapse');
                 $('#main-body').addClass('sidebar-closed');
             }
             else {
+
                 $('#main-body').removeClass('sidebar-collapse');
                 $('#main-body').removeClass('sidebar-closed');
             }
