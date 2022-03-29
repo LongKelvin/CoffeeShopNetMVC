@@ -10,10 +10,10 @@
         'NotificationService',
         '$stateParams',
         '$state',
-        '$ngBootbox'
+      
     ];
 
-    function ProductCategoryListController($scope, ApiServices, NotificationService, $ngBootbox) {
+    function ProductCategoryListController($scope, ApiServices, NotificationService) {
         //setup Controller
         $scope.title = 'ProductCategoryListController';
 

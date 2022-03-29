@@ -129,6 +129,7 @@
     <Content Include="App\Shared\Directives\PagerDirective.js" />
     <Content Include="App\Shared\Filters\StatusFilter.js" />
     <Content Include="App\Shared\Modules\CoffeeShop.Common.js" />
+    <Content Include="App\Shared\Services\CommonService.js" />
     <Content Include="App\Shared\Services\ApiServices.js" />
     <Content Include="App\Shared\Services\NotificationService.js" />
     <Content Include="Assets\Admin\css\adminlte.css" />

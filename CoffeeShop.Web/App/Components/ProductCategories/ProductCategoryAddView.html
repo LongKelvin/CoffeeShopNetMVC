@@ -35,7 +35,8 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label >Tên danh mục</label>
-                                <input type="text" ng-model="productCategory.Name" class="form-control" placeholder="Tên danh mục ...">
+                                <input type="text" ng-model="productCategory.Name" class="form-control" placeholder="Tên danh mục ..."
+                                       ng-change="getSeoTitle()">
                             </div>
 
                             <div class="form-group">

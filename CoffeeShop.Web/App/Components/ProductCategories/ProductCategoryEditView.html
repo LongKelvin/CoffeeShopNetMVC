@@ -21,7 +21,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <form name="frmUpdateProductCategory" role="form" ng-submit="UpdateProductCategory()">
+        <form name="frmUpdateProductCategory" role="form" ng-submit="UpdateProductCategory()" novalidate>
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-6">
@@ -36,7 +36,9 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Tên danh mục</label>
-                                <input type="text" ng-model="productCategory.Name" class="form-control" placeholder="Tên danh mục ...">
+                                <input type="text" ng-model="productCategory.Name" class="form-control" 
+                                       ng-change="getSeoTitle()"
+                                       placeholder="Tên danh mục ...">
                             </div>
 
                             <div class="form-group">

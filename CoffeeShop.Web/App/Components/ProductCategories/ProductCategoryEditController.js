@@ -1,9 +1,18 @@
 ﻿(function (app) {
     app.controller('ProductCategoryEditController', ProductCategoryEditController);
 
-    ProductCategoryEditController.$inject = ['$scope', 'ApiServices', '$state', 'NotificationService', '$stateParams'];
+    ProductCategoryEditController.$inject =
+        [
+            '$scope',
+            'ApiServices',
+            '$state',
+            'NotificationService',
+            '$stateParams',
+            'CommonService'
+        ];
 
-    function ProductCategoryEditController($scope, ApiServices, $state, NotificationService, $stateParams) {
+
+    function ProductCategoryEditController($scope, ApiServices, $state, NotificationService, $stateParams, CommonService) {
         $scope.title = 'ProductCategoryEditController';
 
         $scope.productCategory = {
@@ -12,6 +21,12 @@
         }
 
         $scope.UpdateProductCategory = UpdateProductCategory;
+        $scope.getSeoTitle = getSeoTitle;
+
+        function getSeoTitle() {
+            $scope.productCategory.Alias = CommonService.getSeoTitle($scope.productCategory.Name);
+        }
+
 
         function UpdateProductCategory() {
             $scope.productCategory.UpdatedDate = new Date();
