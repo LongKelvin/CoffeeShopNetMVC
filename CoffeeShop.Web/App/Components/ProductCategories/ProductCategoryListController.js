@@ -9,9 +9,11 @@
         'ApiServices',
         'NotificationService',
         '$stateParams',
-        '$state'];
+        '$state',
+        '$ngBootbox'
+    ];
 
-    function ProductCategoryListController($scope, ApiServices, NotificationService/*, $stateParams, $state*/) {
+    function ProductCategoryListController($scope, ApiServices, NotificationService, $ngBootbox) {
         //setup Controller
         $scope.title = 'ProductCategoryListController';
 
@@ -23,6 +25,8 @@
         $scope.keyWord = '';
         //asign function to get productCategory
         $scope.getProductCagories = getProductCagories;
+        $scope.showDeleteDialog = showDeleteDialog;
+        $scope.deleteProductCategory = deleleProductCategory;
 
         function getProductCagories(page, pageSize) {
             page = page || 0;
@@ -65,6 +69,29 @@
         //}
 
         //excute when page loading done such as PageLoad
+
+        function showDeleteDialog(id) {
+            $('#deleteId').val(id);
+            $('#confirmDeleteModal').modal('show');
+        }
+
+        function deleleProductCategory() {
+            var id = $('#deleteId').val();
+            var config = {
+                params: {
+                    id: id
+                }
+            }
+            ApiServices.del('api/ProductCategory/Delete', config, function () {
+                NotificationService.displaySuccess('Xóa thành công');
+                $('#confirmDeleteModal').modal('hide');
+                getProductCagories();
+            }, function () {
+                $('#confirmDeleteModal').modal('hide');
+                NotificationService.displayError('Xóa không thành công');
+            })
+        }
+
         $scope.getProductCagories();
     }
 })(angular.module('CoffeeShop.ProductCategory'));

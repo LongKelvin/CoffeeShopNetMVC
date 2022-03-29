@@ -82,7 +82,7 @@
                             </td>
                             <td>
                                 <button ui-sref="ProductCategoryEdit({id:item.ID})" class="btn btn-sm btn-outline-primary"><i class="fa fa-pencil"></i></button>
-                                <button class="btn  btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                <button ng-click="showDeleteDialog(item.ID)" class="btn  btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -117,6 +117,24 @@
         </div>
     </div>
 </section><!-- /.content -->
+<!-- Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cfirmTitle"><strong>Bạn chắc chắn muốn xóa?</strong></h5>
+            </div>
+            <div class="modal-body">
+                <span>Dữ liệu bị xóa sẽ không thể khôi phục lại!</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Hủy bỏ</button>
+                <button ng-click="deleteProductCategory()" type="button" class="btn btn-danger">&nbsp; &nbsp; Xóa&nbsp;&nbsp;  </button>
+                <input id="deleteId" hidden />
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
 

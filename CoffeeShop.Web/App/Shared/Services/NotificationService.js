@@ -9,10 +9,10 @@
             "debug": false,
             "positionClass": "toast-top-right",
             "onclick": null,
-            "fadeIn": 300,
-            "fadeOut": 1000,
-            "timeOut": 4000,
-            "extendedTimeOut": 1000
+            "fadeIn": 500,
+            "fadeOut": 1500,
+            "timeOut": 6000,
+            "extendedTimeOut": 2000
         };
 
         function displaySuccess(message) {

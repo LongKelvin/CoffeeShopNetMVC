@@ -4,7 +4,7 @@
     angular.module('CoffeeShop.ProductCategory', [
 
         // Custom modules
-        'CoffeeShop.Common'
+        'CoffeeShop.Common',
 
     ]).config(config);
 

@@ -140,5 +140,27 @@ namespace CoffeeShop.Web.Api
                 return request.CreateResponse(HttpStatusCode.OK, responseResult);
             });
         }
+
+        [Route("Delete")]
+        [AllowAnonymous]
+        [HttpDelete]
+        public HttpResponseMessage Delete(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+              
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                     
+                }
+
+                _productCategoryService.Delete(id);
+                _productCategoryService.SaveChanges();
+
+                return request.CreateResponse(HttpStatusCode.OK);
+
+            });
+        }
     }
 }

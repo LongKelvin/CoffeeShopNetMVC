@@ -10,9 +10,9 @@ namespace CoffeeShop.Services
 
         void Update(ProductCategory productCategory);
 
-        void Delete(ProductCategory productCategory);
+        ProductCategory Delete(ProductCategory productCategory);
 
-        void Delete(int id);
+        ProductCategory Delete(int id);
 
         IEnumerable<ProductCategory> GetAll();
         IEnumerable<ProductCategory> GetAll(string keyWord);
