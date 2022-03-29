@@ -20,6 +20,7 @@ namespace CoffeeShop.Web.Infrastucture.Core
             _errorService = errorService;
         }
 
+        
         protected HttpResponseMessage CreateHttpResponse(
             HttpRequestMessage requestMessage, Func<HttpResponseMessage> function)
         {
