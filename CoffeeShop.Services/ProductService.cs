@@ -35,6 +35,7 @@ namespace CoffeeShop.Services
         public IEnumerable<Product> GetAll()
         {
             return _productRepository.GetAll(new string[] { "ProductCategory" });
+            //var res =  _productRepository.GetAll(null);
         }
 
         public IEnumerable<Product> GetAll(string keyWord)

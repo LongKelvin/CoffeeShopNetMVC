@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web;
-using System.Web.Http;
-using AutoMapper;
+﻿using AutoMapper;
 
-using System.Web.Script.Serialization;
-
-using CoffeeShop.Data;
 using CoffeeShop.Models.Models;
 using CoffeeShop.Services;
 using CoffeeShop.Web.Infrastucture.Core;
 using CoffeeShop.Web.Infrastucture.Extensions;
 using CoffeeShop.Web.Models;
+
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Script.Serialization;
 
 namespace CoffeeShop.Web.Api
 {
@@ -41,23 +38,21 @@ namespace CoffeeShop.Web.Api
                 //Get All Product
 
                 var listProduct = _productService.GetAll(keyWord);
-                
 
                 totalRow = listProduct.Count();
 
                 //Order by
-                var query = listProduct.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
+                IEnumerable<Product> query = listProduct.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize);
 
                 //Map object using Automapper
-                var listProductCategotyVM = Mapper.Map<List<ProductViewModel>>(query);
+                var listProductVM = Mapper.Map<List<ProductViewModel>>(query);
 
                 //Paging
                 var paginationSetResult = new PaginationSet<ProductViewModel>()
                 {
-                    Items = listProductCategotyVM,
                     Page = page,
                     TotalCount = totalRow,
-
+                    Items = listProductVM,
                     //Rounding decimals
                     TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize)
                 };

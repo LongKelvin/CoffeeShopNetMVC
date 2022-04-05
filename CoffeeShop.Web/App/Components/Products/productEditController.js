@@ -1,6 +1,4 @@
 ﻿(function (app) {
-   
-
     app.controller('ProductEditController', ProductEditController);
 
     ProductEditController.$inject = ['$scope'];

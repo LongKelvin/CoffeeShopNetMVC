@@ -1,7 +1,4 @@
-﻿
-/// <reference path="../../shared/services/notificationservice.js" />
-/// <reference path="../../shared/services/apiservices.js" />
-
+﻿/// <reference path="../../shared/services/notificationservice.js" />
 (function (app) {
     app.controller('ProductListController', ProductListController);
 
@@ -50,7 +47,7 @@
                         NotificationService.displayWarning('No data to display');
                     }
 
-                    $scope.productCategories = result.data.Items;
+                    $scope.products = result.data.Items;
                     $scope.page = result.data.Page;
                     $scope.pagesCount = result.data.TotalPages; //total pages that the query recevied
                     $scope.totalCount = result.data.TotalCount; //total row data from api result
@@ -77,7 +74,7 @@
 
         function showDeleteDialog(id) {
             $('#deleteId').val(id);
-            $('#confirmDeleteModal').modal('show');
+            $('#pconfirmDeleteModal').modal('show');
         }
 
         function deleleProduct() {
@@ -89,10 +86,10 @@
             }
             ApiServices.del('api/Product/Delete', config, function () {
                 NotificationService.displaySuccess('Xóa thành công');
-                $('#confirmDeleteModal').modal('hide');
+                $('#pconfirmDeleteModal').modal('hide');
                 getProducts();
             }, function () {
-                $('#confirmDeleteModal').modal('hide');
+                $('#pconfirmDeleteModal').modal('hide');
                 NotificationService.displayError('Xóa không thành công');
             })
         }
@@ -110,11 +107,11 @@
             if (selectedItem.length <= 0) {
                 //$('m-content').html("Vui lòng chọn ít nhất một bản ghi để xóa!");
                 //$('#delMultiBtn').hide();
-                //$('#confirmMultiDeleteModal').modal('show');
+                //$('#pconfirmMultiDeleteModal').modal('show');
             }
             else {
                 $('#totalDeleteCount').html(selectedItem.length);
-                $('#confirmMultiDeleteModal').modal('show');
+                $('#pconfirmMultiDeleteModal').modal('show');
             }
         }
 
@@ -137,14 +134,15 @@
             //console.log('Param config: ', config)
             ApiServices.del('api/Product/DeleteMultiItems', config, function () {
                 NotificationService.displaySuccess('Xóa thành công');
-                $('#confirmDeleteModal').modal('hide');
+
                 getProducts();
             }, function () {
                 NotificationService.displayError('Xóa không thành công');
-                $('#confirmDeleteModal').modal('hide');
             })
+
+            $('#pconfirmDeleteModal').modal('hide');
         }
 
         $scope.getProducts();
     }
-})(angular.module('CoffeeShop.Product'));
+})(angular.module('CoffeeShop.Products'));

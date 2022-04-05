@@ -10,7 +10,6 @@
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-
     function config($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('Products', {

@@ -11,7 +11,6 @@
             'CommonService'
         ];
 
-
     function ProductCategoryEditController($scope, ApiServices, $state, NotificationService, $stateParams, CommonService) {
         $scope.title = 'ProductCategoryEditController';
 
@@ -26,7 +25,6 @@
         function getSeoTitle() {
             $scope.productCategory.Alias = CommonService.getSeoTitle($scope.productCategory.Name);
         }
-
 
         function UpdateProductCategory() {
             $scope.productCategory.UpdatedDate = new Date();
@@ -52,9 +50,8 @@
         function loadProductCategoryDetail() {
             ApiServices.get('api/ProductCategory/GetById/' + $stateParams.id, null, function (result) {
                 $scope.productCategory = result.data;
-                
 
-                console.log('productCategoryData: ',$scope.productCategory)
+                console.log('productCategoryData: ', $scope.productCategory)
             }, function (error) {
                 NotificationService.displayError(error.data);
             });
@@ -62,6 +59,5 @@
 
         loadParentCategory();
         loadProductCategoryDetail();
-       
     }
 })(angular.module('CoffeeShop.ProductCategory'));

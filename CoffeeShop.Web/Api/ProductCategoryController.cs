@@ -43,6 +43,7 @@ namespace CoffeeShop.Web.Api
                 //Order by
                 var query = listProductCategory.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
 
+                int count = query.Count();
                 //Map object using Automapper
                 var listProductCategotyVM = Mapper.Map<List<ProductCategoryViewModel>>(query);
 

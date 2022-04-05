@@ -118,7 +118,7 @@
             </div>
             <hr />
             <!--Pager directives-->
-            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" pageSize="3" search-func="getProductCagories(page, pageSize)"></pager-directive>
+            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" pageSize="3" search-func="getProducts(page, pageSize)"></pager-directive>
             <div class="card-footer form-row justify-content-around">
                 <div class="col-6">
                     <div class="float-left justify-content-around ">
@@ -145,7 +145,7 @@
     </div>
 </section><!-- /.content -->
 <!-- Modal -->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="pconfirmDeleteModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -164,7 +164,7 @@
 </div>
 
 <!--Modal for delete multi items-->
-<div class="modal fade" id="confirmMultiDeleteModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="pconfirmMultiDeleteModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
