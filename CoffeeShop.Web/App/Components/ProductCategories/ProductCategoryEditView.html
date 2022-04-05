@@ -36,9 +36,12 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Tên danh mục</label>
-                                <input type="text" ng-model="productCategory.Name" class="form-control" 
+                                <input type="text" ng-model="productCategory.Name" class="form-control"
+                                       name="pName" required
                                        ng-change="getSeoTitle()"
                                        placeholder="Tên danh mục ...">
+                                <span class="text-danger" ng-show="frmUpdateProductCategory.pName.$touched && frmUpdateProductCategory.pName.$invalid">Bạn chưa nhập tên danh mục</span>
+                                
                             </div>
 
                             <div class="form-group">
@@ -105,7 +108,9 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Tiêu đề SEO</label>
-                                        <input type="text" ng-model="productCategory.Alias" class="form-control" placeholder="Tiêu đề SEO ...">
+                                        <input type="text" ng-model="productCategory.Alias" class="form-control" placeholder="Tiêu đề SEO ..."
+                                               name="pAlias" required>
+                                        <span class="text-danger" ng-show="frmUpdateProductCategory.pAlias.$touched && frmUpdateProductCategory.pAlias.$invalid">Bạn chưa nhập tiêu đề SEO</span>
                                     </div>
                                     <!-- text input -->
                                     <div class="form-group">

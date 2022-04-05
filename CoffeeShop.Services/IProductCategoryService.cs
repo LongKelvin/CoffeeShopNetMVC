@@ -24,5 +24,6 @@ namespace CoffeeShop.Services
         ProductCategory GetById(int id);
 
         void SaveChanges();
+        void DeleteMultiItems(int[] ids);
     }
 }

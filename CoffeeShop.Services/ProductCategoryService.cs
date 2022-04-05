@@ -3,6 +3,7 @@ using CoffeeShop.Data.Repositories;
 using CoffeeShop.Models.Models;
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CoffeeShop.Services
 {
@@ -73,6 +74,11 @@ namespace CoffeeShop.Services
                 return GetAll();
 
             return _productCategoryRepository.GetMulti(x => x.Name.Contains(keyWord) || x.Alias.Contains(keyWord));
+        }
+
+        public void DeleteMultiItems(int[] ids)
+        {  
+             _productCategoryRepository.DeleteMulti(x => ids.Contains(x.ID));
         }
     }
 }

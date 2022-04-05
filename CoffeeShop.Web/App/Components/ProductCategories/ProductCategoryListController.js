@@ -10,7 +10,8 @@
         'NotificationService',
         '$stateParams',
         '$state',
-      
+        '$http'
+
     ];
 
     function ProductCategoryListController($scope, ApiServices, NotificationService) {
@@ -27,6 +28,9 @@
         $scope.getProductCagories = getProductCagories;
         $scope.showDeleteDialog = showDeleteDialog;
         $scope.deleteProductCategory = deleleProductCategory;
+
+        $scope.showMultiDeleteDialog = showMultiDeleteDialog;
+        $scope.deleteMultiProductCategory = deleteMultiProductCategory;
 
         function getProductCagories(page, pageSize) {
             page = page || 0;
@@ -89,6 +93,54 @@
             }, function () {
                 $('#confirmDeleteModal').modal('hide');
                 NotificationService.displayError('Xóa không thành công');
+            })
+        }
+
+        function showMultiDeleteDialog() {
+            var selectedItem = new Array();
+            $('input:checkbox.checkBox').each(function () {
+                if ($(this).prop('checked')) {
+                    selectedItem.push($(this).val());
+                }
+            });
+
+            console.log('delete selected count: ', selectedItem);
+
+            if (selectedItem.length <= 0) {
+                //$('m-content').html("Vui lòng chọn ít nhất một bản ghi để xóa!");
+                //$('#delMultiBtn').hide();
+                //$('#confirmMultiDeleteModal').modal('show');
+            }
+            else {
+                $('#totalDeleteCount').html(selectedItem.length);
+                $('#confirmMultiDeleteModal').modal('show');
+            }
+        }
+
+        function deleteMultiProductCategory() {
+            var selectedIDs = [];
+            $('input:checkbox.checkBox').each(function () {
+                if ($(this).prop('checked')) {
+                    selectedIDs.push($(this).val());
+                }
+            });
+
+            //console.log('Console selectedIDs -> ', selectedIDs)
+
+            var config = {
+                params: {
+                    ids: JSON.stringify(selectedIDs)
+                }
+            }
+
+            //console.log('Param config: ', config)
+            ApiServices.del('api/ProductCategory/DeleteMultiItems', config, function () {
+                NotificationService.displaySuccess('Xóa thành công');
+                $('#confirmDeleteModal').modal('hide');
+                getProductCagories();
+            }, function () {
+                NotificationService.displayError('Xóa không thành công');
+                $('#confirmDeleteModal').modal('hide');
             })
         }
 

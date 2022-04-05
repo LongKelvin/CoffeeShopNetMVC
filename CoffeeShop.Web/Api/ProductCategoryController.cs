@@ -12,6 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 
 namespace CoffeeShop.Web.Api
 {
@@ -148,18 +149,46 @@ namespace CoffeeShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-              
                 if (!ModelState.IsValid)
                 {
                     return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-                     
                 }
 
                 _productCategoryService.Delete(id);
                 _productCategoryService.SaveChanges();
 
                 return request.CreateResponse(HttpStatusCode.OK);
+            });
+        }
 
+        [Route("DeleteMultiItems")]
+        [AllowAnonymous]
+        [HttpDelete]
+        public HttpResponseMessage DeleteMultiItems(HttpRequestMessage request, string ids)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+
+                try
+                {
+                    var listProductCategory = new JavaScriptSerializer().Deserialize<List<int>>(ids);
+                    foreach (var item in listProductCategory)
+                    {
+                        _productCategoryService.Delete(item);
+                    }
+
+                    _productCategoryService.SaveChanges();
+                }
+                catch
+                {
+                    throw;
+                }
+
+                return request.CreateResponse(HttpStatusCode.OK);
             });
         }
     }
