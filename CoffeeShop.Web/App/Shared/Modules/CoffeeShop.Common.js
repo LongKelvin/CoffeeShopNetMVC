@@ -6,7 +6,7 @@
         // Custom modules 
 
         // 3rd Party Modules
-        'ui.router'
-
+        'ui.router',
+        
     ]);
 })();

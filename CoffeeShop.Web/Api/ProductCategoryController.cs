@@ -3,6 +3,7 @@
 using CoffeeShop.Models.Models;
 using CoffeeShop.Services;
 using CoffeeShop.Web.Infrastucture.Core;
+using CoffeeShop.Web.Infrastucture.Extensions;
 using CoffeeShop.Web.Models;
 
 using System;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 
 namespace CoffeeShop.Web.Api
 {
@@ -59,24 +61,46 @@ namespace CoffeeShop.Web.Api
             });
         }
 
-        [Route("Create")]
-        public HttpResponseMessage Create(HttpRequestMessage request, ProductCategoryViewModel model)
+        // GET api/<controller>
+        [Route("GetById/{id:int}")]
+        public HttpResponseMessage GetById(HttpRequestMessage request, int Id)
         {
             return CreateHttpResponse(request, () =>
             {
-                HttpResponseMessage response = null;
-                if (!ModelState.IsValid)
+                var productCategoryDetail = _productCategoryService.GetById(Id);
+
+                if (productCategoryDetail == null)
                 {
-                    request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-                    return response;
+                    return request.CreateErrorResponse(HttpStatusCode.NotFound, Id.ToString());
                 }
 
-                var newProductCatenogy = Mapper.Map<ProductCategory>(model);
+                //Map object using Automapper
+                var productCategotyVM = Mapper.Map<ProductCategoryViewModel>(productCategoryDetail);
 
-                var result = _productCategoryService.Add(newProductCatenogy);
+                return request.CreateResponse(HttpStatusCode.OK, productCategotyVM);
+            });
+        }
+
+        [AllowAnonymous]
+        [Route("Create")]
+        public HttpResponseMessage Create(HttpRequestMessage request, ProductCategoryViewModel productCategoryVM)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+
+                var newProductCategory = new ProductCategory();
+                EntityExtensions.UpdateProductCategory(newProductCategory, productCategoryVM);
+
+                var result = _productCategoryService.Add(newProductCategory);
                 _productCategoryService.SaveChanges();
 
-                return request.CreateResponse(HttpStatusCode.Created, result);
+                var responseResult = Mapper.Map<ProductCategory, ProductCategoryViewModel>(result);
+
+                return request.CreateResponse(HttpStatusCode.Created, responseResult);
             });
         }
 
@@ -92,6 +116,79 @@ namespace CoffeeShop.Web.Api
 
                 var response = request.CreateResponse(HttpStatusCode.OK, responseData);
                 return response;
+            });
+        }
+
+        [Route("Update")]
+        [HttpPost]
+        public HttpResponseMessage Update(HttpRequestMessage request, ProductCategoryViewModel productCategoryVM)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+
+                var updateProductCategory = new ProductCategory();
+                EntityExtensions.UpdateProductCategory(updateProductCategory, productCategoryVM);
+
+                _productCategoryService.Update(updateProductCategory);
+                _productCategoryService.SaveChanges();
+
+                var responseResult = Mapper.Map<ProductCategory, ProductCategoryViewModel>(updateProductCategory);
+
+                return request.CreateResponse(HttpStatusCode.OK, responseResult);
+            });
+        }
+
+        [Route("Delete")]
+        [AllowAnonymous]
+        [HttpDelete]
+        public HttpResponseMessage Delete(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+
+                _productCategoryService.Delete(id);
+                _productCategoryService.SaveChanges();
+
+                return request.CreateResponse(HttpStatusCode.OK);
+            });
+        }
+
+        [Route("DeleteMultiItems")]
+        [AllowAnonymous]
+        [HttpDelete]
+        public HttpResponseMessage DeleteMultiItems(HttpRequestMessage request, string ids)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+
+                try
+                {
+                    var listProductCategory = new JavaScriptSerializer().Deserialize<List<int>>(ids);
+                    foreach (var item in listProductCategory)
+                    {
+                        _productCategoryService.Delete(item);
+                    }
+
+                    _productCategoryService.SaveChanges();
+                }
+                catch
+                {
+                    throw;
+                }
+
+                return request.CreateResponse(HttpStatusCode.OK);
             });
         }
     }

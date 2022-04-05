@@ -28,6 +28,7 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             postCategory.MetaKeyword = postCategoryVm.MetaKeyword;
             postCategory.MetaDescription = postCategoryVm.MetaDescription;
             postCategory.Status = postCategoryVm.Status;
+            postCategory.RowVersion = postCategoryVm.RowVersion;
 
         }
         public static void UpdateProductCategory(this ProductCategory productCategory, ProductCategoryViewModel productCategoryVm)
@@ -48,6 +49,7 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             productCategory.MetaKeyword = productCategoryVm.MetaKeyword;
             productCategory.MetaDescription = productCategoryVm.MetaDescription;
             productCategory.Status = productCategoryVm.Status;
+            productCategory.RowVersion = productCategoryVm.RowVersion;
 
         }
         public static void UpdatePost(this Post post, PostViewModel postVm)
@@ -69,6 +71,7 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             post.MetaKeyword = postVm.MetaKeyword;
             post.MetaDescription = postVm.MetaDescription;
             post.Status = postVm.Status;
+            post.RowVersion = postVm.RowVersion;
         }
     }
 }

@@ -53,7 +53,28 @@
     {
       "library": "select2-bootstrap-theme@0.1.0-beta.10",
       "destination": "Assets/Admin/lib/select2-bootstrap-theme/"
+    },
+    {
+      "library": "angular-sweetalert@1.1.2",
+      "destination": "Assets/Admin/lib/angular-sweetalert/"
+    },
+    {
+      "library": "sweetalert@2.1.2",
+      "destination": "Assets/Admin/lib/sweetalert/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "angularjs-sweetalert2@1.0.0",
+      "destination": "Assets/Admin/lib/angularjs-sweetalert2/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "ngbootbox@0.2.0",
+      "destination": "Assets/Admin/lib/ngbootbox/"
+    },
+    {
+      "library": "bootbox.js@5.5.2",
+      "destination": "Assets/Admin/lib/bootbox.js/"
     }
-   
   ]
 }

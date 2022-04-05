@@ -3,6 +3,7 @@ using CoffeeShop.Data.Repositories;
 using CoffeeShop.Models.Models;
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CoffeeShop.Services
 {
@@ -22,14 +23,14 @@ namespace CoffeeShop.Services
             return _productCategoryRepository.Add(productCategory);
         }
 
-        public void Delete(ProductCategory productCategory)
+        public ProductCategory Delete(ProductCategory productCategory)
         {
-            _productCategoryRepository.Delete(productCategory);
+            return _productCategoryRepository.Delete(productCategory);
         }
 
-        public void Delete(int id)
+        public ProductCategory Delete(int id)
         {
-            _productCategoryRepository.Delete(id);
+            return _productCategoryRepository.Delete(id);
         }
 
         public IEnumerable<ProductCategory> GetAll()
@@ -73,6 +74,11 @@ namespace CoffeeShop.Services
                 return GetAll();
 
             return _productCategoryRepository.GetMulti(x => x.Name.Contains(keyWord) || x.Alias.Contains(keyWord));
+        }
+
+        public void DeleteMultiItems(int[] ids)
+        {  
+             _productCategoryRepository.DeleteMulti(x => ids.Contains(x.ID));
         }
     }
 }

@@ -46,7 +46,7 @@
                     $scope.updateRecordPerPage = function () {
                         console.log("selected item:", $scope.pageSize);
                         //get result from searchFunc
-                        $scope.searchFunc({ page: $scope.page, pageSize: $scope.pageSize });
+                        $scope.searchFunc({ page: 0, pageSize: $scope.pageSize });
                     }
                 }]
         }

@@ -4,7 +4,7 @@
     angular.module('CoffeeShop.ProductCategory', [
 
         // Custom modules
-        'CoffeeShop.Common'
+        'CoffeeShop.Common',
 
     ]).config(config);
 
@@ -24,7 +24,7 @@
                 controller: "ProductCategoryAddController"
             })
             .state('ProductCategoryEdit', {
-                url: "/ProductCategory/Edit",
+                url: "/ProductCategory/Edit/:id",
                 templateUrl: "/App/Components/ProductCategories/ProductCategoryEditView.html",
                 controller: "ProductCategoryEditController"
             });

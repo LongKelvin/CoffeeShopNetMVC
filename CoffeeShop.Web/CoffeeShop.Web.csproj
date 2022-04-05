@@ -129,6 +129,7 @@
     <Content Include="App\Shared\Directives\PagerDirective.js" />
     <Content Include="App\Shared\Filters\StatusFilter.js" />
     <Content Include="App\Shared\Modules\CoffeeShop.Common.js" />
+    <Content Include="App\Shared\Services\CommonService.js" />
     <Content Include="App\Shared\Services\ApiServices.js" />
     <Content Include="App\Shared\Services\NotificationService.js" />
     <Content Include="Assets\Admin\css\adminlte.css" />
@@ -185,6 +186,8 @@
     <Content Include="Assets\Admin\js\pages\dashboard.js" />
     <Content Include="Assets\Admin\js\pages\dashboard2.js" />
     <Content Include="Assets\Admin\js\pages\dashboard3.js" />
+    <Content Include="Assets\Admin\lib\angular-sweetalert\SweetAlert.js" />
+    <Content Include="Assets\Admin\lib\angular-sweetalert\SweetAlert.min.js" />
     <Content Include="Assets\Admin\lib\angular-ui-router\angular-ui-router.js" />
     <Content Include="Assets\Admin\lib\angular-ui-router\angular-ui-router.min.js" />
     <Content Include="Assets\Admin\lib\angular-ui-router\resolveService.js" />
@@ -197,6 +200,10 @@
     <Content Include="Assets\Admin\lib\angular.js\angular-csp.min.css" />
     <Content Include="Assets\Admin\lib\angular.js\angular.js" />
     <Content Include="Assets\Admin\lib\angular.js\angular.min.js" />
+    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\SweetAlert2.js" />
+    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\SweetAlert2.min.js" />
+    <Content Include="Assets\Admin\lib\bootbox.js\bootbox.js" />
+    <Content Include="Assets\Admin\lib\bootbox.js\bootbox.min.js" />
     <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-grid.css" />
     <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-grid.rtl.css" />
@@ -262,6 +269,24 @@
     <Content Include="Assets\Admin\lib\jquery\jquery.min.js" />
     <Content Include="Assets\Admin\lib\jquery\jquery.slim.js" />
     <Content Include="Assets\Admin\lib\jquery\jquery.slim.min.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\dist\ngBootbox.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\dist\ngBootbox.min.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-1\app.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-1\app.min.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-1\custom-dialog.tpl.html" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-1\index.html" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\app.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\app.min.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\index.html" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\main.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\main.min.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\require.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\require.min.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\index.html" />
+    <Content Include="Assets\Admin\lib\ngbootbox\gulpfile.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\gulpfile.min.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\ngBootbox.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\ngBootbox.min.js" />
     <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\select2-bootstrap-5-theme.css" />
     <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\select2-bootstrap-5-theme.min.css" />
     <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\select2-bootstrap-5-theme.rtl.css" />
@@ -398,6 +423,7 @@
     <Content Include="Assets\Admin\lib\select2\js\select2.min.js" />
     <Content Include="Assets\Admin\lib\slim-scroll\slimscroll.js" />
     <Content Include="Assets\Admin\lib\slim-scroll\slimscroll.min.js" />
+    <Content Include="Assets\Admin\lib\sweetalert\sweetalert.min.js" />
     <Content Include="Assets\Admin\lib\toastr.js\toastr.css" />
     <Content Include="Assets\Admin\lib\toastr.js\toastr.min.css" />
     <Content Include="Assets\Admin\lib\toastr.js\toastr.min.js" />
@@ -585,6 +611,15 @@
     <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_sizing.scss" />
     <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_validation.scss" />
     <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_variables.scss" />
+    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\bower.json" />
+    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\LICENSE" />
+    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\package.json" />
+    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\README.md" />
+    <Content Include="Assets\Admin\lib\ngbootbox\.npmignore" />
+    <Content Include="Assets\Admin\lib\ngbootbox\bower.json" />
+    <Content Include="Assets\Admin\lib\ngbootbox\package.json" />
+    <Content Include="Assets\Admin\lib\ngbootbox\README.md" />
+    <Content Include="Assets\Admin\lib\ngbootbox\tsd.json" />
     <None Include="packages.config" />
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
@@ -670,6 +705,11 @@
     <PackageReference Include="Microsoft.Owin.Security.OAuth">
       <Version>4.2.0</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.TypeScript.MSBuild">
+      <Version>4.6.2</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
     </PackageReference>
@@ -679,6 +719,14 @@
     <PackageReference Include="WebGrease">
       <Version>1.6.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Assets\Admin\lib\ngbootbox\typings\angularjs\angular.d.ts" />
+    <TypeScriptCompile Include="Assets\Admin\lib\ngbootbox\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Assets\Admin\lib\ngbootbox\typings\tsd.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
