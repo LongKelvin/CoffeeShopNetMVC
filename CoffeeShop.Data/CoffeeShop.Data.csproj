@@ -40,9 +40,17 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,7 +59,63 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoffeeShopDbContext.cs" />
+    <Compile Include="Insfrastructure\DbFactory.cs" />
+    <Compile Include="Insfrastructure\IDbFactory.cs" />
+    <Compile Include="Insfrastructure\Disposable.cs" />
+    <Compile Include="Insfrastructure\IRepository.cs" />
+    <Compile Include="Insfrastructure\IUnitOfWork.cs" />
+    <Compile Include="Insfrastructure\RepositoryBase.cs" />
+    <Compile Include="Insfrastructure\UnitOfWork.cs" />
+    <Compile Include="Migrations\202203161159516_InitialDb.cs" />
+    <Compile Include="Migrations\202203161159516_InitialDb.designer.cs">
+      <DependentUpon>202203161159516_InitialDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203170330274_AddErrorTable.cs" />
+    <Compile Include="Migrations\202203170330274_AddErrorTable.designer.cs">
+      <DependentUpon>202203170330274_AddErrorTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203171251546_ModifySomeEntity.cs" />
+    <Compile Include="Migrations\202203171251546_ModifySomeEntity.designer.cs">
+      <DependentUpon>202203171251546_ModifySomeEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203180227057_Intergrate-ASPNET-Identity.cs" />
+    <Compile Include="Migrations\202203180227057_Intergrate-ASPNET-Identity.designer.cs">
+      <DependentUpon>202203180227057_Intergrate-ASPNET-Identity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ErrorRepository.cs" />
+    <Compile Include="Repositories\IErrorRepository.cs" />
+    <Compile Include="Repositories\IOrderRepository.cs" />
+    <Compile Include="Repositories\IPageRepository.cs" />
+    <Compile Include="Repositories\IPostCategoryRepository.cs" />
+    <Compile Include="Repositories\IPostRepository.cs" />
+    <Compile Include="Repositories\IOrderDetailRepository.cs" />
+    <Compile Include="Repositories\IFooterRepository.cs" />
+    <Compile Include="Repositories\IMenuRepository.cs" />
+    <Compile Include="Repositories\IProductCategoryRepository.cs" />
+    <Compile Include="Repositories\IProductRepository.cs" />
+    <Compile Include="Repositories\ISupportOnlineRepository.cs" />
+    <Compile Include="Repositories\IMenuGroupRepository.cs" />
+    <Compile Include="Repositories\ISystemConfigRepository.cs" />
+    <Compile Include="Repositories\IVisitorStatisticRepository.cs" />
+    <Compile Include="Repositories\ITagRepository.cs" />
+    <Compile Include="Repositories\ISlideRepository.cs" />
+    <Compile Include="Repositories\PostCategoryRepository.cs" />
+    <Compile Include="Repositories\ProductCategoryRepository.cs" />
+    <Compile Include="Repositories\VisitorStatisticRepository.cs" />
+    <Compile Include="Repositories\SystemConfigRepository.cs" />
+    <Compile Include="Repositories\SupportOnlineRepository.cs" />
+    <Compile Include="Repositories\SlideRepository.cs" />
+    <Compile Include="Repositories\PostRepository.cs" />
+    <Compile Include="Repositories\PageRepository.cs" />
+    <Compile Include="Repositories\OrderDetailRepository.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
+    <Compile Include="Repositories\TagRepository.cs" />
+    <Compile Include="Repositories\MenuGroupRepository.cs" />
+    <Compile Include="Repositories\FooterRepository.cs" />
+    <Compile Include="Repositories\ProductRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -62,6 +126,27 @@
       <Project>{65689ebc-fb16-4332-bfa2-2a4b1d119493}</Project>
       <Name>CoffeeShop.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CoffeeShop.Models\CoffeeShop.Models.csproj">
+      <Project>{6bf830a9-6444-463a-902b-d20bc1ccfe45}</Project>
+      <Name>CoffeeShop.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202203161159516_InitialDb.resx">
+      <DependentUpon>202203161159516_InitialDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203170330274_AddErrorTable.resx">
+      <DependentUpon>202203170330274_AddErrorTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203171251546_ModifySomeEntity.resx">
+      <DependentUpon>202203171251546_ModifySomeEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203180227057_Intergrate-ASPNET-Identity.resx">
+      <DependentUpon>202203180227057_Intergrate-ASPNET-Identity.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

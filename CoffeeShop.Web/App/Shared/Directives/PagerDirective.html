@@ -1,0 +1,55 @@
+﻿<!--<div class="card-header">-->
+<!--<div class="card-title">
+    <span> <strong>Trang: {{page+1}} - Tổng số bản ghi: {{totalCount}}</strong> </span>
+
+    <div class="form-row-col-md-6 w-100">
+    </div>
+</div>-->
+
+<div class="card-header row">
+    <div class="col-lg-4 col-md-6 col-sm-12 space-vertical justify-content-sm-between">
+        <div class="row">
+            <div class="col-5"><span class="optional-sm"><strong>Bản ghi mỗi trang:&nbsp;</strong> </span></div>
+            <div class="col-7 w-100 ">
+
+                <select class="custom-select "
+                        ng-init=" pageSize = '20'"
+                        ng-model="pageSize"
+                        ng-change="updateRecordPerPage(pageSize)">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="150">150</option>
+                    <option value="200">200</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8 col-md-6 col-sm-12">
+        <div class="dataTables_paginate paging_simple_numbers float-lg-right align-items-sm-center col-xs-12 col-sm-12">
+            <ul class="pagination float-right float-sm-end">
+                <li class="paginate_button page-item ">
+                    <a ng-disabled="page==0" ng-click="search(0)" class="page-link">First</a>
+                </li>
+                <li class="paginate_button page-item previous">
+                    <a ng-disabled="page==0" ng-click="search(page-1)" class="page-link">Previous</a>
+                </li>
+                <li class="paginate_button page-item " ng-repeat="n in range()" ng-class="{active: n == page}">
+                    <a class="page-link" ng-click="search(n)" ng-if="n != page">{{n+1}}</a>
+                    <span class="page-link" ng-if="n == page">{{n+1}}</span>
+                </li>
+
+                <li class="paginate_button page-item next">
+                    <a class="page-link" ng-style="page==pagesCount - 1 && {'cursor':'not-allowed','pointer-events': 'none'}" ng-click="search(pagePlus(1))">Next</a>
+                </li>
+                <li class="paginate_button page-item next">
+                    <a class="page-link" ng-style="page==pagesCount - 1 && {'cursor':'not-allowed','pointer-events': 'none'}" ng-click="search(pagePlus(1))">Last</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

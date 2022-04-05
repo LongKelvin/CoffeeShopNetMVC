@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -46,16 +45,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -71,103 +68,366 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Optimization">
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="WebGrease">
-      <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
-    </Reference>
-    <Reference Include="Antlr3.Runtime">
-      <Private>True</Private>
-      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Formatting">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="Api\AccountController.cs" />
+    <Compile Include="Api\PostCategoryController.cs" />
+    <Compile Include="Api\ProductCategoryController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastucture\Core\ApiControllerBase.cs" />
+    <Compile Include="Infrastucture\Core\PaginationSet.cs" />
+    <Compile Include="Infrastucture\Extensions\EntityExtensions.cs" />
+    <Compile Include="Mappings\AutoMapperConfiguration.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\OrderDetailViewModel.cs" />
+    <Compile Include="Models\PostCategoryViewModel.cs" />
+    <Compile Include="Models\PostViewModel.cs" />
+    <Compile Include="Models\ProductCategoryViewModel.cs" />
+    <Compile Include="Models\ProductViewModel.cs" />
+    <Compile Include="Models\TagViewModel.cs" />
+    <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="App\app.routes.js" />
+    <Content Include="App\app.js" />
+    <Content Include="App\Components\Home\HomeController.js" />
+    <Content Include="App\Components\Home\HomeView.html" />
+    <Content Include="App\Components\ProductCategories\ProductCategory.Module.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App\Components\ProductCategories\ProductCategoryAddController.js" />
+    <Content Include="App\Components\ProductCategories\ProductCategoryAddView.html" />
+    <Content Include="App\Components\ProductCategories\ProductCategoryEditController.js" />
+    <Content Include="App\Components\ProductCategories\ProductCategoryEditView.html" />
+    <Content Include="App\Components\ProductCategories\ProductCategoryListController.js" />
+    <Content Include="App\Components\ProductCategories\ProductCategoryListView.html" />
+    <Content Include="App\Components\Products\Products.Module.js" />
+    <Content Include="App\Components\Products\ProductAddController.js" />
+    <Content Include="App\Components\Products\ProductAddView.html" />
+    <Content Include="App\Components\Products\ProductEditController.js" />
+    <Content Include="App\Components\Products\ProductEditView.html" />
+    <Content Include="App\Components\Products\ProductListController.js" />
+    <Content Include="App\Components\Products\ProductListView.html" />
+    <Content Include="App\Shared\Directives\PagerDirective.html" />
+    <Content Include="App\Shared\Directives\PagerDirective.js" />
+    <Content Include="App\Shared\Filters\StatusFilter.js" />
+    <Content Include="App\Shared\Modules\CoffeeShop.Common.js" />
+    <Content Include="App\Shared\Services\CommonService.js" />
+    <Content Include="App\Shared\Services\ApiServices.js" />
+    <Content Include="App\Shared\Services\NotificationService.js" />
+    <Content Include="Assets\Admin\css\adminlte.css" />
+    <Content Include="Assets\Admin\css\adminlte.min.css" />
+    <Content Include="Assets\Admin\css\alt\adminlte.components.css" />
+    <Content Include="Assets\Admin\css\alt\adminlte.components.min.css" />
+    <Content Include="Assets\Admin\css\alt\adminlte.core.css" />
+    <Content Include="Assets\Admin\css\alt\adminlte.core.min.css" />
+    <Content Include="Assets\Admin\css\alt\adminlte.extra-components.css" />
+    <Content Include="Assets\Admin\css\alt\adminlte.extra-components.min.css" />
+    <Content Include="Assets\Admin\css\alt\adminlte.light.css" />
+    <Content Include="Assets\Admin\css\alt\adminlte.light.min.css" />
+    <Content Include="Assets\Admin\css\alt\adminlte.pages.css" />
+    <Content Include="Assets\Admin\css\alt\adminlte.pages.min.css" />
+    <Content Include="Assets\Admin\css\alt\adminlte.plugins.css" />
+    <Content Include="Assets\Admin\css\alt\adminlte.plugins.min.css" />
+    <Content Include="Assets\Admin\custom-css\main-page.css" />
+    <Content Include="Assets\Admin\img\AdminLTELogo.png" />
+    <Content Include="Assets\Admin\img\avatar.png" />
+    <Content Include="Assets\Admin\img\avatar2.png" />
+    <Content Include="Assets\Admin\img\avatar3.png" />
+    <Content Include="Assets\Admin\img\avatar4.png" />
+    <Content Include="Assets\Admin\img\avatar5.png" />
+    <Content Include="Assets\Admin\img\boxed-bg.jpg" />
+    <Content Include="Assets\Admin\img\boxed-bg.png" />
+    <Content Include="Assets\Admin\img\credit\american-express.png" />
+    <Content Include="Assets\Admin\img\credit\cirrus.png" />
+    <Content Include="Assets\Admin\img\credit\mastercard.png" />
+    <Content Include="Assets\Admin\img\credit\paypal.png" />
+    <Content Include="Assets\Admin\img\credit\paypal2.png" />
+    <Content Include="Assets\Admin\img\credit\visa.png" />
+    <Content Include="Assets\Admin\img\default-150x150.png" />
+    <Content Include="Assets\Admin\img\icons.png" />
+    <Content Include="Assets\Admin\img\photo1.png" />
+    <Content Include="Assets\Admin\img\photo2.png" />
+    <Content Include="Assets\Admin\img\photo3.jpg" />
+    <Content Include="Assets\Admin\img\photo4.jpg" />
+    <Content Include="Assets\Admin\img\prod-1.jpg" />
+    <Content Include="Assets\Admin\img\prod-2.jpg" />
+    <Content Include="Assets\Admin\img\prod-3.jpg" />
+    <Content Include="Assets\Admin\img\prod-4.jpg" />
+    <Content Include="Assets\Admin\img\prod-5.jpg" />
+    <Content Include="Assets\Admin\img\user1-128x128.jpg" />
+    <Content Include="Assets\Admin\img\user2-160x160.jpg" />
+    <Content Include="Assets\Admin\img\user3-128x128.jpg" />
+    <Content Include="Assets\Admin\img\user4-128x128.jpg" />
+    <Content Include="Assets\Admin\img\user5-128x128.jpg" />
+    <Content Include="Assets\Admin\img\user6-128x128.jpg" />
+    <Content Include="Assets\Admin\img\user7-128x128.jpg" />
+    <Content Include="Assets\Admin\img\user8-128x128.jpg" />
+    <Content Include="Assets\Admin\js\adminlte.js" />
+    <Content Include="Assets\Admin\js\adminlte.min.js" />
+    <Content Include="Assets\Admin\js\demo.js" />
+    <Content Include="Assets\Admin\js\pages\dashboard.js" />
+    <Content Include="Assets\Admin\js\pages\dashboard2.js" />
+    <Content Include="Assets\Admin\js\pages\dashboard3.js" />
+    <Content Include="Assets\Admin\lib\angular-sweetalert\SweetAlert.js" />
+    <Content Include="Assets\Admin\lib\angular-sweetalert\SweetAlert.min.js" />
+    <Content Include="Assets\Admin\lib\angular-ui-router\angular-ui-router.js" />
+    <Content Include="Assets\Admin\lib\angular-ui-router\angular-ui-router.min.js" />
+    <Content Include="Assets\Admin\lib\angular-ui-router\resolveService.js" />
+    <Content Include="Assets\Admin\lib\angular-ui-router\resolveService.min.js" />
+    <Content Include="Assets\Admin\lib\angular-ui-router\stateEvents.js" />
+    <Content Include="Assets\Admin\lib\angular-ui-router\stateEvents.min.js" />
+    <Content Include="Assets\Admin\lib\angular-ui-router\ui-router-angularjs.js" />
+    <Content Include="Assets\Admin\lib\angular-ui-router\ui-router-angularjs.min.js" />
+    <Content Include="Assets\Admin\lib\angular.js\angular-csp.css" />
+    <Content Include="Assets\Admin\lib\angular.js\angular-csp.min.css" />
+    <Content Include="Assets\Admin\lib\angular.js\angular.js" />
+    <Content Include="Assets\Admin\lib\angular.js\angular.min.js" />
+    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\SweetAlert2.js" />
+    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\SweetAlert2.min.js" />
+    <Content Include="Assets\Admin\lib\bootbox.js\bootbox.js" />
+    <Content Include="Assets\Admin\lib\bootbox.js\bootbox.min.js" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-grid.rtl.css" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-grid.rtl.min.css" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-reboot.rtl.css" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-utilities.css" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-utilities.min.css" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-utilities.rtl.css" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap.css" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap.rtl.css" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap.rtl.min.css" />
+    <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.esm.js" />
+    <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.esm.min.js" />
+    <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.js" />
+    <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Assets\Admin\lib\fastclick\fastclick.js" />
+    <Content Include="Assets\Admin\lib\fastclick\fastclick.min.js" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\all.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\all.min.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\brands.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\brands.min.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\fontawesome.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\fontawesome.min.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\regular.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\regular.min.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\solid.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\solid.min.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\svg-with-js.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\svg-with-js.min.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\v4-font-face.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\v4-font-face.min.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\v4-shims.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\v4-shims.min.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\v5-font-face.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\css\v5-font-face.min.css" />
+    <Content Include="Assets\Admin\lib\font-awesome\js\all.js" />
+    <Content Include="Assets\Admin\lib\font-awesome\js\all.min.js" />
+    <Content Include="Assets\Admin\lib\font-awesome\js\brands.js" />
+    <Content Include="Assets\Admin\lib\font-awesome\js\brands.min.js" />
+    <Content Include="Assets\Admin\lib\font-awesome\js\conflict-detection.js" />
+    <Content Include="Assets\Admin\lib\font-awesome\js\conflict-detection.min.js" />
+    <Content Include="Assets\Admin\lib\font-awesome\js\fontawesome.js" />
+    <Content Include="Assets\Admin\lib\font-awesome\js\fontawesome.min.js" />
+    <Content Include="Assets\Admin\lib\font-awesome\js\regular.js" />
+    <Content Include="Assets\Admin\lib\font-awesome\js\regular.min.js" />
+    <Content Include="Assets\Admin\lib\font-awesome\js\solid.js" />
+    <Content Include="Assets\Admin\lib\font-awesome\js\solid.min.js" />
+    <Content Include="Assets\Admin\lib\font-awesome\js\v4-shims.js" />
+    <Content Include="Assets\Admin\lib\font-awesome\js\v4-shims.min.js" />
+    <Content Include="Assets\Admin\lib\font-awesome\sprites\brands.svg" />
+    <Content Include="Assets\Admin\lib\font-awesome\sprites\regular.svg" />
+    <Content Include="Assets\Admin\lib\font-awesome\sprites\solid.svg" />
+    <Content Include="Assets\Admin\lib\icheck-bootstrap\icheck-bootstrap.css" />
+    <Content Include="Assets\Admin\lib\icheck-bootstrap\icheck-bootstrap.min.css" />
+    <Content Include="Assets\Admin\lib\jquery\jquery.js" />
+    <Content Include="Assets\Admin\lib\jquery\jquery.min.js" />
+    <Content Include="Assets\Admin\lib\jquery\jquery.slim.js" />
+    <Content Include="Assets\Admin\lib\jquery\jquery.slim.min.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\dist\ngBootbox.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\dist\ngBootbox.min.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-1\app.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-1\app.min.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-1\custom-dialog.tpl.html" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-1\index.html" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\app.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\app.min.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\index.html" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\main.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\main.min.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\require.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\require.min.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\examples\index.html" />
+    <Content Include="Assets\Admin\lib\ngbootbox\gulpfile.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\gulpfile.min.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\ngBootbox.js" />
+    <Content Include="Assets\Admin\lib\ngbootbox\ngBootbox.min.js" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\select2-bootstrap-5-theme.css" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\select2-bootstrap-5-theme.min.css" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\select2-bootstrap-5-theme.rtl.css" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\select2-bootstrap-5-theme.rtl.min.css" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-css\select2-bootstrap.css" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-css\select2-bootstrap.min.css" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-theme\select2-bootstrap.css" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-theme\select2-bootstrap.min.css" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap4-theme\select2-bootstrap4.css" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap4-theme\select2-bootstrap4.min.css" />
+    <Content Include="Assets\Admin\lib\select2\css\select2.css" />
+    <Content Include="Assets\Admin\lib\select2\css\select2.min.css" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\af.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\af.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ar.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ar.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\az.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\az.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\bg.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\bg.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\bn.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\bn.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\bs.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\bs.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ca.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ca.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\cs.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\cs.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\da.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\da.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\de.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\de.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\dsb.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\dsb.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\el.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\el.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\en.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\en.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\es.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\es.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\et.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\et.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\eu.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\eu.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\fa.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\fa.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\fi.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\fi.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\fr.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\fr.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\gl.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\gl.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\he.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\he.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\hi.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\hi.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\hr.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\hr.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\hsb.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\hsb.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\hu.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\hu.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\hy.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\hy.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\id.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\id.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\is.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\is.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\it.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\it.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ja.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ja.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ka.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ka.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\km.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\km.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ko.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ko.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\lt.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\lt.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\lv.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\lv.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\mk.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\mk.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ms.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ms.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\nb.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\nb.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ne.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ne.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\nl.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\nl.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\pl.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\pl.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ps.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ps.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\pt-BR.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\pt-BR.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\pt.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\pt.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ro.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ro.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ru.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\ru.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\sk.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\sk.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\sl.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\sl.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\sq.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\sq.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\sr-Cyrl.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\sr-Cyrl.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\sr.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\sr.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\sv.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\sv.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\th.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\th.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\tk.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\tk.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\tr.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\tr.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\uk.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\uk.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\vi.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\vi.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\zh-CN.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\zh-CN.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\zh-TW.js" />
+    <Content Include="Assets\Admin\lib\select2\js\i18n\zh-TW.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\select2.full.js" />
+    <Content Include="Assets\Admin\lib\select2\js\select2.full.min.js" />
+    <Content Include="Assets\Admin\lib\select2\js\select2.js" />
+    <Content Include="Assets\Admin\lib\select2\js\select2.min.js" />
+    <Content Include="Assets\Admin\lib\slim-scroll\slimscroll.js" />
+    <Content Include="Assets\Admin\lib\slim-scroll\slimscroll.min.js" />
+    <Content Include="Assets\Admin\lib\sweetalert\sweetalert.min.js" />
+    <Content Include="Assets\Admin\lib\toastr.js\toastr.css" />
+    <Content Include="Assets\Admin\lib\toastr.js\toastr.min.css" />
+    <Content Include="Assets\Admin\lib\toastr.js\toastr.min.js" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -176,29 +436,192 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\Components\ApplicationGroups\" />
+    <Folder Include="App\Components\ApplicationRoles\" />
+    <Folder Include="App\Components\ApplicationUsers\" />
+    <Folder Include="App\Components\Login\" />
+    <Folder Include="App\Components\Orders\" />
+    <Folder Include="App\Components\Statistics\" />
+    <Folder Include="App\Shared\Views\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Assets\Admin\css\skins\" />
+    <Folder Include="Assets\Admin\templates\" />
+    <Folder Include="Assets\Client\css\" />
+    <Folder Include="Assets\Client\images\" />
+    <Folder Include="Assets\Client\js\" />
+    <Folder Include="Assets\Client\templates\" />
+    <Folder Include="Lang\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="libman.json" />
+    <Content Include="Assets\Admin\lib\angular.js\angular.min.js.map" />
+    <Content Include="Assets\Admin\lib\angular-ui-router\angular-ui-router.js.map" />
+    <Content Include="Assets\Admin\lib\angular-ui-router\angular-ui-router.min.js.map" />
+    <Content Include="Assets\Admin\lib\angular-ui-router\resolveService.js.map" />
+    <Content Include="Assets\Admin\lib\angular-ui-router\resolveService.min.js.map" />
+    <Content Include="Assets\Admin\lib\angular-ui-router\stateEvents.js.map" />
+    <Content Include="Assets\Admin\lib\angular-ui-router\stateEvents.min.js.map" />
+    <Content Include="Assets\Admin\lib\angular-ui-router\ui-router-angularjs.js.map" />
+    <Content Include="Assets\Admin\lib\angular-ui-router\ui-router-angularjs.min.js.map" />
+    <Content Include="Assets\Admin\css\adminlte.css.map" />
+    <Content Include="Assets\Admin\css\adminlte.min.css.map" />
+    <Content Include="Assets\Admin\css\alt\adminlte.components.css.map" />
+    <Content Include="Assets\Admin\css\alt\adminlte.components.min.css.map" />
+    <Content Include="Assets\Admin\css\alt\adminlte.core.css.map" />
+    <Content Include="Assets\Admin\css\alt\adminlte.core.min.css.map" />
+    <Content Include="Assets\Admin\css\alt\adminlte.extra-components.css.map" />
+    <Content Include="Assets\Admin\css\alt\adminlte.extra-components.min.css.map" />
+    <Content Include="Assets\Admin\css\alt\adminlte.light.css.map" />
+    <Content Include="Assets\Admin\css\alt\adminlte.light.min.css.map" />
+    <Content Include="Assets\Admin\css\alt\adminlte.pages.css.map" />
+    <Content Include="Assets\Admin\css\alt\adminlte.pages.min.css.map" />
+    <Content Include="Assets\Admin\css\alt\adminlte.plugins.css.map" />
+    <Content Include="Assets\Admin\css\alt\adminlte.plugins.min.css.map" />
+    <Content Include="Assets\Admin\js\.eslintrc.json" />
+    <Content Include="Assets\Admin\js\adminlte.js.map" />
+    <Content Include="Assets\Admin\js\adminlte.min.js.map" />
+    <Content Include="Assets\Admin\lib\jquery\jquery.min.map" />
+    <Content Include="Assets\Admin\lib\jquery\jquery.slim.min.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-grid.rtl.css.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-utilities.css.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-utilities.min.css.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap.rtl.css.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap.rtl.min.css.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.esm.js.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.esm.min.js.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.js.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_accordion.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_alert.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_badge.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_breadcrumb.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_button-group.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_buttons.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_card.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_carousel.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_close.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_containers.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_dropdown.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_forms.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_functions.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_grid.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_helpers.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_images.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_list-group.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_mixins.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_modal.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_nav.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_navbar.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_offcanvas.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_pagination.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_placeholders.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_popover.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_progress.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_reboot.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_root.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_spinners.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_tables.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_toasts.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_tooltip.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_transitions.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_type.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_utilities.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\_variables.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\bootstrap-grid.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\bootstrap-reboot.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\bootstrap-utilities.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\bootstrap.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\forms\_floating-labels.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\forms\_form-check.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\forms\_form-control.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\forms\_form-range.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\forms\_form-select.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\forms\_form-text.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\forms\_input-group.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\forms\_labels.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\forms\_validation.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\helpers\_clearfix.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\helpers\_colored-links.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\helpers\_position.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\helpers\_ratio.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\helpers\_stacks.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\helpers\_stretched-link.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\helpers\_text-truncation.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\helpers\_visually-hidden.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\helpers\_vr.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_alert.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_backdrop.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_border-radius.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_box-shadow.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_breakpoints.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_buttons.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_caret.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_clearfix.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_color-scheme.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_container.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_deprecate.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_forms.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_gradients.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_grid.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_image.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_list-group.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_lists.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_pagination.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_reset-text.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_resize.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_table-variants.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_text-truncate.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_transition.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_utilities.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\mixins\_visually-hidden.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\utilities\_api.scss" />
+    <Content Include="Assets\Admin\lib\bootstrap\scss\vendor\_rfs.scss" />
+    <Content Include="Assets\Admin\lib\font-awesome\webfonts\fa-brands-400.ttf" />
+    <Content Include="Assets\Admin\lib\font-awesome\webfonts\fa-brands-400.woff2" />
+    <Content Include="Assets\Admin\lib\font-awesome\webfonts\fa-regular-400.ttf" />
+    <Content Include="Assets\Admin\lib\font-awesome\webfonts\fa-regular-400.woff2" />
+    <Content Include="Assets\Admin\lib\font-awesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="Assets\Admin\lib\font-awesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="Assets\Admin\lib\font-awesome\webfonts\fa-v4compatibility.ttf" />
+    <Content Include="Assets\Admin\lib\font-awesome\webfonts\fa-v4compatibility.woff2" />
+    <Content Include="Assets\Admin\lib\toastr.js\toastr.js.map" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_disabled.scss" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_dropdown.scss" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_include-all.scss" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_input-group.scss" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_layout.scss" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_multiple.scss" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\select2-bootstrap-5-theme.scss" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_single.scss" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_sizing.scss" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_validation.scss" />
+    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_variables.scss" />
+    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\bower.json" />
+    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\LICENSE" />
+    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\package.json" />
+    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\README.md" />
+    <Content Include="Assets\Admin\lib\ngbootbox\.npmignore" />
+    <Content Include="Assets\Admin\lib\ngbootbox\bower.json" />
+    <Content Include="Assets\Admin\lib\ngbootbox\package.json" />
+    <Content Include="Assets\Admin\lib\ngbootbox\README.md" />
+    <Content Include="Assets\Admin\lib\ngbootbox\tsd.json" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoffeeShop.Common\CoffeeShop.Common.csproj">
@@ -217,6 +640,93 @@
       <Project>{5631d9e2-7a76-4168-9ade-a4f73ff3db9d}</Project>
       <Name>CoffeeShop.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AngularJS.Utils.Pagination">
+      <Version>0.11.1</Version>
+    </PackageReference>
+    <PackageReference Include="Antlr">
+      <Version>3.5.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Autofac">
+      <Version>6.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="Autofac.Mvc5">
+      <Version>6.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Autofac.WebApi2">
+      <Version>6.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="AutoMapper">
+      <Version>4.2.1</Version>
+    </PackageReference>
+    <PackageReference Include="EntityFramework">
+      <Version>6.4.4</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.Identity.Core">
+      <Version>2.2.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <Version>2.2.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.Identity.Owin">
+      <Version>2.2.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.Mvc">
+      <Version>5.2.7</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.Web.Optimization">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi">
+      <Version>5.2.7</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core">
+      <Version>5.2.7</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <Version>3.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Identity.Core">
+      <Version>6.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin">
+      <Version>4.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Host.SystemWeb">
+      <Version>4.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Security">
+      <Version>4.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Security.Cookies">
+      <Version>3.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Security.OAuth">
+      <Version>4.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.TypeScript.MSBuild">
+      <Version>4.6.2</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Owin">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="WebGrease">
+      <Version>1.6.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Assets\Admin\lib\ngbootbox\typings\angularjs\angular.d.ts" />
+    <TypeScriptCompile Include="Assets\Admin\lib\ngbootbox\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Assets\Admin\lib\ngbootbox\typings\tsd.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -246,15 +756,18 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+  <!-- <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
-  </Target>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets'))" />
+  </Target> -->
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

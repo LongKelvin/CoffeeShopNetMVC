@@ -51,7 +51,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ErrorService.cs" />
+    <Compile Include="FooterService.cs" />
+    <Compile Include="IErrorService.cs" />
+    <Compile Include="IFooterService.cs" />
+    <Compile Include="IMenuGroupService.cs" />
+    <Compile Include="IMenuService.cs" />
+    <Compile Include="IOrderDetailService.cs" />
+    <Compile Include="IOrderService.cs" />
+    <Compile Include="IPageService.cs" />
+    <Compile Include="IPostCategoryService.cs" />
+    <Compile Include="IProductCategoryService.cs" />
+    <Compile Include="IProductService.cs" />
+    <Compile Include="IPostService.cs" />
+    <Compile Include="ISlideService.cs" />
+    <Compile Include="ISupportOnlineService.cs" />
+    <Compile Include="ISystemConfigService.cs" />
+    <Compile Include="ITagService.cs" />
+    <Compile Include="IVisitorStatisticService.cs" />
+    <Compile Include="MenuGroupService.cs" />
+    <Compile Include="MenuService.cs" />
+    <Compile Include="OrderDetailService.cs" />
+    <Compile Include="OrderService.cs" />
+    <Compile Include="PageService.cs" />
+    <Compile Include="PostCategoryService.cs" />
+    <Compile Include="ProductCategoryService.cs" />
+    <Compile Include="ProductService.cs" />
+    <Compile Include="PostService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SlideService.cs" />
+    <Compile Include="SupportOnlineService.cs" />
+    <Compile Include="SystemConfigService.cs" />
+    <Compile Include="TagService.cs" />
+    <Compile Include="VisitorStatisticService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
