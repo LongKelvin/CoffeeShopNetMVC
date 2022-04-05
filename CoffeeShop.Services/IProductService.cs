@@ -6,7 +6,7 @@ namespace CoffeeShop.Services
 {
     public interface IProductService
     {
-        void Add(Product product);
+        Product Add(Product product);
 
         void Update(Product product);
 
@@ -14,6 +14,7 @@ namespace CoffeeShop.Services
 
         void Delete(int id);
 
+        IEnumerable<Product> GetAll(string keyWord);
         IEnumerable<Product> GetAll();
 
         IEnumerable<Product> GetAllPaging(int page, int pageSize, out int totalRow);

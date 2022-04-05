@@ -17,9 +17,9 @@ namespace CoffeeShop.Services
             _productRepository = productRepository;
         }
 
-        public void Add(Product product)
+        public Product Add(Product product)
         {
-            _productRepository.Add(product);
+            return _productRepository.Add(product);
         }
 
         public void Delete(Product product)
@@ -35,6 +35,14 @@ namespace CoffeeShop.Services
         public IEnumerable<Product> GetAll()
         {
             return _productRepository.GetAll(new string[] { "ProductCategory" });
+        }
+
+        public IEnumerable<Product> GetAll(string keyWord)
+        {
+            if (string.IsNullOrEmpty(keyWord))
+                return GetAll();
+
+            return _productRepository.GetMulti(x => x.Name.Contains(keyWord) || x.Alias.Contains(keyWord));
         }
 
         public IEnumerable<Product> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow)

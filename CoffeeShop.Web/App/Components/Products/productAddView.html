@@ -1,10 +1,190 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-    <h1>THIS IS PRODUCT ADD VIEW</h1>
-</body>
-</html>
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><strong>Thêm mới sản phẩm</strong></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="Home">Trang chủ</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="Products">Sản phẩm</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="ProductCategory">Danh sách sản phẩm</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <form name="frmAddProductCategory" role="form" ng-submit="AddProductCategory()" novalidate>
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-6">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin chính</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Tên danh mục <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="productCategory.Name" required name="pName"
+                                       class="form-control" placeholder="Tên danh mục ..."
+                                       ng-change="getSeoTitle()">
+                                <span class="text-danger" ng-show="frmAddProductCategory.pName.$touched && frmAddProductCategory.pName.$invalid">Bạn chưa nhập tên danh mục</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Thứ tự hiển thị</label>
+                                <input ng-model="productCategory.DisplayOrder" type="number" class="form-control"
+                                       oninput="setLimitValue(0)"
+                                       placeholder="Hiển thị ở vị trí 1 2 3 ...">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Danh mục cha</label>
+                                <select ng-model="productCategory.ParentID" id="parentIdDropdown"
+                                        ng-init="productCategory.ParentID=''"
+                                        class=" form-control w-100"
+                                        ng-options="option.ID as option.Name for option in parentCategories">
+                                    <option value=''>Danh mục gốc</option>
+                                </select>
+                            </div>
+
+                            <!-- textarea -->
+                            <div class="form-group">
+                                <label>Mô tả ngắn về danh mục</label>
+                                <textarea ng-model="productCategory.Description"
+                                          class="form-control" rows="2"
+                                          placeholder="Mô tả ngắn về danh mục ..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputFile">Hình ảnh</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input ng-model="productCategory.Images" type="file"
+                                               class="custom-file-input"
+                                               id="productCategoryImagesInput" multiple="multiple">
+                                        <label class="custom-file-label"
+                                               for="productCategoryImagesInput">Chọn files</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Tải lên</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <!-- general form elements disabled -->
+                    <div class="card card-lightblue">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin SEO</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Tiêu đề SEO <span class="text-danger">*</span></label>
+                                        <input type="text" ng-model="productCategory.Alias" class="form-control" placeholder="Tiêu đề SEO ..." name="pAlias" required>
+                                        <span class="text-danger" ng-show="frmAddProductCategory.pAlias.$touched && frmAddProductCategory.pAlias.$invalid">Bạn chưa nhập tiêu đề SEO</span>
+                                    </div>
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Từ khóa SEO</label>
+                                        <input ng-model="productCategory.MetaKeyword"
+                                               type="text" class="form-control"
+                                               placeholder="Chọn vài từ để làm từ khóa ...">
+                                    </div>
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Từ khóa mô tả</label>
+                                        <input ng-model="productCategory.MetaDescription"
+                                               type="text" class="form-control"
+                                               placeholder="Từ khóa mô tả về danh mục ...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                    <div class="card card-success ">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý danh mục</h3>
+                        </div>
+                        <div class="card-body" style="margin-top:13px">
+                            <!-- Minimal style -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <!-- checkbox -->
+                                    <div class="form-group clearfix">
+                                        <div class="icheck-success d-inline">
+                                            <input type="checkbox" id="checkboxActive"
+                                                   ng-model="productCategory.Status"
+                                                   ng-checked="productCategory.Status==true">
+                                            <label for="checkboxActive">
+                                                Kích hoạt danh mục
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <!-- checkbox -->
+                                    <div class="form-group clearfix">
+                                        <div class="icheck-belizehole d-inline">
+                                            <input type="checkbox" id="checkboxHomeFlag"
+                                                   ng-model="productCategory.HomeFlag"
+                                                   ng-checked="productCategory.HomeFlag==true">
+                                            <label for="checkboxHomeFlag">
+                                                Hiển thị trên trang chủ
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <!--/.col (right) -->
+            </div>
+            <div class="card-footer">
+                <button type="submit" ng-disabled="frmAddProductCategory.$invalid" class="btn btn-primary">Lưu danh mục</button>
+                <button ui-sref="Products" class="btn btn-outline-secondary space-around">Hủy bỏ</button>
+            </div>
+        </form>
+
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+<script>
+    $(document).ready(function () {
+        $('#parentIdDropdown').select2({
+            theme: 'bootstrap4'
+        });
+
+        $('#parentIdDropdown').val('Danh mục gốc'); // Select the option with a default value
+        $('#parentIdDropdown').trigger('change'); // Notify any JS components that the value changed
+
+        //Initialize Select2 Elements
+        //console.log('Load library done!')
+    });
+</script>

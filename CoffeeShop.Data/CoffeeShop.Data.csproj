@@ -83,6 +83,10 @@
     <Compile Include="Migrations\202203180227057_Intergrate-ASPNET-Identity.designer.cs">
       <DependentUpon>202203180227057_Intergrate-ASPNET-Identity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204050650382_tblProduct_ChangeEntityField.cs" />
+    <Compile Include="Migrations\202204050650382_tblProduct_ChangeEntityField.designer.cs">
+      <DependentUpon>202204050650382_tblProduct_ChangeEntityField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
@@ -146,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202203180227057_Intergrate-ASPNET-Identity.resx">
       <DependentUpon>202203180227057_Intergrate-ASPNET-Identity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204050650382_tblProduct_ChangeEntityField.resx">
+      <DependentUpon>202204050650382_tblProduct_ChangeEntityField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -26,6 +26,7 @@
 
             CreateUser(context);
             CreateProductCategorySample(context);
+            CreateProductsSample(context);
         }
 
         private void CreateUser(CoffeeShopDbContext context)
@@ -65,11 +66,34 @@
                 List<ProductCategory> listProductCategory = new List<ProductCategory>()
             {
                 new ProductCategory() { Name="Cà phê pha máy",Alias="cf-phamay",Status=true },
-                 new ProductCategory() { Name="Cà phê phin",Alias="cf-phin",Status=true },
-                  new ProductCategory() { Name="Cà phê hạt",Alias="cf-hat",Status=true },
-                   new ProductCategory() { Name="Dụng cụ pha Cà Phê",Alias="cf-dungcu",Status=true }
+                new ProductCategory() { Name="Cà phê phin",Alias="cf-phin",Status=true },
+                new ProductCategory() { Name="Cà phê hạt",Alias="cf-hat",Status=true },
+                new ProductCategory() { Name="Dụng cụ pha Cà Phê",Alias="cf-dungcu",Status=true }
             };
                 context.ProductCategories.AddRange(listProductCategory);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateProductsSample(CoffeeShopDbContext context)
+        {
+            if (context.Products.Count() == 0)
+            {
+                List<Product> listProduct = new List<Product>()
+            {
+                new Product() { Name="Pine Mountain Arabica 250g",Alias="cf-hat",Status=true, Price=175000 },
+                new Product() { Name="Black Volcano Robusta 250g",Alias="cf-hat",Status=true ,Price=105000},
+                new Product() { Name="Pine Mountain Fruity 250g",Alias="cf-hat",Status=true ,Price=190000},
+                new Product() { Name="Pine Mountain Blend #7 250g",Alias="cf-hat",Status=true,Price=143000 },
+                new Product() { Name="Pine Mountain Blend #5 250",Alias="cf-hat",Status=true ,Price=140000},
+                new Product() { Name="Pine Mountain Arabica 500g",Alias="cf-hat",Status=true ,Price=335000},
+                new Product() { Name="Black Volcano Robusta 500g",Alias="cf-hat",Status=true ,Price=195000},
+                new Product() { Name="Pine Mountain Fruity 500g",Alias="cf-hat",Status=true ,Price=364000},
+                new Product() { Name="Pine Mountain Blend #7 500g",Alias="cf-hat",Status=true ,Price=270000},
+                new Product() { Name="Pine Mountain Blend #5 500g",Alias="cf-hat",Status=true ,Price=265000},
+                
+            };
+                context.Products.AddRange(listProduct);
                 context.SaveChanges();
             }
         }
