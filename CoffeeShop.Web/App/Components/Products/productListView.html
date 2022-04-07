@@ -60,11 +60,15 @@
                             <th class="selectedItem" style="width: 10px">
                                 Chọn
                             </th>
-                            <th>Tên danh mục</th>
-                            <th style="width: 20%">Người tạo</th>
+                            <th style="width: 20%">Tên sản phẩm</th>
+                            <th class="optional-sm" style="width: 10%">Danh mục</th>
+                            <th style="width: 10%">Giá</th>
+                            <th style="width: 10%">Giá khuyến mãi</th>
+                            <th class="optional-sm" style="width: 10%">Lượt xem</th>
+                            <th class="optional-sm" style="width: 10%">Người tạo</th>
                             <th class="optional-sm" style="width: 10%">Ngày tạo</th>
                             <th style="width: 10%">Trạng thái</th>
-                            <th style="width: 10%">Thao tác</th>
+                            <th style="width: 15%">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,6 +79,17 @@
                             </td>
 
                             <td>{{item.Name}}</td>
+                            <td>{{item.ProductCategory.Name}}</td>
+                            <td><strong>{{item.Price | currency:'₫':0}}</strong></td>
+
+                            <td>
+                                <div style="font-size:0.9rem;" ng-class="{'badge bg-danger':item.PromotionPrice>item.Price,'badge bg-success':item.PromotionPrice<item.Price}">
+
+                                    <strong>{{item.PromotionPrice| currency:'₫':0}}</strong>
+                                </div>
+                            </td>
+
+                            <td>{{item.ViewCount}}</td>
                             <td>
                                 {{item.CreatedBy}}
                             </td>
@@ -87,7 +102,7 @@
                                 </span>
                             </td>
                             <td>
-                                <button ui-sref="ProductCategoryEdit({id:item.ID})" class="btn btn-sm btn-outline-primary"><i class="fa fa-pencil"></i></button>
+                                <button ui-sref="ProductEdit({id:item.ID})" class="btn btn-sm btn-outline-primary"><i class="fa fa-pencil"></i></button>
                                 <button ng-click="showDeleteDialog(item.ID)" class="btn  btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
@@ -178,7 +193,6 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Hủy bỏ</button>
                 <button id="delMultiBtn" ng-click="deleteMultiProduct()" type="button" class="btn btn-danger">&nbsp; &nbsp; Xóa&nbsp;&nbsp;  </button>
-
             </div>
         </div>
     </div>

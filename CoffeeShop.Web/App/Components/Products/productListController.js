@@ -18,7 +18,7 @@
 
         //Setup ApiServices
 
-        $scope.productCategories = [];
+        $scope.products = [];
         $scope.page = 0;
         $scope.pagesCount = 0;
         $scope.keyWord = '';

@@ -75,6 +75,11 @@
     {
       "library": "bootbox.js@5.5.2",
       "destination": "Assets/Admin/lib/bootbox.js/"
+    },
+    
+    {
+      "library": "ckeditor5@33.0.0",
+      "destination": "Assets/Admin/lib/ckeditor5/"
     }
   ]
 }

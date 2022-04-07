@@ -9,7 +9,7 @@
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a ui-sref="Home">Trang chủ</a></li>
                     <li class="breadcrumb-item "><a ui-sref="Products">Sản phẩm</a></li>
-                    <li class="breadcrumb-item "><a ui-sref="ProductCategory">Danh sách sản phẩm</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="Products">Danh sách sản phẩm</a></li>
                     <li class="breadcrumb-item active">Thêm mới</li>
                 </ol>
             </div>
@@ -20,7 +20,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <form name="frmAddProductCategory" role="form" ng-submit="AddProductCategory()" novalidate>
+        <form name="frmAddproduct" role="form" ng-submit="Addproduct()" novalidate>
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-6">
@@ -34,47 +34,64 @@
 
                         <div class="card-body">
                             <div class="form-group">
-                                <label>Tên danh mục <span class="text-danger">*</span> </label>
-                                <input type="text" ng-model="productCategory.Name" required name="pName"
+                                <label>Tên sản phẩm <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="product.Name" required name="pName"
                                        class="form-control" placeholder="Tên danh mục ..."
                                        ng-change="getSeoTitle()">
-                                <span class="text-danger" ng-show="frmAddProductCategory.pName.$touched && frmAddProductCategory.pName.$invalid">Bạn chưa nhập tên danh mục</span>
+                                <span class="text-danger" ng-show="frmAddproduct.pName.$touched && frmAddproduct.pName.$invalid">Bạn chưa nhập tên danh mục</span>
                             </div>
 
                             <div class="form-group">
                                 <label>Thứ tự hiển thị</label>
-                                <input ng-model="productCategory.DisplayOrder" type="number" class="form-control"
+                                <input ng-model="product.DisplayOrder" type="number" class="form-control"
                                        oninput="setLimitValue(0)"
                                        placeholder="Hiển thị ở vị trí 1 2 3 ...">
                             </div>
 
                             <div class="form-group">
-                                <label>Danh mục cha</label>
-                                <select ng-model="productCategory.ParentID" id="parentIdDropdown"
-                                        ng-init="productCategory.ParentID=''"
+                                <label>Danh mục <span class="text-danger">*</span></label>
+                                <select ng-model="product.CategoryID" id="categoryIdDropdown"
+                                        ng-init="product.ParentID=''"
                                         class=" form-control w-100"
+                                        required name="pCategoryId"
                                         ng-options="option.ID as option.Name for option in parentCategories">
-                                    <option value=''>Danh mục gốc</option>
+                                    <option value=''>Chọn danh mục</option>
                                 </select>
+                                <span class="text-danger" ng-show="frmAddproduct.pCategoryId.$touched && frmAddproduct.pCategoryId.$invalid">Danh mục sản phẩm không được bỏ trống</span>
                             </div>
-
+                            <div class="form-group">
+                                <label>Giá <span class="text-danger">*</span></label>
+                                <input ng-model="product.Price" type="number" class="form-control"
+                                       name="pPrice" required
+                                       oninput="setLimitValue(0)"
+                                       value="0"
+                                       placeholder="Giá bán">
+                                <span class="text-danger" ng-show="frmAddproduct.pPrice.$touched && frmAddproduct.pPrice.$invalid">Giá sản phẩm là bắt buộc</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Giá khuyến mãi</label>
+                                <input ng-model="product.PromotionPrice" type="number" class="form-control"
+                                       value="0"
+                                       oninput="setLimitValue(0)"
+                                       placeholder="Giá khuyến mãi">
+                            </div>
                             <!-- textarea -->
                             <div class="form-group">
-                                <label>Mô tả ngắn về danh mục</label>
-                                <textarea ng-model="productCategory.Description"
+                                <label>Mô tả ngắn về sản phẩm</label>
+                                <textarea ng-model="product.Description"
                                           class="form-control" rows="2"
-                                          placeholder="Mô tả ngắn về danh mục ..."></textarea>
+                                          placeholder="Mô tả ngắn về sản phẩm ..."></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleInputFile">Hình ảnh</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input ng-model="productCategory.Images" type="file"
+                                        <input ng-model="product.Images" type="file"
                                                class="custom-file-input"
-                                               id="productCategoryImagesInput" multiple="multiple">
+                                               id="productImagesInput" multiple="multiple">
                                         <label class="custom-file-label"
-                                               for="productCategoryImagesInput">Chọn files</label>
+                                               for="productImagesInput">Chọn files</label>
                                     </div>
                                     <div class="input-group-append">
                                         <span class="input-group-text">Tải lên</span>
@@ -99,20 +116,20 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Tiêu đề SEO <span class="text-danger">*</span></label>
-                                        <input type="text" ng-model="productCategory.Alias" class="form-control" placeholder="Tiêu đề SEO ..." name="pAlias" required>
-                                        <span class="text-danger" ng-show="frmAddProductCategory.pAlias.$touched && frmAddProductCategory.pAlias.$invalid">Bạn chưa nhập tiêu đề SEO</span>
+                                        <input type="text" ng-model="product.Alias" class="form-control" placeholder="Tiêu đề SEO ..." name="pAlias" required>
+                                        <span class="text-danger" ng-show="frmAddproduct.pAlias.$touched && frmAddproduct.pAlias.$invalid">Bạn chưa nhập tiêu đề SEO</span>
                                     </div>
                                     <!-- text input -->
                                     <div class="form-group">
                                         <label>Từ khóa SEO</label>
-                                        <input ng-model="productCategory.MetaKeyword"
+                                        <input ng-model="product.MetaKeyword"
                                                type="text" class="form-control"
                                                placeholder="Chọn vài từ để làm từ khóa ...">
                                     </div>
                                     <!-- text input -->
                                     <div class="form-group">
                                         <label>Từ khóa mô tả</label>
-                                        <input ng-model="productCategory.MetaDescription"
+                                        <input ng-model="product.MetaDescription"
                                                type="text" class="form-control"
                                                placeholder="Từ khóa mô tả về danh mục ...">
                                     </div>
@@ -124,35 +141,48 @@
 
                     <div class="card card-success ">
                         <div class="card-header">
-                            <h3 class="card-title">Quản lý danh mục</h3>
+                            <h3 class="card-title">Quản lý sản phẩm</h3>
                         </div>
                         <div class="card-body" style="margin-top:13px">
                             <!-- Minimal style -->
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-6">
                                     <!-- checkbox -->
                                     <div class="form-group clearfix">
                                         <div class="icheck-success d-inline">
                                             <input type="checkbox" id="checkboxActive"
-                                                   ng-model="productCategory.Status"
-                                                   ng-checked="productCategory.Status==true">
+                                                   ng-model="product.Status"
+                                                   ng-checked="product.Status==true">
                                             <label for="checkboxActive">
-                                                Kích hoạt danh mục
+                                                Kích hoạt sản phẩm
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <!-- checkbox -->
+                                    <div class="form-group clearfix">
+                                        <div class="icheck-belizehole d-inline">
+                                            <input type="checkbox" id="checkboxHomeFlag"
+                                                   ng-model="product.HomeFlag"
+                                                   ng-checked="product.HomeFlag==true">
+                                            <label for="checkboxHomeFlag">
+                                                Hiển thị trên trang chủ
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-6">
                                     <!-- checkbox -->
                                     <div class="form-group clearfix">
-                                        <div class="icheck-belizehole d-inline">
-                                            <input type="checkbox" id="checkboxHomeFlag"
-                                                   ng-model="productCategory.HomeFlag"
-                                                   ng-checked="productCategory.HomeFlag==true">
-                                            <label for="checkboxHomeFlag">
-                                                Hiển thị trên trang chủ
+                                        <div class="icheck-yellow d-inline">
+                                            <input type="checkbox" id="checkboxHotFlag"
+                                                   ng-model="product.HotFlag"
+                                                   ng-checked="product.HotFlag==true">
+                                            <label for="checkboxHotFlag">
+                                                Sản phẩm HOT
                                             </label>
                                         </div>
                                     </div>
@@ -165,7 +195,7 @@
                 <!--/.col (right) -->
             </div>
             <div class="card-footer">
-                <button type="submit" ng-disabled="frmAddProductCategory.$invalid" class="btn btn-primary">Lưu danh mục</button>
+                <button type="submit" ng-disabled="frmAddproduct.$invalid" class="btn btn-primary">Lưu sản phẩm</button>
                 <button ui-sref="Products" class="btn btn-outline-secondary space-around">Hủy bỏ</button>
             </div>
         </form>
@@ -177,12 +207,12 @@
 
 <script>
     $(document).ready(function () {
-        $('#parentIdDropdown').select2({
+        $('#categoryIdDropdown').select2({
             theme: 'bootstrap4'
         });
 
-        $('#parentIdDropdown').val('Danh mục gốc'); // Select the option with a default value
-        $('#parentIdDropdown').trigger('change'); // Notify any JS components that the value changed
+        $('#categoryIdDropdown').val('Chọn danh mục'); // Select the option with a default value
+        $('#categoryIdDropdown').trigger('change'); // Notify any JS components that the value changed
 
         //Initialize Select2 Elements
         //console.log('Load library done!')

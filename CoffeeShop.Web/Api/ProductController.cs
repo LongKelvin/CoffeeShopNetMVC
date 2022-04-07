@@ -104,7 +104,7 @@ namespace CoffeeShop.Web.Api
             });
         }
 
-        [Route("GetAllParents")]
+        [Route("GetAllCategories")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {

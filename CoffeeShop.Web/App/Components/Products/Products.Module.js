@@ -23,7 +23,7 @@
                 controller: "ProductAddController"
             })
             .state('ProductEdit', {
-                url: "/Products/Edit",
+                url: "/Products/Edit/:id",
                 templateUrl: "/App/Components/Products/ProductEditView.html",
                 controller: "ProductEditController"
             });

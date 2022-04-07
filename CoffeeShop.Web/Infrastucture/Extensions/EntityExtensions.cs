@@ -89,6 +89,7 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             product.Warranty = productVm.Warranty;
             product.HomeFlag = productVm.HomeFlag;
             product.ViewCount = productVm.ViewCount;
+            product.HotFlag = productVm.HotFlag;
 
             product.CreatedDate = productVm.CreatedDate;
             product.CreatedBy = productVm.CreatedBy;
