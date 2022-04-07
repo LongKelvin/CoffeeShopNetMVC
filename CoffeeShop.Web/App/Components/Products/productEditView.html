@@ -35,7 +35,7 @@
 
                         <div class="card-body">
                             <div class="form-group">
-                                <label>Tên danh mục</label>
+                                <label>Tên sản phẩm</label>
                                 <input type="text" ng-model="product.Name" class="form-control"
                                        name="pName" required
                                        ng-change="getSeoTitle()"
@@ -51,24 +51,47 @@
                             </div>
 
                             <div class="form-group">
-
-                                <label>Danh mục</label>
+                                <label>Danh mục <span class="text-danger">*</span></label>
                                 <select ng-model="product.CategoryID" id="categoryIdDropdown"
-                                        ng-init="product.CategoryID=''"
+                                        ng-init="product.ParentID=''"
                                         class=" form-control w-100"
                                         required name="pCategoryId"
                                         ng-options="option.ID as option.Name for option in parentCategories">
+                                    <option value=''>Chọn danh mục</option>
                                 </select>
-
                                 <span class="text-danger" ng-show="frmAddproduct.pCategoryId.$touched && frmAddproduct.pCategoryId.$invalid">Danh mục sản phẩm không được bỏ trống</span>
                             </div>
+                            <div class="form-group">
+                                <label>Giá <span class="text-danger">*</span></label>
+                                <input ng-model="product.Price" type="number" class="form-control"
+                                       name="pPrice" required
+                                       oninput="setLimitValue(0)"
+                                       value="0"
+                                       placeholder="Giá bán">
+                                <span class="text-danger" ng-show="frmAddproduct.pPrice.$touched && frmAddproduct.pPrice.$invalid">Giá sản phẩm là bắt buộc</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Giá khuyến mãi</label>
+                                <input ng-model="product.PromotionPrice" type="number" class="form-control"
+                                       value="0"
+                                       oninput="setLimitValue(0)"
+                                       placeholder="Giá khuyến mãi">
+                            </div>
+                            <div class="form-group">
+                                <label>Ngày sản xuất</label>
+                                <input id="mfg-date" ng-model="product.ManufacturingDate" type="date" class="form-control">
+                            </div>
 
+                            <div class="form-group">
+                                <label>Ngày hết hạn</label>
+                                <input id="exp-date" ng-model="product.ExpireDate" type="date" class="form-control">
+                            </div>
                             <!-- textarea -->
                             <div class="form-group">
-                                <label>Mô tả ngắn về danh mục</label>
+                                <label>Mô tả ngắn về sản phẩm</label>
                                 <textarea ng-model="product.Description"
                                           class="form-control" rows="2"
-                                          placeholder="Mô tả ngắn về danh mục ..."></textarea>
+                                          placeholder="Mô tả ngắn về sản phẩm ..."></textarea>
                             </div>
 
                             <div class="form-group">

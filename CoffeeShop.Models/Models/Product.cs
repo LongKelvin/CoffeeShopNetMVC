@@ -98,6 +98,12 @@ namespace CoffeeShop.Models.Models
         [Display(Name = "Warranty")]
         public int? Warranty { get; set; } // int, null
 
+        [Display(Name="Mfg Date")]
+        public DateTime? ManufacturingDate { get; set; }
+
+        [Display(Name ="Exp Date")]
+        public DateTime? ExpireDate { get; set; }
+
         [ForeignKey("ID")]
         public virtual ProductCategory ProductCategory { get; set; }
 

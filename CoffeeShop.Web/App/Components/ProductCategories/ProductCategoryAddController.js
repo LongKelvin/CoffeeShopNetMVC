@@ -30,7 +30,7 @@
                 }, function (error) {
                     console.error(error)
                     NotificationService.displayError('Đã có lỗi xảy ra, Xin vui lòng thử lại.');
-                });
+            });   
         }
         function loadParentCategory() {
             ApiServices.get('api/ProductCategory/GetAllParents', null, function (result) {

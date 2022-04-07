@@ -76,10 +76,17 @@
       "library": "bootbox.js@5.5.2",
       "destination": "Assets/Admin/lib/bootbox.js/"
     },
-    
     {
       "library": "ckeditor5@33.0.0",
       "destination": "Assets/Admin/lib/ckeditor5/"
+    },
+    {
+      "library": "ng-ckeditor@0.2.1",
+      "destination": "Assets/Admin/lib/ng-ckeditor/"
+    },
+    {
+      "library": "moment.js@2.29.2",
+      "destination": "Assets/Admin/lib/moment.js/"
     }
   ]
 }

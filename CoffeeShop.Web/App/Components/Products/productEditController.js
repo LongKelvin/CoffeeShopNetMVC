@@ -52,6 +52,10 @@
         function loadProductDetail() {
             ApiServices.get('api/Product/GetById/' + $stateParams.id, null, function (result) {
                 $scope.product = result.data;
+                if ($scope.product.ManufacturingDate!=null)
+                    $scope.product.ManufacturingDate = new Date($scope.product.ManufacturingDate); // convert filed to date
+                if ($scope.product.ExpireDate != null)
+                    $scope.product.ExpireDate = new Date($scope.product.ExpireDate); // convert filed to date
 
                 console.log('ProductData: ', $scope.product)
             }, function (error) {

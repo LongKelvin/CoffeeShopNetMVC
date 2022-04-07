@@ -81,7 +81,13 @@ namespace CoffeeShop.Web.Models
         [Display(Name = "Warranty")]
         public int? Warranty { get; set; } // int, null
 
-      
+        [Display(Name = "Mfg Date")]
+        public DateTime? ManufacturingDate { get; set; }
+
+        [Display(Name = "Exp Date")]
+        public DateTime? ExpireDate { get; set; }
+
+
         public virtual ProductCategoryViewModel ProductCategory { get; set; }
 
         public virtual ICollection<OrderDetailViewModel> OrderDetails { get; set; }

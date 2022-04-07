@@ -755,8 +755,8 @@
     <Content Include="Assets\Admin\lib\ngbootbox\package.json" />
     <Content Include="Assets\Admin\lib\ngbootbox\README.md" />
     <Content Include="Assets\Admin\lib\ngbootbox\tsd.json" />
-    <Content Include="Assets\Admin\lib\ng-ckeditor\ng-ckeditor.min.map" />
     <Content Include="Assets\Admin\lib\ckeditor5\ckeditor.js.map" />
+    <Content Include="Assets\Admin\lib\ng-ckeditor\ng-ckeditor.min.map" />
     <None Include="packages.config" />
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>

@@ -20,7 +20,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <form name="frmAddproduct" role="form" ng-submit="Addproduct()" novalidate>
+        <form name="frmAddproduct" role="form" ng-submit="AddProduct()" novalidate>
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-6">
@@ -44,7 +44,7 @@
                             <div class="form-group">
                                 <label>Thứ tự hiển thị</label>
                                 <input ng-model="product.DisplayOrder" type="number" class="form-control"
-                                       oninput="setLimitValue(0)"
+                                      
                                        placeholder="Hiển thị ở vị trí 1 2 3 ...">
                             </div>
 
@@ -63,7 +63,7 @@
                                 <label>Giá <span class="text-danger">*</span></label>
                                 <input ng-model="product.Price" type="number" class="form-control"
                                        name="pPrice" required
-                                       oninput="setLimitValue(0)"
+                                     
                                        value="0"
                                        placeholder="Giá bán">
                                 <span class="text-danger" ng-show="frmAddproduct.pPrice.$touched && frmAddproduct.pPrice.$invalid">Giá sản phẩm là bắt buộc</span>
@@ -72,8 +72,18 @@
                                 <label>Giá khuyến mãi</label>
                                 <input ng-model="product.PromotionPrice" type="number" class="form-control"
                                        value="0"
-                                       oninput="setLimitValue(0)"
+                                    
                                        placeholder="Giá khuyến mãi">
+                            </div>
+                            <div class="form-group">
+                                <label>Ngày sản xuất</label>
+                                <input ng-model="product.ManufacturingDate" type="date" class="form-control" >
+                            </div>
+
+                            <div class="form-group">
+                                <label>Ngày hết hạn</label>
+                                <input ng-model="product.ExpireDate" type="date" class="form-control" name="pMfg-date">
+                                <span class="text-danger" ng-show="frmAddproduct.pMfg-date.$touched && frmAddproduct.pMfg-date.$invalid">Giá sản phẩm là bắt buộc</span>
                             </div>
                             <!-- textarea -->
                             <div class="form-group">
