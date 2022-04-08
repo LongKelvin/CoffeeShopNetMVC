@@ -41,6 +41,15 @@
             });
         }
 
+        $scope.ChooseImages = function () {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $scope.product.Images = fileUrl;
+                console.log('file url: ', fileUrl)
+            }
+            finder.popup();
+        }
+
         loadParentCategory();
     }
 })(angular.module('CoffeeShop.Products'));

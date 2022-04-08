@@ -44,7 +44,6 @@
                             <div class="form-group">
                                 <label>Thứ tự hiển thị</label>
                                 <input ng-model="product.DisplayOrder" type="number" class="form-control"
-                                      
                                        placeholder="Hiển thị ở vị trí 1 2 3 ...">
                             </div>
 
@@ -63,7 +62,6 @@
                                 <label>Giá <span class="text-danger">*</span></label>
                                 <input ng-model="product.Price" type="number" class="form-control"
                                        name="pPrice" required
-                                     
                                        value="0"
                                        placeholder="Giá bán">
                                 <span class="text-danger" ng-show="frmAddproduct.pPrice.$touched && frmAddproduct.pPrice.$invalid">Giá sản phẩm là bắt buộc</span>
@@ -72,12 +70,11 @@
                                 <label>Giá khuyến mãi</label>
                                 <input ng-model="product.PromotionPrice" type="number" class="form-control"
                                        value="0"
-                                    
                                        placeholder="Giá khuyến mãi">
                             </div>
                             <div class="form-group">
                                 <label>Ngày sản xuất</label>
-                                <input ng-model="product.ManufacturingDate" type="date" class="form-control" >
+                                <input ng-model="product.ManufacturingDate" type="date" class="form-control">
                             </div>
 
                             <div class="form-group">
@@ -94,18 +91,18 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputFile">Hình ảnh</label>
+                                <label>Hình ảnh</label>
                                 <div class="input-group">
-                                    <div class="custom-file">
-                                        <input ng-model="product.Images" type="file"
-                                               class="custom-file-input"
-                                               id="productImagesInput" multiple="multiple">
-                                        <label class="custom-file-label"
-                                               for="productImagesInput">Chọn files</label>
-                                    </div>
+                                    <input ng-model="product.Images" type="text" class="form-control" placeholder="Chọn files" aria-label="Recipient's username" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
-                                        <span class="input-group-text">Tải lên</span>
+                                        <button class="btn btn-secondary" type="button" ng-click="ChooseImages()">Chọn ảnh</button>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Nội dung chi tiết</label>
+                                <div id="ckEditorContent" ng-model="product.Content">
                                 </div>
                             </div>
                         </div>
@@ -216,6 +213,7 @@
 <!-- /.content -->
 
 <script>
+
     $(document).ready(function () {
         $('#categoryIdDropdown').select2({
             theme: 'bootstrap4'
@@ -224,7 +222,18 @@
         $('#categoryIdDropdown').val('Chọn danh mục'); // Select the option with a default value
         $('#categoryIdDropdown').trigger('change'); // Notify any JS components that the value changed
 
-        //Initialize Select2 Elements
-        //console.log('Load library done!')
+        //var editor = CKEDITOR.replace('ckEditorContent');
+        CKEDITOR.replace('ckEditorContent', {
+            filebrowserBrowseUrl: '/Assets/Admin/lib/ckfinder/ckfinder.html',
+            filebrowserImageBrowseUrl: '/Assets/Admin/lib/ckfinder/ckfinder.html?Type=Images',
+            filebrowserUploadUrl: '/Assets/Admin/lib/ckfinder/core/connector//aspx/connector.aspx?command=QuickUpload&type=Files',
+            filebrowserImageUploadUrl: '/Assets/Admin/lib/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images',
+
+            filebrowserWindowHeight: '1000',
+            filebrowserWindowWidth: '1000'
+        });
+
+        //var editor = $('#ckEditorContent');
+        //CKFinder.setupCKEditor(editor, '/Assets/Admin/lib/ckfinder/');
     });
 </script>
