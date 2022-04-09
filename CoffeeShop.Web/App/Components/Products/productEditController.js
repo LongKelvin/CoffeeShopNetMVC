@@ -57,6 +57,8 @@
                 if ($scope.product.ExpireDate != null)
                     $scope.product.ExpireDate = new Date($scope.product.ExpireDate); // convert filed to date
 
+                CKEDITOR.instances['ckEditorContent'].setData($scope.product.Content)
+
                 console.log('ProductData: ', $scope.product)
             }, function (error) {
                 NotificationService.displayError(error.data);

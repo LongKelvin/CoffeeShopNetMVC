@@ -18,12 +18,16 @@
 
         $scope.AddProduct = AddProduct;
         $scope.getSeoTitle = getSeoTitle;
+       
 
         function getSeoTitle() {
             $scope.product.Alias = CommonService.getSeoTitle($scope.product.Name);
         }
 
         function AddProduct() {
+            var content = CKEDITOR.instances['ckEditorContent'].getData();
+            $scope.product.Content = content; 
+
             ApiServices.post('api/Product/Create', $scope.product,
                 function (result) {
                     NotificationService.displaySuccess(result.data.Name + ' đã được thêm mới.');
