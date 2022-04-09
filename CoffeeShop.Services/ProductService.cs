@@ -109,33 +109,12 @@ namespace CoffeeShop.Services
             if (productFromDb == null)
                 return null;
 
-            productFromDb.ID = product.ID;
-            productFromDb.Name = product.Name;
-            productFromDb.Description = product.Description;
-            productFromDb.Alias = product.Alias;
-            productFromDb.CategoryID = product.CategoryID;
-            productFromDb.Content = product.Content;
-            productFromDb.Images = product.Images;
-            productFromDb.MoreImages = product.MoreImages;
-            productFromDb.Price = product.Price;
-            productFromDb.PromotionPrice = product.PromotionPrice;
-            productFromDb.Warranty = product.Warranty;
-            productFromDb.HomeFlag = product.HomeFlag;
-            productFromDb.ViewCount = product.ViewCount;
-            productFromDb.HotFlag = product.HotFlag;
-            productFromDb.ManufacturingDate = product.ManufacturingDate;
-            productFromDb.ExpireDate = product.ExpireDate;
-            productFromDb.CreatedDate = product.CreatedDate;
-            productFromDb.CreatedBy = product.CreatedBy;
-            productFromDb.UpdatedDate = product.UpdatedDate;
-            productFromDb.UpdatedBy = product.UpdatedBy;
-            productFromDb.MetaKeyword = product.MetaKeyword;
-            productFromDb.MetaDescription = product.MetaDescription;
-            productFromDb.Status = product.Status;
-            productFromDb.RowVersion = product.RowVersion;
-
+            ModelsEntityExtensions.UpdateProduct(product, productFromDb);
+            
+            //clear all tags record in link table ProductTags for add new record
             productFromDb.Tags.Clear();
 
+            //Get all tags from product and assign to productFromDb
             var listTag = new List<Tag>();
             foreach (var tag in product.Tags)
             {
