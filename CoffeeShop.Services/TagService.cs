@@ -53,6 +53,10 @@ namespace CoffeeShop.Services
             return _tagRepository.GetById(id);
         }
 
+        public Tag GetByIdString(string id)
+        {
+            return _tagRepository.GetByIdString(id);
+        }
         public void SaveChanges()
         {
             _unitOfWork.Commit();

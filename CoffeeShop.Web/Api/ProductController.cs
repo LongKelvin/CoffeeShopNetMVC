@@ -67,7 +67,7 @@ namespace CoffeeShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                var ProductDetail = _productService.GetById(Id);
+                var ProductDetail = _productService.GetByCondition(x=>x.ID==Id, new string[] {"Tags"});
 
                 if (ProductDetail == null)
                 {
@@ -76,6 +76,7 @@ namespace CoffeeShop.Web.Api
 
                 //Map object using Automapper
                 var productCategotyVM = Mapper.Map<ProductViewModel>(ProductDetail);
+                productCategotyVM.TagsString = EntityExtensions.GetTagStringFromProductTags(ProductDetail);
 
                 return request.CreateResponse(HttpStatusCode.OK, productCategotyVM);
             });
@@ -99,7 +100,7 @@ namespace CoffeeShop.Web.Api
                 _productService.SaveChanges();
 
                 var responseResult = Mapper.Map<Product, ProductViewModel>(result);
-
+                responseResult.TagsString = EntityExtensions.GetTagStringFromProductTags(result);
                 return request.CreateResponse(HttpStatusCode.Created, responseResult);
             });
         }
@@ -133,10 +134,10 @@ namespace CoffeeShop.Web.Api
                 var updateProduct = new Product();
                 EntityExtensions.UpdateProduct(updateProduct, ProductVM);
 
-                _productService.Update(updateProduct);
+                var result = _productService.Update(updateProduct);
                 _productService.SaveChanges();
 
-                var responseResult = Mapper.Map<Product, ProductViewModel>(updateProduct);
+                var responseResult = Mapper.Map<Product, ProductViewModel>(result);
 
                 return request.CreateResponse(HttpStatusCode.OK, responseResult);
             });

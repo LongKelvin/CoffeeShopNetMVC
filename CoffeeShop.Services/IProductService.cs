@@ -1,6 +1,8 @@
 ﻿using CoffeeShop.Models.Models;
 
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace CoffeeShop.Services
 {
@@ -8,7 +10,7 @@ namespace CoffeeShop.Services
     {
         Product Add(Product product);
 
-        void Update(Product product);
+        Product Update(Product product);
 
         void Delete(Product product);
 
@@ -22,6 +24,8 @@ namespace CoffeeShop.Services
         IEnumerable<Product> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow);
 
         Product GetById(int id);
+
+        Product GetByCondition(Expression<Func<Product, bool>> expression, string[] includes = null);
 
         void SaveChanges();
     }

@@ -87,6 +87,8 @@ namespace CoffeeShop.Web.Models
         [Display(Name = "Exp Date")]
         public DateTime? ExpireDate { get; set; }
 
+        [Display(Name = "Tags")]
+        public string TagsString { get; set; }
 
         public virtual ProductCategoryViewModel ProductCategory { get; set; }
 

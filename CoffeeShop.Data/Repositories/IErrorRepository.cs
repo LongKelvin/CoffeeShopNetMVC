@@ -3,7 +3,7 @@ using CoffeeShop.Models.Models;
 
 namespace CoffeeShop.Data.Repositories
 {
-    public interface IErrorRepository: IRepository<Error>
+    public interface IErrorRepository : IRepository<Error>
     {
     }
 }
