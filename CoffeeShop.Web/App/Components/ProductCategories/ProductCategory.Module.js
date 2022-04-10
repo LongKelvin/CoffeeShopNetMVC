@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../../assets/admin/lib/angular.js/angular.js" />
 
-(function() {
+(function () {
     angular.module('CoffeeShop.ProductCategory', [
 
         // Custom modules
@@ -9,7 +9,6 @@
     ]).config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
-
 
     function config($stateProvider, $urlRouterProvider) {
         $stateProvider

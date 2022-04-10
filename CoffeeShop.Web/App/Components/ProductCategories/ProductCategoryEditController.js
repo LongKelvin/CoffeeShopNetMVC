@@ -11,7 +11,6 @@
             'CommonService'
         ];
 
-
     function ProductCategoryEditController($scope, ApiServices, $state, NotificationService, $stateParams, CommonService) {
         $scope.title = 'ProductCategoryEditController';
 
@@ -27,7 +26,6 @@
             $scope.productCategory.Alias = CommonService.getSeoTitle($scope.productCategory.Name);
         }
 
-
         function UpdateProductCategory() {
             $scope.productCategory.UpdatedDate = new Date();
             $scope.productCategory.UpdatedBy = 'AdminTest';
@@ -39,7 +37,8 @@
                 }, function (error) {
                     console.error(error)
                     NotificationService.displayError('Đã có lỗi xảy ra, Xin vui lòng thử lại.');
-                });
+            });
+            $state.go('ProductCategory')
         }
         function loadParentCategory() {
             ApiServices.get('api/ProductCategory/GetAllParents', null, function (result) {
@@ -52,9 +51,8 @@
         function loadProductCategoryDetail() {
             ApiServices.get('api/ProductCategory/GetById/' + $stateParams.id, null, function (result) {
                 $scope.productCategory = result.data;
-                
 
-                console.log('productCategoryData: ',$scope.productCategory)
+                console.log('productCategoryData: ', $scope.productCategory)
             }, function (error) {
                 NotificationService.displayError(error.data);
             });
@@ -62,6 +60,5 @@
 
         loadParentCategory();
         loadProductCategoryDetail();
-       
     }
 })(angular.module('CoffeeShop.ProductCategory'));

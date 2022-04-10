@@ -13,13 +13,13 @@ namespace CoffeeShop.Data.Insfrastructure
         private CoffeeShopDbContext dataContext;
         private readonly IDbSet<T> dbSet;
 
-        protected IDbFactory DbFactory
+        public IDbFactory DbFactory
         {
             get;
             private set;
         }
 
-        protected CoffeeShopDbContext DbContext
+        public CoffeeShopDbContext DbContext
         {
             get { return dataContext ?? (dataContext = DbFactory.Init()); }
         }
@@ -43,6 +43,21 @@ namespace CoffeeShop.Data.Insfrastructure
         {
             dbSet.Attach(entity);
             dataContext.Entry(entity).State = EntityState.Modified;
+        }
+
+        public virtual T Attach(T entity)
+        {
+            return dbSet.Attach(entity); ;
+        }
+
+        public virtual void MakeAsModified(T entity)
+        {
+            dataContext.Entry(entity).State = EntityState.Modified;
+        }
+
+        public virtual void Detach(T entity)
+        {
+            dataContext.Entry(entity).State = EntityState.Detached;
         }
 
         public virtual T Delete(T entity)

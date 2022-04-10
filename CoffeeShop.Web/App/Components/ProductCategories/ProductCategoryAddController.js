@@ -1,14 +1,14 @@
-﻿(function(app) {
+﻿(function (app) {
     'use strict';
 
     app.controller('ProductCategoryAddController', ProductCategoryAddController);
 
-    ProductCategoryAddController.$inject = ['$scope','ApiServices','$state', 'NotificationService', 'CommonService'];
+    ProductCategoryAddController.$inject = ['$scope', 'ApiServices', '$state', 'NotificationService', 'CommonService'];
 
-    function ProductCategoryAddController($scope,ApiServices,$state, NotificationService, CommonService) {
+    function ProductCategoryAddController($scope, ApiServices, $state, NotificationService, CommonService) {
         $scope.title = 'ProductCategoryAddController';
 
-        $scope.productCategory =  {
+        $scope.productCategory = {
             Status: true,
             CreatedDate: new Date(),
             HomeFlag: false,
@@ -30,7 +30,7 @@
                 }, function (error) {
                     console.error(error)
                     NotificationService.displayError('Đã có lỗi xảy ra, Xin vui lòng thử lại.');
-                });
+            });   
         }
         function loadParentCategory() {
             ApiServices.get('api/ProductCategory/GetAllParents', null, function (result) {
