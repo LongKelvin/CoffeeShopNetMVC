@@ -20,6 +20,20 @@
         $scope.getSeoTitle = getSeoTitle;
        
 
+        $scope.moreImages = []
+        $scope.ChooseMoreImages =function() {
+            var finder = new CKFinder();
+            finder.selectActionData = "container";
+            finder.selectActionFunction = function (fileUrl) {
+                $scope.moreImages.push(fileUrl);
+                $scope.$apply();
+                console.log('file url: ', $scope.moreImages)
+               
+            }
+            finder.popup();
+        }
+       
+
         function getSeoTitle() {
             $scope.product.Alias = CommonService.getSeoTitle($scope.product.Name);
         }
@@ -27,6 +41,9 @@
         function AddProduct() {
             var content = CKEDITOR.instances['ckEditorContent'].getData();
             $scope.product.Content = content; 
+
+            //update MoreImages field
+            $scope.product.MoreImages = JSON.stringify($scope.moreImages)
 
             ApiServices.post('api/Product/Create', $scope.product,
                 function (result) {
@@ -49,6 +66,7 @@
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
                 $scope.product.Images = fileUrl;
+                $scope.$apply();
                 console.log('file url: ', fileUrl)
             }
             finder.popup();

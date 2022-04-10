@@ -131,7 +131,7 @@
                                         <label>Từ khóa SEO</label>
                                         <input ng-model="product.MetaKeyword"
                                                type="text" class="form-control"
-                                               placeholder="Chọn vài từ để làm từ khóa ...">
+                                               placeholder="Chọn từ phù hợp để làm từ khóa ...">
                                     </div>
                                     <!-- text input -->
                                     <div class="form-group">
@@ -204,8 +204,45 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
+                    <div class="card card-cyan ">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý hình ảnh</h3>
+                        </div>
+                        <div class="card-body" style="margin-top:13px">
+                            <!-- Minimal style -->
+                            
+
+                            <div class="form-group">
+
+                                <div class="input-group">
+                                    <button ng-click="ChooseMoreImages()" type="button" class="btn btn-outline-primary">
+                                        <i class="fa-solid fa-square-plus"></i> Thêm nhiều ảnh
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- bootstrap image gallery 1 -->
+                            <div class="form-group">
+
+                                <div class="row" >
+                                    <div ng-repeat="image in moreImages" class="col-sm-6 col-md-4 col-lg-3">
+                                        <figure>
+                                            <img ng-src="{{image}}" class="fit-img img-thumbnail grayscale" width="150" height="150">
+                                            <figcaption>Image {{$index+1}}</figcaption>
+                                        </figure>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
                 </div>
+
+                
                 <!--/.col (right) -->
+
+
             </div>
             <div class="card-footer">
                 <button type="submit" ng-disabled="frmAddproduct.$invalid" class="btn btn-primary">Lưu sản phẩm</button>

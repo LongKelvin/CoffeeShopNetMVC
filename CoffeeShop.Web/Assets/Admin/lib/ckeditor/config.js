@@ -32,5 +32,8 @@ CKEDITOR.editorConfig = function (config) {
     config.filebrowserBrowseUrl = '/Assets/admin/libs/ckfinder/ckfinder.html',
     config.filebrowserUploadUrl = '/Assets/admin/libs/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Files',
     config.filebrowserWindowWidth = '1000',
-    config.filebrowserWindowHeight = '1000'
+        config.filebrowserWindowHeight = '1000'
+
+    config.height = 600;        // 500 pixels high.
+    //config.height = '25em';     // CSS unit (em).
 };
