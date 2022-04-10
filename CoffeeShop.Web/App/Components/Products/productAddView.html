@@ -210,7 +210,6 @@
                         </div>
                         <div class="card-body" style="margin-top:13px">
                             <!-- Minimal style -->
-                            
 
                             <div class="form-group">
 
@@ -224,14 +223,13 @@
                             <!-- bootstrap image gallery 1 -->
                             <div class="form-group">
 
-                                <div class="row" >
+                                <div class="row">
                                     <div ng-repeat="image in moreImages" class="col-sm-6 col-md-4 col-lg-3">
                                         <figure>
                                             <img ng-src="{{image}}" class="fit-img img-thumbnail grayscale" width="150" height="150">
                                             <figcaption>Image {{$index+1}}</figcaption>
                                         </figure>
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -239,10 +237,7 @@
                     </div>
                 </div>
 
-                
                 <!--/.col (right) -->
-
-
             </div>
             <div class="card-footer">
                 <button type="submit" ng-disabled="frmAddproduct.$invalid" class="btn btn-primary">Lưu sản phẩm</button>
@@ -275,7 +270,6 @@
             filebrowserWindowHeight: '1000',
             filebrowserWindowWidth: '1000'
         });
-
 
         //var editor = $('#ckEditorContent');
         //CKFinder.setupCKEditor(editor, '/Assets/Admin/lib/ckfinder/');

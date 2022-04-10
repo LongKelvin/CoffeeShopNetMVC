@@ -1,5 +1,4 @@
-﻿
-(function (app) {
+﻿(function (app) {
     'use strict';
 
     app.controller('ProductAddController', ProductAddController);
@@ -18,21 +17,7 @@
 
         $scope.AddProduct = AddProduct;
         $scope.getSeoTitle = getSeoTitle;
-       
-
         $scope.moreImages = []
-        $scope.ChooseMoreImages =function() {
-            var finder = new CKFinder();
-            finder.selectActionData = "container";
-            finder.selectActionFunction = function (fileUrl) {
-                $scope.moreImages.push(fileUrl);
-                $scope.$apply();
-                console.log('file url: ', $scope.moreImages)
-               
-            }
-            finder.popup();
-        }
-       
 
         function getSeoTitle() {
             $scope.product.Alias = CommonService.getSeoTitle($scope.product.Name);
@@ -40,7 +25,7 @@
 
         function AddProduct() {
             var content = CKEDITOR.instances['ckEditorContent'].getData();
-            $scope.product.Content = content; 
+            $scope.product.Content = content;
 
             //update MoreImages field
             $scope.product.MoreImages = JSON.stringify($scope.moreImages)
@@ -51,7 +36,7 @@
                 }, function (error) {
                     console.error(error)
                     NotificationService.displayError('Đã có lỗi xảy ra, Xin vui lòng thử lại.');
-            });
+                });
             $state.go('Products')
         }
         function loadParentCategory() {
@@ -68,6 +53,18 @@
                 $scope.product.Images = fileUrl;
                 $scope.$apply();
                 console.log('file url: ', fileUrl)
+            }
+            finder.popup();
+        }
+
+      
+        $scope.ChooseMoreImages = function () {
+            var finder = new CKFinder();
+            finder.selectActionData = "container";
+            finder.selectActionFunction = function (fileUrl) {
+                $scope.moreImages.push(fileUrl);
+                $scope.$apply();
+                console.log('file url: ', $scope.moreImages)
             }
             finder.popup();
         }

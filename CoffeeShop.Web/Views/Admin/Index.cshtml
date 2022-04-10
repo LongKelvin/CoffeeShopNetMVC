@@ -922,7 +922,23 @@
     <script src="~/Assets/Admin/lib/ckeditor/ckeditor.js"></script>
     <script src="~/Assets/Admin/lib/ng-ckeditor/ng-ckeditor.js"></script>
 
+    <script>
+        $(function () {
 
+            $(window).bind("resize", function () {
+                // console.log($(this).width())
+                if ($(this).width() < 1920) {
+                    $('#main-body').addClass('sidebar-collapse');
+                    $('#main-body').addClass('sidebar-closed');
+                }
+                else {
+
+                    $('#main-body').removeClass('sidebar-collapse');
+                    $('#main-body').removeClass('sidebar-closed');
+                }
+            })
+        })
+    </script>
 
 </body>
 </html>
