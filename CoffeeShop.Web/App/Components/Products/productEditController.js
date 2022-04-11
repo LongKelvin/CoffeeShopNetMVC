@@ -60,11 +60,10 @@
                     $scope.product.ExpireDate = new Date($scope.product.ExpireDate); // convert filed to date
 
                 var checkMoreImagesValue = CommonService.isNullOrEmpty($scope.product.MoreImages);
-                if (checkMoreImagesValue==false) { //check if MoreImages is not null or empty
+                if (checkMoreImagesValue == false) { //check if MoreImages is not null or empty
                     $scope.moreImages = JSON.parse($scope.product.MoreImages)
-                    
                 }
-             
+
                 CKEDITOR.instances['ckEditorContent'].setData($scope.product.Content)
 
                 console.log('ProductData: ', $scope.product)

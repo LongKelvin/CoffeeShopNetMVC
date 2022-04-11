@@ -115,6 +115,9 @@
     <Content Include="App\app.js" />
     <Content Include="App\Components\Home\HomeController.js" />
     <Content Include="App\Components\Home\HomeView.html" />
+    <Content Include="App\Components\Home\RootController.js" />
+    <Content Include="App\Components\Login\LoginController.js" />
+    <Content Include="App\Components\Login\LoginView.html" />
     <Content Include="App\Components\ProductCategories\ProductCategory.Module.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -138,6 +141,7 @@
     <Content Include="App\Shared\Services\CommonService.js" />
     <Content Include="App\Shared\Services\ApiServices.js" />
     <Content Include="App\Shared\Services\NotificationService.js" />
+    <Content Include="App\Shared\Views\BaseView.html" />
     <Content Include="Assets\Admin\css\adminlte.css" />
     <Content Include="Assets\Admin\css\adminlte.min.css" />
     <Content Include="Assets\Admin\css\alt\adminlte.components.css" />
@@ -1632,10 +1636,8 @@
     <Folder Include="App\Components\ApplicationGroups\" />
     <Folder Include="App\Components\ApplicationRoles\" />
     <Folder Include="App\Components\ApplicationUsers\" />
-    <Folder Include="App\Components\Login\" />
     <Folder Include="App\Components\Orders\" />
     <Folder Include="App\Components\Statistics\" />
-    <Folder Include="App\Shared\Views\" />
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Admin\css\skins\" />
     <Folder Include="Assets\Admin\templates\" />
