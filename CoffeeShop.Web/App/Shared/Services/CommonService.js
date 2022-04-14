@@ -3,7 +3,6 @@
 (function (app) {
     app.service('CommonService', CommonService);
 
-   
     function CommonService() {
         return {
             getSeoTitle: getSeoTitle,

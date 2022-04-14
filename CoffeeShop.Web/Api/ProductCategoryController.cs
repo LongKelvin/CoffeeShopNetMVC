@@ -17,6 +17,7 @@ using System.Web.Script.Serialization;
 namespace CoffeeShop.Web.Api
 {
     [RoutePrefix("api/ProductCategory")]
+    [Authorize]
     public class ProductCategoryController : ApiControllerBase
     {
         private readonly IProductCategoryService _productCategoryService;
@@ -95,7 +96,7 @@ namespace CoffeeShop.Web.Api
 
                 var newProductCategory = new ProductCategory();
                 EntityExtensions.UpdateProductCategory(newProductCategory, productCategoryVM);
-
+                newProductCategory.CreatedBy = User.Identity.Name;
                 var result = _productCategoryService.Add(newProductCategory);
                 _productCategoryService.SaveChanges();
 
@@ -133,6 +134,7 @@ namespace CoffeeShop.Web.Api
 
                 var updateProductCategory = new ProductCategory();
                 EntityExtensions.UpdateProductCategory(updateProductCategory, productCategoryVM);
+                updateProductCategory.UpdatedBy = User.Identity.Name;
 
                 _productCategoryService.Update(updateProductCategory);
                 _productCategoryService.SaveChanges();

@@ -57,7 +57,6 @@
             finder.popup();
         }
 
-      
         $scope.ChooseMoreImages = function () {
             var finder = new CKFinder();
             finder.selectActionData = "container";

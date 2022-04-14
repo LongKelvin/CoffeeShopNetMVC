@@ -37,7 +37,7 @@
                 }, function (error) {
                     console.error(error)
                     NotificationService.displayError('Đã có lỗi xảy ra, Xin vui lòng thử lại.');
-            });
+                });
             $state.go('ProductCategory')
         }
         function loadParentCategory() {

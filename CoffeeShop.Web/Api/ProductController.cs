@@ -18,6 +18,7 @@ using System.Web.Script.Serialization;
 namespace CoffeeShop.Web.Api
 {
     [RoutePrefix("api/Product")]
+    [Authorize]
     public class ProductController : ApiControllerBase
     {
         private readonly IProductService _productService;
@@ -27,6 +28,7 @@ namespace CoffeeShop.Web.Api
             _productService = productService;
         }
 
+        [AllowAnonymous]
         // GET api/<controller>
         [Route("GetAll")]
         public HttpResponseMessage GetAll(HttpRequestMessage request, string keyWord, int page, int pageSize = 20)
@@ -95,6 +97,7 @@ namespace CoffeeShop.Web.Api
 
                 var newProduct = new Product();
                 EntityExtensions.UpdateProduct(newProduct, ProductVM);
+                newProduct.CreatedBy = User.Identity.Name;
 
                 var result = _productService.Add(newProduct);
                 _productService.SaveChanges();
@@ -133,6 +136,7 @@ namespace CoffeeShop.Web.Api
 
                 var updateProduct = new Product();
                 EntityExtensions.UpdateProduct(updateProduct, ProductVM);
+                updateProduct.UpdatedBy = User.Identity.Name;
 
                 var result = _productService.Update(updateProduct);
                 _productService.SaveChanges();
