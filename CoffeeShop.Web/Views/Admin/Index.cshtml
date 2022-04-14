@@ -1,6 +1,4 @@
-﻿
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -27,26 +25,25 @@
     <link href="~/Assets/Admin/lib/icheck-bootstrap/icheck-bootstrap.css" rel="stylesheet" />
     <link href="~/Assets/Admin/lib/select2/css/select2.css" rel="stylesheet" />
     @*<link href="~/Assets/Admin/lib/select2-bootstrap-css/select2-bootstrap.css" rel="stylesheet" />
-
         <link href="~/Assets/Admin/lib/select2-bootstrap-css/select2-bootstrap.css" rel="stylesheet" />
         <link href="~/Assets/Admin/lib/select2-bootstrap-theme/select2-bootstrap.css" rel="stylesheet" />
         <link href="~/Assets/Admin/lib/select2-bootstrap-5-theme/select2-bootstrap-5-theme.css" rel="stylesheet" />*@
     <link href="~/Assets/Admin/lib/select2-bootstrap4-theme/select2-bootstrap4.css" rel="stylesheet" />
     @*<link href="~/Assets/Admin/lib/ckeditor/contents.css" rel="stylesheet" />
         <link href="~/Assets/Admin/lib/ng-ckeditor/ng-ckeditor.css" rel="stylesheet" />*@
+    <link href="~/Assets/Admin/lib/angular-loading-bar/loading-bar.css" rel="stylesheet" />
 </head>
 <body id="main-body" ng-app="CoffeeShop" ng-controller="RootController">
 
-
     <div ui-view>
-
     </div>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
 
     <!--<script src="~/Assets/Admin/lib/jquery/jquery.min.js"></script>-->
     <!-- Bootstrap 4 -->
@@ -60,40 +57,13 @@
     @*angularJs embed sources*@
 
     @*angularJS lib*@
+    <!-- 3rd party libraries -->
     <script src="~/Assets/Admin/lib/angular.js/angular.js"></script>
     <script src="~/Assets/Admin/lib/angular-ui-router/angular-ui-router.js"></script>
 
-    @*CoffeeShop.Module & Services*@
-    <script src="~/App/Shared/Modules/CoffeeShop.Common.js"></script>
-    <script src="~/App/Shared/Services/CommonService.js"></script>
-    <script src="~/App/Shared/Services/ApiServices.js"></script>
-    <script src="~/App/Shared/Services/NotificationService.js"></script>
-    <script src="~/App/Components/Products/Products.Module.js"></script>
-    <script src="~/App/Components/ProductCategories/ProductCategory.Module.js"></script>
-    <script src="~/App/app.js"></script>
+    <script src="~/Assets/Admin/lib/angular-local-storage/angular-local-storage.js"></script>
+    <script src="~/Assets/Admin/lib/angular-loading-bar/loading-bar.js"></script>
 
-    @*CoffeeShop.Controller*@
-    <script src="~/App/Components/Home/RootController.js"></script>
-    <script src="~/App/Components/Home/HomeController.js"></script>
-
-    <script src="~/App/Components/Products/ProductAddController.js"></script>
-    <script src="~/App/Components/Products/ProductEditController.js"></script>
-    <script src="~/App/Components/Products/ProductListController.js"></script>
-
-    <script src="~/App/Components/ProductCategories/ProductCategoryAddController.js"></script>
-    <script src="~/App/Components/ProductCategories/ProductCategoryEditController.js"></script>
-    <script src="~/App/Components/ProductCategories/ProductCategoryListController.js"></script>
-
-    <script src="~/App/Components/Login/LoginController.js"></script>
-
-    @*AngularJS Filter*@
-    <script src="~/App/Shared/Filters/StatusFilter.js"></script>
-
-    @*AngularJS Directive*@
-    <script src="~/App/Shared/Directives/PagerDirective.js"></script>
-
-    @*library*@
-    @*<script src="~/Assets/Admin/lib/dir-pagination/dirPagination.js"></script>*@
     <script src="~/Assets/Admin/lib/toastr.js/toastr.min.js"></script>
     <script src="~/Assets/Admin/lib/select2/js/select2.full.js"></script>
 
@@ -103,7 +73,47 @@
     <script src="~/Assets/Admin/lib/ckfinder/ckfinder.js"></script>
     @*Ckeditor5*@
     <script src="~/Assets/Admin/lib/ckeditor/ckeditor.js"></script>
-    <script src="~/Assets/Admin/lib/ng-ckeditor/ng-ckeditor.js"></script>
+    @*<script src="~/Assets/Admin/lib/ng-ckeditor/ng-ckeditor.js"></script>*@
+
+
+
+    @*CoffeeShop.Module & Services*@
+
+
+    <script src="~/App/Shared/Modules/CoffeeShop.Common.js"></script>
+    <script src="~/App/Shared/Services/CommonService.js"></script>
+    <script src="~/App/Shared/Services/ApiServices.js"></script>
+    <script src="~/App/Shared/Services/NotificationService.js"></script>
+    <script src="~/App/Components/Products/Products.Module.js"></script>
+    <script src="~/App/Components/ProductCategories/ProductCategory.Module.js"></script>
+    <script src="~/App/app.js"></script>
+
+    <script src="~/App/Shared/Services/AuthData.js"></script>
+    <script src="~/App/Shared/Services/AuthenticationService.js"></script>
+    <script src="~/App/Shared/Services/LoginService.js"></script>
+
+
+    @*CoffeeShop.Controller*@
+    <script src="~/App/Components/Home/RootController.js"></script>
+
+    <script src="~/App/Components/Home/HomeController.js"></script>
+
+    <script src="~/App/Components/Login/LoginController.js"></script>
+
+    <script src="~/App/Components/Products/ProductAddController.js"></script>
+    <script src="~/App/Components/Products/ProductEditController.js"></script>
+    <script src="~/App/Components/Products/ProductListController.js"></script>
+
+    <script src="~/App/Components/ProductCategories/ProductCategoryAddController.js"></script>
+    <script src="~/App/Components/ProductCategories/ProductCategoryEditController.js"></script>
+    <script src="~/App/Components/ProductCategories/ProductCategoryListController.js"></script>
+
+    @*AngularJS Filter*@
+    <script src="~/App/Shared/Filters/StatusFilter.js"></script>
+
+    @*AngularJS Directive*@
+    <script src="~/App/Shared/Directives/PagerDirective.js"></script>
+
 
     <script>
         $(function () {

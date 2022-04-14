@@ -8,7 +8,8 @@
         'CoffeeShop.Products',
         'CoffeeShop.ProductCategory',
 
-    ]).config(config);
+    ]).config(config)
+        .config(configAuthentication);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
@@ -33,5 +34,31 @@
             });
 
         $urlRouterProvider.otherwise('/Login');
+    }
+
+    function configAuthentication($httpProvider) {
+        $httpProvider.interceptors.push(function ($q, $location) {
+            return {
+                request: function (config) {
+                    return config;
+                },
+                requestError: function (rejection) {
+                    return $q.reject(rejection);
+                },
+                response: function (response) {
+                    if (response.status == "401") {
+                        $location.path('/Login');
+                    }
+                    //the same response/modified/or a new one need to be returned.
+                    return response;
+                },
+                responseError: function (rejection) {
+                    if (rejection.status == "401") {
+                        $location.path('/Login');
+                    }
+                    return $q.reject(rejection);
+                }
+            };
+        });
     }
 })();

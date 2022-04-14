@@ -14,6 +14,7 @@ using System.Web.Http;
 namespace CoffeeShop.Web.Api
 {
     [RoutePrefix("api/PostCategory")]
+    [Authorize]
     public class PostCategoryController : ApiControllerBase
     {
         private readonly IPostCategoryService _postCategoryService;
@@ -35,6 +36,7 @@ namespace CoffeeShop.Web.Api
                 }
 
                 var newPostCatenogy = Mapper.Map<PostCategory>(postCategoryVM);
+                newPostCatenogy.CreatedBy = User.Identity.Name;
 
                 var category = _postCategoryService.Add(newPostCatenogy);
                 _postCategoryService.SaveChanges();
@@ -63,6 +65,8 @@ namespace CoffeeShop.Web.Api
                 }
 
                 loadedPostCategory.UpdatePostCategory(postCategoryVM);
+                loadedPostCategory.UpdatedBy = User.Identity.Name;
+
                 _postCategoryService.Update(loadedPostCategory);
                 _postCategoryService.SaveChanges();
 
