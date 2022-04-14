@@ -8,5 +8,10 @@ namespace CoffeeShop.Data.Repositories
         public TagRepository(IDbFactory dbFactory) : base(dbFactory)
         {
         }
+
+        public Tag GetByIdString(string id)
+        {
+            return DbContext.Set<Tag>().Find(id);
+        }
     }
 }

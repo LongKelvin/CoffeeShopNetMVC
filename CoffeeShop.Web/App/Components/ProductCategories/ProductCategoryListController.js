@@ -134,11 +134,11 @@
             }
 
             //console.log('Param config: ', config)
-            ApiServices.del('api/ProductCategory/DeleteMultiItems', config, function () {
+            ApiServices.del('api/ProductCategory/DeleteMultiItems', config, function (result) {
                 NotificationService.displaySuccess('Xóa thành công');
                 $('#confirmDeleteModal').modal('hide');
                 getProductCagories();
-            }, function () {
+            }, function (error) {
                 NotificationService.displayError('Xóa không thành công');
                 $('#confirmDeleteModal').modal('hide');
             })

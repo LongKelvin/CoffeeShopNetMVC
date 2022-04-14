@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityExtension.cs" />
     <Compile Include="ErrorService.cs" />
     <Compile Include="FooterService.cs" />
     <Compile Include="IErrorService.cs" />

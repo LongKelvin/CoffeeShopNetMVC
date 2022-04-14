@@ -10,21 +10,23 @@
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-
     function config($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('Products', {
                 url: "/Products",
+                parent: 'Base',
                 templateUrl: "/App/Components/Products/ProductListView.html",
                 controller: "ProductListController"
             })
             .state('ProductAdd', {
                 url: "/Products/Add",
+                parent: 'Base',
                 templateUrl: "/App/Components/Products/ProductAddView.html",
                 controller: "ProductAddController"
             })
             .state('ProductEdit', {
-                url: "/Products/Edit",
+                url: "/Products/Edit/:id",
+                parent: 'Base',
                 templateUrl: "/App/Components/Products/ProductEditView.html",
                 controller: "ProductEditController"
             });

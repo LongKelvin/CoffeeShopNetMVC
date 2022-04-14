@@ -1,14 +1,14 @@
-﻿(function(app) {
+﻿(function (app) {
     'use strict';
 
     app.controller('ProductCategoryAddController', ProductCategoryAddController);
 
-    ProductCategoryAddController.$inject = ['$scope','ApiServices','$state', 'NotificationService', 'CommonService'];
+    ProductCategoryAddController.$inject = ['$scope', 'ApiServices', '$state', 'NotificationService', 'CommonService'];
 
-    function ProductCategoryAddController($scope,ApiServices,$state, NotificationService, CommonService) {
+    function ProductCategoryAddController($scope, ApiServices, $state, NotificationService, CommonService) {
         $scope.title = 'ProductCategoryAddController';
 
-        $scope.productCategory =  {
+        $scope.productCategory = {
             Status: true,
             CreatedDate: new Date(),
             HomeFlag: false,

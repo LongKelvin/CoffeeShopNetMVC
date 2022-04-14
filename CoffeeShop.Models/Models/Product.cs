@@ -92,11 +92,17 @@ namespace CoffeeShop.Models.Models
         [Display(Name = "Price")]
         public decimal Price { get; set; } // decimal(18,2), not null
 
-        [Display(Name = "Promotion")]
-        public decimal? Promotion { get; set; } // decimal(18,2), null
+        [Display(Name = "Promotion Price")]
+        public decimal? PromotionPrice { get; set; } // decimal(18,2), null
 
         [Display(Name = "Warranty")]
         public int? Warranty { get; set; } // int, null
+
+        [Display(Name="Mfg Date")]
+        public DateTime? ManufacturingDate { get; set; }
+
+        [Display(Name ="Exp Date")]
+        public DateTime? ExpireDate { get; set; }
 
         [ForeignKey("ID")]
         public virtual ProductCategory ProductCategory { get; set; }
