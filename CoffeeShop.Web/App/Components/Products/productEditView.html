@@ -1,10 +1,313 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><strong>Cập nhật sản phẩm</strong></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="Home">Trang chủ</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="Products">Sản phẩm</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="Products">Danh sách sản phẩm</a></li>
+                    <li class="breadcrumb-item active">Cập nhật sản phẩm</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
 
-</body>
-</html>
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <form name="frmUpdateProduct" role="form" ng-submit="UpdateProduct()" novalidate>
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-6">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin chính</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Tên sản phẩm <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="product.Name" required name="pName"
+                                       class="form-control" placeholder="Tên danh mục ..."
+                                       ng-change="getSeoTitle()">
+                                <span class="text-danger" ng-show="frmUpdateProduct.pName.$touched && frmUpdateProduct.pName.$invalid">Bạn chưa nhập tên danh mục</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Thứ tự hiển thị</label>
+                                <input ng-model="product.DisplayOrder" type="number" class="form-control"
+                                       placeholder="Hiển thị ở vị trí 1 2 3 ...">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Danh mục <span class="text-danger">*</span></label>
+                                <select ng-model="product.CategoryID" id="categoryIdDropdown"
+                                        ng-init="product.ParentID=''"
+                                        class=" form-control w-100"
+                                        required name="pCategoryId"
+                                        ng-options="option.ID as option.Name for option in parentCategories">
+                                    <option value=''>Chọn danh mục</option>
+                                </select>
+                                <span class="text-danger" ng-show="frmUpdateProduct.pCategoryId.$touched && frmUpdateProduct.pCategoryId.$invalid">Danh mục sản phẩm không được bỏ trống</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Giá <span class="text-danger">*</span></label>
+                                <input ng-model="product.Price" type="number" class="form-control"
+                                       name="pPrice" required
+                                       value="0"
+                                       placeholder="Giá bán">
+                                <span class="text-danger" ng-show="frmUpdateProduct.pPrice.$touched && frmUpdateProduct.pPrice.$invalid">Giá sản phẩm là bắt buộc</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Giá khuyến mãi</label>
+                                <input ng-model="product.PromotionPrice" type="number" class="form-control"
+                                       value="0"
+                                       placeholder="Giá khuyến mãi">
+                            </div>
+                            <div class="form-group">
+                                <label>Ngày sản xuất</label>
+                                <input ng-model="product.ManufacturingDate" type="date" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Ngày hết hạn</label>
+                                <input ng-model="product.ExpireDate" type="date" class="form-control" name="pMfg-date">
+                                <span class="text-danger" ng-show="frmUpdateProduct.pMfg-date.$touched && frmUpdateProduct.pMfg-date.$invalid">Giá sản phẩm là bắt buộc</span>
+                            </div>
+                            <!-- textarea -->
+                            <div class="form-group">
+                                <label>Mô tả ngắn về sản phẩm</label>
+                                <textarea ng-model="product.Description"
+                                          class="form-control" rows="2"
+                                          placeholder="Mô tả ngắn về sản phẩm ..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Hình ảnh</label>
+                                <div class="input-group">
+                                    <input ng-model="product.Images" type="text" class="form-control" placeholder="Chọn files" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" type="button" ng-click="ChooseImages()">Chọn ảnh</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Nội dung chi tiết</label>
+                                <div id="ckEditorContent" ng-model="product.Content">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <!-- general form elements disabled -->
+                    <div class="card card-lightblue">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin SEO</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Tiêu đề SEO <span class="text-danger">*</span></label>
+                                        <input type="text" ng-model="product.Alias" class="form-control" placeholder="Tiêu đề SEO ..." name="pAlias" required>
+                                        <span class="text-danger" ng-show="frmUpdateProduct.pAlias.$touched && frmUpdateProduct.pAlias.$invalid">Bạn chưa nhập tiêu đề SEO</span>
+                                    </div>
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Từ khóa SEO</label>
+                                        <input ng-model="product.MetaKeyword"
+                                               type="text" class="form-control"
+                                               placeholder="Chọn vài từ để làm từ khóa ...">
+                                    </div>
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Từ khóa mô tả</label>
+                                        <input ng-model="product.MetaDescription"
+                                               type="text" class="form-control"
+                                               placeholder="Từ khóa mô tả về danh mục ...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tags cho sản phẩm</label>
+                                        <input ng-model="product.TagsString"
+                                               type="text" class="form-control"
+                                               placeholder="Tags liên quan ...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                    <div class="card card-success ">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý sản phẩm</h3>
+                        </div>
+                        <div class="card-body" style="margin-top:13px">
+                            <!-- Minimal style -->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <!-- checkbox -->
+                                    <div class="form-group clearfix">
+                                        <div class="icheck-success d-inline">
+                                            <input type="checkbox" id="checkboxActive"
+                                                   ng-model="product.Status"
+                                                   ng-checked="product.Status==true">
+                                            <label for="checkboxActive">
+                                                Kích hoạt sản phẩm
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <!-- checkbox -->
+                                    <div class="form-group clearfix">
+                                        <div class="icheck-belizehole d-inline">
+                                            <input type="checkbox" id="checkboxHomeFlag"
+                                                   ng-model="product.HomeFlag"
+                                                   ng-checked="product.HomeFlag==true">
+                                            <label for="checkboxHomeFlag">
+                                                Hiển thị trên trang chủ
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <!-- checkbox -->
+                                    <div class="form-group clearfix">
+                                        <div class="icheck-yellow d-inline">
+                                            <input type="checkbox" id="checkboxHotFlag"
+                                                   ng-model="product.HotFlag"
+                                                   ng-checked="product.HotFlag==true">
+                                            <label for="checkboxHotFlag">
+                                                Sản phẩm HOT
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <div class="card card-cyan ">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý hình ảnh</h3>
+                        </div>
+                        <div class="card-body" style="margin-top:13px">
+                            <!-- Minimal style -->
+
+                            <div class="form-group">
+
+                                <div class="input-group">
+                                    <button ng-click="ChooseMoreImages()" type="button" class="btn btn-outline-primary">
+                                        <i class="fa-solid fa-square-plus"></i> Thêm nhiều ảnh
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- bootstrap image gallery 1 -->
+                            <div class="form-group">
+
+                                <div class="row">
+                                    <div ng-repeat="image in moreImages" class="col-sm-6 col-md-4 col-lg-3">
+                                        <figure>
+                                            <img ng-src="{{image}}" class="fit-img img-thumbnail grayscale" width="150" height="150">
+                                            <figcaption>Image {{$index+1}}</figcaption>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- general form elements disabled -->
+                    <div class="card card-dark">
+                        <div class="card-header">
+                            <h3 class="card-title">Lịch sử chỉnh sửa</h3>
+                        </div>
+                        <!--/.card-header-->
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Người tạo</label>
+                                        <input ng-model="product.CreatedBy" type="text" class="form-control" required disabled>
+                                    </div>
+                                    <!--text input-->
+                                    <div class="form-group">
+                                        <label>Ngày tạo</label>
+                                        <input ng-model="product.CreatedDate" type="text" class="form-control" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Người chỉnh sửa gần nhất</label>
+                                        <input ng-model="product.UpdatedBy" type="text" class="form-control" readonly>
+                                    </div>
+                                    <!--text input-->
+                                    <div class="form-group">
+                                        <label>Thời gian chỉnh sửa</label>
+                                        <input ng-model="product.UpdatedDate" type="text" class="form-control" readonly>
+                                        <!--<input ng-model="product.RowVersion" type="text" class="form-control" hidden >-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.card-body-->
+                    </div>
+                </div>
+                <!--/.col (right) -->
+            </div>
+            <div class="card-footer">
+                <button type="submit" ng-disabled="frmUpdateProduct.$invalid" class="btn btn-primary">Cập nhật sản phẩm</button>
+                <button ui-sref="Products" class="btn btn-outline-secondary space-around">Hủy bỏ</button>
+            </div>
+        </form>
+
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+<script>
+
+    $(document).ready(function () {
+        $('#categoryIdDropdown').select2({
+            theme: 'bootstrap4'
+        });
+
+        //$('#categoryIdDropdown').val('Chọn danh mục'); // Select the option with a default value
+        //$('#categoryIdDropdown').trigger('change'); // Notify any JS components that the value changed
+
+        //var editor = CKEDITOR.replace('ckEditorContent');
+        CKEDITOR.replace('ckEditorContent', {
+            filebrowserBrowseUrl: '/Assets/Admin/lib/ckfinder/ckfinder.html',
+            filebrowserImageBrowseUrl: '/Assets/Admin/lib/ckfinder/ckfinder.html?Type=Images',
+            filebrowserUploadUrl: '/Assets/Admin/lib/ckfinder/core/connector//aspx/connector.aspx?command=QuickUpload&type=Files',
+            filebrowserImageUploadUrl: '/Assets/Admin/lib/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images',
+
+            filebrowserWindowHeight: '1000',
+            filebrowserWindowWidth: '1000'
+        });
+
+        //var editor = $('#ckEditorContent');
+        //CKFinder.setupCKEditor(editor, '/Assets/Admin/lib/ckfinder/');
+    });
+</script>

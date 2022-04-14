@@ -51,3 +51,34 @@
         display:block;
     }
 }
+
+.ck-editor__editable
+{
+    min-height: 600px;
+}
+
+#cke_1_contents
+{
+    height: 600px;
+}
+
+
+
+img.fit-img
+{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+#user-menu:hover
+{
+    cursor: pointer;
+    background: linear-gradient(to right, #adb5bd, #001f3f);
+}
+
+.space-between{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+}

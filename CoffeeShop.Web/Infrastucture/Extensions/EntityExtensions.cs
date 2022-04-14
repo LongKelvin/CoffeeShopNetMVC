@@ -4,7 +4,7 @@ using CoffeeShop.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
 
 namespace CoffeeShop.Web.Infrastucture.Extensions
 {
@@ -29,8 +29,8 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             postCategory.MetaDescription = postCategoryVm.MetaDescription;
             postCategory.Status = postCategoryVm.Status;
             postCategory.RowVersion = postCategoryVm.RowVersion;
-
         }
+
         public static void UpdateProductCategory(this ProductCategory productCategory, ProductCategoryViewModel productCategoryVm)
         {
             productCategory.ID = productCategoryVm.ID;
@@ -50,8 +50,8 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             productCategory.MetaDescription = productCategoryVm.MetaDescription;
             productCategory.Status = productCategoryVm.Status;
             productCategory.RowVersion = productCategoryVm.RowVersion;
-
         }
+
         public static void UpdatePost(this Post post, PostViewModel postVm)
         {
             post.ID = postVm.ID;
@@ -72,6 +72,100 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             post.MetaDescription = postVm.MetaDescription;
             post.Status = postVm.Status;
             post.RowVersion = postVm.RowVersion;
+        }
+
+        public static void UpdateProduct(this Product product, ProductViewModel productVm)
+        {
+            product.ID = productVm.ID;
+            product.Name = productVm.Name;
+            product.Description = productVm.Description;
+            product.Alias = productVm.Alias;
+            product.CategoryID = productVm.CategoryID;
+            product.Content = productVm.Content;
+            product.Images = productVm.Images;
+            product.MoreImages = productVm.MoreImages;
+            product.Price = productVm.Price;
+            product.PromotionPrice = productVm.PromotionPrice;
+            product.Warranty = productVm.Warranty;
+            product.HomeFlag = productVm.HomeFlag;
+            product.ViewCount = productVm.ViewCount;
+            product.HotFlag = productVm.HotFlag;
+            product.ManufacturingDate = productVm.ManufacturingDate;
+            product.ExpireDate = productVm.ExpireDate;
+
+            product.CreatedDate = productVm.CreatedDate;
+            product.CreatedBy = productVm.CreatedBy;
+            product.UpdatedDate = productVm.UpdatedDate;
+            product.UpdatedBy = productVm.UpdatedBy;
+            product.MetaKeyword = productVm.MetaKeyword;
+            product.MetaDescription = productVm.MetaDescription;
+            product.Status = productVm.Status;
+            product.RowVersion = productVm.RowVersion;
+
+            if (string.IsNullOrEmpty(productVm.TagsString))
+                return;
+            //Extract tag from List<string>
+            GetProductTagsFromTagsString(productVm.TagsString, productVm);
+
+            //Assign tag to Product
+            foreach (var tag in productVm.Tags)
+            {
+                Tag t = new Tag();
+                t.UpdateTag(tag);
+                product.Tags.Add(t);
+            }
+        }
+
+        public static void UpdateTag(this Tag tag, TagViewModel tagVm)
+        {
+            tag.ID = tagVm.ID;
+            tag.Name = tagVm.Name;
+            tag.Type = tagVm.Type;
+        }
+
+        public static void GetProductTagsFromTagsString(string tags, ProductViewModel productVm)
+        {
+            if (string.IsNullOrEmpty(tags))
+                return;
+
+            var listTag = new List<TagViewModel>();
+            char[] separators = new char[] { ' ', '.', ',', ';' };
+            List<string> tagStr = tags.Split(separators, StringSplitOptions.RemoveEmptyEntries)
+                .Select(p => p.Trim()).ToList();
+            foreach (string t in tagStr)
+            {
+                string uTag = Common.StringHelper.ToUnsignString(t);
+
+                listTag.Add(new TagViewModel
+                {
+                    Name = uTag,
+                    ID = uTag,
+                    Type = Common.CommonConstants.ProductTag
+                });
+            }
+            productVm.Tags = listTag;
+        }
+
+        public static string GetTagStringFromProductTags(Product product)
+        {
+            if (product == null || product.Tags == null || product.Tags.Count <= 0)
+                return null;
+
+            var lastItem = product.Tags.Last();
+            StringBuilder tags = new StringBuilder();
+            foreach (var tag in product.Tags)
+            {
+                if (tag.Equals(lastItem))
+                {
+                    tags.Append(tag.Name);
+                }
+                else
+                {
+                    tags.Append(tag.Name);
+                    tags.Append(';');
+                }
+            }
+            return tags.ToString();
         }
     }
 }

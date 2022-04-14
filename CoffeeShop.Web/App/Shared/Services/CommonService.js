@@ -3,11 +3,11 @@
 (function (app) {
     app.service('CommonService', CommonService);
 
-   
     function CommonService() {
         return {
             getSeoTitle: getSeoTitle,
-            getTree: getTree
+            getTree: getTree,
+            isNullOrEmpty: isNullOrEmpty
         }
 
         function getSeoTitle(input) {
@@ -78,6 +78,26 @@
             };
 
             return tree;
+        }
+
+        function isNullOrEmpty(data) {
+            if (typeof (data) === 'object') {
+                if (JSON.stringify(data) === '{}' || JSON.stringify(data) === '[]') {
+                    return true;
+                } else if (!data) {
+                    return true;
+                }
+                return false;
+            } else if (typeof (data) === 'string') {
+                if (!data.trim()) {
+                    return true;
+                }
+                return false;
+            } else if (typeof (data) === 'undefined') {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 })(angular.module('CoffeeShop.Common'));

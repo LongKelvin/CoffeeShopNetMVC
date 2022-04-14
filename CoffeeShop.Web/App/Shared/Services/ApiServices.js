@@ -6,10 +6,11 @@
     ApiServices.$inject = [
 
         '$http',
-        'NotificationService'
+        'NotificationService',
+        'AuthenticationService'
     ];
 
-    function ApiServices($http, NotificationService) {
+    function ApiServices($http, NotificationService, AuthenticationService) {
         return {
             get: get,
             post: post,
@@ -18,7 +19,7 @@
         }
 
         function get(url, params, success, failure) {
-            //authenticationService.setHeader();
+            AuthenticationService.setHeader();
             $http.get(url, params).then(function (result) {
                 success(result);
             }, function (error) {
@@ -27,7 +28,7 @@
         }
 
         function del(url, data, success, failure) {
-            //authenticationService.setHeader();
+            AuthenticationService.setHeader();
             $http.delete(url, data).then(function (result) {
                 success(result);
             }, function (error) {
@@ -38,11 +39,10 @@
                 else if (failure != null) {
                     failure(error);
                 }
-
             });
         }
         function post(url, data, success, failure) {
-            //authenticationService.setHeader();
+            AuthenticationService.setHeader();
             $http.post(url, data).then(function (result) {
                 success(result);
             }, function (error) {
@@ -53,11 +53,10 @@
                 else if (failure != null) {
                     failure(error);
                 }
-
             });
         }
         function put(url, data, success, failure) {
-            //authenticationService.setHeader();
+            AuthenticationService.setHeader();
             $http.put(url, data).then(function (result) {
                 success(result);
             }, function (error) {
@@ -68,7 +67,6 @@
                 else if (failure != null) {
                     failure(error);
                 }
-
             });
         }
     }
