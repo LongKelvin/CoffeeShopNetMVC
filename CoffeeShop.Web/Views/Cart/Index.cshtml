@@ -1,0 +1,259 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Assets/Client/custom-css/checkout-style.css" rel="stylesheet" />
+<section class="cart-section custom-container layout_padding">
+    <div class="heading_container heading_center">
+        <h2>
+            My <span>Cart</span>
+        </h2>
+    </div>
+    <div class="row px-md-4 px-2 pt-4">
+        <div class="col-lg-8">
+            <h4 class="card-white pb-2 fw-bold"><strong>Order</strong></h4>
+            <div class="card shadow">
+                <div>
+                    <div class="table-responsive px-md-4 px-2 pt-3">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Total</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-bottom" style="vertical-align: middle;">
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div>
+                                                <img src="~/Assets/Client/images/menu-item-5.jpg" />
+                                            </div>
+                                            <div class="ps-3 d-flex flex-column justify-content auto-margin">
+                                                <p>
+                                                    <strong>EXPRESSO</strong>
+                                                </p>
+
+                                                <small>
+                                                    <strong>
+                                                        Size:&nbsp;L
+                                                    </strong>
+                                                </small>
+                                                <small>
+                                                    <strong>
+                                                        Hot:&nbsp;
+                                                    </strong>
+                                                </small>
+                                                <small>
+                                                    <strong>
+                                                        &nbsp;
+                                                    </strong>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <p class="pe-3"><span class="red">$15.00</span></p>
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="pe-3"> <input class="ps-2" type="number" value="2"></span>
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <p class="pe-3"><span class="red">$30.00</span></p>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-bottom" style="vertical-align: middle;">
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div>
+
+                                                <img src="~/Assets/Client/images/menu-item-3.jpg" />
+                                            </div>
+                                            <div class="ps-3 d-flex flex-column justify-content auto-margin">
+                                                <p>
+                                                    <strong>AMERICANO </strong>
+                                                </p>
+
+                                                <small>
+                                                    <strong>
+                                                        Size:&nbsp;L
+                                                    </strong>
+                                                </small>
+                                                <small>
+                                                    <strong>
+                                                        Hot:&nbsp;
+                                                    </strong>
+                                                </small>
+                                                <small>
+                                                    <strong>
+                                                        &nbsp;
+                                                    </strong>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <p class="pe-3"><span class="red">$17.00</span></p>
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="pe-3"> <input class="ps-2" type="number" value="2"></span>
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <p class="pe-3"><span class="red">$34.00</span></p>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            @*Delivery*@
+            @*<div>
+                <h4 class="card-white pt-4 fw-bold pb-3 ps-2"><strong>Delivery</strong></h4>
+                <div class="card mt-4 shadow">
+                        <div class="card card-info recent-cart">
+                            <ul class="cart-order card-body">
+                                <li class="order-item row">
+                                    <div class="item-image col-4">
+                                        <img src="~/Assets/Client/images/menu-item-1.jpg" />
+                                    </div>
+                                    <div class="col-6">
+                                        <p>
+                                            <b class="product-name ">ESPRESSO AMERICANO</b>
+                                            <br />
+                                            <strong>2</strong> x <span class="product-price">$12</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-2 w-100 btn-close">
+                                        <button type="button" class="close"> <span class="text-danger" aria-hidden="true">&times;</span></button>
+                                    </div>
+                                </li>
+                                <li class="order-item row ">
+                                    <div class="item-image col-4">
+                                        <img src="~/Assets/Client/images/menu-item-2.jpg" />
+                                    </div>
+                                    <div class="col-6">
+                                        <p>
+                                            <b class="product-name ">DOUBLE ESPRESSO</b>
+                                            <br />
+                                            <strong>2</strong> x <span class="product-price">$12</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-2 w-100">
+                                        <button type="button" class="close "> <span class="text-danger" aria-hidden="true">&times;</span></button>
+                                    </div>
+                                </li>
+                                <li class="order-item row">
+                                    <div class="item-image col-4">
+                                        <img src="~/Assets/Client/images/menu-item-7.jpg" />
+                                    </div>
+                                    <div class="col-6">
+                                        <p>
+                                            <b class="product-name ">ICED LATTE</b>
+                                            <br />
+                                            <strong>2</strong> x <span class="product-price">$12</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-2 w-100">
+                                        <button type="button" class="close "> <span class="text-danger" aria-hidden="true">&times;</span></button>
+                                    </div>
+                                </li>
+                                <li class="order-item row">
+                                    <div class="item-image col-4">
+                                        <img src="~/Assets/Client/images/menu-item-5.jpg" />
+                                    </div>
+                                    <div class="col-6">
+                                        <p>
+                                            <b class="product-name ">LATTE MACCHIATO</b>
+                                            <br />
+                                            <strong>2</strong> x <span class="product-price">$12</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-2 w-100">
+                                        <button type="button" class="close "> <span class="text-danger" aria-hidden="true">&times;</span></button>
+                                    </div>
+                                </li>
+                            </ul>
+                           
+                        </div>
+                    
+
+                </div>
+            </div>*@
+        </div>
+
+
+        @*PAYMENT SUMMARY*@
+        <div class="col-lg-4 payment-summary ">
+            <h4 class="card-white fw-bold pt-lg-0 pt-4 pb-2"><strong>Payment Summary</strong></h4>
+            <div class="card px-md-3 px-2 pt-4 shadow">
+                <div class="unregistered mb-4"> <span class="py-1">unregistered account</span> </div>
+                <div class="d-flex justify-content-between pb-3">
+                    <small class="text-muted">Transaction code</small>
+                    <p><b>VC115665</b></p>
+                </div>
+                <div class="d-flex justify-content-between b-bottom">
+                    <input type="text" class="ps-2" placeholder="COUPON CODE">
+                    <div class="btn-box center-block">
+                        <a class="btn-secondary">Apply</a>
+                    </div>
+                </div>
+                <div class="d-flex flex-column b-bottom">
+                    <div class="d-flex justify-content-between py-3">
+                        <small class="text-muted">Order Summary</small>
+                        <p class="product-price">$122</p>
+                    </div>
+                    <div class="d-flex justify-content-between pb-3">
+                        <small class="text-muted">Delivery Fee</small>
+                        <p class="product-price">$22</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <small class="text-muted">Total Amount</small>
+                        <p class="product-price">$132</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="btn-box">
+                        <a class="btn-secondary text-center w-75">BACK</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="btn-box">
+                        <a href="@Url.Action("Index","Payment")" class="w-75 text-center">CHECK OUT</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="btn-box">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>

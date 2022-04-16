@@ -1,0 +1,150 @@
+﻿
+.payment-section .btn-box
+{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+    .payment-section .btn-box a
+    {
+        display: inline-block;
+        padding: 10px 40px;
+        background-color: #eab676;
+        border: 1px solid #eab676;
+        color: #ffffff;
+        border-radius: 0;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+        font-weight: 700;
+        cursor:pointer;
+    }
+
+        .payment-section .btn-box a:hover
+        {
+            background-color: transparent;
+            color: #eab676;
+        }
+
+    .payment-section .btn-box .btn-secondary
+    {
+        background-color: #000000;
+        border: 1px solid #000000;
+        color: #ffffff;
+    }
+
+        .payment-section .btn-box .btn-secondary:hover
+        {
+            background-color: transparent;
+            color: #000000;
+        }
+.card
+{
+    border: none;
+    
+}
+
+.form-control
+{
+    border-bottom: 2px solid #eee !important;
+    border: none;
+    font-weight: 600
+}
+
+    .form-control:focus
+    {
+        color: black;
+        background-color: #fff;
+        border-color: #eab676;
+        outline: 0;
+        box-shadow: none;
+        border-radius: 0px;
+        border-bottom: 2px solid #eab676 !important
+    }
+
+.inputbox
+{
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%
+}
+
+    .inputbox span
+    {
+        position: absolute;
+        top: 7px;
+        left: 11px;
+        transition: 0.5s
+    }
+
+    .inputbox i
+    {
+        position: absolute;
+        top: 13px;
+        right: 8px;
+        transition: 0.5s;
+        color: #eab676
+    }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button
+{
+    -webkit-appearance: none;
+    margin: 0
+}
+
+.inputbox input:focus ~ span
+{
+    transform: translateX(-0px) translateY(-15px);
+    font-size: 12px
+}
+
+.inputbox input:valid ~ span
+{
+    transform: translateX(-0px) translateY(-15px);
+    font-size: 12px
+}
+
+.card-blue
+{
+    background-color: #eab676;
+    color:black;
+}
+
+.hightlight
+{
+    background-color: #eab676;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 15px;
+    font-size: 14px
+}
+
+.yellow
+{
+    color: #fdcc49
+}
+
+.decoration
+{
+    text-decoration: none;
+    font-size: 14px
+}
+
+
+.decoration:hover
+{
+    text-decoration: none;
+    color: #fdcc49
+}
+
+.card-hightlight
+{
+    font-weight: 500;
+    background-color: #002c3e;
+    color: white;
+}
