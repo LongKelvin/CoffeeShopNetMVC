@@ -28,6 +28,7 @@ namespace CoffeeShop.Web.Mappings
                 cfg.CreateMap<Product, ProductViewModel>();
                 cfg.CreateMap<OrderDetail, OrderDetailViewModel>();
                 cfg.CreateMap<Order, OrderViewModel>();
+                cfg.CreateMap<ShopInformation, ShopInfoViewModel>();
                 //cfg.CreateMap<ProductTag, ProductTagViewModel>();
                 //cfg.CreateMap<Footer, FooterViewModel>();
                 //cfg.CreateMap<Slide, SlideViewModel>();

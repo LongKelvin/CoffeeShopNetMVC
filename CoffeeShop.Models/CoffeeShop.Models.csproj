@@ -73,6 +73,8 @@
     <Compile Include="Models\PostCategory.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
+    <Compile Include="Models\ShopInformation.cs" />
+    <Compile Include="Models\ShopPaymentInfo.cs" />
     <Compile Include="Models\Slide.cs" />
     <Compile Include="Models\SupportOnline.cs" />
     <Compile Include="Models\SystemConfig.cs" />

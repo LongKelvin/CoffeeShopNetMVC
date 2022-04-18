@@ -24,7 +24,7 @@ namespace CoffeeShop.Services
         IEnumerable<Product> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow);
 
         Product GetById(int id);
-
+        List<Product> GetListProductByParentID(int id);
         Product GetByCondition(Expression<Func<Product, bool>> expression, string[] includes = null);
 
         void SaveChanges();

@@ -65,6 +65,7 @@
     <Compile Include="IProductCategoryService.cs" />
     <Compile Include="IProductService.cs" />
     <Compile Include="IPostService.cs" />
+    <Compile Include="IShopInfoService.cs" />
     <Compile Include="ISlideService.cs" />
     <Compile Include="ISupportOnlineService.cs" />
     <Compile Include="ISystemConfigService.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="ProductService.cs" />
     <Compile Include="PostService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShopInfoService.cs" />
     <Compile Include="SlideService.cs" />
     <Compile Include="SupportOnlineService.cs" />
     <Compile Include="SystemConfigService.cs" />

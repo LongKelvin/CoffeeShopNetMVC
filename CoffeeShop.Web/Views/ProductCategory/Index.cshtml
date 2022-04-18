@@ -1,0 +1,21 @@
+﻿@model IEnumerable<CoffeeShop.Web.Models.ProductCategoryViewModel>
+<link href="~/Assets/Client/custom-css/custom-style.css" rel="stylesheet" />
+@*Product categories*@
+<div class="margin-top">
+    <div class="card card-info">
+        <h4 class="card-header"><strong>Product categories</strong></h4>
+        <ul class="card-body product-category-list">
+            @foreach (var item in Model)
+            {
+                <li class="category-item">
+
+                    <a href="@Url.Action("GetListProductByCategoryID","Product",new {@item.ID})">@item.Name</a>
+
+                </li>
+            }
+
+        </ul>
+
+    </div>
+
+</div>

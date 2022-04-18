@@ -1,4 +1,6 @@
-﻿<!-- footer start -->
+﻿@model CoffeeShop.Web.Models.ShopInfoViewModel
+
+<!-- footer start -->
 <footer>
     <div class="container">
         <div class="row">
@@ -8,9 +10,10 @@
                         <a href="#"><img width="210" src="~/Assets/Client/images/logo.png" alt="#" /></a>
                     </div>
                     <div class="information_f">
-                        <p><strong>ADDRESS:</strong> 28 White tower, Street Name New York City, USA</p>
-                        <p><strong>TELEPHONE:</strong> +91 987 654 3210</p>
-                        <p><strong>EMAIL:</strong> yourmain@gmail.com</p>
+                        <p><strong>SHOP NAME:</strong> @Model.Name</p>
+                        <p><strong>ADDRESS:</strong> @Model.Address</p>
+                        <p><strong>TELEPHONE:</strong> +@Model.Telephone</p>
+                        <p><strong>EMAIL:</strong> @Model.Email</p>
                     </div>
                 </div>
             </div>

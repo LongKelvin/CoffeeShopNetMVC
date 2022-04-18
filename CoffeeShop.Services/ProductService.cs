@@ -149,6 +149,11 @@ namespace CoffeeShop.Services
             return _productRepository.GetByCondition(expression, includes);
         }
 
+        public List<Product> GetListProductByParentID(int id)
+        {
+            return _productRepository.GetMulti(x => x.CategoryID == id).ToList();
+        }
+
         private CoffeeShopDbContext DbContext
         {
             get { return _productRepository.DbContext; }

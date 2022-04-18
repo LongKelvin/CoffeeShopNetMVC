@@ -92,7 +92,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CartController.cs" />
-    <Compile Include="Controllers\HomeClientController.cs" />
+    <Compile Include="Controllers\ProductCategoryController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
@@ -110,6 +111,7 @@
     <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Models\ProductCategoryViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
+    <Compile Include="Models\ShopInfoViewModel.cs" />
     <Compile Include="Models\TagViewModel.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1795,12 +1797,15 @@
     <None Include="packages.config" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\HomeClient\Index.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\Shared\Category.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Header.cshtml" />
+    <Content Include="Views\ProductCategory\Index.cshtml" />
+    <Content Include="Views\Product\GetListProductByCategoryID.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoffeeShop.Common\CoffeeShop.Common.csproj">
