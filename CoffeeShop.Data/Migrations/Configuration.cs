@@ -27,6 +27,7 @@
             CreateUser(context);
             CreateProductCategorySample(context);
             CreateProductsSample(context);
+            CreateSlidesSample(context);
         }
 
         private void CreateUser(CoffeeShopDbContext context)
@@ -91,9 +92,24 @@
                 new Product() { Name="Pine Mountain Fruity 500g",Alias="cf-hat",Status=true ,Price=364000},
                 new Product() { Name="Pine Mountain Blend #7 500g",Alias="cf-hat",Status=true ,Price=270000},
                 new Product() { Name="Pine Mountain Blend #5 500g",Alias="cf-hat",Status=true ,Price=265000},
-                
             };
                 context.Products.AddRange(listProduct);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateSlidesSample(CoffeeShopDbContext context)
+        {
+            if (context.Slides.Count() == 0)
+            {
+                List<Slide> listSlide = new List<Slide>()
+                {
+                    new Slide(){ Status=true, Title = "Coffee Way", ActionName="Khám phá ngay1", Description="Uống Coffee Way, Uống sức khỏe", DisplayOrder = 1, Images = "/UploadFiles/images/slider-bg.jpg", URL="/Products"},
+                    new Slide(){ Status=true, Title = "Coffee Way", ActionName="Khám phá ngay2", Description="Uống Coffee Way, Uống sức khỏe", DisplayOrder = 2, Images = "/UploadFiles/images/slider-bg.jpg", URL="/Products"},
+                    new Slide(){ Status=true, Title = "Coffee Way", ActionName="Khám phá ngay3", Description="Uống Coffee Way, Uống sức khỏe", DisplayOrder = 3, Images = "/UploadFiles/images/slider-bg.jpg", URL="/Products"}
+                };
+
+                context.Slides.AddRange(listSlide);
                 context.SaveChanges();
             }
         }

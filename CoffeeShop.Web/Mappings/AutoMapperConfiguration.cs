@@ -31,7 +31,7 @@ namespace CoffeeShop.Web.Mappings
                 cfg.CreateMap<ShopInformation, ShopInfoViewModel>();
                 //cfg.CreateMap<ProductTag, ProductTagViewModel>();
                 //cfg.CreateMap<Footer, FooterViewModel>();
-                //cfg.CreateMap<Slide, SlideViewModel>();
+                cfg.CreateMap<Slide, SlideViewModel>();
                 //cfg.CreateMap<Page, PageViewModel>();
                 //cfg.CreateMap<ContactDetail, ContactDetailViewModel>();
                 //cfg.CreateMap<ApplicationGroup, ApplicationGroupViewModel>();

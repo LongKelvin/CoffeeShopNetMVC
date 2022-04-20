@@ -79,6 +79,7 @@ namespace CoffeeShop.Services
             return _productRepository.GetMulti(x => x.Name.Contains(keyWord) || x.Alias.Contains(keyWord));
         }
 
+        
         public IEnumerable<Product> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow)
         {
             //TODO: Select all Product by tag
@@ -152,6 +153,11 @@ namespace CoffeeShop.Services
         public List<Product> GetListProductByParentID(int id)
         {
             return _productRepository.GetMulti(x => x.CategoryID == id).ToList();
+        }
+
+        public List<Product> GetListProductByCondition(Expression<Func<Product, bool>> expression, string[] includes = null)
+        {
+            return _productRepository.GetMulti(expression, includes).ToList();
         }
 
         private CoffeeShopDbContext DbContext

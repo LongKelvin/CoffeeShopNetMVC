@@ -16,7 +16,7 @@
                 <div class="card card-info recent-cart">
                     <h4 class="card-header card-white"><strong>Cart</strong></h4>
                     <ul class="cart-order card-body">
-                        <li class="order-item row" >
+                        <li class="order-item row">
                             <div class="item-image col-4">
                                 <img src="~/Assets/Client/images/menu-item-1.jpg" />
                             </div>
@@ -31,7 +31,7 @@
                                 <button type="button" class="close"> <span class="text-danger" aria-hidden="true">&times;</span></button>
                             </div>
                         </li>
-                        <li class="order-item row " >
+                        <li class="order-item row ">
                             <div class="item-image col-4">
                                 <img src="~/Assets/Client/images/menu-item-2.jpg" />
                             </div>
@@ -46,7 +46,7 @@
                                 <button type="button" class="close "> <span class="text-danger" aria-hidden="true">&times;</span></button>
                             </div>
                         </li>
-                        <li class="order-item row" >
+                        <li class="order-item row">
                             <div class="item-image col-4">
                                 <img src="~/Assets/Client/images/menu-item-7.jpg" />
                             </div>
@@ -61,7 +61,7 @@
                                 <button type="button" class="close "> <span class="text-danger" aria-hidden="true">&times;</span></button>
                             </div>
                         </li>
-                        <li class="order-item row" >
+                        <li class="order-item row">
                             <div class="item-image col-4">
                                 <img src="~/Assets/Client/images/menu-item-5.jpg" />
                             </div>
@@ -75,7 +75,7 @@
                             <div class="col-2 w-100">
                                 <button type="button" class="close "> <span class="text-danger" aria-hidden="true">&times;</span></button>
                             </div>
-                        </li>                      
+                        </li>
                     </ul>
                     <div class="card card-footer text-center">
                         <div class="sub_total ">
@@ -103,318 +103,37 @@
         <div class="col-lg-9 col-lg-push-3 col-md-8 col-md-push-4">
 
             <div class="row">
-                <div class="col-sm-6 col-md-4 col-lg-4">
-                    <div class="box">
-                        <div class="option_container">
-                            <div class="options">
-                                <a href="" class="option1">
-                                    Add To Cart
-                                </a>
-                                <a href="" class="option2">
-                                    Order Now
-                                </a>
+                @foreach (var item in Model)
+                {
+                    <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="box">
+                            <div class="option_container">
+                                <div class="options">
+                                    <a href="" class="option1">
+                                        Add To Cart
+                                    </a>
+                                    <a href="" class="option2">
+                                        Order Now
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="img-box">
+
+                                <img src="@item.Images" />
+                            </div>
+                            <div class="detail-box">
+                                <h5>
+                                    @item.Name
+                                </h5>
+                                <h6>
+                                    @item.Price
+                                </h6>
                             </div>
                         </div>
-                        <div class="img-box">
-
-                            <img src="~/Assets/Client/images/menu-item-1.jpg" />
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                AMERICANO
-                            </h5>
-                            <h6>
-                                $75
-                            </h6>
-                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4">
-                    <div class="box">
-                        <div class="option_container">
-                            <div class="options">
-                                <a href="" class="option1">
-                                    Add To Cart
-                                </a>
-                                <a href="" class="option2">
-                                    Order Now
-                                </a>
-                            </div>
-                        </div>
-                        <div class="img-box">
+                }
 
-                            <img src="~/Assets/Client/images/menu-item-2.jpg" />
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                AFFOGATO
-                            </h5>
-                            <h6>
-                                $80
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4">
-                    <div class="box">
-                        <div class="option_container">
-                            <div class="options">
-                                <a href="" class="option1">
-                                    Add To Cart
-                                </a>
-                                <a href="" class="option2">
-                                    Order Now
-                                </a>
-                            </div>
-                        </div>
-                        <div class="img-box">
-
-                            <img src="~/Assets/Client/images/menu-item-3.jpg" />
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                CAFFÈ LATTE
-                            </h5>
-                            <h6>
-                                $68
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4">
-                    <div class="box">
-                        <div class="option_container">
-                            <div class="options">
-                                <a href="" class="option1">
-                                    Add To Cart
-                                </a>
-                                <a href="" class="option2">
-                                    Order Now
-                                </a>
-                            </div>
-                        </div>
-                        <div class="img-box">
-
-                            <img src="~/Assets/Client/images/menu-item-4.jpg" />
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                CAPPUCCINO
-                            </h5>
-                            <h6>
-                                $70
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4">
-                    <div class="box">
-                        <div class="option_container">
-                            <div class="options">
-                                <a href="" class="option1">
-                                    Add To Cart
-                                </a>
-                                <a href="" class="option2">
-                                    Order Now
-                                </a>
-                            </div>
-                        </div>
-                        <div class="img-box">
-
-                            <img src="~/Assets/Client/images/menu-item-5.jpg" />
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                ICED LATTE
-                            </h5>
-                            <h6>
-                                $75
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4">
-                    <div class="box">
-                        <div class="option_container">
-                            <div class="options">
-                                <a href="" class="option1">
-                                    Add To Cart
-                                </a>
-                                <a href="" class="option2">
-                                    Order Now
-                                </a>
-                            </div>
-                        </div>
-                        <div class="img-box">
-
-                            <img src="~/Assets/Client/images/menu-item-6.jpg" />
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                COLD BREW COFFEE
-                            </h5>
-                            <h6>
-                                $58
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4">
-                    <div class="box">
-                        <div class="option_container">
-                            <div class="options">
-                                <a href="" class="option1">
-                                    Add To Cart
-                                </a>
-                                <a href="" class="option2">
-                                    Order Now
-                                </a>
-                            </div>
-                        </div>
-                        <div class="img-box">
-
-                            <img src="~/Assets/Client/images/menu-item-7.jpg" />
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                CAFFÈ MOCHA
-                            </h5>
-                            <h6>
-                                $80
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4">
-                    <div class="box">
-                        <div class="option_container">
-                            <div class="options">
-                                <a href="" class="option1">
-                                    Add To Cart
-                                </a>
-                                <a href="" class="option2">
-                                    Order Now
-                                </a>
-                            </div>
-                        </div>
-                        <div class="img-box">
-
-                            <img src="~/Assets/Client/images/menu-item-8.jpg" />
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                ESPRESSO CON PANNA
-                            </h5>
-                            <h6>
-                                $65
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4">
-                    <div class="box">
-                        <div class="option_container">
-                            <div class="options">
-                                <a href="" class="option1">
-                                    Add To Cart
-                                </a>
-                                <a href="" class="option2">
-                                    Order Now
-                                </a>
-                            </div>
-                        </div>
-                        <div class="img-box">
-
-                            <img src="~/Assets/Client/images/menu-item-1.jpg" />
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                ESPRESSO MACCHIATO
-                            </h5>
-                            <h6>
-                                $65
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4">
-                    <div class="box">
-                        <div class="option_container">
-                            <div class="options">
-                                <a href="" class="option1">
-                                    Add To Cart
-                                </a>
-                                <a href="" class="option2">
-                                    Order Now
-                                </a>
-                            </div>
-                        </div>
-                        <div class="img-box">
-
-                            <img src="~/Assets/Client/images/menu-item-2.jpg" />
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                DOUBLE ESPRESSO
-                            </h5>
-                            <h6>
-                                $65
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4">
-                    <div class="box">
-                        <div class="option_container">
-                            <div class="options">
-                                <a href="" class="option1">
-                                    Add To Cart
-                                </a>
-                                <a href="" class="option2">
-                                    Order Now
-                                </a>
-                            </div>
-                        </div>
-                        <div class="img-box">
-
-                            <img src="~/Assets/Client/images/menu-item-3.jpg" />
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                CAFÈ AU LAIT
-                            </h5>
-                            <h6>
-                                $65
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4">
-                    <div class="box">
-                        <div class="option_container">
-                            <div class="options">
-                                <a href="" class="option1">
-                                    Add To Cart
-                                </a>
-                                <a href="" class="option2">
-                                    Order Now
-                                </a>
-                            </div>
-                        </div>
-                        <div class="img-box">
-
-                            <img src="~/Assets/Client/images/menu-item-4.jpg" />
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                FLAT WHITE
-                            </h5>
-                            <h6>
-                                $65
-                            </h6>
-                        </div>
-                    </div>
-                </div>
+              
             </div>
 
             <div class="btn-box">

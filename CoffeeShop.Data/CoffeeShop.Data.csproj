@@ -99,6 +99,18 @@
     <Compile Include="Migrations\202204180351028_modifyShopInfoName.designer.cs">
       <DependentUpon>202204180351028_modifyShopInfoName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204181154341_modifySlideTable.cs" />
+    <Compile Include="Migrations\202204181154341_modifySlideTable.designer.cs">
+      <DependentUpon>202204181154341_modifySlideTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204190114043_modify_Silde_tbl.cs" />
+    <Compile Include="Migrations\202204190114043_modify_Silde_tbl.designer.cs">
+      <DependentUpon>202204190114043_modify_Silde_tbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204190448165_updateSlideModel.cs" />
+    <Compile Include="Migrations\202204190448165_updateSlideModel.designer.cs">
+      <DependentUpon>202204190448165_updateSlideModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
@@ -176,6 +188,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202204180351028_modifyShopInfoName.resx">
       <DependentUpon>202204180351028_modifyShopInfoName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204181154341_modifySlideTable.resx">
+      <DependentUpon>202204181154341_modifySlideTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204190114043_modify_Silde_tbl.resx">
+      <DependentUpon>202204190114043_modify_Silde_tbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204190448165_updateSlideModel.resx">
+      <DependentUpon>202204190448165_updateSlideModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

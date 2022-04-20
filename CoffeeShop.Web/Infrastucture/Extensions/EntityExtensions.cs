@@ -167,5 +167,20 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             }
             return tags.ToString();
         }
+
+        public static void UpdateSlide(this Slide slide, SlideViewModel slideVm)
+        {
+            slide.ID = slideVm.ID;
+            slide.Title = slideVm.Title;
+            slide.Description = slideVm.Description;
+            slide.Images = slideVm.Images;
+            slide.URL = slideVm.URL;
+            slide.ActionName = slideVm.ActionName;
+            slide.DisplayOrder = slideVm.DisplayOrder;
+            slide.Status = slideVm.Status;
+            slide.RowVersion = slideVm.RowVersion;
+         
+        }
+
     }
 }

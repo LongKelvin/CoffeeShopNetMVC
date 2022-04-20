@@ -1,12 +1,13 @@
-using CoffeeShop.Models.Abstract;
-
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
+using System.Xml.Linq;
 
-namespace CoffeeShop.Models.Models
+namespace CoffeeShop.Web.Models
 {
-    [Table("Slide")]
-    public class Slide : BaseEntity, ISwitchable
+    public class SlideViewModel : ViewModelBase
     {
         [MaxLength(250)]
         [StringLength(250)]

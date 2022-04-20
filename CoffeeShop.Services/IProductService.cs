@@ -26,6 +26,7 @@ namespace CoffeeShop.Services
         Product GetById(int id);
         List<Product> GetListProductByParentID(int id);
         Product GetByCondition(Expression<Func<Product, bool>> expression, string[] includes = null);
+        List<Product> GetListProductByCondition(Expression<Func<Product, bool>> expression, string[] includes = null);
 
         void SaveChanges();
     }

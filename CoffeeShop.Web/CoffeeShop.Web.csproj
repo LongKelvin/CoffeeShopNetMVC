@@ -83,6 +83,7 @@
     <Compile Include="Api\PostCategoryController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />
     <Compile Include="Api\ProductController.cs" />
+    <Compile Include="Api\SlideController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Models\ProductCategoryViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\ShopInfoViewModel.cs" />
+    <Compile Include="Models\SlideViewModel.cs" />
     <Compile Include="Models\TagViewModel.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -140,6 +142,13 @@
     <Content Include="App\Components\Products\ProductEditView.html" />
     <Content Include="App\Components\Products\ProductListController.js" />
     <Content Include="App\Components\Products\ProductListView.html" />
+    <Content Include="App\Components\Slides\SlideAddController.js" />
+    <Content Include="App\Components\Slides\SlideAddView.html" />
+    <Content Include="App\Components\Slides\SlideEditController.js" />
+    <Content Include="App\Components\Slides\SlideEditView.html" />
+    <Content Include="App\Components\Slides\SlideListController.js" />
+    <Content Include="App\Components\Slides\SlideListView.html" />
+    <Content Include="App\Components\Slides\Slides.Module.js" />
     <Content Include="App\Shared\Directives\PagerDirective.html" />
     <Content Include="App\Shared\Directives\PagerDirective.js" />
     <Content Include="App\Shared\Filters\StatusFilter.js" />
@@ -1806,6 +1815,7 @@
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\ProductCategory\Index.cshtml" />
     <Content Include="Views\Product\GetListProductByCategoryID.cshtml" />
+    <Content Include="Views\Home\HomeProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoffeeShop.Common\CoffeeShop.Common.csproj">
@@ -1868,7 +1878,13 @@
     <PackageReference Include="Microsoft.AspNet.WebApi">
       <Version>5.2.7</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client">
+      <Version>5.2.7</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNet.WebApi.Core">
+      <Version>5.2.7</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.WebHost">
       <Version>5.2.7</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNet.WebPages">
