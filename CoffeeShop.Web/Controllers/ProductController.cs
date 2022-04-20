@@ -27,11 +27,20 @@ namespace CoffeeShop.Web.Controllers
             return View(listAllProductVM);
         }
 
-        public ActionResult GetListProductByCategoryID(int id)
+        public ActionResult ProductByCategory(int id)
         {
             var listProduct = _productService.GetListProductByParentID(id);
             var listProductVM = Mapper.Map<List<ProductViewModel>>(listProduct);
-            return View(listProductVM);
+            return View(nameof(Index),listProductVM);
+        }
+
+        public ActionResult Detail(int?id)
+        {
+            if (id == null)
+                id = 1;
+            var product = _productService.GetById((int)id);
+            var productVM = Mapper.Map<ProductViewModel>(product);
+            return View(productVM);
         }
     }
 }

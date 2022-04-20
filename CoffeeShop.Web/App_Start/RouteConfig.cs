@@ -8,17 +8,25 @@ namespace CoffeeShop.Web
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            
 
 
+            routes.MapRoute(
+            name: "Product Category",
+            url: "pc-{alias}-id-{id}",
+            defaults: new { controller = "Product", action = "ProductByCategory", id = UrlParameter.Optional });
+
+           routes.MapRoute(
+           name: "Product",
+           url: "{alias}-id-{id}",
+           defaults: new { controller = "Product", action = "Detail", id = UrlParameter.Optional });
 
 
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+                    name: "Default",
+                    url: "{controller}/{action}/{id}",
+                    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                );
         }
     }
 }

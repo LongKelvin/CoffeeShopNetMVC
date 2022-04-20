@@ -594,6 +594,19 @@ a:focus
             color: #000000;
         }
 
+    .product_section .options .option3
+    {
+        background-color: #873e23;
+        border: 1px solid #873e23;
+        color: #ffffff;
+    }
+
+        .product_section .options .option3:hover
+        {
+            background-color: transparent;
+            color: #873e23;
+        }
+
 .product_section .btn-box
 {
     display: -webkit-box;

@@ -7,9 +7,11 @@
         <ul class="card-body product-category-list">
             @foreach (var item in Model)
             {
-                <li class="category-item">
-
-                    <a href="@Url.Action("GetListProductByCategoryID","Product",new {@item.ID})">@item.Name</a>
+                var url = "/pc-" + item.Alias + "-id-" + item.ID;
+                <li class="category-item text-black">
+                   
+                    @*<a href="@Url.Action("ProductByCategory","Product",new {@item.ID})">@item.Name</a>*@
+                    <a class="product-category-list " style="color: black;" href="@url">@item.Name</a>
 
                 </li>
             }
