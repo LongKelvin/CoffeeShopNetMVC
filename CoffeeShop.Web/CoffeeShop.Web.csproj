@@ -1816,6 +1816,7 @@
     <Content Include="Views\ProductCategory\Index.cshtml" />
     <Content Include="Views\Product\GetListProductByCategoryID.cshtml" />
     <Content Include="Views\Home\HomeProduct.cshtml" />
+    <Content Include="Views\Home\Slides.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoffeeShop.Common\CoffeeShop.Common.csproj">

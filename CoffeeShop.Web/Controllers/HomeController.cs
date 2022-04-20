@@ -16,12 +16,15 @@ namespace CoffeeShop.Web.Controllers
     {
         IShopInfoService _shopInfoService;
         IProductService _productService;
+        ISlideService _slideService;
 
-        public HomeController(IShopInfoService shopInfoService, IProductService productService)
+        public HomeController(IShopInfoService shopInfoService, IProductService productService,
+            ISlideService slideService)
 
         {
             _shopInfoService = shopInfoService;
             _productService = productService;
+            _slideService = slideService;
         }
         // GET: Home
         public ActionResult Index()
@@ -55,6 +58,14 @@ namespace CoffeeShop.Web.Controllers
             var homeProduct = _productService.GetListProductByCondition(p=>p.HomeFlag==true);
             var homeProductVM = Mapper.Map<List<ProductViewModel>>(homeProduct);
             return PartialView(homeProductVM);
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult Slides()
+        {
+            var listSlider = _slideService.GetAll();
+            var listSLiderVm = Mapper.Map<List<SlideViewModel>>(listSlider);
+            return PartialView(listSLiderVm);
         }
     }
 }
