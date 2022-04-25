@@ -79,7 +79,7 @@ namespace CoffeeShop.Services
             return _productRepository.GetMulti(x => x.Name.Contains(keyWord) || x.Alias.Contains(keyWord));
         }
 
-        
+
         public IEnumerable<Product> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow)
         {
             //TODO: Select all Product by tag
@@ -111,7 +111,7 @@ namespace CoffeeShop.Services
                 return null;
 
             ModelsEntityExtensions.UpdateProduct(product, productFromDb);
-            
+
             //clear all tags record in link table ProductTags for add new record
             productFromDb.Tags.Clear();
 
@@ -155,6 +155,13 @@ namespace CoffeeShop.Services
             return _productRepository.GetMulti(x => x.CategoryID == id).ToList();
         }
 
+        public List<Product> GetListProductByParentID(int id, int page, int pageSize, out int totalRow)
+        {
+            var query = _productRepository.GetMulti(x => x.CategoryID == id && x.Status == true);
+
+            totalRow = query.Count();
+            return query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        }
         public List<Product> GetListProductByCondition(Expression<Func<Product, bool>> expression, string[] includes = null)
         {
             return _productRepository.GetMulti(expression, includes).ToList();

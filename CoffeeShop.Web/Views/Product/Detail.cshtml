@@ -10,14 +10,14 @@
             Detail <span></span>
         </h2>
     </div>
-    <div class="row flexible-view">
-        <div class="col-lg-3 col-md-4 col-lg-pull-9 col-md-pull-8">
+    <div class="row flex-column-reverse flex-lg-row">
+        <div class="col-lg-3 col-md-4 col-lg-pull-9 col-md-pull-8 ">
             <div class="margin-top">
                 <div class="card card-info recent-cart">
                     <h4 class="card-header card-white"><strong>Cart</strong></h4>
                     <ul class="cart-order card-body">
                         <li class="order-item row">
-                            <div class="item-image col-4">
+                            <div class="item-image col-4 flexiable-img">
                                 <img src="~/Assets/Client/images/menu-item-1.jpg" />
                             </div>
                             <div class="col-6">
@@ -32,7 +32,7 @@
                             </div>
                         </li>
                         <li class="order-item row ">
-                            <div class="item-image col-4">
+                            <div class="item-image col-4 flexiable-img">
                                 <img src="~/Assets/Client/images/menu-item-2.jpg" />
                             </div>
                             <div class="col-6">
@@ -47,7 +47,7 @@
                             </div>
                         </li>
                         <li class="order-item row">
-                            <div class="item-image col-4">
+                            <div class="item-image col-4 flexiable-img">
                                 <img src="~/Assets/Client/images/menu-item-7.jpg" />
                             </div>
                             <div class="col-6">
@@ -62,7 +62,7 @@
                             </div>
                         </li>
                         <li class="order-item row">
-                            <div class="item-image col-4">
+                            <div class="item-image col-4 flexiable-img">
                                 <img src="~/Assets/Client/images/menu-item-5.jpg" />
                             </div>
                             <div class="col-6">
@@ -82,12 +82,12 @@
                             <h5><b>Sub Total: $156.94</b></h5>
                         </div>
                         <div class="btn-box">
-                            <a href="" class="btn-secondary w-75">
+                            <a href="" class="btn-secondary  flexible-btn">
                                 Xem giỏ hàng
                             </a>
                         </div>
                         <div class="btn-box">
-                            <a href="@Url.Action("Index","Cart")" class="btn-checkout w-75">
+                            <a href="@Url.Action("Index","Cart")" class="btn-checkout  flexible-btn">
                                 Đặt hàng
                             </a>
                         </div>
@@ -122,14 +122,14 @@
                             </a>
                             <ol class="carousel-indicators">
                                 <li data-target="#carousel-example-1" data-slide-to="0" class="active">
-                                    <img class="d-block w-100 img-fluid"  src="~/Assets/Client/images/menu-item-8.jpg" alt="">
-                                    
+                                    <img class="d-block w-100 img-fluid" src="~/Assets/Client/images/menu-item-8.jpg" alt="">
+
                                 </li>
                                 <li data-target="#carousel-example-1" data-slide-to="1" class="">
-                                    <img class="d-block w-100 img-fluid"  src="~/Assets/Client/images/menu-item-8.jpg" alt="">
+                                    <img class="d-block w-100 img-fluid" src="~/Assets/Client/images/menu-item-8.jpg" alt="">
                                 </li>
                                 <li data-target="#carousel-example-1" data-slide-to="2" class="">
-                                    <img class="d-block w-100 img-fluid"  src="~/Assets/Client/images/menu-item-8.jpg" alt="">
+                                    <img class="d-block w-100 img-fluid" src="~/Assets/Client/images/menu-item-8.jpg" alt="">
                                 </li>
                             </ol>
                         </div>
@@ -144,20 +144,20 @@
                                 Nam sagittis a augue eget scelerisque. Nullam lacinia consectetur sagittis. Nam sed neque id eros fermentum dignissim quis at tortor. Nullam ultricies urna quis sem sagittis pharetra. Nam erat turpis, cursus in ipsum at,
                                 tempor imperdiet metus. In interdum id nulla tristique accumsan. Ut semper in quam nec pretium. Donec egestas finibus suscipit. Curabitur tincidunt convallis arcu.
                             </p>
-                            <ul>
-                                <li>
-                                    <div class="form-group quantity-box">
-                                        <label class="control-label">Quantity</label>
-                                        <input class="form-control" value="0" min="0" max="20" type="number">
-                                    </div>
-                                </li>
-                            </ul>
+
 
                             <div class="price-box-bar">
-                                <div class="cart-and-bay-btn">
-                                    <a class="btn hvr-hover" data-fancybox-close="" href="#">Buy New</a>
-                                    <a class="btn hvr-hover" data-fancybox-close="" href="#">Add to cart</a>
+
+                                <div class="form-group quantity-box">
+                                    <label class="control-label"><b>Quantity</b></label>
+                                    <input class="form-control" value="0" min="0" max="20" type="number">
+
                                 </div>
+
+                                <div class=" btn-box"> <a class=" btn-box btn-secondary text-center flexible-btn" href="#">Buy New</a></div>
+                                <div class="btn-box"> <a class=" btn-box flexible-btn text-center" href="#">Add to cart</a></div>
+
+
                             </div>
                         </div>
                     </div>
@@ -240,7 +240,7 @@
                                 </div>
                             </div>
 
-                           
+
 
                             <div class="owl-dots disabled">
                             </div>

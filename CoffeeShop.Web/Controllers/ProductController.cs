@@ -1,40 +1,69 @@
 ﻿using AutoMapper;
 
 using CoffeeShop.Services;
+using CoffeeShop.Web.Infrastucture.Core;
 using CoffeeShop.Web.Models;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CoffeeShop.Web.Controllers
 {
     public class ProductController : Controller
     {
-        IProductService _productService;
+        private IProductService _productService;
 
         public ProductController(IProductService productService)
         {
             _productService = productService;
         }
+
         // GET: Product
         public ActionResult Index()
         {
-            var listAllProduct = _productService.GetAll();
-            var listAllProductVM = Mapper.Map<List<ProductViewModel>>(listAllProduct);
-            return View(listAllProductVM);
-        }
+            int pageSize = int.Parse(Common.ConfigHeper.GetByKey("PageSize"));
 
-        public ActionResult ProductByCategory(int id)
-        {
-            var listProduct = _productService.GetListProductByParentID(id);
+            var listProduct = _productService.GetAllPaging(0, pageSize, out int totalRow);
             var listProductVM = Mapper.Map<List<ProductViewModel>>(listProduct);
-            return View(nameof(Index),listProductVM);
+
+            int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
+
+            var paginationSet = new PaginationSet<ProductViewModel>
+            {
+                Items = listProductVM,
+                TotalCount = totalRow,
+                Page = 0,
+                MaxPage = int.Parse(Common.ConfigHeper.GetByKey("MaxPage")),
+                TotalPages = totalPage
+            };
+
+            return View(nameof(Index), paginationSet);
         }
 
-        public ActionResult Detail(int?id)
+        public ActionResult ProductByCategory(int id, int page=1)
+        {
+            int pageSize = int.Parse(Common.ConfigHeper.GetByKey("PageSize"));
+
+            var listProduct = _productService.GetListProductByParentID(id, page, pageSize, out int totalRow);
+            var listProductVM = Mapper.Map<List<ProductViewModel>>(listProduct);
+
+            int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
+
+            var paginationSet = new PaginationSet<ProductViewModel>
+            {
+                Items = listProductVM,
+                TotalCount = totalRow,
+              
+                Page = page,
+                MaxPage = int.Parse(Common.ConfigHeper.GetByKey("MaxPage")),
+                TotalPages = totalPage
+            };
+           
+            return View(nameof(Index), paginationSet);
+        }
+
+        public ActionResult Detail(int? id)
         {
             if (id == null)
                 id = 1;
