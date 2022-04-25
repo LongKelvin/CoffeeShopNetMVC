@@ -155,9 +155,37 @@ namespace CoffeeShop.Services
             return _productRepository.GetMulti(x => x.CategoryID == id).ToList();
         }
 
-        public List<Product> GetListProductByParentID(int id, int page, int pageSize, out int totalRow)
+        public List<Product> GetListProductByParentID(int id, int page, int pageSize, string sort, out int totalRow)
         {
-            var query = _productRepository.GetMulti(x => x.CategoryID == id && x.Status == true);
+            IEnumerable<Product> query = new List<Product>();
+            if (id == 0)
+            {
+                query = _productRepository.GetMulti( x=>x.Status == true);
+            }
+            else
+            {
+                query = _productRepository.GetMulti(x => x.CategoryID == id && x.Status == true);
+            }
+             
+
+            switch (sort)
+            {
+                case "popular":
+                    query = query.OrderByDescending(x => x.ViewCount);
+                    break;
+                case "discount":
+                    query = query.OrderByDescending(x => x.PromotionPrice.HasValue);
+                    break;
+                case "priceLowHigh":
+                    query = query.OrderBy(x => x.Price);
+                    break;
+                case "priceHighLow":
+                    query = query.OrderByDescending(x => x.Price);
+                    break;
+                default:
+                    query = query.OrderByDescending(x => x.CreatedDate);
+                    break;
+            }
 
             totalRow = query.Count();
             return query.Skip((page - 1) * pageSize).Take(pageSize).ToList();

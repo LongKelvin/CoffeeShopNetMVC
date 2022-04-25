@@ -20,7 +20,7 @@ namespace CoffeeShop.Web.Controllers
         }
 
         // GET: Product
-        public ActionResult Index()
+        public ActionResult Index(string sort = "")
         {
             int pageSize = int.Parse(Common.ConfigHeper.GetByKey("PageSize"));
 
@@ -41,11 +41,11 @@ namespace CoffeeShop.Web.Controllers
             return View(nameof(Index), paginationSet);
         }
 
-        public ActionResult ProductByCategory(int id, int page=1)
+        public ActionResult ProductByCategory(int id, int page = 1, string sort = "")
         {
             int pageSize = int.Parse(Common.ConfigHeper.GetByKey("PageSize"));
 
-            var listProduct = _productService.GetListProductByParentID(id, page, pageSize, out int totalRow);
+            var listProduct = _productService.GetListProductByParentID(id, page, pageSize, sort,out int totalRow);
             var listProductVM = Mapper.Map<List<ProductViewModel>>(listProduct);
 
             int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
@@ -54,12 +54,12 @@ namespace CoffeeShop.Web.Controllers
             {
                 Items = listProductVM,
                 TotalCount = totalRow,
-              
+
                 Page = page,
                 MaxPage = int.Parse(Common.ConfigHeper.GetByKey("MaxPage")),
                 TotalPages = totalPage
             };
-           
+
             return View(nameof(Index), paginationSet);
         }
 

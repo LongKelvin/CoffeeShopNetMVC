@@ -115,14 +115,14 @@
             }
             else
             {
-                <div class="row col-12 text-right m-0">
-                    <ul class="horizontal-list">
-                        <li>Sort : </li>
-                        <li><a class="active" href="#">popular</a></li> |
-                        <li><a href="#">new </a></li> |
-                        <li><a href="#">discount</a></li> |
-                        <li><a href="#">price: Low to High </a></li>|
-                        <li><a href="#">price: High to Low </a></li>
+                <div class="row text-right m-0 justify-content-end">
+                    <ul class="horizontal-list justify-content-end text-capitalize">
+                        <li>Sắp xếp : </li>
+                        <li><a class="active" href="?page=@Model.Page&sort=popular">Phổ biến</a></li> |
+                        <li><a href="?page=@Model.Page&sort=new">Sản phẩm mới </a></li> |
+                        <li><a href="?page=@Model.Page&sort=discount">Khuyến mãi</a></li> |
+                        <li><a href="?page=@Model.Page&sort=priceLowHigh">Giá:Thấp đến Cao </a></li>|
+                        <li><a href="?page=@Model.Page&sort=priceHighLow">Giá: Cao đến Thấp </a></li>
                     </ul>
                 </div>
 
