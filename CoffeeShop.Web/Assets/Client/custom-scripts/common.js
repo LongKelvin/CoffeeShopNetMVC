@@ -26,7 +26,7 @@
                 $("#searchInput").val(ui.item.Name);
                 return false;
             }
-        }).autocomplete("instance")._renderItem = function (ul, item) {
+        }).data('uiAutocomplete')._renderItem = function (ul, item) {
            
             return $("<li>")
                 .append("<a>" + item.Name + "</a>")
