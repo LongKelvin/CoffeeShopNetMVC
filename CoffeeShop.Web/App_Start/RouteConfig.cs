@@ -19,6 +19,13 @@ namespace CoffeeShop.Web
             url: "{alias}-id-{id}",
             defaults: new { controller = "Product", action = "Detail", id = UrlParameter.Optional });
 
+            
+
+            routes.MapRoute(
+            name: "SearchProduct",
+            url: "search-product",
+            defaults: new { controller = "Product", action = "SearchProduct", id = UrlParameter.Optional });
+
             routes.MapRoute(
                     name: "Default",
                     url: "{controller}/{action}/{id}",

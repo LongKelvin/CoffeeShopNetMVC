@@ -104,6 +104,10 @@ namespace CoffeeShop.Models.Models
         [Display(Name ="Exp Date")]
         public DateTime? ExpireDate { get; set; }
 
+        [Display(Name="Quantity")]
+        [Required]
+        public int Quantity { get; set; }
+
         [ForeignKey("ID")]
         public virtual ProductCategory ProductCategory { get; set; }
 

@@ -41,7 +41,7 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             productCategory.DisplayOrder = productCategoryVm.DisplayOrder;
             productCategory.Images = productCategoryVm.Images;
             productCategory.HomeFlag = productCategoryVm.HomeFlag;
-
+           
             productCategory.CreatedDate = productCategoryVm.CreatedDate;
             productCategory.CreatedBy = productCategoryVm.CreatedBy;
             productCategory.UpdatedDate = productCategoryVm.UpdatedDate;
@@ -92,7 +92,7 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             product.HotFlag = productVm.HotFlag;
             product.ManufacturingDate = productVm.ManufacturingDate;
             product.ExpireDate = productVm.ExpireDate;
-
+            product.Quantity = productVm.Quantity;
             product.CreatedDate = productVm.CreatedDate;
             product.CreatedBy = productVm.CreatedBy;
             product.UpdatedDate = productVm.UpdatedDate;
