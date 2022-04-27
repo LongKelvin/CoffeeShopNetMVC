@@ -45,7 +45,7 @@ namespace CoffeeShop.Web.Controllers
         {
             int pageSize = int.Parse(Common.ConfigHeper.GetByKey("PageSize"));
 
-            var listProduct = _productService.GetListProductByParentID(id, page, pageSize, sort,out int totalRow);
+            var listProduct = _productService.GetListProductByParentID(id, page, pageSize, sort, out int totalRow);
             var listProductVM = Mapper.Map<List<ProductViewModel>>(listProduct);
 
             int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
@@ -70,6 +70,40 @@ namespace CoffeeShop.Web.Controllers
             var product = _productService.GetById((int)id);
             var productVM = Mapper.Map<ProductViewModel>(product);
             return View(productVM);
+        }
+
+        public JsonResult GetListProductByName(string name)
+        {
+            var result = _productService.GetListProductByCondition(
+                (x => x.Name.Contains(name) && x.Status == true));
+
+            var listProductVm = Mapper.Map<List<ProductViewModel>>(result);
+            return Json(new { data = listProductVm }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult SearchProduct(string keyword, int page = 1, string sort = "")
+        {
+            int pageSize = int.Parse(Common.ConfigHeper.GetByKey("PageSize"));
+
+            var listProduct = _productService.GetListProductByConditionPaging(
+                x => x.Name.Contains(keyword) && x.Status == true,
+                page, pageSize, sort, out int totalRow);
+
+            var listProductVM = Mapper.Map<List<ProductViewModel>>(listProduct);
+
+            int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
+
+            var paginationSet = new PaginationSet<ProductViewModel>
+            {
+                Items = listProductVM,
+                TotalCount = totalRow,
+
+                Page = page,
+                MaxPage = int.Parse(Common.ConfigHeper.GetByKey("MaxPage")),
+                TotalPages = totalPage
+            };
+
+            return View(nameof(Index), paginationSet);
         }
     }
 }

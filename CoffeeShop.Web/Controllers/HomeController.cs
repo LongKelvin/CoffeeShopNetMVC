@@ -3,20 +3,16 @@
 using CoffeeShop.Services;
 using CoffeeShop.Web.Models;
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CoffeeShop.Web.Controllers
 {
-   
     public class HomeController : Controller
     {
-        IShopInfoService _shopInfoService;
-        IProductService _productService;
-        ISlideService _slideService;
+        private IShopInfoService _shopInfoService;
+        private IProductService _productService;
+        private ISlideService _slideService;
 
         public HomeController(IShopInfoService shopInfoService, IProductService productService,
             ISlideService slideService)
@@ -26,6 +22,7 @@ namespace CoffeeShop.Web.Controllers
             _productService = productService;
             _slideService = slideService;
         }
+
         // GET: Home
         public ActionResult Index()
         {
@@ -55,7 +52,7 @@ namespace CoffeeShop.Web.Controllers
         [ChildActionOnly]
         public PartialViewResult HomeProduct()
         {
-            var homeProduct = _productService.GetListProductByCondition(p=>p.HomeFlag==true);
+            var homeProduct = _productService.GetListProductByCondition(p => p.HomeFlag == true);
             var homeProductVM = Mapper.Map<List<ProductViewModel>>(homeProduct);
             return PartialView(homeProductVM);
         }

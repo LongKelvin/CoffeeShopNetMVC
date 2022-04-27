@@ -195,6 +195,35 @@ namespace CoffeeShop.Services
             return _productRepository.GetMulti(expression, includes).ToList();
         }
 
+        public List<Product> GetListProductByConditionPaging(Expression<Func<Product, bool>> expression, int page, int pageSize,
+            string sort, out int totalRow, string[] includes = null)
+        {
+            //var query = _productRepository.GetMulti(expression);
+            var query = DbContext.Products.Where(expression);
+
+            switch (sort)
+            {
+                case "popular":
+                    query = query.OrderByDescending(x => x.ViewCount);
+                    break;
+                case "discount":
+                    query = query.OrderByDescending(x => x.PromotionPrice.HasValue);
+                    break;
+                case "priceLowHigh":
+                    query = query.OrderBy(x => x.Price);
+                    break;
+                case "priceHighLow":
+                    query = query.OrderByDescending(x => x.Price);
+                    break;
+                default:
+                    query = query.OrderByDescending(x => x.CreatedDate);
+                    break;
+            }
+
+            totalRow = query.Count();
+            return query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        }
+
         private CoffeeShopDbContext DbContext
         {
             get { return _productRepository.DbContext; }

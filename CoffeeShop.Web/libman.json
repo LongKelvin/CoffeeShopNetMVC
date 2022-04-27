@@ -87,6 +87,10 @@
     {
       "library": "angular-loading-bar@0.9.0",
       "destination": "Assets/Admin/lib/angular-loading-bar/"
+    },
+    {
+      "library": "jqueryui@1.12.1",
+      "destination": "Assets/Admin/lib/jqueryui/"
     }
   ]
 }

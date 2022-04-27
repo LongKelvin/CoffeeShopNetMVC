@@ -144,11 +144,11 @@ namespace CoffeeShop.Data.Insfrastructure
                 var query = dataContext.Set<T>().Include(includes.First());
                 foreach (var include in includes.Skip(1))
                     query = query.Include(include);
-                _resetSet = predicate != null ? query.Where<T>(predicate).AsQueryable() : query.AsQueryable();
+                _resetSet = predicate != null ? query.Where<T>(predicate).AsQueryable().OrderBy(i=>0) : query.AsQueryable().OrderBy(i => 0);
             }
             else
             {
-                _resetSet = predicate != null ? dataContext.Set<T>().Where<T>(predicate).AsQueryable() : dataContext.Set<T>().AsQueryable();
+                _resetSet = predicate != null ? dataContext.Set<T>().Where<T>(predicate).AsQueryable().OrderBy(i => 0) : dataContext.Set<T>().AsQueryable().OrderBy(i => 0);
             }
 
             _resetSet = skipCount == 0 ? _resetSet.Take(size) : _resetSet.Skip(skipCount).Take(size);

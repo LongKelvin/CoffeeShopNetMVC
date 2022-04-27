@@ -11,6 +11,30 @@
             Our <span>Menu</span>
         </h2>
     </div>
+
+    <div class="top-search justify-content-end mb-3 col-sm-12" style="display: flex;">
+        <form method="get" action="@Url.Action("SearchProduct","Product")">
+            <div class="justify-content-end">
+                <div class="input-group row">
+                    <input type="text" class="form-control mr-1" name="keyword" id="searchInput" placeholder="Search keyword">
+                    <button class="btn btn-dark " id="btnSearch" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+   
+
+    <div class="row text-right m-0 justify-content-end col-sm-12">
+        <ul class="horizontal-list justify-content-end text-capitalize space-between">
+            <li>Sắp xếp : </li>
+            <li><a class="active" href="?page=@Model.Page&sort=popular">Phổ biến</a></li> |
+            <li><a href="?page=@Model.Page&sort=new">Sản phẩm mới </a></li> |
+            <li><a href="?page=@Model.Page&sort=discount">Khuyến mãi</a></li> |
+            <li><a href="?page=@Model.Page&sort=priceLowHigh">Giá:Thấp đến Cao </a></li>|
+            <li><a href="?page=@Model.Page&sort=priceHighLow">Giá: Cao đến Thấp </a></li>
+        </ul>
+    </div>
     <div class="row flex-column-reverse flex-lg-row">
         <div class="col-lg-3 col-md-4 col-lg-pull-9 col-md-pull-8 ">
             <div class="margin-top">
@@ -107,24 +131,14 @@
                     <div class=" w-100 align-items-center text-black-50"> <b>No product to display</b></div>
                 </div>
 
-                <div class="btn-box">
-                    <a href="@Url.Action("Index","Product")">
-                        View All products
-                    </a>
-                </div>
+                @*<div class="btn-box">
+                        <a href="@Url.Action("Index","Product")">
+                            View All products
+                        </a>
+                    </div>*@
             }
             else
             {
-                <div class="row text-right m-0 justify-content-end">
-                    <ul class="horizontal-list justify-content-end text-capitalize">
-                        <li>Sắp xếp : </li>
-                        <li><a class="active" href="?page=@Model.Page&sort=popular">Phổ biến</a></li> |
-                        <li><a href="?page=@Model.Page&sort=new">Sản phẩm mới </a></li> |
-                        <li><a href="?page=@Model.Page&sort=discount">Khuyến mãi</a></li> |
-                        <li><a href="?page=@Model.Page&sort=priceLowHigh">Giá:Thấp đến Cao </a></li>|
-                        <li><a href="?page=@Model.Page&sort=priceHighLow">Giá: Cao đến Thấp </a></li>
-                    </ul>
-                </div>
 
                 <div class="row">
                     @foreach (var item in Model.Items)
@@ -163,11 +177,11 @@
                     }
                 </div>
 
-                <div class="btn-box">
-                    <a href="">
-                        View All products
-                    </a>
-                </div>
+                @*<div class="btn-box">
+                        <a href="">
+                            View All products
+                        </a>
+                    </div>*@
             }
         </div>
     </div>
