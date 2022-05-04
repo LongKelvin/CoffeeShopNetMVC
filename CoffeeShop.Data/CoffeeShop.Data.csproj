@@ -115,6 +115,10 @@
     <Compile Include="Migrations\202204270758286_addQuantityFieldToProductTbl.designer.cs">
       <DependentUpon>202204270758286_addQuantityFieldToProductTbl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204270856286_modifyProductMoreImagesColumn.cs" />
+    <Compile Include="Migrations\202204270856286_modifyProductMoreImagesColumn.designer.cs">
+      <DependentUpon>202204270856286_modifyProductMoreImagesColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
@@ -204,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202204270758286_addQuantityFieldToProductTbl.resx">
       <DependentUpon>202204270758286_addQuantityFieldToProductTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204270856286_modifyProductMoreImagesColumn.resx">
+      <DependentUpon>202204270856286_modifyProductMoreImagesColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

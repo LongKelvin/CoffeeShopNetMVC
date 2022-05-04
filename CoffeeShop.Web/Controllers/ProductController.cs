@@ -4,9 +4,12 @@ using CoffeeShop.Services;
 using CoffeeShop.Web.Infrastucture.Core;
 using CoffeeShop.Web.Models;
 
+using Newtonsoft.Json;
+
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace CoffeeShop.Web.Controllers
 {
@@ -69,6 +72,28 @@ namespace CoffeeShop.Web.Controllers
                 id = 1;
             var product = _productService.GetById((int)id);
             var productVM = Mapper.Map<ProductViewModel>(product);
+            //var productImages = new JavaScriptSerializer().Deserialize<List<string>>(productVM.MoreImages);
+
+            if (product.MoreImages == null || product.MoreImages == "[]")
+                productVM.MoreImages = string.Empty;
+
+            List<string> productImages = new List<string>();
+            try
+            {
+                if(!string.IsNullOrEmpty(product.MoreImages))
+                    productImages = new JavaScriptSerializer().Deserialize<List<string>>(productVM.MoreImages);
+            }
+            catch 
+            {
+                productImages.Add(productVM.MoreImages);
+            }
+
+            var relatedProduct = _productService.GetRelatedProduct(productVM.CategoryID);
+            var relatedProductVM = Mapper.Map<List<ProductViewModel>>(relatedProduct);
+            ViewBag.RelatedProduct = relatedProductVM;
+
+
+            ViewBag.MoreImages = productImages;
             return View(productVM);
         }
 

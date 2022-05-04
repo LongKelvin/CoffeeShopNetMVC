@@ -79,7 +79,6 @@ namespace CoffeeShop.Services
             return _productRepository.GetMulti(x => x.Name.Contains(keyWord) || x.Alias.Contains(keyWord));
         }
 
-
         public IEnumerable<Product> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow)
         {
             //TODO: Select all Product by tag
@@ -160,28 +159,31 @@ namespace CoffeeShop.Services
             IEnumerable<Product> query = new List<Product>();
             if (id == 0)
             {
-                query = _productRepository.GetMulti( x=>x.Status == true);
+                query = _productRepository.GetMulti(x => x.Status == true);
             }
             else
             {
                 query = _productRepository.GetMulti(x => x.CategoryID == id && x.Status == true);
             }
-             
 
             switch (sort)
             {
                 case "popular":
                     query = query.OrderByDescending(x => x.ViewCount);
                     break;
+
                 case "discount":
                     query = query.OrderByDescending(x => x.PromotionPrice.HasValue);
                     break;
+
                 case "priceLowHigh":
                     query = query.OrderBy(x => x.Price);
                     break;
+
                 case "priceHighLow":
                     query = query.OrderByDescending(x => x.Price);
                     break;
+
                 default:
                     query = query.OrderByDescending(x => x.CreatedDate);
                     break;
@@ -190,6 +192,7 @@ namespace CoffeeShop.Services
             totalRow = query.Count();
             return query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
+
         public List<Product> GetListProductByCondition(Expression<Func<Product, bool>> expression, string[] includes = null)
         {
             return _productRepository.GetMulti(expression, includes).ToList();
@@ -206,15 +209,19 @@ namespace CoffeeShop.Services
                 case "popular":
                     query = query.OrderByDescending(x => x.ViewCount);
                     break;
+
                 case "discount":
                     query = query.OrderByDescending(x => x.PromotionPrice.HasValue);
                     break;
+
                 case "priceLowHigh":
                     query = query.OrderBy(x => x.Price);
                     break;
+
                 case "priceHighLow":
                     query = query.OrderByDescending(x => x.Price);
                     break;
+
                 default:
                     query = query.OrderByDescending(x => x.CreatedDate);
                     break;
@@ -222,6 +229,18 @@ namespace CoffeeShop.Services
 
             totalRow = query.Count();
             return query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        public List<Product> GetRelatedProduct(int? categoryID)
+        {
+            List<Product> listRelatedProduct = new List<Product>();
+            if (categoryID == null)
+                listRelatedProduct = _productRepository.GetMulti(x => x.Status == true)
+                    .OrderBy(x => x.CreatedDate).Take(5).ToList();
+
+            listRelatedProduct = _productRepository.GetMulti(x => x.Status == true && x.CategoryID == categoryID)
+                .OrderBy(x => x.CreatedDate).Take(5).ToList();
+            return listRelatedProduct;
         }
 
         private CoffeeShopDbContext DbContext

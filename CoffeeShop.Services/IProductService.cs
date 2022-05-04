@@ -31,5 +31,6 @@ namespace CoffeeShop.Services
         List<Product> GetListProductByConditionPaging(Expression<Func<Product, bool>> expression, int page, int pageSize, string sort, out int totalRow, string[] includes = null);
 
         void SaveChanges();
+        List<Product> GetRelatedProduct(int ?categoryID);
     }
 }

@@ -22,8 +22,6 @@
             </div>
         </form>
     </div>
-    
-   
 
     <div class="row text-right m-0 justify-content-end col-sm-12">
         <ul class="horizontal-list justify-content-end text-capitalize space-between">
@@ -127,61 +125,61 @@
 
             @if (Model.Items.Count == 0)
             {
-                <div class="row w-100  text-center ">
-                    <div class=" w-100 align-items-center text-black-50"> <b>No product to display</b></div>
-                </div>
+            <div class="row w-100  text-center ">
+                <div class=" w-100 align-items-center text-black-50"> <b>No product to display</b></div>
+            </div>
 
-                @*<div class="btn-box">
-                        <a href="@Url.Action("Index","Product")">
-                            View All products
-                        </a>
-                    </div>*@
+            @*<div class="btn-box">
+                    <a href="@Url.Action("Index","Product")">
+                        View All products
+                    </a>
+                </div>*@
             }
             else
             {
 
-                <div class="row">
-                    @foreach (var item in Model.Items)
+            <div class="row">
+                @foreach (var item in Model.Items)
                     {
                         var url = "/" + item.Alias + "-id-" + item.ID;
 
-                        <div class="col-sm-6 col-md-4 col-lg-4">
-                            <div class="box">
-                                <div class="option_container">
-                                    <div class="options">
-                                        <a href="@url" class="option3">
-                                            View Detail
-                                        </a>
-                                        <a href="" class="option1">
-                                            Add To Cart
-                                        </a>
-                                        <a href="" class="option2">
-                                            Order Now
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="img-box">
-
-                                    <img src="@item.Images" />
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        @item.Name
-                                    </h5>
-                                    <h6>
-                                        @item.Price.ToString("N2")
-                                    </h6>
-                                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4">
+                    <div class="box">
+                        <div class="option_container">
+                            <div class="options">
+                                <a href="@url" class="option3">
+                                    View Detail
+                                </a>
+                                <a href="" class="option1">
+                                    Add To Cart
+                                </a>
+                                <a href="" class="option2">
+                                    Order Now
+                                </a>
                             </div>
                         </div>
-                    }
-                </div>
+                        <div class="img-box">
 
-                @*<div class="btn-box">
-                        <a href="">
-                            View All products
-                        </a>
-                    </div>*@
+                            <img src="@item.Images" />
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                @item.Name
+                            </h5>
+                            <h6>
+                                @item.Price.ToString("N2")
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+                    }
+            </div>
+
+            @*<div class="btn-box">
+                    <a href="">
+                        View All products
+                    </a>
+                </div>*@
             }
         </div>
     </div>
@@ -193,76 +191,76 @@
             var startPageIndex = Math.Max(1, Model.Page - Model.Page / 2);
             var endPageIndex = Math.Min(Model.TotalPages, Model.Page + Model.Page / 2);
 
-            <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example">
 
-                <ul class="pagination justify-content-end">
-                    @if (Model.Page > 1)
+            <ul class="pagination justify-content-end">
+                @if (Model.Page > 1)
                     {
-                        <li class="page-item">
-                            <a class="page-link" href="?page=1" aria-label="First">
-                                First
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=@(Model.Page-1)" aria-label="Previous">
-                                Previous
-                            </a>
-                        </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page=1" aria-label="First">
+                        First
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page=@(Model.Page-1)" aria-label="Previous">
+                        Previous
+                    </a>
+                </li>
                     }
                     else
                     {
-                        <li class="page-item disabled">
+                <li class="page-item disabled">
 
-                            <a class="page-link" href="?page=1" aria-label="First">
-                                First
-                            </a>
-                        </li>
-                        <li class="page-item disabled">
-                            <a class="page-link" href="?page=@(Model.Page-1)" aria-label="Previous">
-                                Previous
-                            </a>
-                        </li>
+                    <a class="page-link" href="?page=1" aria-label="First">
+                        First
+                    </a>
+                </li>
+                <li class="page-item disabled">
+                    <a class="page-link" href="?page=@(Model.Page-1)" aria-label="Previous">
+                        Previous
+                    </a>
+                </li>
                     }
 
-                    @for (int i = startPageIndex; i <= endPageIndex; i++)
+                @for (int i = startPageIndex; i <= endPageIndex; i++)
                     {
                         if (Model.Page == i)
                         {
-                            <li class="page-item active"><a class="page-link" ref="?page=@i" title="Trang @i">@i</a></li>
+                <li class="page-item active"><a class="page-link" ref="?page=@i" title="Trang @i">@i</a></li>
                         }
                         else
                         {
-                            <li class="page-item"><a class="page-link" href="?page=@i" title="Trang @i">@i</a></li>
+                <li class="page-item"><a class="page-link" href="?page=@i" title="Trang @i">@i</a></li>
                         }
                     }
-                    @if (Model.Page < Model.TotalPages)
+                @if (Model.Page < Model.TotalPages)
                     {
-                        <li class="page-item">
-                            <a class="page-link" href="?page=@(Model.Page+1)" aria-label="Next">
-                                Next
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=@Model.TotalPages" aria-label="Last">
-                                Last
-                            </a>
-                        </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page=@(Model.Page+1)" aria-label="Next">
+                        Next
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page=@Model.TotalPages" aria-label="Last">
+                        Last
+                    </a>
+                </li>
                     }
                     else
                     {
-                        <li class="page-item disabled">
-                            <a class="page-link" href="?page=@(Model.Page)" aria-label="Next">
-                                Next
-                            </a>
-                        </li>
-                        <li class="page-item disabled">
-                            <a class="page-link" href="?page=@Model.TotalPages" aria-label="Last">
-                                Last
-                            </a>
-                        </li>
+                <li class="page-item disabled">
+                    <a class="page-link" href="?page=@(Model.Page)" aria-label="Next">
+                        Next
+                    </a>
+                </li>
+                <li class="page-item disabled">
+                    <a class="page-link" href="?page=@Model.TotalPages" aria-label="Last">
+                        Last
+                    </a>
+                </li>
                     }
-                </ul>
-            </nav>
+            </ul>
+        </nav>
         }
     </div>
 </section>
