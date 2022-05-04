@@ -8,6 +8,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;
+    using System.IO;
     using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<CoffeeShop.Data.CoffeeShopDbContext>
@@ -28,6 +29,7 @@
             CreateProductCategorySample(context);
             CreateProductsSample(context);
             CreateSlidesSample(context);
+            CreatePagesSample(context);
         }
 
         private void CreateUser(CoffeeShopDbContext context)
@@ -110,6 +112,23 @@
                 };
 
                 context.Slides.AddRange(listSlide);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreatePagesSample(CoffeeShopDbContext context)
+        {
+            if (context.Pages.Count() == 0)
+            {
+                Page page = new Page
+                {
+                    Name = "About Us",
+                    Alias = "About",
+                    Status = true,
+                    Content = "ABOUT US" 
+                };
+
+                context.Pages.Add(page);
                 context.SaveChanges();
             }
         }

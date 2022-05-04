@@ -119,6 +119,10 @@
     <Compile Include="Migrations\202204270856286_modifyProductMoreImagesColumn.designer.cs">
       <DependentUpon>202204270856286_modifyProductMoreImagesColumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205041012195_addAliasColToTblPage.cs" />
+    <Compile Include="Migrations\202205041012195_addAliasColToTblPage.designer.cs">
+      <DependentUpon>202205041012195_addAliasColToTblPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
@@ -211,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202204270856286_modifyProductMoreImagesColumn.resx">
       <DependentUpon>202204270856286_modifyProductMoreImagesColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205041012195_addAliasColToTblPage.resx">
+      <DependentUpon>202205041012195_addAliasColToTblPage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

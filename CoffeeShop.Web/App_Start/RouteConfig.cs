@@ -10,6 +10,11 @@ namespace CoffeeShop.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+            name: "Page",
+            url: "page/{alias}",
+            defaults: new { controller = "Page", action = "Index", alias = UrlParameter.Optional });
+
+            routes.MapRoute(
             name: "Product Category",
             url: "pc-{alias}-id-{id}",
             defaults: new { controller = "Product", action = "ProductByCategory", id = UrlParameter.Optional });
@@ -19,7 +24,7 @@ namespace CoffeeShop.Web
             url: "{alias}-id-{id}",
             defaults: new { controller = "Product", action = "Detail", id = UrlParameter.Optional });
 
-            
+
             routes.MapRoute(
             name: "ProductByTag",
             url: "tag/{tagName}",
