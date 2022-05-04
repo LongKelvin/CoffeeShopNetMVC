@@ -6,6 +6,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var listImages = (List<string>)ViewBag.MoreImages;
     var listRelatedProduct = (List<CoffeeShop.Web.Models.ProductViewModel>)ViewBag.RelatedProduct;
+    var listTags = (List<CoffeeShop.Web.Models.TagViewModel>)ViewBag.ListTags;
+    var category = (CoffeeShop.Web.Models.ProductCategoryViewModel)ViewBag.Category;
 }
 <section class="product_section layout_padding custom-container">
     <div class="heading_container heading_center">
@@ -161,6 +163,29 @@
                                     <label class="control-label"><b>Quantity</b></label>
                                     <input class="form-control w-75" value="1" min="0" max="20" type="number">
                                 </div>
+                                <div class="form-group quantity-box ">
+                                    <label class="control-label"><b>Tags: </b></label>
+                                    <ul class="horizontal-list justify-content-end text-capitalize space-between">
+                                        @if (listTags.Count > 0)
+                                        {
+                                            foreach (var item in listTags)
+                                            {
+                                                var url = "/tag/" + item.Name;
+                                                <li><a href="@url">@item.Name</a></li>
+                                            }
+                                        }
+                                    </ul>
+                                    <br />
+                                    <label class="control-label"><b>Category: </b></label>
+                                    <ul class="horizontal-list justify-content-end text-capitalize space-between">
+                                        @if (category != null)
+                                        {
+                                            var url = "/pc-" + category.Alias + "-id-" + category.ID;
+                                            <li><a href="@url">@category.Name</a></li>
+                                        }
+                                    </ul>
+                                </div>
+
                                 <div class=" btn-box justify-content-start"> <a class=" btn-box btn-secondary text-center flexible-btn" href="#">Buy Now</a></div>
                                 <div class="btn-box  justify-content-start"> <a class=" btn-box flexible-btn text-center" href="#">Add to cart</a></div>
                             </div>

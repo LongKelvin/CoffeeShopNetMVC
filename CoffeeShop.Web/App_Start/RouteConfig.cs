@@ -20,6 +20,10 @@ namespace CoffeeShop.Web
             defaults: new { controller = "Product", action = "Detail", id = UrlParameter.Optional });
 
             
+            routes.MapRoute(
+            name: "ProductByTag",
+            url: "tag/{tagName}",
+            defaults: new { controller = "Product", action = "ProductByTag", tagName = UrlParameter.Optional });
 
             routes.MapRoute(
             name: "SearchProduct",

@@ -12,6 +12,7 @@ namespace CoffeeShop.Data
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<CoffeeShopDbContext, CoffeeShop.Data.Migrations.Configuration>());
             this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
 
         public virtual DbSet<Footer> Footers { get; set; }

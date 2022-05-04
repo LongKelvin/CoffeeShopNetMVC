@@ -4,8 +4,6 @@ using CoffeeShop.Services;
 using CoffeeShop.Web.Infrastucture.Core;
 using CoffeeShop.Web.Models;
 
-using Newtonsoft.Json;
-
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -66,10 +64,50 @@ namespace CoffeeShop.Web.Controllers
             return View(nameof(Index), paginationSet);
         }
 
+        public ActionResult ProductByTag(string tag, int page = 1, string sort = "")
+        {
+            int pageSize = int.Parse(Common.ConfigHeper.GetByKey("PageSize"));
+
+            var listProduct = _productService.GetListProductByTag(tag, page, pageSize, sort, out int totalRow);
+            var listProductVM = Mapper.Map<List<ProductViewModel>>(listProduct);
+
+            int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
+
+            var paginationSet = new PaginationSet<ProductViewModel>
+            {
+                Items = listProductVM,
+                TotalCount = totalRow,
+
+                Page = page,
+                MaxPage = int.Parse(Common.ConfigHeper.GetByKey("MaxPage")),
+                TotalPages = totalPage
+            };
+
+            return View(nameof(Index), paginationSet);
+        }
+
+        public void IncreaseViewCount(int productID)
+        {
+            _productService.IncreaseView(productID);
+            _productService.SaveChanges();
+        }
+
+        public JsonResult ListTagsByProduct(int productID)
+        {
+            var listTags = _productService.GetTagsByProduct(productID);
+
+            var listTagsVM = Mapper.Map<List<TagViewModel>>(listTags);
+            return Json(new { data = listTagsVM }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Detail(int? id)
         {
             if (id == null)
                 id = 1;
+
+
+            IncreaseViewCount((int)id);
+
             var product = _productService.GetById((int)id);
             var productVM = Mapper.Map<ProductViewModel>(product);
             //var productImages = new JavaScriptSerializer().Deserialize<List<string>>(productVM.MoreImages);
@@ -80,10 +118,10 @@ namespace CoffeeShop.Web.Controllers
             List<string> productImages = new List<string>();
             try
             {
-                if(!string.IsNullOrEmpty(product.MoreImages))
+                if (!string.IsNullOrEmpty(product.MoreImages))
                     productImages = new JavaScriptSerializer().Deserialize<List<string>>(productVM.MoreImages);
             }
-            catch 
+            catch
             {
                 productImages.Add(productVM.MoreImages);
             }
@@ -92,8 +130,15 @@ namespace CoffeeShop.Web.Controllers
             var relatedProductVM = Mapper.Map<List<ProductViewModel>>(relatedProduct);
             ViewBag.RelatedProduct = relatedProductVM;
 
+            var listTags = _productService.GetTagsByProduct((int)id);
+            var listTagsVM = Mapper.Map<List<TagViewModel>>(listTags);
+
+            var category = _productService.GetCategory((int)id);
+            var categoryVm = Mapper.Map<ProductCategoryViewModel>(category);
 
             ViewBag.MoreImages = productImages;
+            ViewBag.ListTags = listTagsVM;
+            ViewBag.Category = categoryVm;
             return View(productVM);
         }
 
