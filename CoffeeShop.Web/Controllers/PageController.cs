@@ -18,7 +18,9 @@ namespace CoffeeShop.Web.Controllers
         {
             _pageService = pageServices;
         }
+
         // GET: Page
+        [OutputCache(Duration = 0, Location = System.Web.UI.OutputCacheLocation.Server)]
         public ActionResult Index(string alias)
         {
             var page = _pageService.GetByAlias(alias);

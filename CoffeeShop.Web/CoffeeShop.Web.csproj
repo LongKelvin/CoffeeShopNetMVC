@@ -93,6 +93,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\ProductCategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1959,9 +1960,11 @@
     <Content Include="Assets\Client\css\responsive.css" />
     <Content Include="Assets\Client\css\style.css" />
     <Content Include="Assets\Client\custom-css\checkout-style.css" />
+    <Content Include="Assets\Client\custom-css\contact.css" />
     <Content Include="Assets\Client\custom-css\custom-style.css" />
     <Content Include="Assets\Client\custom-css\payment.css" />
     <Content Include="Assets\Client\custom-scripts\common.js" />
+    <Content Include="Assets\Client\custom-scripts\controllers\ggmap-controller.js" />
     <Content Include="Assets\Client\images\arrival-bg.jpg" />
     <Content Include="Assets\Client\images\arrival-bg.png" />
     <Content Include="Assets\Client\images\client.jpg" />
@@ -2240,6 +2243,7 @@
     <Content Include="Views\Home\Slides.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
     <Content Include="Views\Page\Index.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoffeeShop.Common\CoffeeShop.Common.csproj">

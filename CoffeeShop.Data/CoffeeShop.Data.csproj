@@ -123,6 +123,10 @@
     <Compile Include="Migrations\202205041012195_addAliasColToTblPage.designer.cs">
       <DependentUpon>202205041012195_addAliasColToTblPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205050128273_addLocationInfo.cs" />
+    <Compile Include="Migrations\202205050128273_addLocationInfo.designer.cs">
+      <DependentUpon>202205050128273_addLocationInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
@@ -218,6 +222,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205041012195_addAliasColToTblPage.resx">
       <DependentUpon>202205041012195_addAliasColToTblPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205050128273_addLocationInfo.resx">
+      <DependentUpon>202205050128273_addLocationInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

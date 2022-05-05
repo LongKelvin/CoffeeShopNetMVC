@@ -24,11 +24,14 @@ namespace CoffeeShop.Web.Controllers
         }
 
         // GET: Home
+        [OutputCache(Duration = 60, Location = System.Web.UI.OutputCacheLocation.Server)]
         public ActionResult Index()
         {
             return View();
         }
 
+       
+        [OutputCache(Duration =3600)]
         [ChildActionOnly]
         public PartialViewResult Footer()
         {
@@ -38,17 +41,20 @@ namespace CoffeeShop.Web.Controllers
         }
 
         [ChildActionOnly]
+        [OutputCache(Duration = 60)]
         public PartialViewResult Category()
         {
             return PartialView();
         }
 
+        [OutputCache(Duration = 3600)]
         [ChildActionOnly]
         public PartialViewResult Header()
         {
             return PartialView();
         }
 
+        [OutputCache(Duration = 60)]
         [ChildActionOnly]
         public PartialViewResult HomeProduct()
         {
@@ -57,6 +63,7 @@ namespace CoffeeShop.Web.Controllers
             return PartialView(homeProductVM);
         }
 
+        [OutputCache(Duration = 3600)]
         [ChildActionOnly]
         public PartialViewResult Slides()
         {

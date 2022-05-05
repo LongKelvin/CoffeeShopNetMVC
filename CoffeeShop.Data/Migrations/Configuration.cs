@@ -30,6 +30,7 @@
             CreateProductsSample(context);
             CreateSlidesSample(context);
             CreatePagesSample(context);
+            CreateShopInfo(context);
         }
 
         private void CreateUser(CoffeeShopDbContext context)
@@ -129,6 +130,27 @@
                 };
 
                 context.Pages.Add(page);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateShopInfo(CoffeeShopDbContext context)
+        {
+            if (context.ShopInfos.Count() == 0)
+            {
+                ShopInformation shopInfo = new ShopInformation
+                {
+                    Name = "Coffee Way",
+                    Address = "2B Bình Giã - Phường 13 - Tân Bình - TP. Hồ Chí Minh",
+                    Latitude = 10.798109173100983,
+                    Longitude= 106.64413230105687,
+                    Status = true,
+                    Email = "coffeewaytb@gmail.com",
+                    Telephone = "0707635581",
+                    Code = "03F53T"
+                };
+
+                context.ShopInfos.Add(shopInfo);
                 context.SaveChanges();
             }
         }

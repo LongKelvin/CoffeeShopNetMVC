@@ -19,6 +19,7 @@ namespace CoffeeShop.Web.Controllers
 
         // GET: Category
         [ChildActionOnly]
+        [OutputCache(Duration = 60)]
         public ActionResult Index()
         {
             var listProductCategory = _productCategoryService.GetAll();

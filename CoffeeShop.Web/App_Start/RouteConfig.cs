@@ -15,6 +15,11 @@ namespace CoffeeShop.Web
             defaults: new { controller = "Page", action = "Index", alias = UrlParameter.Optional });
 
             routes.MapRoute(
+            name: "ContactDetail",
+            url: "contact",
+            defaults: new { controller = "Contact", action = "Index", id = UrlParameter.Optional });
+
+            routes.MapRoute(
             name: "Product Category",
             url: "pc-{alias}-id-{id}",
             defaults: new { controller = "Product", action = "ProductByCategory", id = UrlParameter.Optional });
