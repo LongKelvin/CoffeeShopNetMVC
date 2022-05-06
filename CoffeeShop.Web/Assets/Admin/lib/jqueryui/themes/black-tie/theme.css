@@ -1,5 +1,5 @@
 /*!
- * jQuery UI CSS Framework 1.12.1
+ * jQuery UI CSS Framework 1.12.0-rc.2
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -137,10 +137,6 @@ a.ui-button:active,
 	background: #ffeb80 url("images/ui-bg_inset-hard_55_ffeb80_1x100.png") 50% bottom repeat-x;
 	color: #363636;
 }
-.ui-state-checked {
-	border: 1px solid #ffde2e;
-	background: #ffeb80;
-}
 .ui-state-highlight a,
 .ui-widget-content .ui-state-highlight a,
 .ui-widget-header .ui-state-highlight a {
@@ -201,10 +197,14 @@ a.ui-button:active,
 .ui-widget-header .ui-icon {
 	background-image: url("images/ui-icons_bbbbbb_256x240.png");
 }
+.ui-button .ui-icon {
+	background-image: url("images/ui-icons_ededed_256x240.png");
+}
 .ui-state-hover .ui-icon,
 .ui-state-focus .ui-icon,
 .ui-button:hover .ui-icon,
-.ui-button:focus .ui-icon {
+.ui-button:focus .ui-icon,
+.ui-state-default .ui-icon {
 	background-image: url("images/ui-icons_ffffff_256x240.png");
 }
 .ui-state-active .ui-icon,
@@ -218,9 +218,6 @@ a.ui-button:active,
 .ui-state-error .ui-icon,
 .ui-state-error-text .ui-icon {
 	background-image: url("images/ui-icons_ffcf29_256x240.png");
-}
-.ui-button .ui-icon {
-	background-image: url("images/ui-icons_ededed_256x240.png");
 }
 
 /* positioning */

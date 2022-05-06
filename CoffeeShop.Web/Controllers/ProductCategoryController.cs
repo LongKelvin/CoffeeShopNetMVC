@@ -8,11 +8,12 @@ using System.Web.Mvc;
 
 namespace CoffeeShop.Web.Controllers
 {
-    public class ProductCategoryController : Controller
+    public class ProductCategoryController : BaseController
     {
         private IProductCategoryService _productCategoryService;
 
-        public ProductCategoryController(IProductCategoryService productCategoryService)
+        public ProductCategoryController(IProductCategoryService productCategoryService,
+            IErrorService errorService) : base(errorService)
         {
             _productCategoryService = productCategoryService;
         }

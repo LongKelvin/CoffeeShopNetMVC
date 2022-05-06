@@ -1,9 +1,15 @@
-﻿using System.Web.Mvc;
+﻿using CoffeeShop.Services;
+
+using System.Web.Mvc;
 
 namespace CoffeeShop.Web.Controllers
 {
-    public class PaymentController : Controller
+    public class PaymentController : BaseController
     {
+        public PaymentController(IErrorService errorService) : base(errorService)
+        {
+        }
+
         // GET: Payment
         public ActionResult Index()
         {

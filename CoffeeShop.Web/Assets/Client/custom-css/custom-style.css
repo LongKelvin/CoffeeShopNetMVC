@@ -420,3 +420,39 @@
         width: 75%;
     }
 }
+
+.ui-menu
+{
+    list-style-type: none;
+    list-style: none;
+    margin: 0;
+    cursor: pointer;
+    width: 50%;
+    background: white;
+}
+
+.ui-menu-item
+{
+    color: black;
+    margin: 0;
+    background: white;
+}
+.ui-menu-item:hover
+{
+    background: white;
+    color: #eab676;
+}
+.ui-menu-item-wrapper
+{
+    margin: 0;
+    color: black;
+    width: 50%;
+}
+    .ui-menu-item-wrapper:hover
+    {
+        margin: 0;
+        color: #eab676;
+        background: white;
+        border: none;
+        width: 50%;
+    }

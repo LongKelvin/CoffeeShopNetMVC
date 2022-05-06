@@ -4,18 +4,22 @@ using CoffeeShop.Services;
 using CoffeeShop.Web.Infrastucture.Core;
 using CoffeeShop.Web.Models;
 
+using Newtonsoft.Json;
+
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
 namespace CoffeeShop.Web.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
         private IProductService _productService;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, 
+            IErrorService errorService) : base(errorService)
         {
             _productService = productService;
         }
@@ -105,7 +109,6 @@ namespace CoffeeShop.Web.Controllers
             if (id == null)
                 id = 1;
 
-
             IncreaseViewCount((int)id);
 
             var product = _productService.GetById((int)id);
@@ -149,6 +152,15 @@ namespace CoffeeShop.Web.Controllers
 
             var listProductVm = Mapper.Map<List<ProductViewModel>>(result);
             return Json(new { data = listProductVm }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetListProductName(string name)
+        {
+            var listProductName = _productService.GetListProductByCondition(
+                (x => x.Name.Contains(name) && x.Status == true))
+                .Select(x => x.Name).ToList();
+
+            return Json(new { data = listProductName }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult SearchProduct(string keyword, int page = 1, string sort = "")

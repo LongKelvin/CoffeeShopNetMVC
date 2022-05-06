@@ -73,14 +73,6 @@
       "destination": "Assets/Admin/lib/ngbootbox/"
     },
     {
-      "library": "bootbox.js@5.5.2",
-      "destination": "Assets/Admin/lib/bootbox.js/"
-    },
-    {
-      "library": "moment.js@2.29.2",
-      "destination": "Assets/Admin/lib/moment.js/"
-    },
-    {
       "library": "angular-local-storage@0.7.1",
       "destination": "Assets/Admin/lib/angular-local-storage/"
     },
@@ -89,8 +81,14 @@
       "destination": "Assets/Admin/lib/angular-loading-bar/"
     },
     {
-      "library": "jqueryui@1.12.1",
+      "provider": "cdnjs",
+      "library": "jqueryui@1.12.0-rc.2",
       "destination": "Assets/Admin/lib/jqueryui/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "typescript@4.6.4",
+      "destination": "Assets/Admin/lib/typescripts/"
     }
   ]
 }

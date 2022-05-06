@@ -12,23 +12,23 @@
     <meta name="author" content="" />
     <link rel="shortcut icon" href="~/Assets/Client/images/favicon.png" type="">
     <title>Coffee Way</title>
-    <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="~/Assets/Client/css/bootstrap.css" />
 
+    @Styles.Render("~/css/base")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("Styles", required: false)
+
+    <!--<!-- bootstrap core css -->
+    <!--<link rel="stylesheet" type="text/css" href="~/Assets/Client/css/bootstrap.css" />-->
     <!-- font awesome style -->
-    <link href="~/Assets/Client/css/font-awesome.min.css" rel="stylesheet" />
+    <!--<link href="~/Assets/Client/css/font-awesome.min.css" rel="stylesheet" />-->
     <!-- Custom styles for this template -->
-    <link href="~/Assets/Client/css/style.css" rel="stylesheet" />
+    <!--<link href="~/Assets/Client/css/style.css" rel="stylesheet" />-->
     <!-- responsive style -->
-    <link href="~/Assets/Client/css/responsive.css" rel="stylesheet" />
-
+    <!--<link href="~/Assets/Client/css/responsive.css" rel="stylesheet" />-->
     @*custom-css*@
-    <link href="~/Assets/Client/custom-css/custom-style.css" rel="stylesheet" />
+    @*<link href="~/Assets/Client/custom-css/custom-style.css" rel="stylesheet" />*@
 
-    @*jquery ui*@
-    <link href="~/Assets/Admin/lib/jqueryui/jquery-ui.css" rel="stylesheet" />
-    <link href="~/Assets/Admin/lib/jqueryui/themes/smoothness/jquery-ui.css" rel="stylesheet" />
-    <link href="~/Assets/Admin/lib/jqueryui/themes/smoothness/theme.css" rel="stylesheet" />
+    @*<link href="~/Assets/Admin/lib/jquery-ui-1.13.1.custom/jquery-ui.theme.css" rel="stylesheet" />-->*@
 </head>
 <body>
     <div id="hero_area" class="hero_area">
@@ -50,9 +50,9 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Pages </span> <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                   @{ 
-                                       var urlAbout = "/page/About";
-                                   }
+                                    @{
+                                        var urlAbout = "/page/About";
+                                    }
                                     <li><a href="@urlAbout">About</a></li>
                                     <li><a href="testimonial.html">Testimonial</a></li>
                                 </ul>
@@ -67,7 +67,7 @@
                                 <a class="nav-link" href="blog_list.html">Blog</a>
                             </li>
                             <li class="nav-item">
-                                @{ 
+                                @{
                                     var urlContact = "/contact";
                                 }
                                 <a class="nav-link" href="@urlContact">Contact</a>
@@ -157,27 +157,34 @@
     <div class="cpy_">
         <p>© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a></p>
     </div>
-    <!-- jQery -->
-    <script src="~/Assets/Client/js/jquery-3.4.1.min.js"></script>
+
+    <!--<!-- jQuery -->
+    <!--@*<script src="~/Assets/Client/js/jquery-3.4.1.min.js"></script>*@
+    <script src="~/Assets/Admin/lib/jquery-ui-1.13.1.custom/external/jquery/jquery.js"></script>-->
     <!-- popper js -->
-    <script src="~/Assets/Client/js/popper.min.js"></script>
-    <!-- bootstrap js -->
-    <script src="~/Assets/Client/js/bootstrap.js"></script>
+    <!--<script src="~/Assets/Client/js/popper.min.js"></script>-->
     <!-- custom js -->
-    <script src="~/Assets/Client/js/custom.js"></script>
-    <script src="~/Assets/Admin/lib/jqueryui/jquery-ui.js"></script>
-    <script src="~/Assets/Client/custom-scripts/common.js"></script>
+    <!--<script src="~/Assets/Client/js/custom.js"></script>-->
 
-    <script>
+    @Scripts.Render("~/js/jquery")
+    @Scripts.Render("~/js/plugins")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @*bootstrap js*@
+    <script src="~/Assets/Client/js/bootstrap.js"></script>
 
-        $("#nav-menu").on('click', 'li', function () {
-            // remove classname 'active' from all li who already has classname 'active'
-            $("#nav-menu li.active").removeClass("active");
-            // adding classname 'active' to current click li
-            $(this).addClass("active");
-        });
-    </script>
 
-   
+    @section Scripts{
+        <script>
+
+            $("#nav-menu").on('click', 'li', function () {
+                // remove classname 'active' from all li who already has classname 'active'
+                $("#nav-menu li.active").removeClass("active");
+                // adding classname 'active' to current click li
+                $(this).addClass("active");
+            });
+        </script>
+    }
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -8,14 +8,14 @@ using System.Web.Mvc;
 
 namespace CoffeeShop.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private IShopInfoService _shopInfoService;
         private IProductService _productService;
         private ISlideService _slideService;
 
         public HomeController(IShopInfoService shopInfoService, IProductService productService,
-            ISlideService slideService)
+            ISlideService slideService, IErrorService errorService) : base(errorService)
 
         {
             _shopInfoService = shopInfoService;
@@ -30,8 +30,7 @@ namespace CoffeeShop.Web.Controllers
             return View();
         }
 
-       
-        [OutputCache(Duration =3600)]
+        [OutputCache(Duration = 3600)]
         [ChildActionOnly]
         public PartialViewResult Footer()
         {
