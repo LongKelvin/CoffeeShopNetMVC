@@ -53,8 +53,10 @@
   <ItemGroup>
     <Compile Include="EntityExtension.cs" />
     <Compile Include="ErrorService.cs" />
+    <Compile Include="FeedbackService.cs" />
     <Compile Include="FooterService.cs" />
     <Compile Include="IErrorService.cs" />
+    <Compile Include="IFeedbackService.cs" />
     <Compile Include="IFooterService.cs" />
     <Compile Include="IMenuGroupService.cs" />
     <Compile Include="IMenuService.cs" />
