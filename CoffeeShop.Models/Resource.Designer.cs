@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CoffeeShop.Web.Resources {
+namespace CoffeeShop.Models {
     using System;
     
     
@@ -22,24 +22,24 @@ namespace CoffeeShop.Web.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    internal class Resource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal Resource() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CoffeeShop.Web.Resources.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CoffeeShop.Models.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace CoffeeShop.Web.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace CoffeeShop.Web.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Email cannot be empty, Please fill out this field.
         /// </summary>
-        public static string RequiredEmailMessage {
+        internal static string RequiredEmailMessage {
             get {
                 return ResourceManager.GetString("RequiredEmailMessage", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace CoffeeShop.Web.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Feedback message cannot be empty,  Please checkout.
         /// </summary>
-        public static string RequiredFeedbackMessage {
+        internal static string RequiredFeedbackMessage {
             get {
                 return ResourceManager.GetString("RequiredFeedbackMessage", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace CoffeeShop.Web.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Name cannot be empty, Please fill out this field.
         /// </summary>
-        public static string RequiredNameMessage {
+        internal static string RequiredNameMessage {
             get {
                 return ResourceManager.GetString("RequiredNameMessage", resourceCulture);
             }

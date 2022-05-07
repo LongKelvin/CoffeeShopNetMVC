@@ -33,6 +33,7 @@ namespace CoffeeShop.Data
         public virtual DbSet<Error> Errors { get; set; }
         public virtual DbSet<ShopInformation> ShopInfos { get; set; }
         public virtual DbSet<ShopPaymentInfo> ShopPayments { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
 
         public static CoffeeShopDbContext Create()
         {
