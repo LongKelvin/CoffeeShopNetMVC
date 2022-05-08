@@ -1,11 +1,10 @@
-﻿using BotDetect.Web.Mvc;
-
-using CoffeeShop.Common;
+﻿using CoffeeShop.Common;
 using CoffeeShop.Models.Models;
 using CoffeeShop.Services;
 using CoffeeShop.Web.Infrastucture.Extensions;
 using CoffeeShop.Web.Models;
 
+using System;
 using System.Web.Mvc;
 
 namespace CoffeeShop.Web.Controllers
@@ -41,10 +40,8 @@ namespace CoffeeShop.Web.Controllers
             };
         }
 
-
         [HttpPost]
-        //[CaptchaValidationActionFilter("CaptchaCode", "ContactCaptcha", "Captcha code invalid")]
-        public ActionResult SendFeedback(ShopContactViewModel shopContactVM)
+        public ActionResult SendFeedbackToAdmin(ShopContactViewModel shopContactVM)
         {
             if (ModelState.IsValid)
             {
@@ -53,20 +50,22 @@ namespace CoffeeShop.Web.Controllers
                 newFeedback.CreatedDate = System.DateTime.Now;
                 newFeedback.Status = true;
 
-
                 _feedbackService.Add(newFeedback);
                 _feedbackService.SaveChanges();
 
                 ViewData["SuccessMsg"] = Resources.Resources.SendFeedbackStatus_OK;
 
-                string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/Client/templates/contact_template.html"));
+                string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/Client/templates/feedback_template.html"));
                 content = content.Replace("{{EmailSubject}}", shopContactVM.Feedback.EmailSubject);
                 content = content.Replace("{{Name}}", shopContactVM.Feedback.Name);
                 content = content.Replace("{{Email}}", shopContactVM.Feedback.Email);
                 content = content.Replace("{{Message}}", shopContactVM.Feedback.Message);
+                content = content.Replace("{{CreatedDate}}", DateTime.Now.ToString());
 
                 var adminEmail = ConfigHelper.GetByKey("AdminEmail");
-                MailHelper.SendMail(adminEmail, "[COFFEE_SHOP] - Thông tin liên hệ từ website", content);
+                MailHelper.SendMail(adminEmail, "[COFFEE_SHOP] - THƯ PHẢN HỒI TỪ KHÁCH HÀNG", content);
+
+                SendResponseEmailToCustomer(shopContactVM.Feedback.Email, shopContactVM.Feedback.Name);
 
                 //feedbackVm.Name = "";
                 //feedbackVm.Message = "";
@@ -75,9 +74,16 @@ namespace CoffeeShop.Web.Controllers
                 return View(nameof(Index), GetContactInfo());
             }
 
-           
+            return View(nameof(Index), shopContactVM);
+        }
 
-            return View(nameof(Index),shopContactVM);
+        public void SendResponseEmailToCustomer(string email, string name)
+        {
+            string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/Client/templates/response_template.html"));
+
+            content = content.Replace("{{Name}}", name);
+            var adminEmail = ConfigHelper.GetByKey("AdminEmail");
+            MailHelper.SendMail(email, "[COFFEE_SHOP] - REPLAY FOR FEEDBACK", content);
         }
     }
 }
