@@ -38,7 +38,7 @@ namespace CoffeeShop.Web
            .Include("~/Assets/Client/css/style.css", new CssRewriteUrlTransform())
 
             );
-            BundleTable.EnableOptimizations = bool.Parse(ConfigHeper.GetByKey("EnableBundles"));
+            BundleTable.EnableOptimizations = bool.Parse(ConfigHelper.GetByKey("EnableBundles"));
         }
     }
 }

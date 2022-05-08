@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CoffeeShop.Common
 {
-    public class ConfigHeper
+    public class ConfigHelper
     {
         public static string GetByKey (string key)
         {

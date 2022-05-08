@@ -27,7 +27,7 @@ namespace CoffeeShop.Web.Controllers
         // GET: Product
         public ActionResult Index(string sort = "")
         {
-            int pageSize = int.Parse(Common.ConfigHeper.GetByKey("PageSize"));
+            int pageSize = int.Parse(Common.ConfigHelper.GetByKey("PageSize"));
 
             var listProduct = _productService.GetAllPaging(0, pageSize, out int totalRow);
             var listProductVM = Mapper.Map<List<ProductViewModel>>(listProduct);
@@ -39,7 +39,7 @@ namespace CoffeeShop.Web.Controllers
                 Items = listProductVM,
                 TotalCount = totalRow,
                 Page = 0,
-                MaxPage = int.Parse(Common.ConfigHeper.GetByKey("MaxPage")),
+                MaxPage = int.Parse(Common.ConfigHelper.GetByKey("MaxPage")),
                 TotalPages = totalPage
             };
 
@@ -48,7 +48,7 @@ namespace CoffeeShop.Web.Controllers
 
         public ActionResult ProductByCategory(int id, int page = 1, string sort = "")
         {
-            int pageSize = int.Parse(Common.ConfigHeper.GetByKey("PageSize"));
+            int pageSize = int.Parse(Common.ConfigHelper.GetByKey("PageSize"));
 
             var listProduct = _productService.GetListProductByParentID(id, page, pageSize, sort, out int totalRow);
             var listProductVM = Mapper.Map<List<ProductViewModel>>(listProduct);
@@ -61,7 +61,7 @@ namespace CoffeeShop.Web.Controllers
                 TotalCount = totalRow,
 
                 Page = page,
-                MaxPage = int.Parse(Common.ConfigHeper.GetByKey("MaxPage")),
+                MaxPage = int.Parse(Common.ConfigHelper.GetByKey("MaxPage")),
                 TotalPages = totalPage
             };
 
@@ -70,7 +70,7 @@ namespace CoffeeShop.Web.Controllers
 
         public ActionResult ProductByTag(string tag, int page = 1, string sort = "")
         {
-            int pageSize = int.Parse(Common.ConfigHeper.GetByKey("PageSize"));
+            int pageSize = int.Parse(Common.ConfigHelper.GetByKey("PageSize"));
 
             var listProduct = _productService.GetListProductByTag(tag, page, pageSize, sort, out int totalRow);
             var listProductVM = Mapper.Map<List<ProductViewModel>>(listProduct);
@@ -83,7 +83,7 @@ namespace CoffeeShop.Web.Controllers
                 TotalCount = totalRow,
 
                 Page = page,
-                MaxPage = int.Parse(Common.ConfigHeper.GetByKey("MaxPage")),
+                MaxPage = int.Parse(Common.ConfigHelper.GetByKey("MaxPage")),
                 TotalPages = totalPage
             };
 
@@ -165,7 +165,7 @@ namespace CoffeeShop.Web.Controllers
 
         public ActionResult SearchProduct(string keyword, int page = 1, string sort = "")
         {
-            int pageSize = int.Parse(Common.ConfigHeper.GetByKey("PageSize"));
+            int pageSize = int.Parse(Common.ConfigHelper.GetByKey("PageSize"));
 
             var listProduct = _productService.GetListProductByConditionPaging(
                 x => x.Name.Contains(keyword) && x.Status == true,
@@ -181,7 +181,7 @@ namespace CoffeeShop.Web.Controllers
                 TotalCount = totalRow,
 
                 Page = page,
-                MaxPage = int.Parse(Common.ConfigHeper.GetByKey("MaxPage")),
+                MaxPage = int.Parse(Common.ConfigHelper.GetByKey("MaxPage")),
                 TotalPages = totalPage
             };
 

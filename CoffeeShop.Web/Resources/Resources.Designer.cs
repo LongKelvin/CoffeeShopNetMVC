@@ -61,6 +61,15 @@ namespace CoffeeShop.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Captcha code is incorect.
+        /// </summary>
+        public static string CaptchaMessage_Failed {
+            get {
+                return ResourceManager.GetString("CaptchaMessage_Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email cannot be empty, Please fill out this field.
         /// </summary>
         public static string RequiredEmailMessage {
@@ -84,6 +93,15 @@ namespace CoffeeShop.Web.Resources {
         public static string RequiredNameMessage {
             get {
                 return ResourceManager.GetString("RequiredNameMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feedback was sent successfull, We will contact you as soon as possible. Thank you!.
+        /// </summary>
+        public static string SendFeedbackStatus_OK {
+            get {
+                return ResourceManager.GetString("SendFeedbackStatus_OK", resourceCulture);
             }
         }
     }

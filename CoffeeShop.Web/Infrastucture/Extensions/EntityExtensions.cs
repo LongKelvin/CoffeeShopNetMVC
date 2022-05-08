@@ -41,7 +41,7 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             productCategory.DisplayOrder = productCategoryVm.DisplayOrder;
             productCategory.Images = productCategoryVm.Images;
             productCategory.HomeFlag = productCategoryVm.HomeFlag;
-           
+
             productCategory.CreatedDate = productCategoryVm.CreatedDate;
             productCategory.CreatedBy = productCategoryVm.CreatedBy;
             productCategory.UpdatedDate = productCategoryVm.UpdatedDate;
@@ -179,8 +179,17 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             slide.DisplayOrder = slideVm.DisplayOrder;
             slide.Status = slideVm.Status;
             slide.RowVersion = slideVm.RowVersion;
-         
         }
 
+        public static void UpdateFeedback(this Feedback feedback, FeedbackViewModel feedbackVM)
+        {
+            feedback.ID = feedbackVM.ID;
+            feedback.Email = feedbackVM.Email;
+            feedback.Name = feedbackVM.Name;
+            feedback.Status = feedbackVM.Status;
+            feedback.EmailSubject = feedbackVM.EmailSubject;
+            feedback.RowVersion = feedbackVM.RowVersion;
+            feedback.Message = feedbackVM.Message;
+        }
     }
 }

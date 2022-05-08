@@ -117,6 +117,7 @@
     <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Models\ProductCategoryViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
+    <Compile Include="Models\ShopContactViewModel.cs" />
     <Compile Include="Models\ShopInfoViewModel.cs" />
     <Compile Include="Models\SlideViewModel.cs" />
     <Compile Include="Models\TagViewModel.cs" />
@@ -1618,6 +1619,7 @@
     <Content Include="Assets\Client\js\custom.js" />
     <Content Include="Assets\Client\js\jquery-3.4.1.min.js" />
     <Content Include="Assets\Client\js\popper.min.js" />
+    <Content Include="Assets\Client\templates\contact_template.html" />
     <Content Include="Global.asax" />
     <Content Include="Libs\CKFinder.dll" />
     <Content Include="Web.config" />
@@ -1638,7 +1640,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Admin\css\skins\" />
     <Folder Include="Assets\Admin\templates\" />
-    <Folder Include="Assets\Client\templates\" />
     <Folder Include="Lang\" />
     <Folder Include="UploadFiles\" />
   </ItemGroup>
@@ -1912,6 +1913,9 @@
     </PackageReference>
     <PackageReference Include="AutoMapper">
       <Version>4.2.1</Version>
+    </PackageReference>
+    <PackageReference Include="Captcha">
+      <Version>4.4.2</Version>
     </PackageReference>
     <PackageReference Include="EntityFramework">
       <Version>6.4.4</Version>

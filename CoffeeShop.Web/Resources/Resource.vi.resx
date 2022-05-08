@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CaptchaMessage_Failed" xml:space="preserve">
+    <value>Mã xác nhận không đúng!</value>
+  </data>
   <data name="RequiredEmailMessage" xml:space="preserve">
     <value>Email không được bỏ trống, Vui lòng điền đầy đủ thông tin email</value>
   </data>
