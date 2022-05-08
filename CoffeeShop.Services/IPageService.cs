@@ -22,6 +22,8 @@ namespace CoffeeShop.Services
 
         Page GetById(int id);
 
+        Page GetByAlias(string alias);
+
         void SaveChanges();
     }
 }

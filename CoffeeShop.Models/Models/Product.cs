@@ -77,6 +77,7 @@ namespace CoffeeShop.Models.Models
         public int? ViewCount { get; set; } // int, null
 
         [Display(Name = "More Images")]
+        [Column(TypeName = "xml")]
         public string MoreImages { get; set; } // XML(.), null
 
         [MaxLength(500)]
@@ -103,6 +104,10 @@ namespace CoffeeShop.Models.Models
 
         [Display(Name ="Exp Date")]
         public DateTime? ExpireDate { get; set; }
+
+        [Display(Name="Quantity")]
+        [Required]
+        public int Quantity { get; set; }
 
         [ForeignKey("ID")]
         public virtual ProductCategory ProductCategory { get; set; }

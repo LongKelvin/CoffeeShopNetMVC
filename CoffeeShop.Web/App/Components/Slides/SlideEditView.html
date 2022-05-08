@@ -1,0 +1,158 @@
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><strong>Thêm mới slide</strong></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="Home">Trang chủ</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="Slides">Cài đặt hiển thị</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="Slides">Danh sách slider</a></li>
+                    <li class="breadcrumb-item active">Cập nhật</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <form name="frmUpdateSlide" role="form" ng-submit="UpdateSlide()" novalidate>
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-8">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin chính</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Tên tiêu đề <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="slide.Title" required name="pTitle"
+                                       class="form-control" placeholder="Tên tiêu đề ...">
+                                <span class="text-danger" ng-show="frmUpdateSlide.pTitle.$touched && frmUpdateSlide.pTitle.$invalid">Bạn chưa nhập Tiêu đề</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tên thao tác <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="slide.ActionName" required name="pActionName"
+                                       class="form-control" placeholder="Thao tác định hướng cho người dùng ...">
+                                <span class="text-danger" ng-show="frmUpdateSlide.pActionName.$touched && frmUpdateSlide.pActionName.$invalid">Trường này không thể bỏ trống</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>URL <span class="text-danger">*</span></label>
+                                <input ng-model="slide.URL" type="text" class="form-control"
+                                       name="pURL" required
+                                       placeholder="Đường dẫn đến trang đích">
+                                <span class="text-danger" ng-show="frmUpdateSlide.pURL.$touched && frmUpdateSlide.pURL.$invalid">Bạn chưa nhập URL</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Thứ tự hiển thị<span class="text-danger">*</span></label>
+                                <input ng-model="slide.DisplayOrder" type="number" name="pDisplayOrder" required class="form-control"
+                                       placeholder="Hiển thị ở vị trí 1 2 3 ...">
+                                <span class="text-danger" ng-show="frmUpdateSlide.pDisplayOrder.$touched && frmUpdateSlide.pDisplayOrder.$invalid">Thứ tự hiển thị là bắt buộc</span>
+                            </div>
+
+                            <!-- textarea -->
+                            <div class="form-group">
+                                <label>Mô tả ngắn </label>
+                                <textarea ng-model="slide.Description"
+                                          class="form-control" rows="4"
+                                          placeholder="Mô tả ngắn ..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Hình ảnh</label>
+                                <div class="input-group">
+                                    <input ng-model="slide.Images" type="text" class="form-control" placeholder="Chọn files" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" type="button" ng-click="ChooseImages()">Chọn ảnh</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<div class="form-group">
+                                <label>Nội dung chi tiết</label>
+                                <div id="ckEditorContent" ng-model="slide.Content">
+                                </div>
+                            </div>-->
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card card-success ">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý slider</h3>
+                        </div>
+                        <div class="card-body" style="margin-top:13px">
+                            <!-- Minimal style -->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <!-- checkbox -->
+                                    <div class="form-group clearfix">
+                                        <div class="icheck-success d-inline">
+                                            <input type="checkbox" id="checkboxActive"
+                                                   ng-model="slide.Status"
+                                                   ng-checked="slide.Status==true">
+                                            <label for="checkboxActive">
+                                                Kích hoạt
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <button type="submit" ng-disabled="frmUpdateSlide.$invalid" class="btn btn-primary">Lưu Slide</button>
+                <button ui-sref="Slides" class="btn btn-outline-secondary space-around">Hủy bỏ</button>
+            </div>
+        </form>
+
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+<script>
+
+    $(document).ready(function () {
+        //$('#categoryIdDropdown').select2({
+        //    theme: 'bootstrap4'
+        //});
+
+        //$('#categoryIdDropdown').val('Chọn danh mục'); // Select the option with a default value
+        //$('#categoryIdDropdown').trigger('change'); // Notify any JS components that the value changed
+
+        ////var editor = CKEDITOR.replace('ckEditorContent');
+        //CKEDITOR.replace('ckEditorContent', {
+        //    filebrowserBrowseUrl: '/Assets/Admin/lib/ckfinder/ckfinder.html',
+        //    filebrowserImageBrowseUrl: '/Assets/Admin/lib/ckfinder/ckfinder.html?Type=Images',
+        //    filebrowserUploadUrl: '/Assets/Admin/lib/ckfinder/core/connector//aspx/connector.aspx?command=QuickUpload&type=Files',
+        //    filebrowserImageUploadUrl: '/Assets/Admin/lib/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images',
+
+        //    filebrowserWindowHeight: '1000',
+        //    filebrowserWindowWidth: '1000'
+        //});
+
+        //var editor = $('#ckEditorContent');
+        //CKFinder.setupCKEditor(editor, '/Assets/Admin/lib/ckfinder/');
+    });
+</script>

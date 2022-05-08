@@ -54,6 +54,9 @@ namespace CoffeeShop.Web.Models
         [Display(Name = "Category ID")]
         public int? CategoryID { get; set; } // int, null
 
+        [Display(Name = "Quantity")]
+        public int Quantity { get; set; }
+
         [Display(Name = "Hot Flag")]
         public bool? HotFlag { get; set; } // bit, null
 

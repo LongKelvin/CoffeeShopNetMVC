@@ -6,9 +6,9 @@ namespace CoffeeShop.Services
 {
     public interface ISlideService
     {
-        void Add(Slide slide);
+        Slide Add(Slide slide);
 
-        void Update(Slide slide);
+        Slide Update(Slide slide);
 
         void Delete(Slide slide);
 

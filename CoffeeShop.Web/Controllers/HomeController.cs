@@ -1,26 +1,74 @@
-﻿using System.Web.Mvc;
+﻿using AutoMapper;
+
+using CoffeeShop.Services;
+using CoffeeShop.Web.Models;
+
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace CoffeeShop.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
+        private IShopInfoService _shopInfoService;
+        private IProductService _productService;
+        private ISlideService _slideService;
+
+        public HomeController(IShopInfoService shopInfoService, IProductService productService,
+            ISlideService slideService, IErrorService errorService) : base(errorService)
+
+        {
+            _shopInfoService = shopInfoService;
+            _productService = productService;
+            _slideService = slideService;
+        }
+
+        // GET: Home
+        [OutputCache(Duration = 60, Location = System.Web.UI.OutputCacheLocation.Server)]
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
+        [OutputCache(Duration = 3600)]
+        [ChildActionOnly]
+        public PartialViewResult Footer()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            var shopInfo = _shopInfoService.GetShopInfo();
+            var shopInfoVM = Mapper.Map<ShopInfoViewModel>(shopInfo);
+            return PartialView(shopInfoVM);
         }
 
-        public ActionResult Contact()
+        [ChildActionOnly]
+        [OutputCache(Duration = 60)]
+        public PartialViewResult Category()
         {
-            ViewBag.Message = "Your contact page.";
+            return PartialView();
+        }
 
-            return View();
+        [OutputCache(Duration = 3600)]
+        [ChildActionOnly]
+        public PartialViewResult Header()
+        {
+            return PartialView();
+        }
+
+        [OutputCache(Duration = 60)]
+        [ChildActionOnly]
+        public PartialViewResult HomeProduct()
+        {
+            var homeProduct = _productService.GetListProductByCondition(p => p.HomeFlag == true);
+            var homeProductVM = Mapper.Map<List<ProductViewModel>>(homeProduct);
+            return PartialView(homeProductVM);
+        }
+
+        [OutputCache(Duration = 3600)]
+        [ChildActionOnly]
+        public PartialViewResult Slides()
+        {
+            var listSlider = _slideService.GetAll();
+            var listSLiderVm = Mapper.Map<List<SlideViewModel>>(listSlider);
+            return PartialView(listSLiderVm);
         }
     }
 }

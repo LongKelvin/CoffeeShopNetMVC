@@ -62,5 +62,10 @@ namespace CoffeeShop.Services
         {
             _pageRepository.Update(page);
         }
+
+        public Page GetByAlias(string alias)
+        {
+           return _pageRepository.GetByCondition(x=>x.Alias == alias && x.Status==true);
+        }
     }
 }

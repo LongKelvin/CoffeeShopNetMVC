@@ -17,14 +17,17 @@ namespace CoffeeShop.Services
         public IUnitOfWork _unitOfWork { get; set; }
         public IProductRepository _productRepository { get; set; }
         public ITagRepository _tagRepository { get; set; }
+        public IProductCategoryRepository _productCategoryRepository { get; set; }  
 
         public ProductService(IUnitOfWork unitOfWork,
             IProductRepository productRepository,
-            ITagRepository tagRepository)
+            ITagRepository tagRepository,
+            IProductCategoryRepository productCategoryRepository)
         {
             _unitOfWork = unitOfWork;
             _productRepository = productRepository;
             _tagRepository = tagRepository;
+            _productCategoryRepository = productCategoryRepository;
         }
 
         public Product Add(Product product)
@@ -110,7 +113,7 @@ namespace CoffeeShop.Services
                 return null;
 
             ModelsEntityExtensions.UpdateProduct(product, productFromDb);
-            
+
             //clear all tags record in link table ProductTags for add new record
             productFromDb.Tags.Clear();
 
@@ -147,6 +150,190 @@ namespace CoffeeShop.Services
         public Product GetByCondition(Expression<Func<Product, bool>> expression, string[] includes = null)
         {
             return _productRepository.GetByCondition(expression, includes);
+        }
+
+        public List<Product> GetListProductByParentID(int id)
+        {
+            return _productRepository.GetMulti(x => x.CategoryID == id).ToList();
+        }
+
+        public List<Product> GetListProductByParentID(int id, int page, int pageSize, string sort, out int totalRow)
+        {
+            IEnumerable<Product> query = new List<Product>();
+            if (id == 0)
+            {
+                query = _productRepository.GetMulti(x => x.Status == true);
+            }
+            else
+            {
+                query = _productRepository.GetMulti(x => x.CategoryID == id && x.Status == true);
+            }
+
+            switch (sort)
+            {
+                case "popular":
+                    query = query.OrderByDescending(x => x.ViewCount);
+                    break;
+
+                case "discount":
+                    query = query.OrderByDescending(x => x.PromotionPrice.HasValue);
+                    break;
+
+                case "priceLowHigh":
+                    query = query.OrderBy(x => x.Price);
+                    break;
+
+                case "priceHighLow":
+                    query = query.OrderByDescending(x => x.Price);
+                    break;
+
+                default:
+                    query = query.OrderByDescending(x => x.CreatedDate);
+                    break;
+            }
+
+            totalRow = query.Count();
+            return query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        public List<Product> GetListProductByCondition(Expression<Func<Product, bool>> expression, string[] includes = null)
+        {
+            return _productRepository.GetMulti(expression, includes).ToList();
+        }
+
+        public List<Product> GetListProductByConditionPaging(Expression<Func<Product, bool>> expression, int page, int pageSize,
+            string sort, out int totalRow, string[] includes = null)
+        {
+            //var query = _productRepository.GetMulti(expression);
+            var query = DbContext.Products.Where(expression);
+
+            switch (sort)
+            {
+                case "popular":
+                    query = query.OrderByDescending(x => x.ViewCount);
+                    break;
+
+                case "discount":
+                    query = query.OrderByDescending(x => x.PromotionPrice.HasValue);
+                    break;
+
+                case "priceLowHigh":
+                    query = query.OrderBy(x => x.Price);
+                    break;
+
+                case "priceHighLow":
+                    query = query.OrderByDescending(x => x.Price);
+                    break;
+
+                default:
+                    query = query.OrderByDescending(x => x.CreatedDate);
+                    break;
+            }
+
+            totalRow = query.Count();
+            return query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        public List<Product> GetRelatedProduct(int? categoryID)
+        {
+            List<Product> listRelatedProduct = new List<Product>();
+            if (categoryID == null)
+                listRelatedProduct = _productRepository.GetMulti(x => x.Status == true)
+                    .OrderBy(x => x.CreatedDate).Take(5).ToList();
+
+            listRelatedProduct = _productRepository.GetMulti(x => x.Status == true && x.CategoryID == categoryID)
+                .OrderBy(x => x.CreatedDate).Take(5).ToList();
+            return listRelatedProduct;
+        }
+
+        public List<Product> GetListProductByTag(string tag, int page, int pageSize, string sort, out int totalRow)
+        {
+            IEnumerable<Product> query = new List<Product>();
+            if (string.IsNullOrEmpty(tag))
+            {
+                query = _productRepository.GetMulti(x => x.Status == true);
+            }
+            else
+            {
+                var tagByName = _tagRepository.GetByCondition(x => x.ID.Contains(tag), new string[] { "Products" });
+                query = tagByName.Products;
+            }
+
+            switch (sort)
+            {
+                case "popular":
+                    query = query.OrderByDescending(x => x.ViewCount);
+                    break;
+
+                case "discount":
+                    query = query.OrderByDescending(x => x.PromotionPrice.HasValue);
+                    break;
+
+                case "priceLowHigh":
+                    query = query.OrderBy(x => x.Price);
+                    break;
+
+                case "priceHighLow":
+                    query = query.OrderByDescending(x => x.Price);
+                    break;
+
+                default:
+                    query = query.OrderByDescending(x => x.CreatedDate);
+                    break;
+            }
+
+            totalRow = query.Count();
+            return query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        public List<Product> GetListProductByTag(string tag)
+        {
+            IEnumerable<Product> query = new List<Product>();
+            if (string.IsNullOrEmpty(tag))
+            {
+                query = _productRepository.GetMulti(x => x.Status == true);
+            }
+            else
+            {
+                var tagByName = _tagRepository.GetByCondition(x => x.ID.Contains(tag), new string[] { "Products" });
+                query = tagByName.Products;
+            }
+            return query.ToList();
+        }
+
+        public List<Tag> GetTagsByProduct(int productID)
+        {
+            var product = _productRepository.GetByCondition(x => x.ID == productID,
+                new string[] { "Tags" });
+
+            return product.Tags.Select(t => new Tag
+            {
+                ID = t.ID,
+                Name = t.Name,
+                Type = t.Type,
+
+            }).ToList();
+        }
+
+        public void IncreaseView(int productID)
+        {
+            var product = _productRepository.GetById(productID);
+            if (product.ViewCount.HasValue)
+            {
+                product.ViewCount += 1;
+            }
+            else
+            {
+                product.ViewCount = 1;
+            }
+
+        }
+
+        public ProductCategory GetCategory(int productID)
+        {
+            var product = _productRepository.GetById(productID);
+            return _productCategoryRepository.GetByCondition(
+                x => x.ID == product.CategoryID && x.Status == true);
         }
 
         private CoffeeShopDbContext DbContext

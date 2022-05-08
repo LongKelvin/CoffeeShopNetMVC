@@ -1,0 +1,255 @@
+﻿@*@using BotDetect.Web.Mvc;*@
+@model CoffeeShop.Web.Models.ShopContactViewModel
+
+<link href="~/Assets/Admin/lib/font-awesome/css/all.css" rel="stylesheet" />
+@*<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl"
+      rel="stylesheet" type="text/css" />*@
+<style>
+    #map_area
+    {
+        height: 600px;
+    }
+</style>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Assets/Client/custom-css/contact.css" rel="stylesheet" />
+
+<div class="heading_container heading_center">
+    <h2>
+        Contact <span>Detail</span>
+    </h2>
+</div>
+
+@Html.Hidden("shopName", Model.ShopInfo.Name);
+@Html.Hidden("shopInfo", Model.ShopInfo.Other);
+
+<section class="contact_area p_120 mt-5">
+    <div class="container mb-5">
+
+        <div class="container row mt-3">
+            <div class="col-lg-12 mb-5">
+                <div class="container">
+
+                    <div class="no-gutters contact-wrap align-items-stretch">
+                        <div class="contact_info m-3">
+                            <h4>Google Map Location</h4>
+                            <div id="map_area" class=" form">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12  ">
+                <div class="container">
+                    <div class="no-gutters contact-wrap align-items-stretch">
+                        <div class="contact_info m-3">
+                            <div class="info_item mb-2 row">
+                                <div class="col-2">
+                                    <i class="fa-solid fa-shop"
+                                       style="color:rebeccapurple"></i>
+                                </div>
+                                <div class="col-10">
+                                    <h6>
+                                        @Model.ShopInfo.Name
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="info_item mb-2 row">
+                                <div class="col-2">
+                                    <i class="fa-solid fa-location-dot"
+                                       style="color:rebeccapurple"></i>
+                                </div>
+                                <div class="col-10">
+                                    <h6>
+                                        @Model.ShopInfo.Address
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="info_item mb-2 row">
+                                <div class="col-2">
+                                    <i class="fa-solid fa-phone"
+                                       style="color:rebeccapurple"></i>
+                                </div>
+                                <div class="col-10">
+                                    <h6>
+                                        <a>
+                                            @Model.ShopInfo.Telephone
+                                        </a>
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="info_item row mt-2">
+                                <div class="col-2">
+                                    <i class="fa-solid fa-at"
+                                       style="color:rebeccapurple"></i>
+                                </div>
+                                <div class="col-10">
+                                    <h6>
+                                        <a>
+
+                                            @Model.ShopInfo.Email
+                                        </a>
+                                    </h6>
+                                </div>
+                            </div>
+
+                            <div class="info_item row mt-2">
+                                <div class="col-2">
+                                    <i class="fa-solid fa-info"
+                                       style="color:rebeccapurple"></i>
+                                </div>
+                                <div class="col-10">
+                                    <h6>
+                                        <a>
+                                            <i>
+                                                @Model.ShopInfo.Other
+                                            </i>
+                                        </a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-5">
+                <div class="container">
+                    <div class="row align-items-stretch no-gutters contact-wrap">
+                        <div class="col-md-12">
+                            <div class="form h-100">
+                                <h4>Send us an email</h4>
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                @if (ViewData["SuccessMsg"] != null)
+                                {
+                                    <div class="alert alert-success" role="alert">
+                                        <strong>
+                                            @ViewData["SuccessMsg"]
+                                        </strong>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <form class="mb-5" method="post" action="@Url.Action("SendFeedback","Contact")" id="contactForm" name="contactForm">
+                                        <div class="row">
+                                            <div class="col-md-6 form-group mb-3">
+                                                <label for="" class="col-form-label">Name *</label>
+                                                @*<input type="text" class="form-control" name="Model.Feedback.Name" id="Feedback_Name" placeholder="Your name">*@
+                                                @Html.TextBoxFor(m => m.Feedback.Name, new { @class = "form-control", @placeholder = "Your name" })
+                                                @Html.ValidationMessageFor(model => model.Feedback.Name, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-md-6 form-group mb-3">
+                                                <label for="" class="col-form-label">Email *</label>
+                                                @*<input type="text" class="form-control" name="Feedback.Email" id="Feedback_Email" placeholder="Your email">*@
+                                                @Html.TextBoxFor(m => m.Feedback.Email, new { @class = "form-control", @placeholder = "Your email" })
+                                                @Html.ValidationMessageFor(model => model.Feedback.Email, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12 form-group mb-3">
+                                                <label for="budget" class="col-form-label">Subject:</label>
+                                                @*<input type="text" class="form-control" name="Feedback.EmailSubject" id="Feedback_EmailSubject" placeholder="Your email subject">*@
+                                                @Html.TextBoxFor(m => m.Feedback.EmailSubject, new { @class = "form-control", @placeholder = "Email subject" })
+                                                @Html.ValidationMessageFor(model => model.Feedback.EmailSubject, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12 form-group mb-3">
+                                                <label for="message" class="col-form-label">Message *</label>
+                                                @*<textarea class="form-control" name="Feedback.Message" id="Feedback_Message" cols="30" rows="4" placeholder="Write your message"></textarea>*@
+                                                @Html.TextAreaFor(m => m.Feedback.Message, new { @class = "form-control", @placeholder = "Write your message" })
+                                                @Html.ValidationMessageFor(model => model.Feedback.Message, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        @*<div class="row">
+                                                <div class="col-md-12 form-group mb-3">
+                                                    <label for="message" class="col-form-label">Captcha *</label>
+                                                    @{
+                                                        MvcCaptcha mvcCaptcha = new MvcCaptcha("ContactCaptcha");
+                                                        mvcCaptcha.UserInputID = "CaptchaCode";
+                                                    }
+                                                    @Html.Captcha(mvcCaptcha)
+                                                    @Html.TextBoxFor(m => m.Feedback.CaptchaCode, new { @class = "form-control"})
+                                                    @Html.ValidationMessageFor(model => model.Feedback.CaptchaCode, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>*@
+
+                                        <div class="row">
+                                            <div class="col-md-12 form-group">
+                                                <div class="btn-box">
+                                                    <a style="background:white;  border:none">
+                                                        <input class="btn-checkout text-center flexible-btn" type="submit" value="Send Message" />
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                }
+
+                                <div id="form-message-warning mt-4"></div>
+                                <div id="form-message-success">
+                                    Your message was sent, thank you!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Assets/Admin/lib/font-awesome/js/all.js"></script>
+
+<!--
+ The `defer` attribute causes the callback to execute after the full HTML
+ document has been parsed. For non-blocking uses, avoiding race conditions,
+ and consistent behavior across browsers, consider loading using Promises
+ with https://www.npmjs.com/package/googlemaps/js-api-loader.
+-->
+
+<script>
+    @*var googleMap_APIKEY = '@System.Configuration.ConfigurationManager.AppSettings["GooggleMapJavascript_API_KEY"]';
+    var ggSource = "https://maps.googleapis.com/maps/api/js?key=" + googleMap_APIKEY + "&callback=initMap&v=weekly";*@
+
+    // This example displays a marker at the center of Australia.
+    // When the user clicks the marker, an info window opens.
+    function initMap() {
+        var shopName = $('#shopName').val();
+        var shopInfo = $('#shopInfo').val();
+        const shopLocation = { lat:@Model.ShopInfo.Latitude, lng: @Model.ShopInfo.Longitude };
+        const map = new google.maps.Map(document.getElementById("map_area"), {
+            zoom:19,
+            center: shopLocation,
+        });
+        const contentString = shopInfo;
+
+        const infowindow = new google.maps.InfoWindow({
+            content: contentString,
+        });
+
+        const marker = new google.maps.Marker({
+            position: shopLocation,
+            map,
+            title: shopName,
+        });
+
+        marker.addListener("click", () => {
+            infowindow.open({
+                anchor: marker,
+                map,
+                shouldFocus: false,
+            });
+        });
+    }
+
+    window.initMap = initMap;
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUkKjFBlL0C2yDfFazbCDMqwpFeqc2QQI&callback=initMap&v=weekly" ;
+        defer></script>
