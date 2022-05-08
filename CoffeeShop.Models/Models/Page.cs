@@ -13,6 +13,11 @@ namespace CoffeeShop.Models.Models
         [Display(Name = "Name")]
         public string Name { get; set; } // nvarchar(250), null
 
+        [MaxLength(250)]
+        [StringLength(250)]
+        [Display(Name = "Alias")]
+        public string Alias { get; set; } // nvarchar(250), null
+
         [MaxLength]
         [Display(Name = "Content")]
         public string Content { get; set; } // nvarchar(max), null

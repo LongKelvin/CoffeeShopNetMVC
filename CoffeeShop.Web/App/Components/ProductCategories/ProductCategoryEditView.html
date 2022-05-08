@@ -53,9 +53,9 @@
                             <div class="form-group">
                                 <label>Danh mục cha</label>
                                 <select ng-model="productCategory.ParentID" id="parentIdDropdown"
-                                        ng-init="productCategory.ParentID=''"
                                         class=" form-control w-100"
                                         ng-options="option.ID as option.Name for option in parentCategories">
+                             
                                     <option value=''>Danh mục gốc</option>
                                 </select>
                             </div>
@@ -218,16 +218,21 @@
 </section>
 <!-- /.content -->
 
+<script src="../../../Assets/Admin/lib/select2/js/select2.js"></script>
 <script>
     $(document).ready(function () {
         $('#parentIdDropdown').select2({
             theme: 'bootstrap4'
         });
 
+       
+        
         //$('#parentIdDropdown').val('Danh mục gốc'); // Select the option with a default value
         //$('#parentIdDropdown').trigger('change'); // Notify any JS components that the value changed
 
         //Initialize Select2 Elements
         //console.log('Load library done!')
     });
+
+    
 </script>

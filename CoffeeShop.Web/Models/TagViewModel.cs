@@ -7,16 +7,17 @@ namespace CoffeeShop.Web.Models
 {
     public class TagViewModel
     {
-        
-       
+        public TagViewModel()
+        {
+            this.Posts = new HashSet<PostViewModel>();
+            this.Products = new HashSet<ProductViewModel>();
+        }
         [Display(Name = "ID")]
         public string ID { get; set; } // varchar(50), not null
 
-       
         [Display(Name = "Name")]
         public string Name { get; set; } // nvarchar(50), null
 
-     
         [Display(Name = "Type")]
         public string Type { get; set; } // varchar(50), null
 

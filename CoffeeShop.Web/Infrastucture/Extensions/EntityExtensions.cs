@@ -92,7 +92,7 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             product.HotFlag = productVm.HotFlag;
             product.ManufacturingDate = productVm.ManufacturingDate;
             product.ExpireDate = productVm.ExpireDate;
-
+            product.Quantity = productVm.Quantity;
             product.CreatedDate = productVm.CreatedDate;
             product.CreatedBy = productVm.CreatedBy;
             product.UpdatedDate = productVm.UpdatedDate;
@@ -166,6 +166,30 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
                 }
             }
             return tags.ToString();
+        }
+
+        public static void UpdateSlide(this Slide slide, SlideViewModel slideVm)
+        {
+            slide.ID = slideVm.ID;
+            slide.Title = slideVm.Title;
+            slide.Description = slideVm.Description;
+            slide.Images = slideVm.Images;
+            slide.URL = slideVm.URL;
+            slide.ActionName = slideVm.ActionName;
+            slide.DisplayOrder = slideVm.DisplayOrder;
+            slide.Status = slideVm.Status;
+            slide.RowVersion = slideVm.RowVersion;
+        }
+
+        public static void UpdateFeedback(this Feedback feedback, FeedbackViewModel feedbackVM)
+        {
+            feedback.ID = feedbackVM.ID;
+            feedback.Email = feedbackVM.Email;
+            feedback.Name = feedbackVM.Name;
+            feedback.Status = feedbackVM.Status;
+            feedback.EmailSubject = feedbackVM.EmailSubject;
+            feedback.RowVersion = feedbackVM.RowVersion;
+            feedback.Message = feedbackVM.Message;
         }
     }
 }

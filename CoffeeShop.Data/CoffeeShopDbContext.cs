@@ -3,8 +3,6 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.Reflection;
 
 namespace CoffeeShop.Data
 {
@@ -14,7 +12,7 @@ namespace CoffeeShop.Data
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<CoffeeShopDbContext, CoffeeShop.Data.Migrations.Configuration>());
             this.Configuration.LazyLoadingEnabled = false;
-            
+            this.Configuration.ProxyCreationEnabled = false;
         }
 
         public virtual DbSet<Footer> Footers { get; set; }
@@ -33,6 +31,9 @@ namespace CoffeeShop.Data
         public virtual DbSet<VisitorStatistic> VisitorStatistics { get; set; }
         public virtual DbSet<Slide> Slides { get; set; }
         public virtual DbSet<Error> Errors { get; set; }
+        public virtual DbSet<ShopInformation> ShopInfos { get; set; }
+        public virtual DbSet<ShopPaymentInfo> ShopPayments { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
 
         public static CoffeeShopDbContext Create()
         {
@@ -109,7 +110,7 @@ namespace CoffeeShop.Data
                 .Property(e => e.IPAddress)
                 .IsUnicode(false);
 
-            //Identity 
+            //Identity
             modelBuilder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId }).ToTable("ApplicationUserRoles");
             modelBuilder.Entity<IdentityUserLogin>().HasKey(i => i.UserId).ToTable("ApplicationUserLogins");
             modelBuilder.Entity<IdentityRole>().ToTable("ApplicationRoles");

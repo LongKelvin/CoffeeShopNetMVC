@@ -1,0 +1,249 @@
+﻿  <!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><strong>Danh sách Slide hiển thị trên trang chủ</strong></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="Home">Trang chủ</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="Slides">Cài đặt hiển thị</a></li>
+                    <li class="breadcrumb-item active">Danh sách Slides</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Main content-->
+<section class="content overflow-hidden">
+    <div class="container-fluid">
+        <div class="card card-default color-palette-box">
+            <!--<div class="card-header">
+                <h1 class="card-title"> <strong>Danh mục Sản phẩm</strong></h1>
+            </div>-->
+            <!-- /.card-header -->
+            <div class="row card-header justify-content-lg-between ">
+                <div class="col-lg-6 col-xs-12 col-md-6 col-sm-12">
+                    <div class="input-group display-flex">
+                        <input ng-model="keyWord" type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm ..."
+                               aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button ng-click="getSlides()" class="btn btn-outline-primary" type="button">
+                                <i class="fa-solid fa-magnifying-glass"> </i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 offset-lg-2 float-lg-right col-xs-12 col-md-6 col-sm-12 justify-content-between space-vertical ">
+                    <div class=" row">
+                        <div class="float-sm-start col-6 ">
+                            <button type="button" class="btn btn-success  w-100 " ui-sref="SlideAdd">
+                                <i class="fas fa-plus"> </i> Thêm mới
+                            </button>
+                        </div>
+                        <div class="float-sm-end col-6 ">
+                            <button type="button" class="btn btn-outline-primary w-100  ">
+                                <i class="fa-solid fa-file-export"> </i> Xuất PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body p-0">
+                <table class="table">
+                    <thead>
+
+                        <tr>
+                            <th  style="width: 10px">
+                                STT
+                            </th>
+                            <th class="selectedItem" style="width: 10px">
+                                Chọn
+                            </th>
+                            <th style="width: 20%">Tên slide</th>
+                            <th class="optional-sm" style="width: 10%">URL</th>
+                            <th style="width: 20%">Mô tả</th>
+                            <th style="width: 10%">Tên sự kiện</th>
+                            <th class="optional-sm" style="width: 10%">Thứ tự hiển thị</th>
+                            <th class="optional-sm" style="width: 10%">Hình ảnh</th>
+                            <th style="width: 10%">Trạng thái</th>
+                            <th style="width: 15%">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in slides">
+                            <td>
+                                {{$index+1}}
+                            </td>
+                            <td>
+                                <input type="checkbox" class="checkBox"
+                                       value="{{item.ID}}" onclick="GetTotalSelectedItems()" />
+                            </td>
+
+                            <td>{{item.Title}}</td>
+                            <td>{{item.URL}}</td>
+                            <td>{{item.Description}} </td>
+
+                        
+                            <td>{{item.ActionName}} </td>
+                            
+
+                            <td>{{item.DisplayOrder}}</td>
+                            <td>
+                                {{item.Images}}
+                            </td>
+                           
+                            <td>
+                                <span ng-class="{'badge bg-danger':item.Status==false,'badge bg-success':item.Status==true}">
+                                    {{item.Status | statusFilter}}
+                                </span>
+                            </td>
+                            <td>
+                                <button ui-sref="SlideEdit({id:item.ID})" class="btn btn-sm btn-outline-primary"><i class="fa fa-pencil"></i></button>
+                                <button ng-click="showDeleteDialog(item.ID)" class="btn  btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr />
+
+            <div class="card-body form-row justify-content-around">
+                <div class="col-6">
+                    <div class="float-left justify-content-around ">
+                        <strong>
+                            Số bản ghi đang được chọn: <span id="SelectedCount" class="text-primary">{{selectedCount}}</span>
+                        </strong>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="float-right justify-content-around ">
+                        <span class="card-body">
+                            <span class="card-title">
+                                <strong>Xóa các bản ghi đã chọn &nbsp;</strong>
+                                <button id="delete-items" ng-click="showMultiDeleteDialog()" class="btn  btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <!--Pager directives-->
+            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" pageSize="3" search-func="getProducts(page, pageSize)"></pager-directive>
+            <div class="card-footer form-row justify-content-around">
+                <div class="col-6">
+                    <div class="float-left justify-content-around ">
+                        <span class="card-title">
+                            <strong>
+                                Trang <span class="text-primary">{{page+1}}</span> / <span class="text-primary">{{pagesCount}}</span>
+                            </strong>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="float-right justify-content-around ">
+                        <span class="card-title">
+                            <strong>
+                                Tổng số bản ghi: <span class="text-primary">{{totalCount}}</span>
+                            </strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section><!-- /.content -->
+<!-- Modal -->
+<div class="modal fade" id="pconfirmDeleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cfirmTitle"><strong>Bạn chắc chắn muốn xóa?</strong></h5>
+            </div>
+            <div class="modal-body">
+                <span>Dữ liệu bị xóa sẽ không thể khôi phục lại!</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Hủy bỏ</button>
+                <button ng-click="deleteSlide()" type="button" class="btn btn-danger">&nbsp; &nbsp; Xóa&nbsp;&nbsp;  </button>
+                <input id="deleteId" hidden />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal for delete multi items-->
+<div class="modal fade" id="pconfirmMultiDeleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cfirmTitle"><strong>Bạn chắc chắn muốn xóa?</strong></h5>
+            </div>
+            <div class="modal-body" id="m-content">
+                <span>Dữ liệu bị xóa sẽ không thể khôi phục lại!</span>
+                <br />
+                <span>Số bản ghi sẽ bị xóa: &nbsp;<span class="danger" id="totalDeleteCount"></span> </span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Hủy bỏ</button>
+                <button id="delMultiBtn" ng-click="deleteMultiSlide()" type="button" class="btn btn-danger">&nbsp; &nbsp; Xóa&nbsp;&nbsp;  </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+
+        $(window).bind("resize", function () {
+            // console.log($(this).width())
+            if ($(this).width() <= 1024) {
+                $('#main-body').addClass('sidebar-collapse');
+                $('#main-body').addClass('sidebar-closed');
+            }
+            else {
+
+                $('#main-body').removeClass('sidebar-collapse');
+                $('#main-body').removeClass('sidebar-closed');
+            }
+        })
+    })
+
+    $(document).ready(function () {
+        var selectedItem = new Array();
+        $('input:checkbox.checkBox').each(function () {
+            if ($(this).prop('checked')) {
+                selectedItem.push($(this).val());
+            }
+        });
+
+        //if (selectedItem.length == 0) {
+        //    $('#delete-items').addClass('disabled');
+
+        //} else {
+        //    $('#delete-items').removeClass('disabled');
+        //}
+
+        GetTotalSelectedItems();
+    });
+
+    function GetTotalSelectedItems() {
+        totalSelectedItems = 0;
+        $('input:checkbox.checkBox').each(function () {
+            if ($(this).prop('checked')) {
+                totalSelectedItems = totalSelectedItems + 1;
+            }
+        });
+
+        //console.log("GetMethod -> total selected : ", totalSelectedItems)
+        $('#SelectedCount').html(totalSelectedItems);
+        return totalSelectedItems;
+    }
+</script>

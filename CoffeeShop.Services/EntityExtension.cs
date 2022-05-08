@@ -94,7 +94,7 @@ namespace CoffeeShop.Services
             target.HotFlag = source.HotFlag;
             target.ManufacturingDate = source.ManufacturingDate;
             target.ExpireDate = source.ExpireDate;
-
+            target.Quantity = source.Quantity;
             target.CreatedDate = source.CreatedDate;
             target.CreatedBy = source.CreatedBy;
             target.UpdatedDate = source.UpdatedDate;

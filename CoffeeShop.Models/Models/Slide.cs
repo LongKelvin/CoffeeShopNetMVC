@@ -11,8 +11,14 @@ namespace CoffeeShop.Models.Models
         [MaxLength(250)]
         [StringLength(250)]
         [Required(ErrorMessage = "Name is required")]
-        [Display(Name = "Name")]
-        public string Name { get; set; } // nvarchar(250), not null
+        [Display(Name = "Title")]
+        public string Title { get; set; } // nvarchar(250), not null
+
+        [MaxLength(50)]
+        [StringLength(50)]
+        [Required(ErrorMessage = "Action Name is required")]
+        [Display(Name = "Action Name")]
+        public string ActionName { get; set; } // nvarchar(250), not null
 
         [MaxLength(500)]
         [StringLength(500)]
@@ -36,6 +42,7 @@ namespace CoffeeShop.Models.Models
         public bool Status { get; set; } // bit, not null
 
         [Display(Name = "Display Order")]
-        public int? DisplayOrder { get; set; } // int, null
+        [Required]
+        public int DisplayOrder { get; set; } // int, null
     }
 }

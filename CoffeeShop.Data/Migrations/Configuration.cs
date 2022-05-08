@@ -8,6 +8,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;
+    using System.IO;
     using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<CoffeeShop.Data.CoffeeShopDbContext>
@@ -27,6 +28,9 @@
             CreateUser(context);
             CreateProductCategorySample(context);
             CreateProductsSample(context);
+            CreateSlidesSample(context);
+            CreatePagesSample(context);
+            CreateShopInfo(context);
         }
 
         private void CreateUser(CoffeeShopDbContext context)
@@ -91,9 +95,62 @@
                 new Product() { Name="Pine Mountain Fruity 500g",Alias="cf-hat",Status=true ,Price=364000},
                 new Product() { Name="Pine Mountain Blend #7 500g",Alias="cf-hat",Status=true ,Price=270000},
                 new Product() { Name="Pine Mountain Blend #5 500g",Alias="cf-hat",Status=true ,Price=265000},
-                
             };
                 context.Products.AddRange(listProduct);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateSlidesSample(CoffeeShopDbContext context)
+        {
+            if (context.Slides.Count() == 0)
+            {
+                List<Slide> listSlide = new List<Slide>()
+                {
+                    new Slide(){ Status=true, Title = "Coffee Way", ActionName="Khám phá ngay1", Description="Uống Coffee Way, Uống sức khỏe", DisplayOrder = 1, Images = "/UploadFiles/images/slider-bg.jpg", URL="/Products"},
+                    new Slide(){ Status=true, Title = "Coffee Way", ActionName="Khám phá ngay2", Description="Uống Coffee Way, Uống sức khỏe", DisplayOrder = 2, Images = "/UploadFiles/images/slider-bg.jpg", URL="/Products"},
+                    new Slide(){ Status=true, Title = "Coffee Way", ActionName="Khám phá ngay3", Description="Uống Coffee Way, Uống sức khỏe", DisplayOrder = 3, Images = "/UploadFiles/images/slider-bg.jpg", URL="/Products"}
+                };
+
+                context.Slides.AddRange(listSlide);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreatePagesSample(CoffeeShopDbContext context)
+        {
+            if (context.Pages.Count() == 0)
+            {
+                Page page = new Page
+                {
+                    Name = "About Us",
+                    Alias = "About",
+                    Status = true,
+                    Content = "ABOUT US" 
+                };
+
+                context.Pages.Add(page);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateShopInfo(CoffeeShopDbContext context)
+        {
+            if (context.ShopInfos.Count() == 0)
+            {
+                ShopInformation shopInfo = new ShopInformation
+                {
+                    Name = "Coffee Way",
+                    Address = "2B Bình Giã - Phường 13 - Tân Bình - TP. Hồ Chí Minh",
+                    Latitude = 10.798109173100983,
+                    Longitude= 106.64413230105687,
+                    Status = true,
+                    Email = "coffeewaytb@gmail.com",
+                    Telephone = "0707635581",
+                    Code = "03F53T"
+                };
+
+                context.ShopInfos.Add(shopInfo);
                 context.SaveChanges();
             }
         }

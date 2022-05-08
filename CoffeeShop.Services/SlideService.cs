@@ -17,9 +17,9 @@ namespace CoffeeShop.Services
             _slideRepository = slideRepository;
         }
 
-        public void Add(Slide slide)
+        public Slide Add(Slide slide)
         {
-            _slideRepository.Add(slide);
+            return _slideRepository.Add(slide);
         }
 
         public void Delete(Slide slide)
@@ -58,9 +58,10 @@ namespace CoffeeShop.Services
             _unitOfWork.Commit();
         }
 
-        public void Update(Slide slide)
+        public Slide Update(Slide slide)
         {
             _slideRepository.Update(slide);
+            return slide;
         }
     }
 }

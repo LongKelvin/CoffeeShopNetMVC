@@ -7,6 +7,7 @@
         'CoffeeShop.Common',
         'CoffeeShop.Products',
         'CoffeeShop.ProductCategory',
+        'CoffeeShop.Slides',
 
     ]).config(config)
         .config(configAuthentication);
@@ -32,6 +33,7 @@
                 templateUrl: "/App/Components/Home/HomeView.html",
                 controller: "HomeController"
             });
+
 
         $urlRouterProvider.otherwise('/Login');
     }
