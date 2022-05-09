@@ -1,4 +1,6 @@
-﻿using CoffeeShop.Common;
+﻿using BotDetect.Web.Mvc;
+
+using CoffeeShop.Common;
 using CoffeeShop.Models.Models;
 using CoffeeShop.Services;
 using CoffeeShop.Web.Infrastucture.Extensions;
@@ -41,6 +43,7 @@ namespace CoffeeShop.Web.Controllers
         }
 
         [HttpPost]
+        [CaptchaValidationActionFilter("CaptchaCode", "ContactCaptcha", "Captcha code is incorrect, please try again")]
         public ActionResult SendFeedbackToAdmin(ShopContactViewModel shopContactVM)
         {
             if (ModelState.IsValid)
@@ -56,7 +59,8 @@ namespace CoffeeShop.Web.Controllers
                 ViewData["SuccessMsg"] = Resources.Resources.SendFeedbackStatus_OK;
 
                 //Fill out content to email
-                string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/Client/templates/feedback_template.html"));
+                string content = System.IO.File.ReadAllText(
+                    Server.MapPath("/Assets/Client/templates/feedback_template.html"));
                 content = content.Replace("{{EmailSubject}}", shopContactVM.Feedback.EmailSubject);
                 content = content.Replace("{{Name}}", shopContactVM.Feedback.Name);
                 content = content.Replace("{{Email}}", shopContactVM.Feedback.Email);
@@ -72,7 +76,7 @@ namespace CoffeeShop.Web.Controllers
                 //feedbackVm.Name = "";
                 //feedbackVm.Message = "";
                 //feedbackVm.Email = "";
-                //MvcCaptcha.ResetCaptcha("ContactCaptcha");
+                MvcCaptcha.ResetCaptcha("ContactCaptcha");
                 return View(nameof(Index), GetContactInfo());
             }
 
@@ -81,7 +85,8 @@ namespace CoffeeShop.Web.Controllers
 
         public void SendResponseEmailToCustomer(string email, string name)
         {
-            string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/Client/templates/response_template.html"));
+            string content = System.IO.File.ReadAllText(
+                Server.MapPath("/Assets/Client/templates/response_template.html"));
             content = content.Replace("{{Name}}", name);
             //Fill out shop contact info to email template
             var shopInfo = GetContactInfo();
