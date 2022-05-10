@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Owin;
 
 using System;
-
+using Microsoft.Owin.Security.Cookies;
 
 namespace CoffeeShop.Web.App_Start
 {
@@ -38,6 +38,25 @@ namespace CoffeeShop.Web.App_Start
             });
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
 
+            var authCookieOptions = new CookieAuthenticationOptions
+            {
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = new PathString("/Account/Login"),
+                ExpireTimeSpan = TimeSpan.FromHours(4.0),
+                Provider = new CookieAuthenticationProvider
+                {
+                    // Enables the application to validate the security stamp when the user logs in.
+                    // This is a security feature which is used when you change a password or add an external login to your account.  
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
+                        validateInterval: TimeSpan.FromMinutes(30),
+                        regenerateIdentity: (manager, user) 
+                        => user.GenerateUserIdentityAsync(manager, DefaultAuthenticationTypes.ApplicationCookie))
+                }
+            };
+
+            app.UseCookieAuthentication(authCookieOptions);
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",
@@ -61,7 +80,7 @@ namespace CoffeeShop.Web.App_Start
         {
             public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
             {
-                context.Validated();
+                 context.Validated();
             }
             public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
             {
