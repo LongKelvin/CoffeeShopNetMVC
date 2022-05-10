@@ -6,10 +6,12 @@ using CoffeeShop.Services;
 using CoffeeShop.Web.App_Start;
 using CoffeeShop.Web.Models;
 
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 
 using System;
-using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -113,7 +115,8 @@ namespace CoffeeShop.Web.Controllers
             string successForm = System.IO.File.ReadAllText(
                    Server.MapPath("/Assets/Client/form/success-form/success_form.html"));
 
-            successForm = successForm.Replace("{{DirectActionLink}}", Url.Action("Login", "Account"));
+            successForm = successForm.Replace("{{DirectActionLink}}",
+                Url.Action("Login", "Account"));
 
             //Send mail to new register account
             SendResponseEmailToCustomer(registerVM.UserName, registerVM);
@@ -150,30 +153,65 @@ namespace CoffeeShop.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Login(LoginViewModel loginVM)
+        public ActionResult Login(LoginViewModel loginVM, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
                 return View(loginVM);
             }
 
-            var userByEmail = _userManager.FindByEmailAsync(loginVM.Email);
-            if (userByEmail.Result == null)
+            //var userByEmail = _userManager.FindByEmail(loginVM.Email);
+            //if (userByEmail == null)
+            //{
+            //    ModelState.AddModelError(loginVM.Email, "The email or password is not correct, Please checkout");
+            //    return View(loginVM);
+            //}
+
+            var user = _userManager.Find(loginVM.UserName, loginVM.Password);
+            if (user == null)
             {
-                ModelState.AddModelError(loginVM.Email, "This email is not correct, Please checkout");
+                ModelState.AddModelError(loginVM.UserName, "The user name or password is not correct, Please checkout");
                 return View(loginVM);
             }
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(userByEmail.Result.UserName, loginVM.Password,
-                false, shouldLockout: false);
-            return View();
+
+            IAuthenticationManager authenticationManager = HttpContext.GetOwinContext().Authentication;
+            authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+
+            ClaimsIdentity claimsIdentity = _userManager.CreateIdentity(user,
+                DefaultAuthenticationTypes.ApplicationCookie);
+
+            AuthenticationProperties properties = new AuthenticationProperties
+            {
+                IsPersistent = loginVM.RememberMe,
+            };
+
+            authenticationManager.SignIn(properties, claimsIdentity);
+
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+
+            ViewBag.ReturnUrl = returnUrl;
+            return RedirectToAction("Index", "Home");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOut()
+        {
+            IAuthenticationManager authenticationManager = HttpContext.GetOwinContext().Authentication;
+            authenticationManager.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+
+        
     }
 }
