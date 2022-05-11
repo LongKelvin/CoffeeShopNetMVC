@@ -1,0 +1,49 @@
+﻿<div class="card card-info recent-cart">
+    <h4 class="card-header card-white"><strong>Cart</strong></h4>
+    <ul class="cart-order card-body" id="cartBody">
+    </ul>
+    <div class="card card-footer text-center">
+        <div class="sub_total ">
+            <h5><b>Sub Total: <b id="totalPriceCartPanel"></b> </b></h5>
+        </div>
+        <div class="btn-box">
+            <a href="" class="btn-secondary  flexible-btn">
+                Xem giỏ hàng
+            </a>
+        </div>
+        <div class="btn-box">
+            <a href="@Url.Action("Index","ShoppingCart")" class="btn-checkout  flexible-btn">
+                Đặt hàng
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<script type="x-tmpl-mustache" id="cartPanelTemplate">
+    <li class="order-item row">
+        <div class="item-image col-4 flexiable-img">
+            <img src="{{itemImage}}" />
+        </div>
+        <div class="col-6">
+            <p>
+                <b class="product-name ">{{itemName}}</b>
+                <br />
+                <strong class="itemQty" data-price="{{itemUnitPrice}}">{{itemQuantity}}</strong> x <span class="product-price">{{itemUnitPriceF}}</span>
+            </p>
+        </div>
+        <div class="col-2 w-100 btn-close"  data-id="{{itemProductID}}" >
+            <button type="button" class="close"  >
+                <span
+                      class="text-danger" onclick="deleteItemInCartPanel({{itemProductID}})" aria-hidden="true">&times;
+    </span>
+            </button>
+        </div>
+
+
+            @*<button type="button" onclick="deleteItemInCartPanel({{itemProductID}})" data-id="{{itemProductID}}"  class="close" style="background-color:pink" >
+                remove
+            </button>*@
+
+    </li>
+</script>

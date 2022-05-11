@@ -66,7 +66,7 @@ namespace CoffeeShop.Web.Controllers
 
             Session[Common.CommonConstants.SessionCart] = cart;
 
-            return Json(new { status = true, count = cart.Count(), totalQuantity = GetCartTotalQuantity() });
+            return Json(new { status = true, count = cart.Count() });
         }
 
         [HttpGet]
@@ -81,7 +81,6 @@ namespace CoffeeShop.Web.Controllers
                 status = true,
                 data = cart,
                 count = cart.Count(),
-                totalQuantity = GetCartTotalQuantity()
             }, JsonRequestBehavior.AllowGet);
         }
 
@@ -123,7 +122,7 @@ namespace CoffeeShop.Web.Controllers
                 cart.RemoveAll(x => x.ProductID == productID);
                 Session[Common.CommonConstants.SessionCart] = cart;
 
-                return Json(new { status = true, count = cart.Count()});
+                return Json(new { status = true, count = cart.Count() });
             }
 
             return Json(new { status = false });
@@ -145,7 +144,13 @@ namespace CoffeeShop.Web.Controllers
             {
                 temp += cartItem.Quantity;
             }
-            return Json(new {data = temp}, JsonRequestBehavior.AllowGet);
+            return Json(new { data = temp }, JsonRequestBehavior.AllowGet);
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult CartPanel()
+        {
+            return PartialView();
         }
     }
 }

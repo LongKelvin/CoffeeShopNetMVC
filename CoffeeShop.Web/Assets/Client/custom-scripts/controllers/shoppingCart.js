@@ -6,7 +6,7 @@
 
     registerEvent: function () {
         var shippingFee = 20000;
-        
+
         $('#btnAddItem').off('click').on('click', function (e) {
             e.preventDefault();
             var productID = parseInt($(this).data('id'));
@@ -43,7 +43,9 @@
 
             $('#orderTotalPrice').text(numeral(cart.getTotalPriceOrder()).format('0,0'));
             $('#totalAmount').text(numeral(totalAmount).format('0,0'));
-   
+
+            //cart panel
+            $('#itemQuantity').text(quantity);
         });
     },
 
@@ -56,19 +58,23 @@
             total += tempPrice;
         });
 
+        //cart panel
+        //$('#totalPriceCartPanel').text(numeral(total).format('0,0'));
+
         return total;
     },
 
     loadData: function () {
         var shippingFee = 20000;
+
         var cartTemplateHtml = $('#cartTemplate').html();
-        if (cartTemplateHtml == null || cartTemplateHtml == 'undefined') {
-            cart.getTotalQuantity();
+        
+        if (cartTemplateHtml == null) {
+            this.getTotalQuantity();
             return;
         }
-            
-        Mustache.parse(cartTemplateHtml, ['{{', '}}']);
 
+        Mustache.parse(cartTemplateHtml, ['{{', '}}']);
         $.ajax({
             url: '/ShoppingCart/GetAll',
             type: 'GET',
@@ -76,7 +82,7 @@
             success: function (result) {
                 if (result.status == true) {
                     var dataAsHtml = '';
-                    console.log('load data: total count: ', result.count);
+
                     if (result.count <= 0) {
                         $('#cartDetailBody').html('<p class="mt-5 ml-1">Your cart is currently empty.</p>')
                         $('#totalQuantity').text(0);
@@ -97,7 +103,7 @@
                                 itemUnitPriceF: numeral(totalPrice).format('0,0'),
                             });
                         });
-                    
+
                         $('#cartDetailBody').html(dataAsHtml);
                         $('#shippingFee').text(numeral(shippingFee).format('0,0'));
 
@@ -112,6 +118,7 @@
                 }
             }
         })
+
     },
 
     addItem: function (productID, quantity) {
@@ -126,9 +133,11 @@
             success: function (result) {
                 if (result.status == true) {
                     cart.getTotalQuantity();
+                    cartPanel.loadData();
                 }
             }
         })
+
     },
 
     deleteItem: function (productID) {
@@ -142,10 +151,12 @@
             success: function (result) {
                 if (result.status == true) {
                     cart.loadData();
+                    cartPanel.loadData();
                     cart.getTotalQuantity();
                 }
             }
         })
+        
     },
     getTotalQuantity: function () {
         $.ajax({
@@ -163,5 +174,5 @@ cart.init();
 
 function addItemToCart(productID) {
     var productId = parseInt(productID);
-    cart.addItem(productId,1); 
+    cart.addItem(productId, 1);
 }
