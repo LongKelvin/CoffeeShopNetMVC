@@ -319,7 +319,6 @@ a:focus
         position: unset;
     }
 
-
     .slider_section .detail-box h1
     {
         font-size: 4.5rem;
@@ -348,7 +347,7 @@ a:focus
         color: white;
         font-family: 'Open Sans', sans-serif;
         font-weight: 500;
-        font-style:italic;
+        font-style: italic;
     }
 
     .slider_section .detail-box a
@@ -366,14 +365,15 @@ a:focus
         margin-top: 10px;
         font-weight: 700;
     }
+
     .slider_section .detail-box
     {
         font-family: 'Open Sans', sans-serif;
-        
     }
+
         .slider_section .detail-box a:hover
         {
-          /*  background-color: transparent;
+            /*  background-color: transparent;
             color: #eab676;*/
             background-color: white;
             color: black;
@@ -566,6 +566,7 @@ a:focus
         -webkit-transition: all .3s;
         transition: all .3s;
         margin: 5px 0;
+        cursor: pointer;
     }
 
     .product_section .options .option1
@@ -573,12 +574,14 @@ a:focus
         background-color: #eab676;
         border: 1px solid #eab676;
         color: #ffffff;
+        cursor: pointer;
     }
 
         .product_section .options .option1:hover
         {
             background-color: transparent;
             color: #eab676;
+            cursor: pointer;
         }
 
     .product_section .options .option2
@@ -586,12 +589,14 @@ a:focus
         background-color: #000000;
         border: 1px solid #000000;
         color: #ffffff;
+        cursor: pointer;
     }
 
         .product_section .options .option2:hover
         {
             background-color: transparent;
             color: #000000;
+            cursor: pointer;
         }
 
     .product_section .options .option3
@@ -599,12 +604,14 @@ a:focus
         background-color: #873e23;
         border: 1px solid #873e23;
         color: #ffffff;
+        cursor: pointer;
     }
 
         .product_section .options .option3:hover
         {
             background-color: transparent;
             color: #873e23;
+            cursor: pointer;
         }
 
 .product_section .btn-box

@@ -92,7 +92,7 @@
                             </a>
                         </div>
                         <div class="btn-box">
-                            <a href="@Url.Action("Index","Cart")" class="btn-checkout  flexible-btn">
+                            <a href="@Url.Action("Index","ShoppingCart")" class="btn-checkout  flexible-btn">
                                 Đặt hàng
                             </a>
                         </div>
@@ -186,8 +186,13 @@
                                     </ul>
                                 </div>
 
-                                <div class=" btn-box justify-content-start"> <a class=" btn-box btn-secondary text-center flexible-btn" href="#">Buy Now</a></div>
-                                <div class="btn-box  justify-content-start"> <a class=" btn-box flexible-btn text-center" href="#">Add to cart</a></div>
+                                <div class=" btn-box justify-content-start">
+                                    <a onclick="addItemToCart(@Model.ID)" href="@Url.Action("Index","ShoppingCart")"
+                                       class=" btn-box btn-secondary text-center flexible-btn">Buy Now</a>
+                                </div>
+                                <div class="btn-box  justify-content-start">
+                                    <a id="btnAddItem" data-id="@Model.ID" class=" btn-box flexible-btn text-center" href="#">Add to cart</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -235,10 +240,10 @@
                                             <a href="@url" class="option3">
                                                 View Detail
                                             </a>
-                                            <a href="" class="option1">
+                                            <a data-id="@item.ID" onclick="addItemToCart(@item.ID)" class="option1">
                                                 Add To Cart
                                             </a>
-                                            <a href="" class="option2">
+                                            <a data-id="@item.ID" onclick="addItemToCart(@item.ID)" href="@Url.Action("Index","ShoppingCart")" class="option2">
                                                 Order Now
                                             </a>
                                         </div>

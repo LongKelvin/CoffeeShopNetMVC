@@ -21,6 +21,9 @@
     list-style-type: none;
     list-style: none;
 }
+#btnDeleteItem{
+    cursor:pointer;
+}
 
 .product-name
 {
@@ -384,6 +387,13 @@ small
     {
         width: 75%;
     }
+    .table-borderless{
+        margin:0;
+    }
+    .table-responsive
+    {
+        margin: 0;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -415,6 +425,14 @@ small
     .flexible-btn
     {
         width: 100%;
+    }
+    .table-borderless
+    {
+        margin: 0;
+    }
+    .table-responsive
+    {
+        margin: 0;
     }
 }
 
