@@ -26,8 +26,10 @@ namespace CoffeeShop.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddItem(int productID)
+        public JsonResult AddItem(int productID, int quantity = 1)
         {
+            CreateIfNotExistShoppingCart();
+
             var cart = (List<ShoppingCartViewModel>)Session[Common.CommonConstants.SessionCart];
 
             if (cart == null)
@@ -35,17 +37,18 @@ namespace CoffeeShop.Web.Controllers
                 cart = (List<ShoppingCartViewModel>)Session[Common.CommonConstants.SessionCart];
             }
 
+            //check if item aready in cart session
             if (cart.Any(x => x.ProductID == productID))
             {
                 foreach (var item in cart)
                 {
                     if (item.ProductID == productID)
                     {
-                        item.Quantity += 1;
+                        item.Quantity += quantity;
                     }
                 }
-                var product = cart.Single(x => x.ProductID == productID);
-                product.Quantity += 1;
+                //var product = cart.Single(x => x.ProductID == productID);
+                //product.Quantity += quantity;
             }
             else
             {
@@ -56,14 +59,14 @@ namespace CoffeeShop.Web.Controllers
 
                 var product = _productService.GetById(productID);
                 newItem.Product = AutoMapper.Mapper.Map<ProductViewModel>(product);
-                newItem.Quantity = 1;
+                newItem.Quantity = quantity;
 
                 cart.Add(newItem);
             }
 
             Session[Common.CommonConstants.SessionCart] = cart;
 
-            return Json(new { status = true });
+            return Json(new { status = true, count = cart.Count(), totalQuantity = GetCartTotalQuantity() });
         }
 
         [HttpGet]
@@ -72,11 +75,13 @@ namespace CoffeeShop.Web.Controllers
             CreateIfNotExistShoppingCart();
 
             var cart = (List<ShoppingCartViewModel>)Session[Common.CommonConstants.SessionCart];
+
             return Json(new
             {
                 status = true,
                 data = cart,
-                count = cart.Count()
+                count = cart.Count(),
+                totalQuantity = GetCartTotalQuantity()
             }, JsonRequestBehavior.AllowGet);
         }
 
@@ -117,7 +122,8 @@ namespace CoffeeShop.Web.Controllers
             {
                 cart.RemoveAll(x => x.ProductID == productID);
                 Session[Common.CommonConstants.SessionCart] = cart;
-                return Json(new { status = true });
+
+                return Json(new { status = true, count = cart.Count()});
             }
 
             return Json(new { status = false });
@@ -127,6 +133,19 @@ namespace CoffeeShop.Web.Controllers
         {
             if (Session[Common.CommonConstants.SessionCart] == null)
                 Session[Common.CommonConstants.SessionCart] = new List<ShoppingCartViewModel>();
+        }
+
+        [HttpGet]
+        public JsonResult GetCartTotalQuantity()
+        {
+            CreateIfNotExistShoppingCart();
+            int temp = 0;
+            var cart = (List<ShoppingCartViewModel>)Session[Common.CommonConstants.SessionCart];
+            foreach (var cartItem in cart)
+            {
+                temp += cartItem.Quantity;
+            }
+            return Json(new {data = temp}, JsonRequestBehavior.AllowGet);
         }
     }
 }

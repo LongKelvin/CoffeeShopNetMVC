@@ -133,9 +133,10 @@
                         <p id="totalAmount" class="product-price"></p>
                     </div>
                 </div>
+                
                 <div>
                     <div class="btn-box">
-                        <a class="btn-secondary text-center flexible-btn">BACK</a>
+                        <a class="btn-secondary text-center flexible-btn" href="@Url.Action("Index","Product")">CONTINUE SHOPPING</a>
                     </div>
                 </div>
                 <div>
@@ -207,5 +208,9 @@
 
 @section Scripts{
 
-    <script src="~/Assets/Client/custom-scripts/controllers/shoppingCart.js"></script>
+   <script>
+       $(document).ready(function () {
+           cart.loadData();
+       })
+    </script>
 }
