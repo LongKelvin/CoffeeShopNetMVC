@@ -21,7 +21,7 @@
 
 
 <script type="x-tmpl-mustache" id="cartPanelTemplate">
-    <li class="order-item row">
+    <li class="order-item row" id="item_{{itemProductID}}">
         <div class="item-image col-4 flexiable-img">
             <img src="{{itemImage}}" />
         </div>
@@ -32,7 +32,7 @@
                 <strong class="itemQty" data-price="{{itemUnitPrice}}">{{itemQuantity}}</strong> x <span class="product-price">{{itemUnitPriceF}}</span>
             </p>
         </div>
-        <div class="col-2 w-100 btn-close"  data-id="{{itemProductID}}" >
+        <div class="col-2 w-100 btn-close remove-item"  data-id="{{itemProductID}}" >
             <button type="button" class="close"  >
                 <span
                       class="text-danger" onclick="deleteItemInCartPanel({{itemProductID}})" aria-hidden="true">&times;

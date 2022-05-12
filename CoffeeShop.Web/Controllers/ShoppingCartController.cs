@@ -37,6 +37,8 @@ namespace CoffeeShop.Web.Controllers
                 cart = (List<ShoppingCartViewModel>)Session[Common.CommonConstants.SessionCart];
             }
 
+            var currentAddedItem = new ShoppingCartViewModel();
+
             //check if item aready in cart session
             if (cart.Any(x => x.ProductID == productID))
             {
@@ -45,6 +47,7 @@ namespace CoffeeShop.Web.Controllers
                     if (item.ProductID == productID)
                     {
                         item.Quantity += quantity;
+                        currentAddedItem = item;
                     }
                 }
                 //var product = cart.Single(x => x.ProductID == productID);
@@ -62,8 +65,37 @@ namespace CoffeeShop.Web.Controllers
                 newItem.Quantity = quantity;
 
                 cart.Add(newItem);
+                currentAddedItem = newItem;
             }
 
+            Session[Common.CommonConstants.SessionCart] = cart;
+
+            return Json(new { status = true, count = cart.Count(), data = currentAddedItem });
+        }
+
+        public JsonResult UpdateItemQuantity(int productID, int quantity)
+        {
+            CreateIfNotExistShoppingCart();
+
+            var cart = (List<ShoppingCartViewModel>)Session[Common.CommonConstants.SessionCart];
+
+            if (cart == null)
+            {
+                cart = (List<ShoppingCartViewModel>)Session[Common.CommonConstants.SessionCart];
+            }
+
+            //check if item aready in cart session
+            if (cart.Any(x => x.ProductID == productID))
+            {
+                foreach (var item in cart)
+                {
+                    if (item.ProductID == productID)
+                    {
+                        item.Quantity = quantity;
+                    }
+                }      
+            }
+            
             Session[Common.CommonConstants.SessionCart] = cart;
 
             return Json(new { status = true, count = cart.Count() });
@@ -105,6 +137,7 @@ namespace CoffeeShop.Web.Controllers
             Session[Common.CommonConstants.SessionCart] = cartSession;
             return Json(new { status = true });
         }
+
 
         [HttpPost]
         public JsonResult DeleteAll()
