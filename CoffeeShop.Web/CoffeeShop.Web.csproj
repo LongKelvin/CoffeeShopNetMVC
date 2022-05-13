@@ -2067,6 +2067,11 @@
     <Content Include="Assets\Client\images\arrival-bg.png" />
     <Content Include="Assets\Client\images\client.jpg" />
     <Content Include="Assets\Client\images\favicon.png" />
+    <Content Include="Assets\Client\images\icon-bank.png" />
+    <Content Include="Assets\Client\images\icon-credit-card.png" />
+    <Content Include="Assets\Client\images\icon-shipcod.png" />
+    <Content Include="Assets\Client\images\icon-zalopay.png" />
+    <Content Include="Assets\Client\images\ic_momo.png" />
     <Content Include="Assets\Client\images\logo.png" />
     <Content Include="Assets\Client\images\menu-item-1.jpg" />
     <Content Include="Assets\Client\images\menu-item-2.jpg" />

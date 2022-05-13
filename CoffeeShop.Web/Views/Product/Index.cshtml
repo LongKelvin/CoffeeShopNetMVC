@@ -220,7 +220,10 @@
                 return $("<li>")
                     .append("<div>" + item.value + "<br>" + "</div>")
                     .appendTo(ul);
-            }
+                }
+
+
+            cartPanel.loadData();
         });
 
         //$('.remove-item').click(function () {

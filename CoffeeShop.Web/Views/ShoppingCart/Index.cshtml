@@ -198,7 +198,7 @@
             <div class="d-flex align-items-center">
                 <p class="pe-3">
                     <span class="red">
-                        <i id="btnDeleteItem" data-id="{{itemProductID}}" class="fa fa-icons fa-close"></i>
+                        <i onclick="deleteItem({{itemProductID}})" data-id="{{itemProductID}}" class="fa fa-icons fa-close remove-item"></i>
                     </span>
                 </p>
             </div>
@@ -211,6 +211,7 @@
    <script>
        $(document).ready(function () {
            cart.getTotalQuantity();
+           cart.loadData();
        })
     </script>
 }

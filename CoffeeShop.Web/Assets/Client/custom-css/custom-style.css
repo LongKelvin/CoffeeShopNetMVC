@@ -21,8 +21,10 @@
     list-style-type: none;
     list-style: none;
 }
-#btnDeleteItem{
-    cursor:pointer;
+
+#btnDeleteItem
+{
+    cursor: pointer;
 }
 
 .product-name
@@ -387,9 +389,12 @@ small
     {
         width: 75%;
     }
-    .table-borderless{
-        margin:0;
+
+    .table-borderless
+    {
+        margin: 0;
     }
+
     .table-responsive
     {
         margin: 0;
@@ -426,10 +431,12 @@ small
     {
         width: 100%;
     }
+
     .table-borderless
     {
         margin: 0;
     }
+
     .table-responsive
     {
         margin: 0;
@@ -528,3 +535,8 @@ small
         border: none;
         width: 50%;
     }
+
+.remove-item
+{
+    cursor: pointer;
+}

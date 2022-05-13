@@ -1,4 +1,5 @@
 ﻿<link href="~/Assets/Client/custom-css/payment.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,6 +12,56 @@
     <div class="row flex-lg-row flex-sm-column-reverse">
         <div class="col-md-8">
             <div class="card p-3">
+                <h6 class="text-uppercase mb-3">Payment method</h6>
+                <div class="col mb-5">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label class="container-rad">
+                                <img src="~/Assets/Client/images/icon-shipcod.png" width="64" height="64" />
+                                <b class="ml-lg-3">SHIPCOD</b>
+                                <input type="radio" name="radio">
+                                <b class="checkmark"></b>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label class="container-rad  ">
+                                <img src="~/Assets/Client/images/ic_momo.png" width="64" height="64" />
+                                <b class="ml-lg-3">MOMO</b>
+                                <input type="radio" checked="checked" name="radio">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <label class="container-rad ">
+                                <img src="~/Assets/Client/images/icon-zalopay.png" width="64" height="64" />
+                                <b class="ml-lg-3">ZALO PAY</b>
+                                <input type="radio" name="radio">
+                                <b class="checkmark"></b>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label class="container-rad ">
+                                <img src="~/Assets/Client/images/icon-bank.png" width="64" height="64" />
+                                <b class="ml-lg-3">INTERNET BANKING</b>
+                                <input type="radio" name="radio">
+                                <b class="checkmark"></b>
+                            </label>
+                        </div>
+                        <div class="col-lg-6  col-sm-12">
+                            <label class="container-rad ">
+                                <img src="~/Assets/Client/images/icon-credit-card.png" width="64" height="64" />
+                                <b class="ml-lg-3">CREDIT CARD</b>
+                                <input type="radio" name="radio">
+                                <b class="checkmark"></b>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
                 <h6 class="text-uppercase">Payment details</h6>
                 <div class="inputbox mt-3"> <input type="text" name="name" class="form-control" required="required"> <span>Name on card</span> </div>
                 <div class="row">
@@ -58,12 +109,11 @@
                 <span>You have to pay</span>
                 <div class="d-flex flex-row align-items-end mb-3">
                     <h1 class="mb-0 yellow">$549</h1> <span>.99</span>
-                </div> 
+                </div>
                 <span>Enjoy all the features and perk after you complete the payment</span>
-                    <a href="#" class="yellow decoration">Know all the features</a>
+                <a href="#" class="yellow decoration">Know all the features</a>
                 <div class="hightlight"> <span>100% Guaranteed support and update for the next 5 years.</span> </div>
             </div>
         </div>
     </div>
 </section>
-

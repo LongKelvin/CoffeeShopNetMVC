@@ -14,7 +14,7 @@
             cart.addItem(productID, quantity);
         });
 
-        $('#btnDeleteItem').off('click').on('click', function (e) {
+        $('#btnDeleteItem').on('click', function (e) {
             e.preventDefault();
             var productID = parseInt($(this).data('id'));
             cart.deleteItem(productID);
@@ -189,4 +189,8 @@ cart.init();
 function addItemToCart(productID) {
     var productId = parseInt(productID);
     cart.addItem(productId, 1);
+}
+
+function deleteItem(productID) {
+    cart.deleteItem(productID);
 }
