@@ -5,14 +5,58 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="payment-section custom-container mt-5 px-5 shadow mb-4">
+<section class="payment-section custom-container mt-5 px-1 px-lg-5 px-sm-1 shadow mb-4">
     <div class="mb-4">
-        <h2><strong>Confirm order and pay</strong></h2> <span>please make the payment, after that you can enjoy all the features and benefits.</span>
+        <h2><strong>Confirm order and pay</strong></h2> <span>Please make the payment, after that you can enjoy all the features and benefits.</span>
     </div>
-    <div class="row flex-lg-row flex-sm-column-reverse">
-        <div class="col-md-8">
-            <div class="card p-3">
-                <h6 class="text-uppercase mb-3">Payment method</h6>
+    <div class="row flex-column-reverse flex-lg-row">
+        <div class="col-md-8 col-sm-12 m-sm-0">
+            <div class="card p-3 m-sm-0">
+                <div class="mt-4 mb-4 m-sm-0">
+                    <h6 class="text-uppercase"><b>Billing Address</b></h6>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <div class="row mt-3">
+                            <label class="container-rad ml-3" style=" min-height: auto">
+                                <b class="ml-lg-3">Use the login user information </b>
+                                <input type="checkbox" name="checkboxGetUserInfo" id="btnAutoFillUserInfo">
+                                <b class="checkmark" style="top:0"></b>
+                            </label>
+                        </div>
+                    }
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2"> <input id="txtFirstName" type="text" name="First Name" class="form-control" required="required"> <span>First Name</span> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2"> <input id="txtLastName" type="text" name="Last Name" class="form-control" required="required"> <span>Last Name</span> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2"> <input id="txtTelephone" type="text" name="name" class="form-control" required="required"> <span>Telephone</span> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2"> <input id="txtEmail" type="email" name="name" class="form-control" required="required"> <span>Email</span> </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2"> <input id="txtAddressStreet" type="text" name="name" class="form-control" required="required"> <span>Street Address</span> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2"> <input id="txtAddressCity" type="text" name="name" class="form-control" required="required"> <span>City</span> </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2"> <input id="txtState" type="text" name="name" class="form-control" required="required"> <span>State/Province</span> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2"> <input id="txtZipCode" type="text" name="name" class="form-control" required="required"> <span>Zip code</span> </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h6 class="text-uppercase mb-3"><b>Payment method</b></h6>
                 <div class="col mb-5">
                     <div class="row">
                         <div class="col-lg-6 col-sm-12">
@@ -62,7 +106,7 @@
                     </div>
                 </div>
 
-                <h6 class="text-uppercase">Payment details</h6>
+                <h6 class="text-uppercase"><b>Payment details</b></h6>
                 <div class="inputbox mt-3"> <input type="text" name="name" class="form-control" required="required"> <span>Name on card</span> </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -75,37 +119,46 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-4 mb-4">
-                    <h6 class="text-uppercase">Billing Address</h6>
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Street Address</span> </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>City</span> </div>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-md-6">
-                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>State/Province</span> </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Zip code</span> </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="mt-4 mb-4 d-flex row">
                 <div class="btn-box col-lg-6 col-md-6 col-sm-12">
-                    <a class="btn-secondary flexible-btn text-center">PREVIOUS STEP</a>
+                    <a class="btn-secondary flexible-btn text-center" href="@Url.Action("Index","ShoppingCart")">PREVIOUS STEP</a>
                 </div>
                 <div class="btn-box col-lg-6 col-md-6 col-sm-12">
                     <a class="flexible-btn text-center">PAY</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-12">
             <div class="card card-hightlight p-3 text-white mb-3 shadow ">
+                <span>You have to pay</span>
+                <div class="d-flex flex-row align-items-end mb-3">
+                    <h1 class="mb-0 yellow">$549</h1> <span>.99</span>
+                </div>
+                <span>Enjoy all the features and perk after you complete the payment</span>
+                <a href="#" class="yellow decoration">Know all the features</a>
+                <div class="hightlight"> <span>100% Guaranteed support and update for the next 5 years.</span> </div>
+                <span>You have to pay</span>
+                <div class="d-flex flex-row align-items-end mb-3">
+                    <h1 class="mb-0 yellow">$549</h1> <span>.99</span>
+                </div>
+                <span>Enjoy all the features and perk after you complete the payment</span>
+                <a href="#" class="yellow decoration">Know all the features</a>
+                <div class="hightlight"> <span>100% Guaranteed support and update for the next 5 years.</span> </div>
+                <span>You have to pay</span>
+                <div class="d-flex flex-row align-items-end mb-3">
+                    <h1 class="mb-0 yellow">$549</h1> <span>.99</span>
+                </div>
+                <span>Enjoy all the features and perk after you complete the payment</span>
+                <a href="#" class="yellow decoration">Know all the features</a>
+                <div class="hightlight"> <span>100% Guaranteed support and update for the next 5 years.</span> </div>
+                <span>You have to pay</span>
+                <div class="d-flex flex-row align-items-end mb-3">
+                    <h1 class="mb-0 yellow">$549</h1> <span>.99</span>
+                </div>
+                <span>Enjoy all the features and perk after you complete the payment</span>
+                <a href="#" class="yellow decoration">Know all the features</a>
+                <div class="hightlight"> <span>100% Guaranteed support and update for the next 5 years.</span> </div>
                 <span>You have to pay</span>
                 <div class="d-flex flex-row align-items-end mb-3">
                     <h1 class="mb-0 yellow">$549</h1> <span>.99</span>

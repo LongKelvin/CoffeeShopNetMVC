@@ -212,6 +212,19 @@ namespace CoffeeShop.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        
+        [HttpPost]
+        public JsonResult GetAuthenticatedUser()
+        {
+            if (!Request.IsAuthenticated)
+                return Json(new { status = false });
+
+            var userId = User.Identity.GetUserId();
+            var result = _userManager.FindById(userId);
+            return Json(new
+            {
+                status = true,
+                data = result
+            });
+        }
     }
 }
