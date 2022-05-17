@@ -167,13 +167,6 @@ namespace CoffeeShop.Web.Controllers
                 return View(loginVM);
             }
 
-            //var userByEmail = _userManager.FindByEmail(loginVM.Email);
-            //if (userByEmail == null)
-            //{
-            //    ModelState.AddModelError(loginVM.Email, "The email or password is not correct, Please checkout");
-            //    return View(loginVM);
-            //}
-
             var user = _userManager.Find(loginVM.UserName, loginVM.Password);
             if (user == null)
             {

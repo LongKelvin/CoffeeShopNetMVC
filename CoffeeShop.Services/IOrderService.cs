@@ -6,13 +6,13 @@ namespace CoffeeShop.Services
 {
     public interface IOrderService
     {
-        void Add(Order order);
+        Order Add(Order order);
 
-        void Update(Order order);
+        Order Update(Order order);
 
-        void Delete(Order order);
+        Order Delete(Order order);
 
-        void Delete(int id);
+        Order Delete(int id);
 
         IEnumerable<Order> GetAll();
 

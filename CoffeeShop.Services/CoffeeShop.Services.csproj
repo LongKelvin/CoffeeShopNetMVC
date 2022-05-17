@@ -63,6 +63,7 @@
     <Compile Include="IOrderDetailService.cs" />
     <Compile Include="IOrderService.cs" />
     <Compile Include="IPageService.cs" />
+    <Compile Include="IPaymentMethodService.cs" />
     <Compile Include="IPostCategoryService.cs" />
     <Compile Include="IProductCategoryService.cs" />
     <Compile Include="IProductService.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="OrderDetailService.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="PageService.cs" />
+    <Compile Include="PaymentMethodService.cs" />
     <Compile Include="PostCategoryService.cs" />
     <Compile Include="ProductCategoryService.cs" />
     <Compile Include="ProductService.cs" />

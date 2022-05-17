@@ -52,11 +52,10 @@ namespace CoffeeShop.Models.Models
         [Display(Name = "Create By")]
         public string CreatedBy { get; set; } // nvarchar(50), null
 
-        [MaxLength(250)]
-        [StringLength(250)]
-        [Required(ErrorMessage = "Payment Mehod is required")]
-        [Display(Name = "Payment Mehod")]
-        public string PaymentMehod { get; set; } // nvarchar(250), not null
+
+        [Required(ErrorMessage = "Payment Method Id is required")]
+        [Display(Name = "Payment Method Id")]
+        public int PaymentMethodID { get; set; } // nvarchar(250), not null
 
         [MaxLength(50)]
         [StringLength(50)]
@@ -73,5 +72,7 @@ namespace CoffeeShop.Models.Models
 
         [ForeignKey("CustomerId")]
         public virtual ApplicationUser User { get; set; }
+
+        public virtual PaymentMethod PaymentMethod { get; set; }
     }
 }

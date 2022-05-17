@@ -1,4 +1,6 @@
-﻿using CoffeeShop.Models.Models;
+﻿using AutoMapper;
+
+using CoffeeShop.Models.Models;
 using CoffeeShop.Web.Models;
 
 using System;
@@ -190,6 +192,21 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             feedback.EmailSubject = feedbackVM.EmailSubject;
             feedback.RowVersion = feedbackVM.RowVersion;
             feedback.Message = feedbackVM.Message;
+        }
+
+        public static void UpdateOrder(this Order order, OrderViewModel orderVm)
+        {
+            order.CustomerName = orderVm.CustomerName;
+            order.CustomerAddress = orderVm.CustomerName;
+            order.CustomerEmail = orderVm.CustomerName;
+            order.CustomerMobile = orderVm.CustomerName;
+            order.CustomerMessage = orderVm.CustomerName;
+            order.PaymentMethodID= orderVm.PaymentMethodCode;
+            order.CreatedDate = DateTime.Now;
+            order.CreatedBy = orderVm.CreatedBy;
+            order.Status = orderVm.Status;
+            order.PaymentStatus = orderVm.PaymentStatus;
+            //order.OrderDetails = Mapper.Map<List<OrderDetail>>(orderVm);
         }
     }
 }

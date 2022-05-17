@@ -51,17 +51,23 @@
 
     getTotalPriceOrder: function () {
         var listInputPrice = $('.inputItemQuantity');
-
         var total = 0;
 
-        $.each(listInputPrice, function (index, item) {
-            var tempPrice = parseInt($(item).val()) * parseFloat($(this).data('price'))
-            total += tempPrice;
-        });
+        //Get price for shopping cart
+        if (listInputPrice != null) {
+           
+            $.each(listInputPrice, function (index, item) {
+                var tempPrice = parseInt($(item).val()) * parseFloat($(this).data('price'))
+                total += tempPrice;
+            });
+        }
+        //Get price for total payment
+
+           
 
         return total;
     },
-
+   
     loadData: async function () {
         var shippingFee = 20000;
 
@@ -101,7 +107,7 @@
                                 itemQuantity: item.Quantity,
                                 itemTotalPrice: totalPrice,
                                 itemTotalPriceF: numeral(totalPrice).format('0,0'),
-                                itemUnitPriceF: numeral(totalPrice).format('0,0'),
+                                itemUnitPriceF: numeral(item.Product.Price).format('0,0'),
                             });
                         });
 

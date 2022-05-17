@@ -114,6 +114,7 @@
     <Compile Include="Models\OrderDetailViewModel.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\PageViewModel.cs" />
+    <Compile Include="Models\PaymentMethodViewModel.cs" />
     <Compile Include="Models\PostCategoryViewModel.cs" />
     <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Models\ProductCategoryViewModel.cs" />
@@ -2126,6 +2127,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\CartPanel.cshtml" />
+    <Content Include="Views\Payment\PaymentTotal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Components\ApplicationGroups\" />

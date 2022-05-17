@@ -8,7 +8,6 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;
-    using System.IO;
     using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<CoffeeShop.Data.CoffeeShopDbContext>
@@ -31,6 +30,7 @@
             CreateSlidesSample(context);
             CreatePagesSample(context);
             CreateShopInfo(context);
+            CreatePaymentMethodSample(context);
         }
 
         private void CreateUser(CoffeeShopDbContext context)
@@ -126,7 +126,7 @@
                     Name = "About Us",
                     Alias = "About",
                     Status = true,
-                    Content = "ABOUT US" 
+                    Content = "ABOUT US"
                 };
 
                 context.Pages.Add(page);
@@ -143,7 +143,7 @@
                     Name = "Coffee Way",
                     Address = "2B Bình Giã - Phường 13 - Tân Bình - TP. Hồ Chí Minh",
                     Latitude = 10.798109173100983,
-                    Longitude= 106.64413230105687,
+                    Longitude = 106.64413230105687,
                     Status = true,
                     Email = "coffeewaytb@gmail.com",
                     Telephone = "0707635581",
@@ -151,6 +151,52 @@
                 };
 
                 context.ShopInfos.Add(shopInfo);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreatePaymentMethodSample(CoffeeShopDbContext context)
+        {
+            if (context.PaymentMethods.Count() == 0)
+            {
+                List<PaymentMethod> listPaymentMethod = new List<PaymentMethod>() {
+                    new PaymentMethod() {
+                        Status = true,
+                        PaymentName = "SHIP CODE",
+                        PaymentCode = 100,
+                        LogoImage = "/UploadFiles/images/icon-shipcod.png"
+                    },
+
+                    new PaymentMethod() {
+                        Status = true,
+                        PaymentName = "MOMO",
+                        PaymentCode = 101,
+                        LogoImage = "/UploadFiles/images/icon-momo.png"
+                    },
+
+                    new PaymentMethod() {
+                        Status = true,
+                        PaymentName = "ZALO PAY",
+                        PaymentCode = 102,
+                        LogoImage = "/UploadFiles/images/icon-zalopay.png"
+                    },
+
+                    new PaymentMethod() {
+                        Status = true,
+                        PaymentName = "INTERNET BANKING",
+                        PaymentCode = 103,
+                        LogoImage = "/UploadFiles/images/icon-bank.png"
+                    },
+
+                    new PaymentMethod() {
+                        Status = true,
+                        PaymentName = "CREDIT CARD",
+                        PaymentCode = 104,
+                        LogoImage = "/UploadFiles/images/icon-creditcard.png"
+                    },
+    };
+
+                context.PaymentMethods.AddRange(listPaymentMethod);
                 context.SaveChanges();
             }
         }
