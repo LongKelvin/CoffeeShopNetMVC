@@ -87,6 +87,10 @@
     {
       "library": "mustache.js@4.2.0",
       "destination": "Assets/Admin/lib/mustache.js/"
+    },
+    {
+      "library": "jquery-validate@1.19.3",
+      "destination": "Assets/Admin/lib/jquery-validate/"
     }
   ]
 }

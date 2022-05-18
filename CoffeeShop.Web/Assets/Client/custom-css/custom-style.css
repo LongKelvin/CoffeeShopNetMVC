@@ -540,3 +540,9 @@ small
 {
     cursor: pointer;
 }
+
+/*JQUERY VALIDATION ERROR*/
+.error{
+    color:red;
+    font-weight:500;
+}

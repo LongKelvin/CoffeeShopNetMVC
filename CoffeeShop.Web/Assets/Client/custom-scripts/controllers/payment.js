@@ -9,11 +9,40 @@
                 payment.getAuthenticatedUser();
             }
             else {
-                if ($('#txtFirstName').val() != null) {
+                if ($('#txtFullName').val() != null) {
                     payment.removeUserAutoFillInformation();
                 }
             }
         });
+
+        $('#frmPayment').validate({
+            rules: {
+                FullName: "required",
+                StreetAddress: "required",
+                Email: {
+                    required: true,
+                    email: true
+                },
+                Telephone: {
+                    required: true,
+                    number:true
+                }
+
+            },
+            messages: {
+                LastName: "Customer Name is required",
+                StreetAddress: "Customer Name is required",
+                Email: {
+                    required: "Email is required",
+                    email: "Email is not valid, please try again"
+                },
+                Telephone: {
+                    required: "Phone number is required",
+                    number: "Phone number is not valid"
+                }
+
+            }
+        })
     },
 
     getAuthenticatedUser: function () {
@@ -23,41 +52,35 @@
             type: 'POST',
             success: function (response) {
                 var userData = response.data;
-
-                $('#txtFirstName').prop("disabled", true);
-                $('#txtFirstName').val(userData.FullName);
+                $('#txtFullName').val(userData.FullName);
                 $('#txtTelephone').val(userData.PhoneNumber);
                 $('#txtEmail').val(userData.Email);
                 $('#txtAddress').val(userData.Address);
-                $('#txtZipCode').val('70000');
             }
         })
     },
 
     removeUserAutoFillInformation() {
-        $('#txtFirstName').prop("disabled", false);
-        $('#txtFirstName').val('');
+        $('#txtFullName').val('');
         $('#txtTelephone').val('');
         $('#txtEmail').val('');
         $('#txtAddress').val('');
-        $('#txtZipCode').val('');
     },
 
     createOrder: function () {
-
-        if (payment.isPaymentMethodHasSelected == false) {
-            alert("Please select payment method to continue")
+        var isValid = $('#frmPayment').valid();
+        if (!isValid)
             return;
-        }
 
         var order = {
-            CustomerName: $('#txtFirstName').val(),
+            CustomerName: $('#txtFullName').val(),
             CustomerAddress: $('#txtAddress').val(),
             CustomerEmail: $('#txtEmail').val(),
             CustomerMobile: $('#txtPhone').val(),
             PaymentMethodCode: $('input[name="paymentMethodRadioBtn"]:checked').val(),
-            PaymentStatus: '0',
-            Status: false
+            CustomerMessage: $('#txtNote').val(),
+            PaymentStatus: false,
+            Status: true
         }
 
         $.ajax({
@@ -79,16 +102,6 @@
             }
         })
     },
-
-    isPaymentMethodHasSelected: function () {
-        console.log($('input[name="paymentMethodRadioBtn"]').is(':checked'))
-        if ($('input[name="paymentMethodRadioBtn"]').is(':checked')) {
-            alert("CHECKED")
-            return true;
-        }
-            
-        return false;
-    }
 }
 
 payment.init();

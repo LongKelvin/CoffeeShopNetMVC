@@ -5,8 +5,9 @@ using CoffeeShop.Services;
 using CoffeeShop.Web.Infrastucture.Extensions;
 using CoffeeShop.Web.Models;
 
+using Microsoft.AspNet.Identity;
+
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
@@ -43,25 +44,18 @@ namespace CoffeeShop.Web.Controllers
         [HttpPost]
         public JsonResult CreateOrder(string orderVM)
         {
-            if (!ModelState.IsValid)
-                return Json(new
-                {
-                    status = false,
-                    error = "Model is not valid"
-                });
-
             var order = new JavaScriptSerializer().Deserialize<OrderViewModel>(orderVM);
 
             var cart = (List<ShoppingCartViewModel>)Session[Common.CommonConstants.SessionCart];
-            if (cart == null || cart.Count() <= 0)
-                return Json(new
-                {
-                    status = false,
-                    error = "Cart can not be empty"
-                });
 
             var newOrder = new Order();
             EntityExtensions.UpdateOrder(newOrder, order);
+
+            if (Request.IsAuthenticated)
+            {
+                newOrder.CreatedBy = User.Identity.GetUserName();
+                newOrder.CustomerId = User.Identity.GetUserId();
+            }
 
             if (newOrder.OrderDetails == null)
                 newOrder.OrderDetails = new List<OrderDetail>();
@@ -83,7 +77,7 @@ namespace CoffeeShop.Web.Controllers
                 return Json(new { status = false });
 
             string successFrm = System.IO.File.ReadAllText(
-                   Server.MapPath("/Assets/Client/form/success-form/success_form.html"));
+                   Server.MapPath("/Assets/Client/form/success-form/order_success_template.html"));
 
             successFrm = successFrm.Replace("{{DirectActionLink}}",
                 Url.Action("Index", "Product"));
@@ -92,8 +86,7 @@ namespace CoffeeShop.Web.Controllers
             {
                 status = true,
                 successMsg = successFrm
-
-            }, JsonRequestBehavior.AllowGet) ;
+            }, JsonRequestBehavior.AllowGet);
         }
     }
 }

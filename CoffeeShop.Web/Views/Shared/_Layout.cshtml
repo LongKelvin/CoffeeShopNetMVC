@@ -189,9 +189,9 @@
     @{ Html.RenderAction("Footer", "Home");}
     @*footer section end*@
 
-    <div class="cpy_">
+    @*<div class="cpy_">
         <p>© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a></p>
-    </div>
+    </div>*@
 
     <!--<!-- jQuery -->
     <!--@*<script src="~/Assets/Client/js/jquery-3.4.1.min.js"></script>*@
@@ -210,8 +210,12 @@
     @*@Scripts.Render("~/bundles/bootstrap")*@
     @*bootstrap js*@
     <script defer src="~/Assets/Client/js/bootstrap.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script src="~/Assets/Admin/lib/mustache.js/mustache.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+
+    <script src="~/Assets/Admin/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/Assets/Admin/lib/jquery-validate/additional-methods.js"></script>
+
     <script async src="~/Assets/Client/custom-scripts/controllers/shoppingCart.js"></script>
     <script async src="~/Assets/Client/custom-scripts/controllers/cartPanel.js"></script>
     <script src="~/Assets/Client/custom-scripts/controllers/payment.js"></script>

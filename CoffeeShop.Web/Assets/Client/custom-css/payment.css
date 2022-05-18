@@ -108,6 +108,18 @@ input::-webkit-inner-spin-button
     font-size: 12px
 }
 
+/*.custom-input:focus ~ span
+{
+    transform: translateX(-0px) translateY(-15px);
+    font-size: 12px
+}
+
+.custom-input ~ span
+{*/
+    /*transform: translateX(-0px) translateY(-15px);*/
+    /*font-size: 16px
+}*/
+
 .card-blue
 {
     background-color: #eab676;
