@@ -155,8 +155,28 @@
     <Compile Include="Migrations\202205170350571_modifyOrderTbl.designer.cs">
       <DependentUpon>202205170350571_modifyOrderTbl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205180308252_AddGroupUser.cs" />
+    <Compile Include="Migrations\202205180308252_AddGroupUser.designer.cs">
+      <DependentUpon>202205180308252_AddGroupUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205200845358_RenameIdentityColmn.cs" />
+    <Compile Include="Migrations\202205200845358_RenameIdentityColmn.designer.cs">
+      <DependentUpon>202205200845358_RenameIdentityColmn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205200852018_RenameIdentityColmn1.cs" />
+    <Compile Include="Migrations\202205200852018_RenameIdentityColmn1.designer.cs">
+      <DependentUpon>202205200852018_RenameIdentityColmn1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205200855541_deleteIdentityUnuseColumn.cs" />
+    <Compile Include="Migrations\202205200855541_deleteIdentityUnuseColumn.designer.cs">
+      <DependentUpon>202205200855541_deleteIdentityUnuseColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ApplicationGroupRepository.cs" />
+    <Compile Include="Repositories\ApplicationRoleGroupRepository.cs" />
+    <Compile Include="Repositories\ApplicationRoleRepository.cs" />
+    <Compile Include="Repositories\ApplicationUserGroupRepository.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
     <Compile Include="Repositories\FeedbackRepository.cs" />
     <Compile Include="Repositories\IErrorRepository.cs" />
@@ -278,6 +298,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205170350571_modifyOrderTbl.resx">
       <DependentUpon>202205170350571_modifyOrderTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205180308252_AddGroupUser.resx">
+      <DependentUpon>202205180308252_AddGroupUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205200845358_RenameIdentityColmn.resx">
+      <DependentUpon>202205200845358_RenameIdentityColmn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205200852018_RenameIdentityColmn1.resx">
+      <DependentUpon>202205200852018_RenameIdentityColmn1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205200855541_deleteIdentityUnuseColumn.resx">
+      <DependentUpon>202205200855541_deleteIdentityUnuseColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

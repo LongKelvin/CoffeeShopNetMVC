@@ -35,9 +35,9 @@ namespace CoffeeShop.Web.Mappings
                 cfg.CreateMap<Page, PageViewModel>();
                 cfg.CreateMap<PaymentMethod, PaymentMethodViewModel>();
                 //cfg.CreateMap<ContactDetail, ContactDetailViewModel>();
-                //cfg.CreateMap<ApplicationGroup, ApplicationGroupViewModel>();
-                //cfg.CreateMap<ApplicationRole, ApplicationRoleViewModel>();
-                //cfg.CreateMap<ApplicationUser, ApplicationUserViewModel>();
+                cfg.CreateMap<ApplicationGroup, ApplicationGroupViewModel>();
+                cfg.CreateMap<ApplicationRole, ApplicationRoleViewModel>();
+                cfg.CreateMap<ApplicationUser, ApplicationUserViewModel>();
             });
 
 

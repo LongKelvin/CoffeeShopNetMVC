@@ -64,7 +64,11 @@
     <Compile Include="Abstract\IAuditable.cs" />
     <Compile Include="Abstract\ISeoable.cs" />
     <Compile Include="Abstract\ISwitchable.cs" />
+    <Compile Include="Models\ApplicationRoleGroup.cs" />
+    <Compile Include="Models\ApplicationGroup.cs" />
+    <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\ApplicationUserGroup.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Error.cs" />
     <Compile Include="Models\Feedback.cs" />

@@ -9,12 +9,15 @@
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using System.Text;
+using static System.Data.Entity.Migrations.Model.UpdateDatabaseOperation;
 
     internal sealed class Configuration : DbMigrationsConfiguration<CoffeeShop.Data.CoffeeShopDbContext>
     {
         public Configuration()
-        {
-            AutomaticMigrationsEnabled = false;
+{
+            AutomaticMigrationsEnabled = true;
+           AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(CoffeeShop.Data.CoffeeShopDbContext context)
@@ -200,5 +203,7 @@
                 context.SaveChanges();
             }
         }
+
+        
     }
 }

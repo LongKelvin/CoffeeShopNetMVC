@@ -52,7 +52,6 @@ namespace CoffeeShop.Models.Models
         [Display(Name = "Create By")]
         public string CreatedBy { get; set; } // nvarchar(50), null
 
-
         [Required(ErrorMessage = "Payment Method Id is required")]
         [Display(Name = "Payment Method Id")]
         public int PaymentMethodID { get; set; } // nvarchar(250), not null
@@ -67,7 +66,7 @@ namespace CoffeeShop.Models.Models
         public bool Status { get; set; }
 
         [StringLength(128)]
-        [Column(TypeName ="nvarchar")]
+        [Column(TypeName = "nvarchar")]
         public string CustomerId { get; set; }
 
         [ForeignKey("CustomerId")]

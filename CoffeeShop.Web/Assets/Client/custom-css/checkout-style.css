@@ -20,7 +20,7 @@
         -webkit-transition: all 0.3s;
         transition: all 0.3s;
         font-weight: 700;
-        cursor:pointer;
+        cursor: pointer;
     }
 
         .cart-section .btn-box a:hover
@@ -326,25 +326,24 @@ input:focus
        display:none;
     }*/
 
-    .pic{
-        display:none;
+    .pic
+    {
+        display: none;
     }
-
-
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px)
 {
-
     .pic
     {
         display: none;
     }
-    .auto-margin{
-        margin:0;
+
+    .auto-margin
+    {
+        margin: 0;
     }
-   
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -354,6 +353,7 @@ input:focus
     {
         display: block;
     }
+
     .auto-margin
     {
         margin: 0;
@@ -367,9 +367,10 @@ input:focus
     {
         display: block;
     }
+
     .auto-margin
     {
-        margin-left:20px;
+        margin-left: 20px;
     }
 }
 
@@ -380,10 +381,9 @@ input:focus
     {
         display: block;
     }
+
     .auto-margin
     {
         margin-left: 20px;
     }
 }
-
-

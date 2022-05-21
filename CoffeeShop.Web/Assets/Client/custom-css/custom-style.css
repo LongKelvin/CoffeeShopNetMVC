@@ -542,7 +542,8 @@ small
 }
 
 /*JQUERY VALIDATION ERROR*/
-.error{
-    color:red;
-    font-weight:500;
+.error
+{
+    color: red;
+    font-weight: 500;
 }

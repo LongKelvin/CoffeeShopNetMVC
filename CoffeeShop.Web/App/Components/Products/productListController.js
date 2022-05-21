@@ -48,6 +48,7 @@
                     }
 
                     $scope.products = result.data.Items;
+                    console.log('product list: ', result)
                     $scope.page = result.data.Page;
                     $scope.pagesCount = result.data.TotalPages; //total pages that the query recevied
                     $scope.totalCount = result.data.TotalCount; //total row data from api result

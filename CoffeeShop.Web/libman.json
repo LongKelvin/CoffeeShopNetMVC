@@ -85,12 +85,12 @@
       "destination": "Assets/Admin/lib/typescripts/"
     },
     {
-      "library": "mustache.js@4.2.0",
-      "destination": "Assets/Admin/lib/mustache.js/"
-    },
-    {
       "library": "jquery-validate@1.19.3",
       "destination": "Assets/Admin/lib/jquery-validate/"
+    },
+    {
+      "library": "checklist-model@1.0.0",
+      "destination": "Assets/Admin/lib/checklist-model/"
     }
   ]
 }
