@@ -3,9 +3,9 @@
 
     app.controller('ApplicationRoleAddController', ApplicationRoleAddController);
 
-    ApplicationRoleAddController.$inject = ['$scope', 'ApiService', 'NotificationService', '$location', 'CommonService'];
+    ApplicationRoleAddController.$inject = ['$scope', 'ApiServices', 'NotificationService', '$location', 'CommonService'];
 
-    function ApplicationRoleAddController($scope, ApiService, NotificationService, $location, CommonService) {
+    function ApplicationRoleAddController($scope, ApiServices, NotificationService, $location, CommonService) {
         $scope.role = {
             Id: 0
         }
@@ -13,13 +13,13 @@
         $scope.addAppRole = addAppRole;
 
         function addAppRole() {
-            ApiService.post('/api/ApplicationRole/Add', $scope.role, addSuccessed, addFailed);
+            ApiServices.post('/api/ApplicationRole/Add', $scope.role, addSuccessed, addFailed);
         }
 
         function addSuccessed() {
             NotificationService.displaySuccess($scope.role.Name + ' đã được thêm mới.');
 
-            $location.url('application_roles');
+            $location.url('ApplicationRoles');
         }
         function addFailed(response) {
             NotificationService.displayError(response.data.Message);

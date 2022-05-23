@@ -18,8 +18,6 @@ using System.Web.Script.Serialization;
 namespace CoffeeShop.Web.Api
 {
     [RoutePrefix("api/ApplicationRole")]
-    
-   
     public class ApplicationRoleController : ApiControllerBase
     {
         private IApplicationRoleService _appRoleService;
@@ -148,7 +146,7 @@ namespace CoffeeShop.Web.Api
 
         [Route("DeleteMulti")]
         [HttpDelete]
-        public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedList)
+        public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string ids)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -159,7 +157,7 @@ namespace CoffeeShop.Web.Api
                 }
                 else
                 {
-                    var listItem = new JavaScriptSerializer().Deserialize<List<string>>(checkedList);
+                    var listItem = new JavaScriptSerializer().Deserialize<List<string>>(ids);
                     foreach (var item in listItem)
                     {
                         _appRoleService.Delete(item);

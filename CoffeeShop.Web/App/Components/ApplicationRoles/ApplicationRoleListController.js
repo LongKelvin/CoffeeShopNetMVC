@@ -1,116 +1,143 @@
 ﻿(function (app) {
-    'use strict';
-
     app.controller('ApplicationRoleListController', ApplicationRoleListController);
 
-    ApplicationRoleListController.$inject = ['$scope', 'ApiService', 'NotificationService', '$ngBootbox', '$filter'];
+    ApplicationRoleListController.$inject = [
+        '$scope',
+        'ApiServices',
+        'NotificationService',
+        '$stateParams',
+        '$state',
+        '$http'
+    ];
 
-    function ApplicationRoleListController($scope, ApiService, NotificationService, $ngBootbox, $filter) {
-        $scope.loading = true;
-        $scope.data = [];
+    function ApplicationRoleListController($scope, ApiServices, NotificationService) {
+        //setup Controller
+        $scope.title = 'ApplicationRoleListController';
+
+        //Setup ApiServices
+
+        $scope.applicationRoles = [];
         $scope.page = 0;
-        $scope.pageCount = 0;
-        $scope.search = search;
-        $scope.clearSearch = clearSearch;
-        $scope.deleteItem = deleteItem;
-        $scope.selectAll = selectAll;
-        $scope.deleteMultiple = deleteMultiple;
+        $scope.pagesCount = 0;
+        $scope.keyWord = '';
+        //asign function to getApplicationRole
+        $scope.getApplicationRoles = getApplicationRoles;
+        $scope.showDeleteDialog = showDeleteDialog;
+        $scope.deleteApplicationRole = deleteApplicationRole;
 
-        function deleteMultiple() {
-            var listId = [];
-            $.each($scope.selected, function (i, item) {
-                listId.push(item.Id);
-            });
-            var config = {
-                params: {
-                    checkedList: JSON.stringify(listId)
-                }
-            }
-            ApiService.del('api/ApplicationRole/DeleteMulti', config, function (result) {
-                NotificationService.displaySuccess('Xóa thành công ' + result.data + ' bản ghi.');
-                search();
-            }, function (error) {
-                NotificationService.displayError('Xóa không thành công');
-            });
-        }
+        $scope.showMultiDeleteDialog = showMultiDeleteDialog;
+        $scope.deleteMultiApplicationRole = deleteMultiApplicationRole;
 
-        $scope.isAll = false;
-        function selectAll() {
-            if ($scope.isAll === false) {
-                angular.forEach($scope.data, function (item) {
-                    item.checked = true;
-                });
-                $scope.isAll = true;
-            } else {
-                angular.forEach($scope.data, function (item) {
-                    item.checked = false;
-                });
-                $scope.isAll = false;
-            }
-        }
-
-        $scope.$watch("data", function (n, o) {
-            var checked = $filter("filter")(n, { checked: true });
-            if (checked.length) {
-                $scope.selected = checked;
-                $('#btnDelete').removeAttr('disabled');
-            } else {
-                $('#btnDelete').attr('disabled', 'disabled');
-            }
-        }, true);
-
-        function deleteItem(id) {
-            $ngBootbox.confirm('Bạn có chắc muốn xóa?')
-                .then(function () {
-                    var config = {
-                        params: {
-                            id: id
-                        }
-                    }
-                    ApiService.del('/api/ApplicationRole/Delete', config, function () {
-                        NotificationService.displaySuccess('Đã xóa thành công.');
-                        search();
-                    },
-                        function () {
-                            NotificationService.displayError('Xóa không thành công.');
-                        });
-                });
-        }
-        function search(page) {
+        function getApplicationRoles(page, pageSize) {
             page = page || 0;
+            pageSize = pageSize || 20;
 
-            $scope.loading = true;
             var config = {
                 params: {
                     page: page,
-                    pageSize: 10,
-                    filter: $scope.keyword
+                    pageSize: pageSize,
+                    filter: $scope.keyWord
+                }
+            }
+            try {
+                ApiServices.get('/api/ApplicationRole/GetListPaging', config, function (result) {
+                    if (result.data.TotalCount == 0) {
+                        NotificationService.displayWarning('No data to display');
+                        var htmlResult = '<div style="width:100%;" class="alert alert-dark text-center" role="alert"><b>Không có dữ liệu để hiển thị</b></div> ';
+                        $('#dataBody').html(htmlResult);
+                    }
+
+                    $scope.listAppRoles = result.data.Items;
+                    $scope.page = result.data.Page;
+                    $scope.pagesCount = result.data.TotalPages; //total pages that the query recevied
+                    $scope.totalCount = result.data.TotalCount; //total row data from api result
+                    $scope.itemPerPage = pageSize;
+                },
+                    function () {
+                        console.log('LoadApplicationRole failed.');
+                        NotificationService.displayError('LoadApplicationRole failed.');
+                    });
+            }
+            catch (e) {
+                console.log("Exception in get application groups function: ")
+                    (console.error || console.log).call(console, e.stack || e);
+
+                NotificationService.displayError('Something went wrong, please try again later');
+            }
+        }
+
+        function showDeleteDialog(id) {
+            $('#deleteId').val(id);
+            $('#confirmDeleteModal').modal('show');
+        }
+
+        function deleteApplicationRole() {
+            var id = $('#deleteId').val();
+            var config = {
+                params: {
+                    id: id
+                }
+            }
+            ApiServices.del('api/ApplicationRole/Delete', config, function () {
+                NotificationService.displaySuccess('Xóa thành công');
+                $('#confirmDeleteModal').modal('hide');
+                getApplicationRoles();
+            }, function () {
+                $('#confirmDeleteModal').modal('hide');
+                NotificationService.displayError('Xóa không thành công');
+            })
+        }
+
+        function showMultiDeleteDialog() {
+            var selectedItem = new Array();
+            $('input:checkbox.checkBox').each(function () {
+                if ($(this).prop('checked')) {
+                    selectedItem.push($(this).val());
+                }
+            });
+
+            console.log('delete selected count: ', selectedItem);
+
+            if (selectedItem.length <= 0) {
+                //$('m-content').html("Vui lòng chọn ít nhất một bản ghi để xóa!");
+                //$('#delMultiBtn').hide();
+                //$('#confirmMultiDeleteModal').modal('show');
+            }
+            else {
+                $('#totalDeleteCount').html(selectedItem.length);
+                $('#confirmMultiDeleteModal').modal('show');
+            }
+        }
+
+        function deleteMultiApplicationRole() {
+            var selectedIDs = [];
+            $('input:checkbox.checkBox').each(function () {
+                if ($(this).prop('checked')) {
+                    selectedIDs.push($(this).val());
+                }
+            });
+
+            //console.log('Console selectedIDs -> ', selectedIDs)
+
+            var config = {
+                params: {
+                    ids: JSON.stringify(selectedIDs)
                 }
             }
 
-            ApiService.get('api/ApplicationRole/GetListPaging', config, dataLoadCompleted, dataLoadFailed);
+            //console.log('Param config: ', config)
+            ApiServices.del('api/ApplicationRole/DeleteMulti', config, function (result) {
+                NotificationService.displaySuccess('Xóa thành công');
+                $('#confirmDeleteModal').modal('hide');
+                getApplicationRoles();
+            }, function (error) {
+                NotificationService.displayError('Xóa không thành công');
+                $('#confirmDeleteModal').modal('hide');
+            })
+
+            $('#confirmDeleteModal').modal('hide');
         }
 
-        function dataLoadCompleted(result) {
-            $scope.data = result.data.Items;
-            $scope.page = result.data.Page;
-            $scope.pagesCount = result.data.TotalPages;
-            $scope.totalCount = result.data.TotalCount;
-            $scope.loading = false;
-
-            if ($scope.filterExpression && $scope.filterExpression.length) {
-                NotificationService.displayInfo(result.data.Items.length + ' được tìm thấy');
-            }
-        }
-        function dataLoadFailed(response) {
-            NotificationService.displayError(response.data);
-        }
-
-        function clearSearch() {
-            $scope.filterExpression = '';
-            search();
-        }
-
-        $scope.search();
+        $scope.getApplicationRoles();
     }
 })(angular.module('CoffeeShop.ApplicationRoles'));
