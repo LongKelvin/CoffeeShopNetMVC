@@ -4,7 +4,6 @@
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1><strong>Cập nhật nhóm người dùng</strong></h1>
-                <h4>{{applicationGroup.Name}}</h4>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -35,173 +34,54 @@
 
                         <div class="card-body">
                             <div class="form-group">
-                                <label>Tên danh mục</label>
-                                <input type="text" ng-model="applicationGroup.Name" class="form-control"
-                                       name="pName" required
-                                       ng-change="getSeoTitle()"
-                                       placeholder="Tên danh mục ...">
-                                <span class="text-danger" ng-show="frmUpdateApplicationGroup.pName.$touched && frmUpdateApplicationGroup.pName.$invalid">Bạn chưa nhập tên danh mục</span>
+                                <label>Tên nhóm <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="group.Name" required name="pName"
+                                       class="form-control" placeholder="Tên của nhóm cần quản lý ...">
+                                <span class="text-danger" ng-show="frmUpdateApplicationGroup.pName.$touched && frmUpdateApplicationGroup.pName.$invalid">Bạn chưa nhập tên nhóm</span>
                             </div>
-
                             <div class="form-group">
-                                <label>Thứ tự hiển thị</label>
-                                <input ng-model="applicationGroup.DisplayOrder" type="number" class="form-control"
-                                       oninput="setLimitValue(0)"
-                                       placeholder="Hiển thị ở vị trí 1 2 3 ...">
-                            </div>
-
-                           
-
-                            <!-- textarea -->
-                            <div class="form-group">
-                                <label>Mô tả ngắn về danh mục</label>
-                                <textarea ng-model="applicationGroup.Description"
-                                          class="form-control" rows="2"
-                                          placeholder="Mô tả ngắn về danh mục ..."></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputFile">Hình ảnh</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input ng-model="applicationGroup.Images" type="file"
-                                               class="custom-file-input"
-                                               id="applicationGroupImagesInput" multiple="multiple">
-                                        <label class="custom-file-label"
-                                               for="applicationGroupImagesInput">Chọn files</label>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">Tải lên</span>
-                                    </div>
-                                </div>
+                                <label>Mô tả <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="group.Description" required name="pDescription"
+                                       class="form-control" placeholder="Mô tả ...">
+                                <span class="text-danger" ng-show="frmUpdateApplicationGroup.pDescription.$touched && frmUpdateApplicationGroup.pDescription.$invalid">Bạn chưa nhập mô tả cho nhóm</span>
                             </div>
                         </div>
-                        <!-- /.card-body -->
                     </div>
 
-                    <!--Submit button group-->
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Cập nhật</button>
-                        <button ui-sref="applicationGroup" class="btn btn-outline-secondary space-around">Hủy bỏ</button>
-                    </div>
                 </div>
 
                 <div class="col-md-6">
-                    <!-- general form elements disabled -->
-                    <div class="card card-lightblue">
-                        <div class="card-header">
-                            <h3 class="card-title">Thông tin SEO</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label>Tiêu đề SEO</label>
-                                        <input type="text" ng-model="applicationGroup.Alias" class="form-control" placeholder="Tiêu đề SEO ..."
-                                               name="pAlias" required>
-                                        <span class="text-danger" ng-show="frmUpdateApplicationGroup.pAlias.$touched && frmUpdateApplicationGroup.pAlias.$invalid">Bạn chưa nhập tiêu đề SEO</span>
-                                    </div>
-                                    <!-- text input -->
-                                    <div class="form-group">
-                                        <label>Từ khóa SEO</label>
-                                        <input ng-model="applicationGroup.MetaKeyword"
-                                               type="text" class="form-control"
-                                               placeholder="Chọn vài từ để làm từ khóa ...">
-                                    </div>
-                                    <!-- text input -->
-                                    <div class="form-group">
-                                        <label>Từ khóa mô tả</label>
-                                        <input ng-model="applicationGroup.MetaDescription"
-                                               type="text" class="form-control"
-                                               placeholder="Từ khóa mô tả về danh mục ...">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-
                     <div class="card card-success ">
                         <div class="card-header">
-                            <h3 class="card-title">Quản lý nhóm người dùng</h3>
+                            <h3 class="card-title">Role của nhóm</h3>
                         </div>
                         <div class="card-body" style="margin-top:13px">
                             <!-- Minimal style -->
+
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-6" ng-repeat="role in roles">
                                     <!-- checkbox -->
                                     <div class="form-group clearfix">
                                         <div class="icheck-success d-inline">
-                                            <input type="checkbox" id="checkboxActive"
-                                                   ng-model="applicationGroup.Status"
-                                                   ng-checked="applicationGroup.Status==true">
-                                            <label for="checkboxActive">
-                                                Kích hoạt danh mục
+                                            <input class="checkbox-role" value="{{role.Id}}" type="checkbox" id="role_{{role.Name}}"
+                                                   data-role-description="{{role.Description}}"
+                                                   data-role-name="{{role.Name}}">
+                                            <label for="role_{{role.Name}}">
+                                                {{role.Description}}
                                             </label>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <!-- checkbox -->
-                                    <div class="form-group clearfix">
-                                        <div class="icheck-belizehole d-inline">
-                                            <input type="checkbox" id="checkboxHomeFlag"
-                                                   ng-model="applicationGroup.HomeFlag"
-                                                   ng-checked="applicationGroup.HomeFlag==true">
-                                            <label for="checkboxHomeFlag">
-                                                Hiển thị trên trang chủ
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
-                        <!-- /.card-body -->
-                    </div>
-
-                    <!-- general form elements disabled -->
-                    <div class="card card-dark">
-                        <div class="card-header">
-                            <h3 class="card-title">Lịch sử chỉnh sửa</h3>
-                        </div>
-                        <!--/.card-header-->
-                        <div class="card-body">
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Người tạo</label>
-                                        <input ng-model="applicationGroup.CreatedBy" type="text" class="form-control" required disabled>
-                                    </div>
-                                    <!--text input-->
-                                    <div class="form-group">
-                                        <label>Ngày tạo</label>
-                                        <input ng-model="applicationGroup.CreatedDate" type="text" class="form-control" disabled>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Người chỉnh sửa gần nhất</label>
-                                        <input ng-model="applicationGroup.UpdatedBy" type="text" class="form-control" readonly>
-                                    </div>
-                                    <!--text input-->
-                                    <div class="form-group">
-                                        <label>Thời gian chỉnh sửa</label>
-                                        <input ng-model="applicationGroup.UpdatedDate" type="text" class="form-control" readonly>
-                                        <!--<input ng-model="applicationGroup.RowVersion" type="text" class="form-control" hidden >-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--/.card-body-->
                     </div>
                 </div>
-                <!--/.col (right) -->
+
+            </div>
+            <div class="card-footer">
+                <button type="submit" ng-disabled="frmUpdateApplicationGroup.$invalid" class="btn btn-primary">Cập nhật</button>
+                <button  ui-sref="ApplicationGroups" class="btn btn-outline-secondary space-around">Hủy bỏ</button>
             </div>
         </form>
 
@@ -210,10 +90,10 @@
 </section>
 <!-- /.content -->
 
-<script src="../../../Assets/Admin/lib/select2/js/select2.js"></script>
 <script>
     $(document).ready(function () {
-    });
 
-    
+
+
+    });
 </script>

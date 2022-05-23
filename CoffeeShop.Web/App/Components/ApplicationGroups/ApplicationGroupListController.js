@@ -23,7 +23,7 @@
         //asign function to get ApplicationGroup
         $scope.getApplicationGroups = getApplicationGroups;
         $scope.showDeleteDialog = showDeleteDialog;
-        $scope.deleteApplicationGroup = deleleApplicationGroup;
+        $scope.deleteApplicationGroup = deleteApplicationGroup;
 
         $scope.showMultiDeleteDialog = showMultiDeleteDialog;
         $scope.deleteMultiApplicationGroup = deleteMultiApplicationGroup;
@@ -34,7 +34,7 @@
 
             var config = {
                 params: {
-                   
+
                     page: page,
                     pageSize: pageSize,
                     filter: $scope.keyWord
@@ -48,7 +48,7 @@
                         $('#dataBody').html(htmlResult);
                     }
 
-                    $scope.applicationGroup = result.data.Items;
+                    $scope.listAppGroups = result.data.Items;
                     $scope.page = result.data.Page;
                     $scope.pagesCount = result.data.TotalPages; //total pages that the query recevied
                     $scope.totalCount = result.data.TotalCount; //total row data from api result
@@ -72,7 +72,8 @@
             $('#confirmDeleteModal').modal('show');
         }
 
-        function deleleApplicationGroup() {
+        function deleteApplicationGroup() {
+            alert("goto delete application group")
             var id = $('#deleteId').val();
             var config = {
                 params: {
@@ -82,7 +83,7 @@
             ApiServices.del('api/ApplicationGroup/Delete', config, function () {
                 NotificationService.displaySuccess('Xóa thành công');
                 $('#confirmDeleteModal').modal('hide');
-                getProductCagories();
+                getApplicationGroups();
             }, function () {
                 $('#confirmDeleteModal').modal('hide');
                 NotificationService.displayError('Xóa không thành công');
@@ -127,14 +128,16 @@
             }
 
             //console.log('Param config: ', config)
-            ApiServices.del('api/ApplicationGroup/DeleteMultiItems', config, function (result) {
+            ApiServices.del('api/ApplicationGroup/DeleteMulti', config, function (result) {
                 NotificationService.displaySuccess('Xóa thành công');
                 $('#confirmDeleteModal').modal('hide');
-                getProductCagories();
+                getApplicationGroups();
             }, function (error) {
                 NotificationService.displayError('Xóa không thành công');
                 $('#confirmDeleteModal').modal('hide');
             })
+
+            $('#confirmDeleteModal').modal('hide');
         }
 
         $scope.getApplicationGroups();

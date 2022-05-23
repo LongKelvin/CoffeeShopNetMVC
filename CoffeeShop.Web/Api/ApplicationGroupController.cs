@@ -105,6 +105,8 @@ namespace CoffeeShop.Web.Api
             {
                 var newAppGroup = new ApplicationGroup();
                 newAppGroup.Name = appGroupViewModel.Name;
+                newAppGroup.Description = appGroupViewModel.Description;
+
                 try
                 {
                     var appGroup = _appGroupService.Add(newAppGroup);
@@ -118,6 +120,7 @@ namespace CoffeeShop.Web.Api
                         {
                             GroupId = appGroup.ID,
                             RoleId = role.Id
+
                         });
                     }
                     _appRoleService.AddRolesToGroup(listRoleGroup, appGroup.ID);
@@ -196,9 +199,9 @@ namespace CoffeeShop.Web.Api
             return request.CreateResponse(HttpStatusCode.OK, appGroup);
         }
 
-        [Route("Deletemulti")]
+        [Route("DeleteMulti")]
         [HttpDelete]
-        public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedList)
+        public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string ids)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -209,7 +212,7 @@ namespace CoffeeShop.Web.Api
                 }
                 else
                 {
-                    var listItem = new JavaScriptSerializer().Deserialize<List<int>>(checkedList);
+                    var listItem = new JavaScriptSerializer().Deserialize<List<int>>(ids);
                     foreach (var item in listItem)
                     {
                         _appGroupService.Delete(item);

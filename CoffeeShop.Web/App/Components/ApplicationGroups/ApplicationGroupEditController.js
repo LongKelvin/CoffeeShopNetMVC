@@ -9,45 +9,69 @@
             '$state',
             'NotificationService',
             '$stateParams',
-            'CommonService'
         ];
 
-    function ApplicationGroupEditController($scope, ApiServices, $state, NotificationService, $stateParams, CommonService) {
-        $scope.title = 'ApplicationGroupEditController';
+    function ApplicationGroupEditController($scope, ApiServices, $state, NotificationService, $stateParams) {
 
-        $scope.applicationGroup = {
-            UpdatedDate: new Date(),
-            UpdatedBy: 'AdminTest'
-        }
+    
+        $scope.group = {}
+
 
         $scope.UpdateApplicationGroup = UpdateApplicationGroup;
-       
-        function UpdateApplicationGroup() {
-            $scope.applicationGroup.UpdatedDate = new Date();
-            $scope.applicationGroup.UpdatedBy = 'AdminTest';
 
-            console.log('update data:', $scope.applicationGroup)
-            ApiServices.post('api/ApplicationGroup/Update', $scope.applicationGroup,
-                function (result) {
-                    NotificationService.displaySuccess(result.data.Name + ' đã cập nhật thành công.');
-                    $state.go('ApplicationGroups');
-                }, function (error) {
-                    console.error(error)
-                    NotificationService.displayError('Đã có lỗi xảy ra, Xin vui lòng thử lại.');
-                });
-            $state.go('ApplicationGroups')
+        function UpdateApplicationGroup() {
+            GetRoles();
+            ApiServices.put('/api/applicationGroup/update', $scope.group, addSuccessed, addFailed);
+            }
+            function loadDetail() {
+                ApiServices.get('/api/applicationGroup/detail/' + $stateParams.id, null,
+                    function (result) {
+                        $scope.group = result.data;
+                        console.log(result.data)
+                        $.each(result.data.Roles, function (i, role) {
+                            $('#role_' + role.Name).prop('checked', true);
+                        });
+                    },
+                    function (result) {
+                        NotificationService.displayError(result.data);
+                    });
+            }
+
+
+
+            function addSuccessed() {
+                NotificationService.displaySuccess($scope.group.Name + ' đã được cập nhật thành công.');
+
+                $state.go('ApplicationGroups');
+            }
+            function addFailed(response) {
+                NotificationService.displayError(response.data.Message);
+                NotificationService.displayErrorValidation(response);
+            }
+            function loadRoles() {
+                ApiServices.get('/api/applicationRole/getlistall',
+                    null,
+                    function (response) {
+                        $scope.roles = response.data;
+                    }, function (response) {
+                        NotificationService.displayError('Không tải được danh sách quyền.');
+                    });
+
         }
 
-        function loadApplicationGroupDetail() {
-            ApiServices.get('api/ApplicationGroup/GetById/' + $stateParams.id, null, function (result) {
-                $scope.applicationGroup = result.data;
-
-                
-                console.log('ApplicationGroupData: ', $scope.applicationGroup)
-            }, function (error) {
-                NotificationService.displayError(error.data);
+        function GetRoles() {
+            $("input:checkbox[class=checkbox-role]:checked").each(function () {
+                var role = {
+                    "Id": $(this).val(),
+                    "Description": $(this).data("role-description"),
+                    "Name": $(this).data("role-name")
+                }
+                $scope.group.Roles.push(role);
+                console.log('Roles data: ', $scope.group.Roles)
             });
         }
-        loadApplicationGroupDetail();
-    }
+
+            loadRoles();
+            loadDetail();
+        }
 })(angular.module('CoffeeShop.ApplicationGroups'));
