@@ -1,4 +1,6 @@
-﻿using CoffeeShop.Models.Models;
+﻿using AutoMapper;
+
+using CoffeeShop.Models.Models;
 using CoffeeShop.Web.Models;
 
 using System;
@@ -190,6 +192,48 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             feedback.EmailSubject = feedbackVM.EmailSubject;
             feedback.RowVersion = feedbackVM.RowVersion;
             feedback.Message = feedbackVM.Message;
+        }
+
+        public static void UpdateOrder(this Order order, OrderViewModel orderVm)
+        {
+            order.CustomerName = orderVm.CustomerName;
+            order.CustomerAddress = orderVm.CustomerName;
+            order.CustomerEmail = orderVm.CustomerName;
+            order.CustomerMobile = orderVm.CustomerName;
+            order.CustomerMessage = orderVm.CustomerName;
+            order.PaymentMethodID= orderVm.PaymentMethodCode;
+            order.CreatedDate = DateTime.Now;
+            order.CreatedBy = orderVm.CreatedBy;
+            order.Status = orderVm.Status;
+            order.PaymentStatus = orderVm.PaymentStatus;
+            //order.OrderDetails = Mapper.Map<List<OrderDetail>>(orderVm);
+        }
+
+        public static void UpdateApplicationGroup(this ApplicationGroup appGroup, ApplicationGroupViewModel appGroupViewModel)
+        {
+            appGroup.ID = appGroupViewModel.ID;
+            appGroup.Name = appGroupViewModel.Name;
+            appGroup.Description = appGroupViewModel.Description;
+        }
+
+        public static void UpdateApplicationRole(this ApplicationRole appRole, ApplicationRoleViewModel appRoleViewModel, string action = "add")
+        {
+            if (action == "update")
+                appRole.Id = appRoleViewModel.Id;
+            else
+                appRole.Id = Guid.NewGuid().ToString();
+            appRole.Name = appRoleViewModel.Name;
+            appRole.Description = appRoleViewModel.Description;
+        }
+        public static void UpdateUser(this ApplicationUser appUser, ApplicationUserViewModel appUserViewModel, string action = "add")
+        {
+
+            appUser.Id = appUserViewModel.Id;
+            appUser.FullName = appUserViewModel.FullName;
+            appUser.BirthDay = appUserViewModel.BirthDay;
+            appUser.Email = appUserViewModel.Email;
+            appUser.UserName = appUserViewModel.UserName;
+            appUser.PhoneNumber = appUserViewModel.PhoneNumber;
         }
     }
 }

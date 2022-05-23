@@ -1,0 +1,41 @@
+﻿<div class="card  recent-cart ">
+    <h4 class="card-header card-white"><strong>Billing Detail</strong></h4>
+    <ul class="cart-order card-body card-hightlight" id="cartDetailBody">
+    </ul>
+    <div class="card card-footer text-left">
+        <div class="sub_total ">
+            <h5><b>Sub Total: <b class="product-price" id="orderTotalPrice"></b> </b></h5>
+            <h5><b>Delivery Fee: <b class="product-price" id="shippingFee"></b> </b></h5>
+            <hr />
+            <h5><b>Total Pay: <b class="product-price" id="totalAmount"></b> </b></h5>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="x-tmpl-mustache" id="cartTemplate">
+    <li class="order-item row" id="item_{{itemProductID}}">
+        <div class="item-image col-3 flexiable-img">
+            <img src="{{itemImage}}" />
+        </div>
+        <div class="col-5 ">
+            <p>
+                <b class="product-name ">{{itemName}}</b>
+                <br />
+                <strong class="itemQty" data-quantity="{{itemQuantity}}" data-price="{{itemUnitPrice}}">{{itemQuantity}}</strong> x <span class="product-price">{{itemUnitPriceF}}</span>
+                <br>
+            </p>
+        </div>
+        <div class="col-4">
+            <p>
+                <b class="product-name "></b>
+                <br />
+                <span class="product-price total-price" data-total-price="{{itemTotalPrice}}">{{itemTotalPriceF}}</span>
+                <br>
+            </p>
+        </div>
+
+        <input hidden data-id="{{itemProductID}}" data-price="{{itemUnitPrice}}" class="ps-2 inputItemQuantity" type="number" min="1" value="{{itemQuantity}}">
+    </li>
+</script>

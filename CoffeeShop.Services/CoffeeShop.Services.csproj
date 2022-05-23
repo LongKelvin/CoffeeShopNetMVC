@@ -40,6 +40,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -51,6 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationGroupService.cs" />
+    <Compile Include="ApplicationRoleService.cs" />
     <Compile Include="EntityExtension.cs" />
     <Compile Include="ErrorService.cs" />
     <Compile Include="FeedbackService.cs" />
@@ -63,6 +71,7 @@
     <Compile Include="IOrderDetailService.cs" />
     <Compile Include="IOrderService.cs" />
     <Compile Include="IPageService.cs" />
+    <Compile Include="IPaymentMethodService.cs" />
     <Compile Include="IPostCategoryService.cs" />
     <Compile Include="IProductCategoryService.cs" />
     <Compile Include="IProductService.cs" />
@@ -78,6 +87,7 @@
     <Compile Include="OrderDetailService.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="PageService.cs" />
+    <Compile Include="PaymentMethodService.cs" />
     <Compile Include="PostCategoryService.cs" />
     <Compile Include="ProductCategoryService.cs" />
     <Compile Include="ProductService.cs" />

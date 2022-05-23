@@ -1,0 +1,100 @@
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><strong>Tạo nhóm người dùng</strong></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="Home">Trang chủ</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="ApplicationGroups">Quản lý nhóm người dùng</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="ApplicationGroups">Nhóm người dùng</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <form name="frmAddApplicationGroup" role="form" ng-submit="AddApplicationGroup()" novalidate>
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-6">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin chính</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Tên nhóm <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="group.Name" required name="pName"
+                                       class="form-control" placeholder="Tên của nhóm cần quản lý ...">
+                                <span class="text-danger" ng-show="frmAddApplicationGroup.pName.$touched && frmAddApplicationGroup.pName.$invalid">Bạn chưa nhập tên nhóm</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Mô tả <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="group.Description" required name="pDescription"
+                                       class="form-control" placeholder="Mô tả ...">
+                                <span class="text-danger" ng-show="frmAddApplicationGroup.pDescription.$touched && frmAddApplicationGroup.pDescription.$invalid">Bạn chưa nhập mô tả cho nhóm</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card card-success ">
+                        <div class="card-header">
+                            <h3 class="card-title">Role của nhóm</h3>
+                        </div>
+                        <div class="card-body" style="margin-top:13px">
+                            <!-- Minimal style -->
+
+                            <div class="row" >
+                                <div class="col-sm-6" ng-repeat="role in roles">
+                                    <!-- checkbox -->
+                                    <div class="form-group clearfix">
+                                        <div class="icheck-success d-inline">
+                                            <input class="checkbox-role" value="{{role.Id}}" type="checkbox" id="role_{{role.Name}}"
+                                                   data-role-description="{{role.Description}}"
+                                                   data-role-name="{{role.Name}}">
+                                            <label for="role_{{role.Name}}">
+                                                {{role.Description}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <button type="submit" ng-disabled="frmAddApplicationGroup.$invalid" class="btn btn-primary">Lưu nhóm người dùng</button>
+                <button ui-sref="ApplicationGroups" class="btn btn-outline-secondary space-around">Hủy bỏ</button>
+            </div>
+        </form>
+
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+<script>
+    $(document).ready(function () {
+      
+
+      
+    });
+</script>

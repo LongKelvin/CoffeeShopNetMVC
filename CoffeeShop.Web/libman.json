@@ -3,10 +3,6 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "library": "angular.js@1.8.2",
-      "destination": "Assets/Admin/lib/angular.js/"
-    },
-    {
       "library": "angular-ui-router@1.0.30",
       "destination": "Assets/Admin/lib/angular-ui-router/"
     },
@@ -81,14 +77,20 @@
       "destination": "Assets/Admin/lib/angular-loading-bar/"
     },
     {
-      "provider": "cdnjs",
       "library": "jqueryui@1.12.0-rc.2",
       "destination": "Assets/Admin/lib/jqueryui/"
     },
     {
-      "provider": "cdnjs",
       "library": "typescript@4.6.4",
       "destination": "Assets/Admin/lib/typescripts/"
+    },
+    {
+      "library": "jquery-validate@1.19.3",
+      "destination": "Assets/Admin/lib/jquery-validate/"
+    },
+    {
+      "library": "checklist-model@1.0.0",
+      "destination": "Assets/Admin/lib/checklist-model/"
     }
   ]
 }

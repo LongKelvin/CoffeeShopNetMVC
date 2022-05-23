@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CoffeeShop.Common
+﻿namespace CoffeeShop.Common
 {
     public static class CommonConstants
     {
@@ -13,11 +7,19 @@ namespace CoffeeShop.Common
         public const string DefaultFooterId = "default";
 
         public const string SessionCart = "SessionCart";
+        public const string SessionCartCurrentItem = "SessionCartCurrentItem";
 
         public const string HomeTitle = "HomeTitle";
         public const string HomeMetaKeyword = "HomeMetaKeyword";
         public const string HomeMetaDescription = "HomeMetaDescription";
 
         public const string Administrator = "Administrator";
+
+        public enum Sex
+        {
+            Male = 0,
+            Female = 1,
+            Other = 2
+        }
     }
 }

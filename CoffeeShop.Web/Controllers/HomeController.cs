@@ -46,12 +46,12 @@ namespace CoffeeShop.Web.Controllers
             return PartialView();
         }
 
-        [OutputCache(Duration = 3600)]
-        [ChildActionOnly]
-        public PartialViewResult Header()
-        {
-            return PartialView();
-        }
+        //[OutputCache(Duration = 3600)]
+        //[ChildActionOnly]
+        //public PartialViewResult Header()
+        //{
+        //    return PartialView();
+        //}
 
         [OutputCache(Duration = 60)]
         [ChildActionOnly]

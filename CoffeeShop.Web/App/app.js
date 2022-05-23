@@ -8,6 +8,9 @@
         'CoffeeShop.Products',
         'CoffeeShop.ProductCategory',
         'CoffeeShop.Slides',
+        'CoffeeShop.ApplicationGroups',
+        'CoffeeShop.ApplicationRoles',
+        'CoffeeShop.ApplicationUsers',
 
     ]).config(config)
         .config(configAuthentication);

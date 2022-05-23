@@ -12,10 +12,11 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="~/Assets/Client/images/favicon.png" type="">
+    <link async rel="shortcut icon" href="~/Assets/Client/images/favicon.png" type="">
     <title>Coffee Way</title>
 
-    @Styles.Render("~/css/base")
+    @*@Styles.Render("~/css/base")*@
+    @Styles.RenderFormat("<link href=\"{0}\" rel=\"stylesheet preload\" as=\"style\" />", "~/css/base")
     @Scripts.Render("~/bundles/modernizr")
     @RenderSection("Styles", required: false)
 
@@ -76,7 +77,8 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index","Cart")">
+                                <a class="nav-link" href="@Url.Action("Index","ShoppingCart")">
+
                                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                                     <g>
                                     <g>
@@ -129,6 +131,7 @@
                                     <g>
                                  </g>
                               </svg>
+                                    <span id="totalQuantity" class="badge badge-pill badge-danger"></span>
                                 </a>
                             </li>
 
@@ -142,12 +145,10 @@
 
                                         <div class="profile-photo dropdown-toggle dropdown-toggle-split"
                                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
                                             <img src="~/Assets/Admin/img/avatar.png" width="48" height="48" />
                                         </div>
 
                                         <div class="dropdown-menu">
-
                                             <form action="@Url.Action("LogOut","Account")" method="post">
                                                 @Html.AntiForgeryToken()
                                                 <a class="dropdown-item" href="#">Account Settings</a>
@@ -188,9 +189,9 @@
     @{ Html.RenderAction("Footer", "Home");}
     @*footer section end*@
 
-    <div class="cpy_">
-        <p>© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a></p>
-    </div>
+    @*<div class="cpy_">
+            <p>© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a></p>
+        </div>*@
 
     <!--<!-- jQuery -->
     <!--@*<script src="~/Assets/Client/js/jquery-3.4.1.min.js"></script>*@
@@ -201,11 +202,23 @@
     <!--<script src="~/Assets/Client/js/custom.js"></script>-->
 
     @Scripts.Render("~/js/jquery")
-    @Scripts.Render("~/js/plugins")
+    @*@Scripts.RenderFormat(@"<script src="" {0}"" async></script>", "~/js/jquery")*@
+    @*@Scripts.Render("~/js/plugins")*@
+    @Scripts.Render("~/js/jquery-ui")
+    @Scripts.RenderFormat(@"<script src="" {0}"" async></script>", "~/js/plugins")
+
     @*@Scripts.Render("~/bundles/bootstrap")*@
     @*bootstrap js*@
-    <script src="~/Assets/Client/js/bootstrap.js"></script>
+    <script defer src="~/Assets/Client/js/bootstrap.js"></script>
+    <script src="~/Libs/localLib/mustache/mustache.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 
+    <script src="~/Assets/Admin/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/Assets/Admin/lib/jquery-validate/additional-methods.js"></script>
+
+    <script async src="~/Assets/Client/custom-scripts/controllers/shoppingCart.js"></script>
+    <script async src="~/Assets/Client/custom-scripts/controllers/cartPanel.js"></script>
+    <script src="~/Assets/Client/custom-scripts/controllers/payment.js"></script>
     @section Scripts{
         <script>
 
@@ -215,6 +228,7 @@
                 // adding classname 'active' to current click li
                 $(this).addClass("active");
             });
+
         </script>
     }
 

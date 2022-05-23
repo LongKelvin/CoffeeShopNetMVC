@@ -244,7 +244,7 @@ label.error
 }
 
 /*button*/
- .btn-box
+.btn-box
 {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -281,23 +281,20 @@ label.error
         color: #ffffff;
     }
 
-        .product_section .btn-box .btn-secondary:hover
-        {
-            background-color: transparent;
-            color: #000000;
-        }
-
+.product_section .btn-box .btn-secondary:hover
+{
+    background-color: transparent;
+    color: #000000;
+}
 
 .flexible-btn
 {
     width: 25%;
 }
 
-
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px)
 {
-
     .flexible-btn
     {
         width: 100%;
@@ -307,8 +304,6 @@ label.error
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px)
 {
-  
-
     .flexible-btn
     {
         width: 75%;
@@ -318,8 +313,6 @@ label.error
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px)
 {
-   
-
     .flexible-btn
     {
         width: 25%;
@@ -329,8 +322,6 @@ label.error
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px)
 {
-   
-
     .flexible-btn
     {
         width: 25%;

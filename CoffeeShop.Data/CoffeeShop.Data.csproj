@@ -131,14 +131,59 @@
     <Compile Include="Migrations\202205071449132_addFeedbackTbl.designer.cs">
       <DependentUpon>202205071449132_addFeedbackTbl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205110640456_modify_User_Order_tbl.cs" />
+    <Compile Include="Migrations\202205110640456_modify_User_Order_tbl.designer.cs">
+      <DependentUpon>202205110640456_modify_User_Order_tbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205110644364_addImageProfileToApplicationUser.cs" />
+    <Compile Include="Migrations\202205110644364_addImageProfileToApplicationUser.designer.cs">
+      <DependentUpon>202205110644364_addImageProfileToApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205140727222_createPaymentMethod.cs" />
+    <Compile Include="Migrations\202205140727222_createPaymentMethod.designer.cs">
+      <DependentUpon>202205140727222_createPaymentMethod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205140732589_addStatusToPaymentMethod.cs" />
+    <Compile Include="Migrations\202205140732589_addStatusToPaymentMethod.designer.cs">
+      <DependentUpon>202205140732589_addStatusToPaymentMethod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205140805298_addLogoImageToPaymentMethod.cs" />
+    <Compile Include="Migrations\202205140805298_addLogoImageToPaymentMethod.designer.cs">
+      <DependentUpon>202205140805298_addLogoImageToPaymentMethod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205170350571_modifyOrderTbl.cs" />
+    <Compile Include="Migrations\202205170350571_modifyOrderTbl.designer.cs">
+      <DependentUpon>202205170350571_modifyOrderTbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205180308252_AddGroupUser.cs" />
+    <Compile Include="Migrations\202205180308252_AddGroupUser.designer.cs">
+      <DependentUpon>202205180308252_AddGroupUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205200845358_RenameIdentityColmn.cs" />
+    <Compile Include="Migrations\202205200845358_RenameIdentityColmn.designer.cs">
+      <DependentUpon>202205200845358_RenameIdentityColmn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205200852018_RenameIdentityColmn1.cs" />
+    <Compile Include="Migrations\202205200852018_RenameIdentityColmn1.designer.cs">
+      <DependentUpon>202205200852018_RenameIdentityColmn1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205200855541_deleteIdentityUnuseColumn.cs" />
+    <Compile Include="Migrations\202205200855541_deleteIdentityUnuseColumn.designer.cs">
+      <DependentUpon>202205200855541_deleteIdentityUnuseColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ApplicationGroupRepository.cs" />
+    <Compile Include="Repositories\ApplicationRoleGroupRepository.cs" />
+    <Compile Include="Repositories\ApplicationRoleRepository.cs" />
+    <Compile Include="Repositories\ApplicationUserGroupRepository.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
     <Compile Include="Repositories\FeedbackRepository.cs" />
     <Compile Include="Repositories\IErrorRepository.cs" />
     <Compile Include="Repositories\IFeedbackRepository.cs" />
     <Compile Include="Repositories\IOrderRepository.cs" />
     <Compile Include="Repositories\IPageRepository.cs" />
+    <Compile Include="Repositories\IPaymentMethodRepository.cs" />
     <Compile Include="Repositories\IPostCategoryRepository.cs" />
     <Compile Include="Repositories\IPostRepository.cs" />
     <Compile Include="Repositories\IOrderDetailRepository.cs" />
@@ -153,6 +198,7 @@
     <Compile Include="Repositories\IVisitorStatisticRepository.cs" />
     <Compile Include="Repositories\ITagRepository.cs" />
     <Compile Include="Repositories\ISlideRepository.cs" />
+    <Compile Include="Repositories\PaymentMethodRepository.cs" />
     <Compile Include="Repositories\PostCategoryRepository.cs" />
     <Compile Include="Repositories\ProductCategoryRepository.cs" />
     <Compile Include="Repositories\ShopInformationRepository.cs" />
@@ -234,6 +280,36 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205071449132_addFeedbackTbl.resx">
       <DependentUpon>202205071449132_addFeedbackTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205110640456_modify_User_Order_tbl.resx">
+      <DependentUpon>202205110640456_modify_User_Order_tbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205110644364_addImageProfileToApplicationUser.resx">
+      <DependentUpon>202205110644364_addImageProfileToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205140727222_createPaymentMethod.resx">
+      <DependentUpon>202205140727222_createPaymentMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205140732589_addStatusToPaymentMethod.resx">
+      <DependentUpon>202205140732589_addStatusToPaymentMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205140805298_addLogoImageToPaymentMethod.resx">
+      <DependentUpon>202205140805298_addLogoImageToPaymentMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205170350571_modifyOrderTbl.resx">
+      <DependentUpon>202205170350571_modifyOrderTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205180308252_AddGroupUser.resx">
+      <DependentUpon>202205180308252_AddGroupUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205200845358_RenameIdentityColmn.resx">
+      <DependentUpon>202205200845358_RenameIdentityColmn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205200852018_RenameIdentityColmn1.resx">
+      <DependentUpon>202205200852018_RenameIdentityColmn1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205200855541_deleteIdentityUnuseColumn.resx">
+      <DependentUpon>202205200855541_deleteIdentityUnuseColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

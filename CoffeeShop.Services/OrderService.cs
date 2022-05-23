@@ -11,25 +11,41 @@ namespace CoffeeShop.Services
         public IUnitOfWork _unitOfWork { get; set; }
         public IOrderRepository _orderRepository { get; set; }
 
-        public OrderService(IUnitOfWork unitOfWork, IOrderRepository orderRepository)
+        public IOrderDetailRepository _orderDetailRepository { get; set; }
+
+        public OrderService(IUnitOfWork unitOfWork, IOrderRepository orderRepository,
+            IOrderDetailRepository orderDetailRepository)
         {
             _unitOfWork = unitOfWork;
             _orderRepository = orderRepository;
+            _orderDetailRepository = orderDetailRepository;
         }
 
-        public void Add(Order order)
+        public Order Add(Order order)
         {
-            _orderRepository.Add(order);
+            var listOrderDetail = order.OrderDetails;
+
+            order.OrderDetails = null;
+           
+            var orderResult =  _orderRepository.Add(order);
+            _unitOfWork.Commit();
+
+            orderResult.OrderDetails = listOrderDetail;
+            _orderRepository.Update(orderResult);
+            _unitOfWork.Commit();
+
+            return orderResult;
+
         }
 
-        public void Delete(Order order)
+        public Order Delete(Order order)
         {
-            _orderRepository.Delete(order);
+            return _orderRepository.Delete(order);
         }
 
-        public void Delete(int id)
+        public Order Delete(int id)
         {
-            _orderRepository.Delete(id);
+            return _orderRepository.Delete(id);
         }
 
         public IEnumerable<Order> GetAll()
@@ -58,9 +74,10 @@ namespace CoffeeShop.Services
             _unitOfWork.Commit();
         }
 
-        public void Update(Order order)
+        public Order Update(Order order)
         {
             _orderRepository.Update(order);
+            return order;
         }
     }
 }

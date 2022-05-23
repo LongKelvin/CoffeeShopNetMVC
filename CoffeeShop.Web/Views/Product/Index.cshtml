@@ -39,90 +39,12 @@
     <div class="row flex-column-reverse flex-lg-row">
         <div class="col-lg-3 col-md-4 col-lg-pull-9 col-md-pull-8 ">
             <div class="margin-top">
-                <div class="card card-info recent-cart">
-                    <h4 class="card-header card-white"><strong>Cart</strong></h4>
-                    <ul class="cart-order card-body">
-                        <li class="order-item row">
-                            <div class="item-image col-4 flexiable-img">
-                                <img src="~/Assets/Client/images/menu-item-1.jpg" />
-                            </div>
-                            <div class="col-6">
-                                <p>
-                                    <b class="product-name ">ESPRESSO AMERICANO</b>
-                                    <br />
-                                    <strong>2</strong> x <span class="product-price">$12</span>
-                                </p>
-                            </div>
-                            <div class="col-2 w-100 btn-close">
-                                <button type="button" class="close"> <span class="text-danger" aria-hidden="true">&times;</span></button>
-                            </div>
-                        </li>
-                        <li class="order-item row ">
-                            <div class="item-image col-4 flexiable-img">
-                                <img src="~/Assets/Client/images/menu-item-2.jpg" />
-                            </div>
-                            <div class="col-6">
-                                <p>
-                                    <b class="product-name ">DOUBLE ESPRESSO</b>
-                                    <br />
-                                    <strong>2</strong> x <span class="product-price">$12</span>
-                                </p>
-                            </div>
-                            <div class="col-2 w-100">
-                                <button type="button" class="close "> <span class="text-danger" aria-hidden="true">&times;</span></button>
-                            </div>
-                        </li>
-                        <li class="order-item row">
-                            <div class="item-image col-4 flexiable-img">
-                                <img src="~/Assets/Client/images/menu-item-7.jpg" />
-                            </div>
-                            <div class="col-6">
-                                <p>
-                                    <b class="product-name ">ICED LATTE</b>
-                                    <br />
-                                    <strong>2</strong> x <span class="product-price">$12</span>
-                                </p>
-                            </div>
-                            <div class="col-2 w-100">
-                                <button type="button" class="close "> <span class="text-danger" aria-hidden="true">&times;</span></button>
-                            </div>
-                        </li>
-                        <li class="order-item row">
-                            <div class="item-image col-4 flexiable-img">
-                                <img src="~/Assets/Client/images/menu-item-5.jpg" />
-                            </div>
-                            <div class="col-6">
-                                <p>
-                                    <b class="product-name ">LATTE MACCHIATO</b>
-                                    <br />
-                                    <strong>2</strong> x <span class="product-price">$12</span>
-                                </p>
-                            </div>
-                            <div class="col-2 w-100">
-                                <button type="button" class="close "> <span class="text-danger" aria-hidden="true">&times;</span></button>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="card card-footer text-center">
-                        <div class="sub_total ">
-                            <h5><b>Sub Total: $156.94</b></h5>
-                        </div>
-                        <div class="btn-box">
-                            <a href="" class="btn-secondary  flexible-btn">
-                                Xem giỏ hàng
-                            </a>
-                        </div>
-                        <div class="btn-box">
-                            <a href="@Url.Action("Index","Cart")" class="btn-checkout  flexible-btn">
-                                Đặt hàng
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
+                @*Cart panel section*@
+                @{ Html.RenderAction("CartPanel", "ShoppingCart");}
                 @*Product categories section*@
                 @{ Html.RenderAction("Index", "ProductCategory");}
             </div>
+           
         </div>
         <div class="col-lg-9 col-lg-push-3 col-md-8 col-md-push-4 ">
 
@@ -153,10 +75,10 @@
                                         <a href="@url" class="option3">
                                             View Detail
                                         </a>
-                                        <a href="" class="option1">
+                                        <a data-id="@item.ID"  onclick="addItemToCart(@item.ID)" class="option1">
                                             Add To Cart
                                         </a>
-                                        <a href="" class="option2">
+                                        <a data-id="@item.ID"  onclick="addItemToCart(@item.ID)" href="@Url.Action("Index","ShoppingCart")" class="option2">
                                             Order Now
                                         </a>
                                     </div>
@@ -274,7 +196,7 @@
 @section Scripts{
     <script>
         $(document).ready(function () {
-           
+
             $('#searchInput').autocomplete({
 
                 source: function (request, response) {
@@ -298,19 +220,22 @@
                 return $("<li>")
                     .append("<div>" + item.value + "<br>" + "</div>")
                     .appendTo(ul);
-            }
+                }
+
+
+            cartPanel.loadData();
         });
 
-        $('.close').click(function () {
-            $(this).closest('li').remove();
-            checkCartList();
-        })
+        //$('.remove-item').click(function () {
+        //    $(this).closest('li').remove();
+        //    checkCartList();
+        //    alert("Button remove item clicking")
+        //})
 
-        function checkCartList() {
-            if ($('.cart-order li').length === 0) {
-                $('.cart-order li').html('Cart is empty')
-            }
-            console.log($('.cart-order li').length)
-        }
+        //function checkCartList() {
+        //    if ($('.cart-order li').length === 0) {
+        //        $('.cart-order li').html('Cart is empty')
+        //    }
+        //}
     </script>
 }
