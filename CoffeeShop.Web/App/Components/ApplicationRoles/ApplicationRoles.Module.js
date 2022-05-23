@@ -1,5 +1,4 @@
-﻿
-(function () {
+﻿(function () {
     angular.module('CoffeeShop.ApplicationRoles', [
 
         // Custom modules

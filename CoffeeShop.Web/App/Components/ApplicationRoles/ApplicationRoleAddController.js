@@ -3,40 +3,39 @@
 
     app.controller('ApplicationRoleAddController', ApplicationRoleAddController);
 
-    ApplicationRoleAddController.$inject = ['$scope', 'ApiServices', 'NotificationService', '$location', 'CommonService'];
+    ApplicationRoleAddController.$inject = ['$scope', 'ApiServices', 'NotificationService', '$location'];
 
-    function ApplicationRoleAddController($scope, ApiServices, NotificationService, $location, CommonService) {
+    function ApplicationRoleAddController($scope, ApiServices, NotificationService, $location) {
         $scope.role = {
             Id: 0
         }
 
-        $scope.addAppRole = addAppRole;
+        $scope.AddApplicationRole = AddApplicationRole;
 
-        function addAppRole() {
-            ApiServices.post('/api/ApplicationRole/Add', $scope.role, addSuccessed, addFailed);
+        function AddApplicationRole() {
+            ApiServices.post('/api/ApplicationRole/Add', $scope.role, AddSuccessed, AddFailed);
         }
 
-        function addSuccessed() {
+        function AddSuccessed() {
             NotificationService.displaySuccess($scope.role.Name + ' đã được thêm mới.');
 
             $location.url('ApplicationRoles');
         }
-        function addFailed(response) {
+        function AddFailed(response) {
             NotificationService.displayError(response.data.Message);
             NotificationService.displayErrorValidation(response);
         }
 
-        function loadRoles() {
-            ApiService.get('/api/applicationRole/getlistall',
+        function LoadRoles() {
+            ApiServices.get('/api/applicationRole/getlistall',
                 null,
                 function (response) {
                     $scope.roles = response.data;
                 }, function (response) {
                     NotificationService.displayError('Không tải được danh sách quyền.');
                 });
-
         }
 
-        loadRoles();
+        LoadRoles();
     }
 })(angular.module('CoffeeShop.ApplicationRoles'));
