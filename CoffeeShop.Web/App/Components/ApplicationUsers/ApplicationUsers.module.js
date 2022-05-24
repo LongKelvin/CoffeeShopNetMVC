@@ -1,12 +1,9 @@
-﻿
-
-(function () {
+﻿(function () {
     angular.module('CoffeeShop.ApplicationUsers', ['CoffeeShop.Common']).config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function config($stateProvider, $urlRouterProvider) {
-
         $stateProvider.state('ApplicationUsers', {
             url: "/ApplicationUsers",
             templateUrl: "/App/Components/ApplicationUsers/ApplicationUserListView.html",

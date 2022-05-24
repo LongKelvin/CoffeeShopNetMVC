@@ -34,10 +34,8 @@
                 }, function (response) {
                     NotificationService.displayError('Không tải được danh sách nhóm.');
                 });
-
         }
 
         loadGroups();
-
     }
 })(angular.module('CoffeeShop.ApplicationUsers'));

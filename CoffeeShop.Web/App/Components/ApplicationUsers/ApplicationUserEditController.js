@@ -8,7 +8,6 @@
     function ApplicationUserEditController($scope, ApiService, NotificationService, $location, $stateParams) {
         $scope.account = {}
 
-
         $scope.updateAccount = updateAccount;
 
         function updateAccount() {
@@ -16,12 +15,12 @@
         }
         function loadDetail() {
             ApiService.get('/api/applicationUser/detail/' + $stateParams.id, null,
-            function (result) {
-                $scope.account = result.data;
-            },
-            function (result) {
-                NotificationService.displayError(result.data);
-            });
+                function (result) {
+                    $scope.account = result.data;
+                },
+                function (result) {
+                    NotificationService.displayError(result.data);
+                });
         }
 
         function addSuccessed() {
@@ -41,7 +40,6 @@
                 }, function (response) {
                     NotificationService.displayError('Không tải được danh sách nhóm.');
                 });
-
         }
 
         loadGroups();
