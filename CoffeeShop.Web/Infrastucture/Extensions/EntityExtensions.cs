@@ -216,16 +216,16 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             appGroup.Description = appGroupViewModel.Description;
         }
 
-        public static void UpdateApplicationRole(this ApplicationRole appRole, ApplicationRoleViewModel appRoleViewModel, string action = "add")
+        public static void UpdateApplicationRole(this ApplicationRole appRole, ApplicationRoleViewModel appRoleViewModel, string action = "Add")
         {
-            if (action == "update")
+            if (action == "Update")
                 appRole.Id = appRoleViewModel.Id;
             else
                 appRole.Id = Guid.NewGuid().ToString();
             appRole.Name = appRoleViewModel.Name;
             appRole.Description = appRoleViewModel.Description;
         }
-        public static void UpdateUser(this ApplicationUser appUser, ApplicationUserViewModel appUserViewModel, string action = "add")
+        public static void UpdateUser(this ApplicationUser appUser, ApplicationUserViewModel appUserViewModel, string action = "Add")
         {
 
             appUser.Id = appUserViewModel.Id;

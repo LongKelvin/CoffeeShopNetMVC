@@ -3,20 +3,29 @@
 
     app.controller('ApplicationUserEditController', ApplicationUserEditController);
 
-    ApplicationUserEditController.$inject = ['$scope', 'ApiService', 'NotificationService', '$location', '$stateParams'];
+    ApplicationUserEditController.$inject = ['$scope', 'ApiServices', 'NotificationService', '$location', '$stateParams'];
 
-    function ApplicationUserEditController($scope, ApiService, NotificationService, $location, $stateParams) {
-        $scope.account = {}
+    function ApplicationUserEditController($scope, ApiServices, NotificationService, $location, $stateParams) {
+        $scope.user = {}
 
-        $scope.updateAccount = updateAccount;
+        $scope.UpdateApplicationUser = UpdateApplicationUser;
 
-        function updateAccount() {
-            ApiService.put('/api/applicationUser/update', $scope.account, addSuccessed, addFailed);
+        function UpdateApplicationUser() {
+            getCheckedGroup();
+            ApiServices.put('/api/applicationUser/update', $scope.user, addSuccessed, addFailed);
         }
         function loadDetail() {
-            ApiService.get('/api/applicationUser/detail/' + $stateParams.id, null,
+            ApiServices.get('/api/applicationUser/detail/' + $stateParams.id, null,
                 function (result) {
-                    $scope.account = result.data;
+                    $scope.user = result.data;
+                    $.each(result.data.Groups, function (i, gr) {
+                        $('#gr_' + gr.Name).prop('checked', true);
+                    });
+
+                    if ($scope.user.BirthDay != null)
+                        $scope.user.BirthDay = new Date($scope.user.BirthDay); 
+
+                    console.log('Get DATA: ', $scope.user)
                 },
                 function (result) {
                     NotificationService.displayError(result.data);
@@ -24,7 +33,7 @@
         }
 
         function addSuccessed() {
-            NotificationService.displaySuccess($scope.account.FullName + ' đã được cập nhật thành công.');
+            NotificationService.displaySuccess($scope.user.FullName + ' đã được cập nhật thành công.');
 
             $location.url('ApplicationUsers');
         }
@@ -33,13 +42,25 @@
             NotificationService.displayErrorValidation(response);
         }
         function loadGroups() {
-            ApiService.get('/api/ApplicationGroup/GetListAll',
+            ApiServices.get('/api/ApplicationGroup/GetListAll',
                 null,
                 function (response) {
                     $scope.groups = response.data;
                 }, function (response) {
                     NotificationService.displayError('Không tải được danh sách nhóm.');
                 });
+        }
+
+        function getCheckedGroup() {
+            $("input:checkbox[class=checkbox-group]:checked").each(function () {
+                var gr = {
+                    "Id": $(this).val(),
+                    "Description": $(this).data("group-description"),
+                    "Name": $(this).data("group-name")
+                }
+                $scope.user.Groups.push(gr);
+                //console.log('Roles data: ', $scope.group.Roles)
+            });
         }
 
         loadGroups();

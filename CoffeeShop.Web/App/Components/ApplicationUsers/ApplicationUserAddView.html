@@ -1,83 +1,137 @@
-﻿<section class="content-header">
-    <h1>
-        Thêm mới người dùng
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="/admin"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-        <li><a ui-sref="accounts">Danh mục người dùng</a></li>
-        <li class="active"><a href="#">Thêm mới</a></li>
-    </ol>
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><strong>Tạo mới người dùng</strong></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="Home">Trang chủ</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="ApplicationUsers">Quản lý người dùng</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="ApplicationUsers">Danh sách người dùng</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
 </section>
+
+<!-- Main content -->
 <section class="content">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">{{account.FullName}}</h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
-                <form class="form-horizontal" role="form" novalidate name="frmAddAccount" ng-submit="addAccount()">
-                    <div class="box-body">
-                        <div class="col-md-8">
-                            <div class="form-group" ng-class="{ 'has-error' : frmAddAccount.name.$invalid && !frmAddAccount.name.$pristine }">
-                                <label class="col-sm-2 control-label">Họ tên người dùng</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="name" class="form-control"
-                                           required reqired-message="Họ tên bắt buộc." ng-model="account.FullName">
-                                </div>
-                            </div>
-                            <div class="form-group" ng-class="{ 'has-error' : frmAddAccount.userName.$invalid && !frmAddAccount.userName.$pristine }">
-                                <label class="col-sm-2 control-label">Tài khoản</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="userName" class="form-control"
-                                           required reqired-message="Tài khoản bắt buộc." ng-model="account.UserName">
-                                </div>
-                            </div>
-                            <div class="form-group" ng-class="{ 'has-error' : frmAddAccount.password.$invalid && !frmAddAccount.password.$pristine }">
-                                <label class="col-sm-2 control-label">Mật khẩu</label>
-                                <div class="col-sm-10">
-                                    <input type="password" name="password" class="form-control"
-                                           required reqired-message="Mật khẩu bắt buộc." ng-model="account.Password">
-                                </div>
-                            </div>
-                            <div class="form-group" ng-class="{ 'has-error' : frmAddAccount.email.$invalid && !frmAddAccount.email.$pristine }">
-                                <label class="col-sm-2 control-label">Email</label>
-                                <div class="col-sm-10">
-                                    <input type="email" name="email" class="form-control"
-                                           required reqired-message="Email bắt buộc." ng-model="account.Email">
-                                </div>
-                            </div>
+    <div class="container-fluid">
+        <form name="frmAddApplicationUser" role="form" ng-submit="AddApplicationUser()" novalidate>
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-7">
+                    <!-- general form elements -->
+
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin chính</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+
+                        <div class="card-body">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Điện thoại</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="password" class="form-control"
-                                           ng-model="account.PhoneNumber">
-                                </div>
+                                <label>Họ tên người dùng <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="user.FullName" required name="pName"
+                                       class="form-control" placeholder="Họ tên đầy đủ  ...">
+                                <span class="text-danger" ng-show="frmAddApplicationUser.pName.$touched && frmAddApplicationUser.pName.$invalid">Bạn chưa nhập họ tên</span>
+                                
                             </div>
-                            <div class="form-group" ng-class="{ 'has-error' : frmAddAccount.birthDate.$invalid && !frmAddAccount.birthDate.$pristine }">
-                                <label class="col-sm-2 control-label">Ngày sinh</label>
-                                <div class="col-sm-10">
-                                    <input type="date" name="birthDate" class="form-control"
-                                           required reqired-message="Ngày sinh bắt buộc." ng-model="account.BirthDay">
-                                </div>
-                            </div>
+
                             <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <label ng-repeat="group in groups">
-                                        <input type="checkbox" checklist-model="account.Groups" checklist-value="group"> {{group.Name}}
-                                    </label>
-                                </div>
+                                <label>Ngày sinh <span class="text-danger">*</span></label>
+                                <input ng-model="user.BirthDay" type="date" class="form-control" name="pBirthday" required>
+                                <span class="text-danger" ng-show="frmAddApplicationUser.pBirthday.$touched && frmAddApplicationUser.pBirthday.$invalid">Bạn chưa nhập ngày sinh</span>
+                                
                             </div>
+
                             <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <a ui-sref="application_users" class="btn btn-default">Hủy bỏ</a>
-                                    <input type="submit" ng-disabled="frmAddAccount.$invalid" class="btn btn-primary" value="Lưu lại" />
+                                <label>Email <span class="text-danger">*</span> </label>
+                                <input type="email" ng-model="user.Email" required name="pEmail"
+                                       class="form-control" placeholder="example@gmail.com">
+                                <span class="text-danger" ng-show="frmAddApplicationUser.pEmail.$touched && frmAddApplicationUser.pEmail.$invalid">Bạn chưa nhập Email </span>
+                                
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sở thích (Optional)  </label>
+                                <input type="text" ng-model="user.Bio" name="pBio"
+                                       class="form-control" placeholder="Sở thích cá nhân">
+                                
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tên tài khoản <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="user.UserName" required name="pUserName"
+                                       class="form-control" placeholder="Tên tài khoản ...">
+                                <span class="text-danger" ng-show="frmAddApplicationUser.pUserName.$touched && frmAddApplicationUser.pUserName.$invalid">Bạn chưa nhập tên tài khoản</span>
+                              
+                            </div>
+
+                            <div class="form-group">
+                                <label>Mật khẩu <span class="text-danger">*</span> </label>
+                                <input type="password" ng-model="user.Password" required name="pPassword"
+                                       class="form-control" placeholder="Nhập mật khẩu">
+                                <span class="text-danger" ng-show="frmAddApplicationUser.pPassword.$touched && frmAddApplicationUser.pPassword.$invalid">Bạn chưa nhập mật khẩu</span>
+                               
+                            </div>
+
+                            <div class="form-group">
+                                <label>Số điện thoại <span class="text-danger">*</span> </label>
+                                <input type="number" ng-model="user.PhoneNumber" required name="pPhoneNumber"
+                                       class="form-control" placeholder="Nhập số điện thoại bạn đang sử dụng">
+                                <span class="text-danger" ng-show="frmAddApplicationUser.pPhoneNumber.$touched && frmAddApplicationUser.pPhoneNumber.$invalid">Bạn chưa số điện thoại</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right column -->
+                <div class="col-md-5">
+                    <!-- general form elements -->
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">Thuộc nhóm</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12" ng-repeat="group in groups">
+                                    <!--checkbox-->
+                                    <div class="form-group clearfix">
+                                        <div class="icheck-success d-inline">
+                                            <input class="checkbox-group" value="{{group.ID}}" 
+                                                   type="checkbox" 
+                                                   id="gr_{{group.Name}}"
+                                                   data-group-description="{{group.Description}}"
+                                                   data-group-name="{{group.Name}}">
+                                            <label for="gr_{{group.Name}}">
+                                                {{group.Description}}
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div><!-- /.box-body -->
-                </form>
-            </div><!-- /.box -->
-        </div>
-    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+
+                <button type="submit" ng-disabled="frmAddApplicationUser.$invalid" class="btn btn-primary">Lưu người dùng </button>
+                <button ui-sref="ApplicationUsers" class="btn btn-outline-secondary space-around">Hủy bỏ</button>
+            </div>
+        </form>
+
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
 </section>
+<!-- /.content -->

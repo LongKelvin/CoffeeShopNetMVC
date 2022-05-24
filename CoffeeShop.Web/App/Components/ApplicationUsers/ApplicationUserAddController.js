@@ -3,31 +3,44 @@
 
     app.controller('ApplicationUserAddController', ApplicationUserAddController);
 
-    ApplicationUserAddController.$inject = ['$scope', 'ApiService', 'NotificationService', '$location', 'CommonService'];
+    ApplicationUserAddController.$inject = ['$scope', 'ApiServices', 'NotificationService', '$location', 'CommonService'];
 
-    function ApplicationUserAddController($scope, ApiService, NotificationService, $location, CommonService) {
-        $scope.account = {
+    function ApplicationUserAddController($scope, ApiServices, NotificationService, $location, CommonService) {
+        $scope.user = {
             Groups: []
         }
 
-        $scope.addAccount = addAccount;
+        $scope.AddApplicationUser = AddApplicationUser;
 
-        function addAccount() {
-            ApiService.post('/api/ApplicationUser/Add', $scope.account, addSuccessed, addFailed);
+        function AddApplicationUser() {
+            getCheckedGroup();
+            console.log('submit data', $scope.user);
+            ApiServices.post('/api/ApplicationUser/Add', $scope.user, addSuccessed, addFailed);
         }
 
         function addSuccessed() {
-            NotificationService.displaySuccess($scope.account.Name + ' đã được thêm mới.');
-
+            NotificationService.displaySuccess($scope.user.Name + ' đã được thêm mới.');
             $location.url('ApplicationUsers');
         }
         function addFailed(response) {
             NotificationService.displayError(response.data.Message);
-            NotificationService.displayErrorValidation(response);
+            //NotificationService.displayErrorValidation(response);
+        }
+
+        function getCheckedGroup() {
+            $("input:checkbox[class=checkbox-group]:checked").each(function () {
+                var gr = {
+                    "Id": $(this).val(),
+                    "Description": $(this).data("group-description"),
+                    "Name": $(this).data("group-name")
+                }
+                $scope.user.Groups.push(gr);
+                //console.log('Roles data: ', $scope.group.Roles)
+            });
         }
 
         function loadGroups() {
-            ApiService.get('/api/ApplicationGroup/GetListAll',
+            ApiServices.get('/api/ApplicationGroup/GetListAll',
                 null,
                 function (response) {
                     $scope.groups = response.data;

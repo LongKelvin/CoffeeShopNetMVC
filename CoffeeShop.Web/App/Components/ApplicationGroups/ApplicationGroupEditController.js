@@ -23,7 +23,7 @@
             ApiServices.get('/api/applicationGroup/detail/' + $stateParams.id, null,
                 function (result) {
                     $scope.group = result.data;
-                    console.log(result.data)
+                    //console.log(result.data)
                     $.each(result.data.Roles, function (i, role) {
                         $('#role_' + role.Name).prop('checked', true);
                     });
