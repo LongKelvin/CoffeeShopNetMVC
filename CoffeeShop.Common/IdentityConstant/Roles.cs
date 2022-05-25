@@ -10,6 +10,6 @@ namespace CoffeeShop.Common
     {
         SuperAdmin,
         Admin,
-        Basic
+        BasicUser
     }
 }

@@ -46,9 +46,9 @@
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="ExceptionHandler\NameDuplicatedException.cs" />
     <Compile Include="MailHelper.cs" />
-    <Compile Include="Permission.cs" />
+    <Compile Include="IdentityConstant\Permission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Roles.cs" />
+    <Compile Include="IdentityConstant\Roles.cs" />
     <Compile Include="StringHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

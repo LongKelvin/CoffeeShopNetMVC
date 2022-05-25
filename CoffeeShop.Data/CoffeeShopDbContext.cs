@@ -13,7 +13,6 @@ namespace CoffeeShop.Data
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<CoffeeShopDbContext, CoffeeShop.Data.Migrations.Configuration>());
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
-          
         }
 
         public virtual DbSet<Footer> Footers { get; set; }
@@ -41,6 +40,7 @@ namespace CoffeeShop.Data
         public virtual DbSet<ApplicationRole> ApplicationRoles { get; set; }
         public virtual DbSet<ApplicationRoleGroup> ApplicationRoleGroups { get; set; }
         public virtual DbSet<ApplicationUserGroup> ApplicationUserGroups { get; set; }
+        public virtual DbSet<ApplicationRoleClaims> ApplicationRoleClaims { get; set; }
 
         public static CoffeeShopDbContext Create()
         {
@@ -135,6 +135,10 @@ namespace CoffeeShop.Data
             modelBuilder.Entity<IdentityUserClaim>().ToTable("ApplicationUserClaims")
                  .Property(p => p.UserId).HasColumnName("UserId");
             modelBuilder.Entity<IdentityUserClaim>().HasKey(k => new { k.UserId });
+
+            //Permission base Authorize
+            //modelBuilder.Entity<IdentityRoleClaim<string>>(entity => entity.Property(m => m.Id).HasMaxLength(85));
+            //modelBuilder.Entity<IdentityRoleClaim<string>>(entity => entity.Property(m => m.RoleId).HasMaxLength(85));
         }
     }
 }
