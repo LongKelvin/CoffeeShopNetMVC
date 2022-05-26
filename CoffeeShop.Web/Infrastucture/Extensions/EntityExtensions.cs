@@ -224,6 +224,7 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
                 appRole.Id = Guid.NewGuid().ToString();
             appRole.Name = appRoleViewModel.Name;
             appRole.Description = appRoleViewModel.Description;
+            appRole.IsSystemProtected = false;
         }
         public static void UpdateUser(this ApplicationUser appUser, ApplicationUserViewModel appUserViewModel, string action = "Add")
         {

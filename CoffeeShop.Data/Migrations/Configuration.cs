@@ -15,8 +15,7 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(CoffeeShop.Data.CoffeeShopDbContext context)
@@ -46,22 +45,25 @@
                 roleManager.Create(new ApplicationRole
                 {
                     Name = Common.BasicRoles.SuperAdmin.ToString(),
-                    Description = Common.BasicRoles.SuperAdmin.ToString()
+                    Description = Common.BasicRoles.SuperAdmin.ToString(),
+                    IsSystemProtected = true
                 });
                 roleManager.Create(new ApplicationRole
                 {
                     Name = Common.BasicRoles.Admin.ToString(),
-                    Description = Common.BasicRoles.Admin.ToString()
+                    Description = Common.BasicRoles.Admin.ToString(),
+                    IsSystemProtected = true
                 });
                 roleManager.Create(new ApplicationRole
                 {
                     Name = Common.BasicRoles.BasicUser.ToString(),
-                    Description = Common.BasicRoles.BasicUser.ToString()
+                    Description = Common.BasicRoles.BasicUser.ToString(),
+                    IsSystemProtected = false
                 });
 
                 CreateClaimForBasicRole(Common.BasicRoles.SuperAdmin.ToString(), Common.Permissions.GetDefaultApplicationModuleForSuperAdmin(), context, roleManager);
-                CreateClaimForBasicRole(Common.BasicRoles.Admin.ToString(), Common.Permissions.GetDefaultApplicationModuleForAdmin(), context,roleManager);
-                CreateClaimForBasicRole(Common.BasicRoles.BasicUser.ToString(), Common.Permissions.GetDefaultApplicationModuleForBasicUser(), context,roleManager);
+                CreateClaimForBasicRole(Common.BasicRoles.Admin.ToString(), Common.Permissions.GetDefaultApplicationModuleForAdmin(), context, roleManager);
+                CreateClaimForBasicRole(Common.BasicRoles.BasicUser.ToString(), Common.Permissions.GetDefaultApplicationModuleForBasicUser(), context, roleManager);
             }
 
             if (manager.Users.Count(x => x.UserName == "admin") == 0)
@@ -85,7 +87,6 @@
                     Common.BasicRoles.Admin.ToString(),
                     Common.BasicRoles.BasicUser.ToString()
                 });
-
             }
 
             if (manager.Users.Count(x => x.UserName == "superAdmin") == 0)
@@ -110,8 +111,6 @@
                     Common.BasicRoles.Admin.ToString(),
                     Common.BasicRoles.BasicUser.ToString()
                 });
-
-            
             }
 
             if (manager.Users.Count(x => x.UserName == "basicUser") == 0)
@@ -134,8 +133,6 @@
                 {
                     Common.BasicRoles.BasicUser.ToString()
                 });
-
-               
             }
         }
 
@@ -143,7 +140,6 @@
         //the application run
         private static void CreateClaimForBasicRole(string basicRole, List<string> appModules, CoffeeShopDbContext context, RoleManager<IdentityRole> roleManager)
         {
-            
             var userRole = roleManager.FindByName(basicRole);
             AddPermissionClaim(userRole, appModules, context);
         }

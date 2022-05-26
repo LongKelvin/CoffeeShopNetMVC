@@ -15,6 +15,8 @@
 
         public const string Administrator = "Administrator";
 
+        public const string PermissionsType = "Permission";
+
         public enum Sex
         {
             Male = 0,

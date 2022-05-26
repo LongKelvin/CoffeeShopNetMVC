@@ -45,6 +45,7 @@
     <Compile Include="CommonConstants.cs" />
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="ExceptionHandler\NameDuplicatedException.cs" />
+    <Compile Include="IdentityConstant\ApplicationPermissons.cs" />
     <Compile Include="MailHelper.cs" />
     <Compile Include="IdentityConstant\Permission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

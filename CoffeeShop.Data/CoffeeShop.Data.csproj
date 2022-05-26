@@ -236,6 +236,10 @@
     <Compile Include="Migrations\202205250943397_AddApplicationRoleClaims.designer.cs">
       <DependentUpon>202205250943397_AddApplicationRoleClaims.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205260117520_AddSystemProtectedFieldForApplicationRole.cs" />
+    <Compile Include="Migrations\202205260117520_AddSystemProtectedFieldForApplicationRole.designer.cs">
+      <DependentUpon>202205260117520_AddSystemProtectedFieldForApplicationRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
@@ -378,6 +382,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205250943397_AddApplicationRoleClaims.resx">
       <DependentUpon>202205250943397_AddApplicationRoleClaims.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205260117520_AddSystemProtectedFieldForApplicationRole.resx">
+      <DependentUpon>202205260117520_AddSystemProtectedFieldForApplicationRole.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

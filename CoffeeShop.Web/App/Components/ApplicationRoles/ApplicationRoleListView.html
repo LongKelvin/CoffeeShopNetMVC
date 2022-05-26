@@ -68,8 +68,8 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in listAppRoles">
-                            <td>
-                                <input type="checkbox" class="checkBox"
+                            <td  >
+                                <input ng-disabled="item.IsSystemProtected==true" type="checkbox" class="checkBox"
                                        value="{{item.Id}}" onclick="GetTotalSelectedItems()" />
                             </td>
 
@@ -83,7 +83,7 @@
 
                             <td>
                                 <button ui-sref="ApplicationRoleEdit({id:item.Id})" class="btn btn-sm btn-outline-primary"><i class="fa fa-pencil"></i></button>
-                                <button ng-click="showDeleteDialog(item.Id)" class="btn  btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                <button ng-disabled="item.IsSystemProtected==true"  ng-click="showDeleteDialog(item.Id)" class="btn  btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>

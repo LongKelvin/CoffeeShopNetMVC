@@ -3,11 +3,8 @@ using CoffeeShop.Data.Insfrastructure;
 using CoffeeShop.Data.Repositories;
 using CoffeeShop.Models.Models;
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CoffeeShop.Services
 {
@@ -21,9 +18,11 @@ namespace CoffeeShop.Services
 
         ApplicationRole Add(ApplicationRole appRole);
 
+        ApplicationRole GetByStringId(string id);
+
         void Update(ApplicationRole AppRole);
 
-        void Delete(string id);
+        bool Delete(string id);
 
         //Add roles to a sepcify group
         bool AddRolesToGroup(IEnumerable<ApplicationRoleGroup> roleGroups, int groupId);
@@ -33,7 +32,8 @@ namespace CoffeeShop.Services
 
         void SaveChanges();
     }
-    public class ApplicationRoleService: IApplicationRoleService
+
+    public class ApplicationRoleService : IApplicationRoleService
     {
         private IApplicationRoleRepository _appRoleRepository;
         private IApplicationRoleGroupRepository _appRoleGroupRepository;
@@ -64,9 +64,14 @@ namespace CoffeeShop.Services
             return true;
         }
 
-        public void Delete(string id)
+        public bool Delete(string id)
         {
+            var deleteRole = _appRoleRepository.GetByStringId(id);
+            if (deleteRole == null || deleteRole.IsSystemProtected)
+                return false;
+
             _appRoleRepository.DeleteMulti(x => x.Id == id);
+            return true;
         }
 
         public IEnumerable<ApplicationRole> GetAll()
@@ -104,6 +109,11 @@ namespace CoffeeShop.Services
         public IEnumerable<ApplicationRole> GetListRoleByGroupId(int groupId)
         {
             return _appRoleRepository.GetListRoleByGroupId(groupId);
+        }
+
+        public ApplicationRole GetByStringId(string id)
+        {
+            return _appRoleRepository.GetByStringId(id);
         }
     }
 }
