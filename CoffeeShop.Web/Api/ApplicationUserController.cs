@@ -20,7 +20,7 @@ using System.Web.Script.Serialization;
 
 namespace CoffeeShop.Web.Api
 {
-    [Authorize]
+    [Authorize(Roles ="SuperAdmin")]
     [RoutePrefix("api/ApplicationUser")]
     public class ApplicationUserController : ApiControllerBase
     {

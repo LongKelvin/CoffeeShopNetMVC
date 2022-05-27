@@ -240,9 +240,70 @@
     <Compile Include="Migrations\202205260117520_AddSystemProtectedFieldForApplicationRole.designer.cs">
       <DependentUpon>202205260117520_AddSystemProtectedFieldForApplicationRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205260410224_AddApplicationUserClaims.cs" />
+    <Compile Include="Migrations\202205260410224_AddApplicationUserClaims.designer.cs">
+      <DependentUpon>202205260410224_AddApplicationUserClaims.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205260416491_ModifyApplicationUserClaims.cs" />
+    <Compile Include="Migrations\202205260416491_ModifyApplicationUserClaims.designer.cs">
+      <DependentUpon>202205260416491_ModifyApplicationUserClaims.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205260611256_AddApplicationPermission.cs" />
+    <Compile Include="Migrations\202205260611256_AddApplicationPermission.designer.cs">
+      <DependentUpon>202205260611256_AddApplicationPermission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205260620445_AddApplicationPermissionRole.cs" />
+    <Compile Include="Migrations\202205260620445_AddApplicationPermissionRole.designer.cs">
+      <DependentUpon>202205260620445_AddApplicationPermissionRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205260652439_UpdateApplicationPermission.cs" />
+    <Compile Include="Migrations\202205260652439_UpdateApplicationPermission.designer.cs">
+      <DependentUpon>202205260652439_UpdateApplicationPermission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205260740051_ModifyApplicationUserPermission.cs" />
+    <Compile Include="Migrations\202205260740051_ModifyApplicationUserPermission.designer.cs">
+      <DependentUpon>202205260740051_ModifyApplicationUserPermission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205270123308_UpdateApplicationPermissionIdColumn.cs" />
+    <Compile Include="Migrations\202205270123308_UpdateApplicationPermissionIdColumn.designer.cs">
+      <DependentUpon>202205270123308_UpdateApplicationPermissionIdColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205270133410_ChangeApplicationPermissionIdToIdentity.cs" />
+    <Compile Include="Migrations\202205270133410_ChangeApplicationPermissionIdToIdentity.designer.cs">
+      <DependentUpon>202205270133410_ChangeApplicationPermissionIdToIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205270137507_ChangeApplicationPermissionId.cs" />
+    <Compile Include="Migrations\202205270137507_ChangeApplicationPermissionId.designer.cs">
+      <DependentUpon>202205270137507_ChangeApplicationPermissionId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205270142070_UpdateApplicationPermissionId.cs" />
+    <Compile Include="Migrations\202205270142070_UpdateApplicationPermissionId.designer.cs">
+      <DependentUpon>202205270142070_UpdateApplicationPermissionId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205270158268_UpdatePermissionGuiId.cs" />
+    <Compile Include="Migrations\202205270158268_UpdatePermissionGuiId.designer.cs">
+      <DependentUpon>202205270158268_UpdatePermissionGuiId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205270201226_UpdatePermissionID.cs" />
+    <Compile Include="Migrations\202205270201226_UpdatePermissionID.designer.cs">
+      <DependentUpon>202205270201226_UpdatePermissionID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205270234211_UpdateAppPermission.cs" />
+    <Compile Include="Migrations\202205270234211_UpdateAppPermission.designer.cs">
+      <DependentUpon>202205270234211_UpdateAppPermission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205270455189_UpdateApplicationRolePermissionForeignKey.cs" />
+    <Compile Include="Migrations\202205270455189_UpdateApplicationRolePermissionForeignKey.designer.cs">
+      <DependentUpon>202205270455189_UpdateApplicationRolePermissionForeignKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205270729045_UpdateAppUserPermissionPrimaryKey.cs" />
+    <Compile Include="Migrations\202205270729045_UpdateAppUserPermissionPrimaryKey.designer.cs">
+      <DependentUpon>202205270729045_UpdateAppUserPermissionPrimaryKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
+    <Compile Include="Repositories\ApplicationPermissionRepository.cs" />
     <Compile Include="Repositories\ApplicationRoleGroupRepository.cs" />
     <Compile Include="Repositories\ApplicationRoleRepository.cs" />
     <Compile Include="Repositories\ApplicationUserGroupRepository.cs" />
@@ -385,6 +446,51 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205260117520_AddSystemProtectedFieldForApplicationRole.resx">
       <DependentUpon>202205260117520_AddSystemProtectedFieldForApplicationRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205260410224_AddApplicationUserClaims.resx">
+      <DependentUpon>202205260410224_AddApplicationUserClaims.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205260416491_ModifyApplicationUserClaims.resx">
+      <DependentUpon>202205260416491_ModifyApplicationUserClaims.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205260611256_AddApplicationPermission.resx">
+      <DependentUpon>202205260611256_AddApplicationPermission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205260620445_AddApplicationPermissionRole.resx">
+      <DependentUpon>202205260620445_AddApplicationPermissionRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205260652439_UpdateApplicationPermission.resx">
+      <DependentUpon>202205260652439_UpdateApplicationPermission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205260740051_ModifyApplicationUserPermission.resx">
+      <DependentUpon>202205260740051_ModifyApplicationUserPermission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205270123308_UpdateApplicationPermissionIdColumn.resx">
+      <DependentUpon>202205270123308_UpdateApplicationPermissionIdColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205270133410_ChangeApplicationPermissionIdToIdentity.resx">
+      <DependentUpon>202205270133410_ChangeApplicationPermissionIdToIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205270137507_ChangeApplicationPermissionId.resx">
+      <DependentUpon>202205270137507_ChangeApplicationPermissionId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205270142070_UpdateApplicationPermissionId.resx">
+      <DependentUpon>202205270142070_UpdateApplicationPermissionId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205270158268_UpdatePermissionGuiId.resx">
+      <DependentUpon>202205270158268_UpdatePermissionGuiId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205270201226_UpdatePermissionID.resx">
+      <DependentUpon>202205270201226_UpdatePermissionID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205270234211_UpdateAppPermission.resx">
+      <DependentUpon>202205270234211_UpdateAppPermission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205270455189_UpdateApplicationRolePermissionForeignKey.resx">
+      <DependentUpon>202205270455189_UpdateApplicationRolePermissionForeignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205270729045_UpdateAppUserPermissionPrimaryKey.resx">
+      <DependentUpon>202205270729045_UpdateAppUserPermissionPrimaryKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

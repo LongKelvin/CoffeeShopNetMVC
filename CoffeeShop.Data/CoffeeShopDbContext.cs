@@ -41,6 +41,12 @@ namespace CoffeeShop.Data
         public virtual DbSet<ApplicationRoleGroup> ApplicationRoleGroups { get; set; }
         public virtual DbSet<ApplicationUserGroup> ApplicationUserGroups { get; set; }
         public virtual DbSet<ApplicationRoleClaims> ApplicationRoleClaims { get; set; }
+        public virtual DbSet<ApplicationUserClaim> ApplicationUserClaims { get; set; }
+        public virtual DbSet<ApplicationPermission> ApplicationPermissions { get; set; }
+
+        public virtual DbSet<ApplicationRolePermission> ApplicationRolePermissions { get; set; }
+
+        public virtual DbSet<ApplicationUserPermission> ApplicationUserPermissions { get; set; }
 
         public static CoffeeShopDbContext Create()
         {
@@ -134,7 +140,9 @@ namespace CoffeeShop.Data
 
             modelBuilder.Entity<IdentityUserClaim>().ToTable("ApplicationUserClaims")
                  .Property(p => p.UserId).HasColumnName("UserId");
-            modelBuilder.Entity<IdentityUserClaim>().HasKey(k => new { k.UserId });
+            modelBuilder.Entity<IdentityUserClaim>().HasKey(k => new { k.UserId , k.Id});
+
+            modelBuilder.Entity<ApplicationPermission>().HasKey(k=>new { k.Id });
 
             //Permission base Authorize
             //modelBuilder.Entity<IdentityRoleClaim<string>>(entity => entity.Property(m => m.Id).HasMaxLength(85));
