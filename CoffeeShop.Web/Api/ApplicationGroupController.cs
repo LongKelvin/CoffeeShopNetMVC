@@ -16,11 +16,13 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Script.Serialization;
+using CoffeeShop.Common;
 
 namespace CoffeeShop.Web.Api
 {
     [RoutePrefix("api/ApplicationGroup")]
     [Authorize]
+    
     public class ApplicationGroupController : ApiControllerBase
     {
         private IApplicationGroupService _appGroupService;
@@ -37,6 +39,7 @@ namespace CoffeeShop.Web.Api
             _userManager = userManager;
         }
 
+        [PermissionAuthorize(ApplicationPermissons.ApplicationGroups.View)]
         [Route("GetListPaging")]
         [HttpGet]
         public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
@@ -62,6 +65,7 @@ namespace CoffeeShop.Web.Api
             });
         }
 
+        [PermissionAuthorize(ApplicationPermissons.ApplicationGroups.View)]
         [Route("GetListAll")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
@@ -78,6 +82,7 @@ namespace CoffeeShop.Web.Api
             });
         }
 
+        [PermissionAuthorize(ApplicationPermissons.ApplicationGroups.View)]
         [Route("Detail/{id:int}")]
         [HttpGet]
         public HttpResponseMessage Details(HttpRequestMessage request, int id)
@@ -97,6 +102,8 @@ namespace CoffeeShop.Web.Api
             return request.CreateResponse(HttpStatusCode.OK, appGroupViewModel);
         }
 
+        [PermissionAuthorize(ApplicationPermissons.ApplicationGroups.View)]
+        [PermissionAuthorize(ApplicationPermissons.ApplicationGroups.Edit)]
         [HttpPost]
         [Route("Add")]
         public HttpResponseMessage Create(HttpRequestMessage request, ApplicationGroupViewModel appGroupViewModel)
@@ -141,6 +148,7 @@ namespace CoffeeShop.Web.Api
 
         [HttpPut]
         [Route("Update")]
+        [PermissionAuthorize(ApplicationPermissons.ApplicationGroups.Edit)]
         public async Task<HttpResponseMessage> Update(HttpRequestMessage request, ApplicationGroupViewModel appGroupViewModel)
         {
             if (ModelState.IsValid)
@@ -190,6 +198,7 @@ namespace CoffeeShop.Web.Api
             }
         }
 
+        [PermissionAuthorize(ApplicationPermissons.ApplicationGroups.Delete)]
         [HttpDelete]
         [Route("Delete")]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
@@ -199,6 +208,7 @@ namespace CoffeeShop.Web.Api
             return request.CreateResponse(HttpStatusCode.OK, appGroup);
         }
 
+        [PermissionAuthorize(ApplicationPermissons.ApplicationGroups.Delete)]
         [Route("DeleteMulti")]
         [HttpDelete]
         public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string ids)

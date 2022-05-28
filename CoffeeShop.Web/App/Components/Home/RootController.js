@@ -20,7 +20,7 @@
         function RootController($scope, $state, AuthData, LoginService, AuthenticationService) {
             $scope.logOut = function () {
                 LoginService.logOut();
-                console.log(AuthData.authenticationData)
+                //console.log(AuthData.authenticationData)
                 $state.go('Login')
             }
             $scope.authentication = AuthData.authenticationData;

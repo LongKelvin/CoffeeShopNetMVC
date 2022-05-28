@@ -173,6 +173,9 @@
     <Content Include="App\Components\ApplicationUsers\ApplicationUserListController.js" />
     <Content Include="App\Components\ApplicationUsers\ApplicationUserListView.html" />
     <Content Include="App\Components\ApplicationUsers\ApplicationUsers.module.js" />
+    <Content Include="App\Components\Authorize\Permission.Module.js" />
+    <Content Include="App\Components\Authorize\PermissionDenied.html" />
+    <Content Include="App\Components\Authorize\PermissionDeniedController.js" />
     <Content Include="App\Components\Home\HomeController.js" />
     <Content Include="App\Components\Home\HomeView.html" />
     <Content Include="App\Components\Home\RootController.js" />

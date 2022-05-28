@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using System.Transactions;
 using System.Web.Http;
 using System.Web.Script.Serialization;
+using CoffeeShop.Common;
 
 namespace CoffeeShop.Web.Api
 {
@@ -41,7 +42,7 @@ namespace CoffeeShop.Web.Api
         }
 
         [Route("GetListPaging")]
-        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationUsers.View)]
+        [PermissionAuthorize(ApplicationPermissons.ApplicationUsers.View)]
         [HttpGet]
         public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
         {
@@ -67,6 +68,7 @@ namespace CoffeeShop.Web.Api
             });
         }
 
+        [PermissionAuthorize(ApplicationPermissons.ApplicationUsers.View)]
         [Route("Detail/{id}")]
         [HttpGet]
         public HttpResponseMessage Details(HttpRequestMessage request, string id)
@@ -89,6 +91,8 @@ namespace CoffeeShop.Web.Api
             }
         }
 
+        [PermissionAuthorize(ApplicationPermissons.ApplicationUsers.View)]
+        [PermissionAuthorize(ApplicationPermissons.ApplicationUsers.Edit)]
         [HttpPost]
         [Route("Add")]
         public async Task<HttpResponseMessage> Create(HttpRequestMessage request, ApplicationUserViewModel applicationUserViewModel)
@@ -142,6 +146,7 @@ namespace CoffeeShop.Web.Api
             }
         }
 
+        [PermissionAuthorize(ApplicationPermissons.ApplicationUsers.Edit)]
         [HttpPut]
         [Route("Update")]
         public async Task<HttpResponseMessage> Update(HttpRequestMessage request, ApplicationUserViewModel applicationUserViewModel)
@@ -191,6 +196,7 @@ namespace CoffeeShop.Web.Api
 
         [HttpDelete]
         [Route("Delete")]
+        [PermissionAuthorize(ApplicationPermissons.ApplicationUsers.Delete)]
         public async Task<HttpResponseMessage> Delete(HttpRequestMessage request, string id)
         {
             var appUser = await _userManager.FindByIdAsync(id);
@@ -203,6 +209,7 @@ namespace CoffeeShop.Web.Api
 
         [HttpDelete]
         [Route("DeleteMulti")]
+        [PermissionAuthorize(ApplicationPermissons.ApplicationUsers.Delete)]
         public async Task<HttpResponseMessage> DeleteMultiUser(HttpRequestMessage request, string ids)
         {
             var listUser = new JavaScriptSerializer().Deserialize<List<string>>(ids);
