@@ -1,4 +1,4 @@
-﻿namespace CoffeeShop.Common.IdentityConstant
+﻿namespace CoffeeShop.Common
 {
     public static class ApplicationPermissons
     {

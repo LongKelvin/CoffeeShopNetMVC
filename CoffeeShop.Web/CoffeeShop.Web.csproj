@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Api\AccountController.cs" />
     <Compile Include="Api\ApplicationGroupController.cs" />
+    <Compile Include="Api\ApplicationPermissionController.cs" />
     <Compile Include="Api\ApplicationRoleController.cs" />
     <Compile Include="Api\ApplicationUserController.cs" />
     <Compile Include="Api\HomeController.cs" />
@@ -110,10 +111,12 @@
     </Compile>
     <Compile Include="Infrastucture\Core\ApiControllerBase.cs" />
     <Compile Include="Infrastucture\Core\PaginationSet.cs" />
+    <Compile Include="Infrastucture\Core\PermissionAuthorizeAttribute.cs" />
     <Compile Include="Infrastucture\Extensions\EntityExtensions.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationGroupViewModel.cs" />
+    <Compile Include="Models\ApplicationPermissionViewModel.cs" />
     <Compile Include="Models\ApplicationRoleViewModel.cs" />
     <Compile Include="Models\ApplicationUserViewModel.cs" />
     <Compile Include="Models\FeedbackViewModel.cs" />

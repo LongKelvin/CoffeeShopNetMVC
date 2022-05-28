@@ -41,6 +41,7 @@ namespace CoffeeShop.Web.Api
         }
 
         [Route("GetListPaging")]
+        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationUsers.View)]
         [HttpGet]
         public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
         {

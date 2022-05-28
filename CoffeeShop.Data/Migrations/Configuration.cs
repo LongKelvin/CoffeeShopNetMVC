@@ -27,7 +27,7 @@
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
 
-            ResetDatabaseIdentityRecord(context);
+            //ResetDatabaseIdentityRecord(context);
 
             CreateAppDefaultPermission(context);
             CreateUserAndRoles(context);
