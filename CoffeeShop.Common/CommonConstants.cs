@@ -15,6 +15,12 @@
 
         public const string Administrator = "Administrator";
 
+        public const string PermissionsType = "Permission";
+
+        public const string SuperAdmin = "SuperAdmin";
+        public const string Admin = "Admin";
+        public const string BasicUser = "BasicUser";
+
         public enum Sex
         {
             Male = 0,

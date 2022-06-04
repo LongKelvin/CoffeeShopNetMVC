@@ -88,6 +88,7 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             product.MoreImages = productVm.MoreImages;
             product.Price = productVm.Price;
             product.PromotionPrice = productVm.PromotionPrice;
+            product.OriginalPrice = productVm.OriginalPrice;
             product.Warranty = productVm.Warranty;
             product.HomeFlag = productVm.HomeFlag;
             product.ViewCount = productVm.ViewCount;
@@ -216,16 +217,17 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             appGroup.Description = appGroupViewModel.Description;
         }
 
-        public static void UpdateApplicationRole(this ApplicationRole appRole, ApplicationRoleViewModel appRoleViewModel, string action = "add")
+        public static void UpdateApplicationRole(this ApplicationRole appRole, ApplicationRoleViewModel appRoleViewModel, string action = "Add")
         {
-            if (action == "update")
+            if (action == "Update")
                 appRole.Id = appRoleViewModel.Id;
             else
                 appRole.Id = Guid.NewGuid().ToString();
             appRole.Name = appRoleViewModel.Name;
             appRole.Description = appRoleViewModel.Description;
+            appRole.IsSystemProtected = false;
         }
-        public static void UpdateUser(this ApplicationUser appUser, ApplicationUserViewModel appUserViewModel, string action = "add")
+        public static void UpdateUser(this ApplicationUser appUser, ApplicationUserViewModel appUserViewModel, string action = "Add")
         {
 
             appUser.Id = appUserViewModel.Id;

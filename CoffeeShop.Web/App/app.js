@@ -54,12 +54,18 @@
                     if (response.status == "401") {
                         $location.path('/Login');
                     }
+                    if (response.status == "403") {
+                        $location.path('/AccessDenied');
+                    }
                     //the same response/modified/or a new one need to be returned.
                     return response;
                 },
                 responseError: function (rejection) {
                     if (rejection.status == "401") {
                         $location.path('/Login');
+                    }
+                    if (response.status == "403") {
+                        $location.path('/AccessDenied');
                     }
                     return $q.reject(rejection);
                 }

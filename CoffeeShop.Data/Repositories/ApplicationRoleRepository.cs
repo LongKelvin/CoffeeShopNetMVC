@@ -9,12 +9,19 @@ namespace CoffeeShop.Data.Repositories
     public interface IApplicationRoleRepository : IRepository<ApplicationRole>
     {
         IEnumerable<ApplicationRole> GetListRoleByGroupId(int groupId);
+
+        ApplicationRole GetByStringId(string id);
     }
 
     public class ApplicationRoleRepository : RepositoryBase<ApplicationRole>, IApplicationRoleRepository
     {
         public ApplicationRoleRepository(IDbFactory dbFactory) : base(dbFactory)
         {
+        }
+
+        public ApplicationRole GetByStringId(string id)
+        {
+            return DbContext.ApplicationRoles.SingleOrDefault(r => r.Id == id);
         }
 
         public IEnumerable<ApplicationRole> GetListRoleByGroupId(int groupId)

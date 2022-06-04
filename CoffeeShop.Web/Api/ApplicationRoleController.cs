@@ -18,8 +18,6 @@ using System.Web.Script.Serialization;
 namespace CoffeeShop.Web.Api
 {
     [RoutePrefix("api/ApplicationRole")]
-    
-   
     public class ApplicationRoleController : ApiControllerBase
     {
         private IApplicationRoleService _appRoleService;
@@ -121,7 +119,7 @@ namespace CoffeeShop.Web.Api
                 var appRole = _appRoleService.GetDetail(applicationRoleViewModel.Id);
                 try
                 {
-                    appRole.UpdateApplicationRole(applicationRoleViewModel, "update");
+                    appRole.UpdateApplicationRole(applicationRoleViewModel, "Update");
                     _appRoleService.Update(appRole);
                     _appRoleService.SaveChanges();
                     return request.CreateResponse(HttpStatusCode.OK, appRole);
@@ -141,6 +139,10 @@ namespace CoffeeShop.Web.Api
         [Route("Delete")]
         public HttpResponseMessage Delete(HttpRequestMessage request, string id)
         {
+            var deleteRole = _appRoleService.GetByStringId(id);
+            if(deleteRole == null || deleteRole.IsSystemProtected)
+                return request.CreateResponse(HttpStatusCode.NotAcceptable, $"You cannot delete this role \"{deleteRole.Name}\" because it is protected by the system, Contact authorized person for more details");
+
             _appRoleService.Delete(id);
             _appRoleService.SaveChanges();
             return request.CreateResponse(HttpStatusCode.OK, id);
@@ -148,7 +150,7 @@ namespace CoffeeShop.Web.Api
 
         [Route("DeleteMulti")]
         [HttpDelete]
-        public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedList)
+        public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string ids)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -159,9 +161,13 @@ namespace CoffeeShop.Web.Api
                 }
                 else
                 {
-                    var listItem = new JavaScriptSerializer().Deserialize<List<string>>(checkedList);
+                    var listItem = new JavaScriptSerializer().Deserialize<List<string>>(ids);
                     foreach (var item in listItem)
                     {
+                        var deleteRole = _appRoleService.GetByStringId(item);
+                        if (deleteRole == null || deleteRole.IsSystemProtected)
+                            return request.CreateResponse(HttpStatusCode.NotAcceptable, $"You cannot delete this role \"{deleteRole.Name}\" because it is protected by the system, Contact authorized person for more details");
+
                         _appRoleService.Delete(item);
                     }
 

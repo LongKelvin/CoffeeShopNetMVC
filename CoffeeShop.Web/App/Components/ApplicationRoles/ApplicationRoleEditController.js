@@ -3,19 +3,18 @@
 
     app.controller('ApplicationRoleEditController', ApplicationRoleEditController);
 
-    ApplicationRoleEditController.$inject = ['$scope', 'ApiService', 'NotificationService', '$location', '$stateParams'];
+    ApplicationRoleEditController.$inject = ['$scope', 'ApiServices', 'NotificationService', '$location', '$stateParams'];
 
-    function ApplicationRoleEditController($scope, ApiService, NotificationService, $location, $stateParams) {
+    function ApplicationRoleEditController($scope, ApiServices, NotificationService, $location, $stateParams) {
         $scope.role = {}
 
+        $scope.UpdateApplicationRole = UpdateApplicationRole;
 
-        $scope.updateApplicationRole = updateApplicationRole;
-
-        function updateApplicationRole() {
-            ApiService.put('/api/ApplicationRole/Update', $scope.role, addSuccessed, addFailed);
+        function UpdateApplicationRole() {
+            ApiServices.put('/api/ApplicationRole/Update', $scope.role, addSuccessed, addFailed);
         }
         function loadDetail() {
-            ApiService.get('/api/ApplicationRole/Detail/' + $stateParams.id, null,
+            ApiServices.get('/api/ApplicationRole/Detail/' + $stateParams.id, null,
                 function (result) {
                     $scope.role = result.data;
                 },

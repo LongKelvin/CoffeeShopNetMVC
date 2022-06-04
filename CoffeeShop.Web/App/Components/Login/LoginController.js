@@ -12,12 +12,12 @@
                         //console.log('login_response_data: ', response)
                     if (response != null && response.data.error != undefined) {
                         NotificationService.displayError("Login failed, UserName or Password incorrect");
-                        console.error("Login failed, UserName or Password incorrect");
+                        //console.error("Login failed, UserName or Password incorrect");
                     }
                     else {
                         var stateService = $injector.get('$state');
                         stateService.go('Products');
-                        console.log("Login successfull");
+                        //console.log("Login successfull");
                         
                     }
                 });

@@ -14,11 +14,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Web.Http;
+using System.Web.Script.Serialization;
+using CoffeeShop.Common;
 
 namespace CoffeeShop.Web.Api
 {
-    [Authorize]
+    [Authorize(Roles ="SuperAdmin")]
     [RoutePrefix("api/ApplicationUser")]
     public class ApplicationUserController : ApiControllerBase
     {
@@ -39,8 +42,8 @@ namespace CoffeeShop.Web.Api
         }
 
         [Route("GetListPaging")]
+        [PermissionAuthorize(ApplicationPermissons.ApplicationUsers.View)]
         [HttpGet]
-        [Authorize(Roles = "ViewUser")]
         public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
         {
             return CreateHttpResponse(request, () =>
@@ -50,6 +53,7 @@ namespace CoffeeShop.Web.Api
                 var model = _userManager.Users;
                 IEnumerable<ApplicationUserViewModel> modelVm = Mapper.Map<IEnumerable<ApplicationUser>, IEnumerable<ApplicationUserViewModel>>(model);
 
+                totalRow = model.Count();
                 PaginationSet<ApplicationUserViewModel> pagedSet = new PaginationSet<ApplicationUserViewModel>()
                 {
                     Page = page,
@@ -64,9 +68,9 @@ namespace CoffeeShop.Web.Api
             });
         }
 
+        [PermissionAuthorize(ApplicationPermissons.ApplicationUsers.View)]
         [Route("Detail/{id}")]
         [HttpGet]
-        [Authorize(Roles = "ViewUser")]
         public HttpResponseMessage Details(HttpRequestMessage request, string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -87,9 +91,10 @@ namespace CoffeeShop.Web.Api
             }
         }
 
+        [PermissionAuthorize(ApplicationPermissons.ApplicationUsers.View)]
+        [PermissionAuthorize(ApplicationPermissons.ApplicationUsers.Edit)]
         [HttpPost]
         [Route("Add")]
-        [Authorize(Roles = "AddUser")]
         public async Task<HttpResponseMessage> Create(HttpRequestMessage request, ApplicationUserViewModel applicationUserViewModel)
         {
             if (ModelState.IsValid)
@@ -141,9 +146,9 @@ namespace CoffeeShop.Web.Api
             }
         }
 
+        [PermissionAuthorize(ApplicationPermissons.ApplicationUsers.Edit)]
         [HttpPut]
         [Route("Update")]
-        [Authorize(Roles = "UpdateUser")]
         public async Task<HttpResponseMessage> Update(HttpRequestMessage request, ApplicationUserViewModel applicationUserViewModel)
         {
             if (ModelState.IsValid)
@@ -191,7 +196,7 @@ namespace CoffeeShop.Web.Api
 
         [HttpDelete]
         [Route("Delete")]
-        [Authorize(Roles = "DeleteUser")]
+        [PermissionAuthorize(ApplicationPermissons.ApplicationUsers.Delete)]
         public async Task<HttpResponseMessage> Delete(HttpRequestMessage request, string id)
         {
             var appUser = await _userManager.FindByIdAsync(id);
@@ -200,6 +205,36 @@ namespace CoffeeShop.Web.Api
                 return request.CreateResponse(HttpStatusCode.OK, id);
             else
                 return request.CreateErrorResponse(HttpStatusCode.OK, string.Join(",", result.Errors));
+        }
+
+        [HttpDelete]
+        [Route("DeleteMulti")]
+        [PermissionAuthorize(ApplicationPermissons.ApplicationUsers.Delete)]
+        public async Task<HttpResponseMessage> DeleteMultiUser(HttpRequestMessage request, string ids)
+        {
+            var listUser = new JavaScriptSerializer().Deserialize<List<string>>(ids);
+            HttpResponseMessage response = null;
+            using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            {
+                try
+                {
+                    foreach (var item in listUser)
+                    {
+                        await Delete(request, item);
+                    }
+                    scope.Complete();
+
+                    response = request.CreateResponse(HttpStatusCode.OK, ids);
+                }
+                catch (Exception ex)
+                {
+                    LogError(ex);
+                    scope.Dispose();
+                    response = request.CreateErrorResponse(HttpStatusCode.OK, string.Join(",", "Error"));
+                    throw;
+                }
+            }
+            return response;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -45,9 +46,35 @@ namespace CoffeeShop.Common
             if (replacements.Count > 0)
             {
                 template = replacements.Keys
-                            .Aggregate(template, (current, key) => current.Replace(key, replacements[key]));
+                            .Aggregate(template, (current, key) => current
+                            .Replace(key, replacements[key]));
             }
             return template;
+        }
+
+        /// <summary>
+        /// Get string from a parent string that separate by 2 special character
+        /// </summary>
+        /// <param name="sourceString"></param>
+        /// <param name="specialCharacter"></param>
+        /// <returns></returns>
+        public static string GetStringBetween(string sourceString, string specialCharacter)
+        {
+            return sourceString.Split(new string[] { $"{specialCharacter}" }, 3, 
+                StringSplitOptions.None)[1];
+        }
+
+        /// <summary>
+        /// This function use to get string from a parent string that seperate by special character at the last
+        /// For exmaple full string like "Permission.Product.View"
+        /// the function will return string like "View"
+        /// </summary>
+        /// <param name="sourceString"></param>
+        /// <param name="lastCharacter"></param>
+        /// <returns></returns>
+        public static string GetStringAfterLasCharacter(string sourceString, string lastCharacter)
+        {
+            return sourceString.Substring(sourceString.LastIndexOf(lastCharacter) + 1);
         }
     }
 }

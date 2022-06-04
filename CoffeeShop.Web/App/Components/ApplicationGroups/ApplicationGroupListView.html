@@ -87,11 +87,9 @@
                             </td>
                         </tr>
                     </tbody>
-
                 </table>
             </div>
             <hr />
-
 
             <div class="card-body form-row justify-content-around" id="dataBody">
                 <div class="col-6">
@@ -115,7 +113,7 @@
             </div>
             <hr />
             <!--Pager directives-->
-            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" pageSize="3" search-func="getProductCagories(page, pageSize)"></pager-directive>
+            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" pageSize="3" search-func="getApplicationGroups(page, pageSize)"></pager-directive>
             <div class="card-footer form-row justify-content-around">
                 <div class="col-6">
                     <div class="float-left justify-content-around ">
@@ -205,8 +203,6 @@
                 selectedItem.push($(this).val());
             }
         });
-
-
 
         GetTotalSelectedItems();
     });

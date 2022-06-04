@@ -42,5 +42,9 @@
                 AuthData.authenticationData.isAuthenticated = false;
                 AuthData.authenticationData.userName = "";
             }
+
+            this.getUserInfo = function () {
+                return userInfo;
+            }
         }]);
 })(angular.module('CoffeeShop.Common'));

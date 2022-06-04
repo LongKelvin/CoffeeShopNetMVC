@@ -1,5 +1,6 @@
 ﻿namespace CoffeeShop.Data.Migrations
 {
+    using CoffeeShop.Common;
     using CoffeeShop.Models.Models;
 
     using Microsoft.AspNet.Identity;
@@ -10,14 +11,13 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
     using System.Text;
-using static System.Data.Entity.Migrations.Model.UpdateDatabaseOperation;
 
     internal sealed class Configuration : DbMigrationsConfiguration<CoffeeShop.Data.CoffeeShopDbContext>
     {
         public Configuration()
-{
+        {
             AutomaticMigrationsEnabled = true;
-           AutomaticMigrationDataLossAllowed = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(CoffeeShop.Data.CoffeeShopDbContext context)
@@ -27,7 +27,11 @@ using static System.Data.Entity.Migrations.Model.UpdateDatabaseOperation;
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
 
-            CreateUser(context);
+            //ResetDatabaseIdentityRecord(context);
+
+            CreateAppDefaultPermission(context);
+            CreateUserAndRoles(context);
+
             CreateProductCategorySample(context);
             CreateProductsSample(context);
             CreateSlidesSample(context);
@@ -36,34 +40,326 @@ using static System.Data.Entity.Migrations.Model.UpdateDatabaseOperation;
             CreatePaymentMethodSample(context);
         }
 
-        private void CreateUser(CoffeeShopDbContext context)
+        private void CreateAppDefaultPermission(CoffeeShopDbContext context)
         {
-            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new CoffeeShopDbContext()));
-
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new CoffeeShopDbContext()));
-
-            var user = new ApplicationUser()
+            if (context.ApplicationPermissions.Count() == 0)
             {
-                UserName = "admin",
-                Email = "admin.testapp@gmail.com",
-                EmailConfirmed = true,
-                BirthDay = new DateTime(1999, 10, 10),
-                FullName = "Adminstrators"
-            };
-            if (manager.Users.Count(x => x.UserName == "admin") == 0)
-            {
-                manager.Create(user, "admin@123X");
+                List<ApplicationPermission> appPermissions = new List<ApplicationPermission>();
+                var listPermissonName = Permissions.GenerateAllDefaultApplicationPermission();
 
-                if (!roleManager.Roles.Any())
+                foreach (var permission in listPermissonName)
                 {
-                    roleManager.Create(new IdentityRole { Name = "Admin" });
-                    roleManager.Create(new IdentityRole { Name = "User" });
+                    var appPermission = new ApplicationPermission
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = permission,
+                        Type = StringHelper.GetStringAfterLasCharacter(permission, "."),
+                        Module = StringHelper.GetStringBetween(permission, "."),
+                        Description = $"Default App Permission for {permission}",
+                        IsSystemProtected = true
+                    };
+
+                    appPermissions.Add(appPermission);
                 }
 
-                var adminUser = manager.FindByEmail("admin.testapp@gmail.com");
-
-                manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
+                context.ApplicationPermissions.AddRange(appPermissions);
+                context.SaveChanges();
             }
+        }
+
+        private void CreateUserAndRoles(CoffeeShopDbContext context)
+        {
+            var manager = new UserManager<ApplicationUser>(
+                new UserStore<ApplicationUser>(new CoffeeShopDbContext()));
+
+            var roleManager = new RoleManager<IdentityRole>(
+                new RoleStore<IdentityRole>(new CoffeeShopDbContext()));
+
+            if (!roleManager.Roles.Any())
+            {
+                roleManager.Create(new ApplicationRole
+                {
+                    Name = BasicRoles.SuperAdmin.ToString(),
+                    Description = BasicRoles.SuperAdmin.ToString(),
+                    IsSystemProtected = true
+                });
+                roleManager.Create(new ApplicationRole
+                {
+                    Name = BasicRoles.Admin.ToString(),
+                    Description = BasicRoles.Admin.ToString(),
+                    IsSystemProtected = true
+                });
+                roleManager.Create(new ApplicationRole
+                {
+                    Name = BasicRoles.BasicUser.ToString(),
+                    Description = BasicRoles.BasicUser.ToString(),
+                    IsSystemProtected = false
+                });
+
+                AddPermissionForRole(BasicRoles.SuperAdmin.ToString(), roleManager, context);
+                AddPermissionForRole(BasicRoles.Admin.ToString(), roleManager, context);
+                AddPermissionForRole(BasicRoles.BasicUser.ToString(), roleManager, context);
+            }
+
+            if (manager.Users.Count(x => x.UserName == "admin") == 0)
+            {
+                var admin = new ApplicationUser()
+                {
+                    UserName = "admin",
+                    Email = "admin.testapp@gmail.com",
+                    EmailConfirmed = true,
+                    BirthDay = new DateTime(1999, 10, 10),
+                    FullName = "Adminstrators",
+                    CreatedDate = DateTime.Now.Date,
+                    Address = "HCMC VietNam",
+                    PhoneNumber = "0984426795"
+                };
+                manager.Create(admin, "admin@123X");
+
+                var adminUser = manager.FindById(admin.Id);
+                manager.AddToRoles(adminUser.Id, new string[]
+                {
+                   BasicRoles.Admin.ToString(),
+                   BasicRoles.BasicUser.ToString()
+                });
+
+                //AddUserClaim(adminUser, manager, context);
+                AddPermissionForUser(adminUser, manager, roleManager, context);
+            }
+
+            if (manager.Users.Count(x => x.UserName == "superAdmin") == 0)
+            {
+                var superAdmin = new ApplicationUser()
+                {
+                    UserName = "superAdmin",
+                    Email = "superAdmin.testapp@gmail.com",
+                    EmailConfirmed = true,
+                    BirthDay = new DateTime(1999, 10, 10),
+                    FullName = "Super Adminstrators",
+                    CreatedDate = DateTime.Now.Date,
+                    Address = "HCMC VietNam",
+                    PhoneNumber = "0984426796"
+                };
+                manager.Create(superAdmin, "superAdmin@123X");
+
+                var superUser = manager.FindById(superAdmin.Id);
+                manager.AddToRoles(superUser.Id, new string[]
+                {
+                    BasicRoles.SuperAdmin.ToString(),
+                    BasicRoles.Admin.ToString(),
+                    BasicRoles.BasicUser.ToString()
+                });
+
+                //AddUserClaim(superUser, manager, context);
+                AddPermissionForUser(superUser, manager, roleManager, context);
+            }
+
+            if (manager.Users.Count(x => x.UserName == "basicUser") == 0)
+            {
+                var basicUser = new ApplicationUser()
+                {
+                    UserName = "basicUser",
+                    Email = "basicUser.testapp@gmail.com",
+                    EmailConfirmed = true,
+                    BirthDay = new DateTime(1999, 10, 10),
+                    FullName = "Basic User",
+                    CreatedDate = DateTime.Now.Date,
+                    Address = "HCMC VietNam",
+                    PhoneNumber = "0984426794"
+                };
+                manager.Create(basicUser, "basicUser@123X");
+
+                var user = manager.FindById(basicUser.Id);
+                manager.AddToRoles(user.Id, new string[]
+                {
+                    BasicRoles.BasicUser.ToString()
+                });
+
+                //AddUserClaim(user, manager, context);
+                AddPermissionForUser(user, manager, roleManager, context);
+            }
+        }
+
+        private static void AddPermissionForRole(string roleName, RoleManager<IdentityRole> roleManager, CoffeeShopDbContext context)
+        {
+            if (roleName.Equals(BasicRoles.SuperAdmin.ToString()))
+            {
+                var permissionForSuperAdmin = context.ApplicationPermissions
+                    .Select(x => x.Id).ToList();
+                var roleId = roleManager.FindByName(BasicRoles.SuperAdmin.ToString()).Id;
+
+                foreach (var permission in permissionForSuperAdmin)
+                {
+                    context.ApplicationRolePermissions.Add(new ApplicationRolePermission()
+                    {
+                        PermissionId = permission,
+                        RoleId = roleId
+                    });
+                }
+            }
+            else if (roleName.Equals(BasicRoles.Admin.ToString()))
+            {
+                var adminModules = Permissions.GetDefaultApplicationModuleForAdmin();
+                var roleId = roleManager.FindByName(BasicRoles.Admin.ToString()).Id;
+                var permissionForAdmin = context.ApplicationPermissions
+                    .Where(x => adminModules.Contains(x.Module))
+                    .Select(p => p.Id).ToList();
+                foreach (var permission in permissionForAdmin)
+                {
+                    context.ApplicationRolePermissions.Add(new ApplicationRolePermission()
+                    {
+                        PermissionId = permission,
+                        RoleId = roleId
+                    });
+                }
+            }
+            else
+            {
+                var basicUserModules = Permissions.GetDefaultApplicationModuleForBasicUser();
+                var roleId = roleManager.FindByName(BasicRoles.BasicUser.ToString()).Id;
+                var permissionForBasicUser = context.ApplicationPermissions
+                    .Where(x => basicUserModules.Contains(x.Module))
+                    .Select(p => p.Id).ToList();
+                foreach (var permission in permissionForBasicUser)
+                {
+                    context.ApplicationRolePermissions.Add(new ApplicationRolePermission()
+                    {
+                        PermissionId = permission,
+                        RoleId = roleId
+                    });
+                }
+            }
+
+            context.SaveChanges();
+        }
+
+        #region Claim
+
+        //This function aim to add claim for user that has been seed when initialize in the first time
+        //the application run
+        private static void CreateClaimForBasicRole(string basicRole, List<string> appModules, CoffeeShopDbContext context, RoleManager<IdentityRole> roleManager)
+        {
+            var userRole = roleManager.FindByName(basicRole);
+            AddPermissionClaim(userRole, appModules, context);
+        }
+
+        public static void AddPermissionClaim(IdentityRole role, List<string> modules, CoffeeShopDbContext context)
+        {
+            var allClaims = context.ApplicationRoleClaims.Where(x => x.RoleId.Equals(role.Id));
+
+            List<string> allPermissions = new List<string>();
+
+            foreach (var module in modules)
+            {
+                var tempPermission = Permissions.GeneratePermissionsForModule(module);
+                foreach (var permission in tempPermission)
+                {
+                    allPermissions.Add(permission);
+                }
+            }
+
+            foreach (var permission in allPermissions)
+            {
+                if (!allClaims.Any(a => a.ClaimType == "Permission" && a.ClaimValue == permission))
+                {
+                    context.ApplicationRoleClaims.Add(new ApplicationRoleClaims()
+                    {
+                        ClaimType = "Permission",
+                        ClaimValue = permission,
+                        RoleId = role.Id
+                    });
+                }
+            }
+
+            context.SaveChanges();
+        }
+
+        public static void AddUserClaim(ApplicationUser user, UserManager<ApplicationUser> userManager, CoffeeShopDbContext context)
+        {
+            List<ApplicationUserClaim> listUserClaims = new List<ApplicationUserClaim>();
+            IDictionary<string, ApplicationRole> listUserRoles = new Dictionary<string, ApplicationRole>();
+
+            var roleNameByUser = userManager.GetRoles(user.Id);
+
+            foreach (var role in roleNameByUser)
+            {
+                var roleByRoleName = context.ApplicationRoles.Where(r => r.Name.Equals(role)).SingleOrDefault();
+
+                try
+                {
+                    listUserRoles.Add(roleByRoleName.Id, roleByRoleName);
+                }
+                catch
+                {
+                    continue;
+                }
+            }
+
+            foreach (var role in listUserRoles)
+            {
+                var claimByRole = context.ApplicationRoleClaims.Where(x => x.RoleId.Equals(role.Value.Id)).ToList();
+
+                foreach (var claim in claimByRole)
+                {
+                    var userClaim = new ApplicationUserClaim
+                    {
+                        ClaimType = claim.ClaimType,
+                        ClaimValue = claim.ClaimValue,
+                        Id = claim.Id,
+                        UserId = user.Id,
+                    };
+
+                    if (listUserClaims.Contains(userClaim))
+                        continue;
+
+                    listUserClaims.Add(userClaim);
+                }
+            }
+
+            context.ApplicationUserClaims.AddRange(listUserClaims);
+            context.SaveChanges();
+        }
+
+        #endregion Claim
+
+        public void AddPermissionForUser(ApplicationUser user, UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager, CoffeeShopDbContext context)
+        {
+            List<ApplicationUserPermission> listAppUserPermission = new List<ApplicationUserPermission>();
+            var roleNameByUser = userManager.GetRoles(user.Id);
+
+            var listAppRoles = context.ApplicationRoles;
+
+            var roleIdByName = listAppRoles
+                .Where(x => roleNameByUser.Contains(x.Name))
+                .Select(k => k.Id);
+
+            var listRolePermissions = context.ApplicationRolePermissions;
+
+            foreach (var roleId in roleIdByName)
+            {
+                var roleName = listAppRoles.FirstOrDefault(x => x.Id.Equals(roleId)).Name;
+
+                var permissionByRole = listRolePermissions
+                    .Where(x => x.RoleId.Equals(roleId))
+                    .Select(i => i.PermissionId);
+
+                foreach (var permission in permissionByRole)
+                {
+                    var appUserPermission = new ApplicationUserPermission
+                    {
+                        UserId = user.Id,
+                        RoleId = roleId,
+                        RoleName = roleName,
+                        PermissionId = permission
+                    };
+
+                    listAppUserPermission.Add(appUserPermission);
+                }
+            }
+
+            context.ApplicationUserPermissions.AddRange(listAppUserPermission);
+            context.SaveChanges();
         }
 
         private void CreateProductCategorySample(CoffeeShopDbContext context)
@@ -204,6 +500,21 @@ using static System.Data.Entity.Migrations.Model.UpdateDatabaseOperation;
             }
         }
 
-        
+        //delete all record from role, user, group and claims
+        private void ResetDatabaseIdentityRecord(CoffeeShopDbContext context)
+        {
+            StringBuilder queryBuilder = new StringBuilder("delete from [CoffeeShopDatabase_MVC].[dbo].ApplicationRoleClaims  ");
+
+            queryBuilder.AppendLine("delete from [CoffeeShopDatabase_MVC].[dbo].ApplicationUserRoles  ");
+            queryBuilder.AppendLine("delete from [CoffeeShopDatabase_MVC].[dbo].ApplicationUserPermissions  ");
+            queryBuilder.AppendLine("delete from [CoffeeShopDatabase_MVC].[dbo].ApplicationRolePermissions  ");
+            queryBuilder.AppendLine("delete from [CoffeeShopDatabase_MVC].[dbo].ApplicationUserGroups  ");
+            queryBuilder.AppendLine("delete from [CoffeeShopDatabase_MVC].[dbo].[ApplicationRoles]  ");
+            queryBuilder.AppendLine("delete from [CoffeeShopDatabase_MVC].[dbo].ApplicationUsers  ");
+            queryBuilder.AppendLine("delete from [CoffeeShopDatabase_MVC].[dbo].ApplicationGroups  ");
+            queryBuilder.AppendLine("delete from [CoffeeShopDatabase_MVC].[dbo].ApplicationPermissions  ");
+
+            context.Database.ExecuteSqlCommand(queryBuilder.ToString());
+        }
     }
 }

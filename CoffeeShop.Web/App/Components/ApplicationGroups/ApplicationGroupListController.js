@@ -34,7 +34,6 @@
 
             var config = {
                 params: {
-
                     page: page,
                     pageSize: pageSize,
                     filter: $scope.keyWord
