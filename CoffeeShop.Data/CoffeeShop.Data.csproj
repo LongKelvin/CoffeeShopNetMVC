@@ -300,6 +300,10 @@
     <Compile Include="Migrations\202205270729045_UpdateAppUserPermissionPrimaryKey.designer.cs">
       <DependentUpon>202205270729045_UpdateAppUserPermissionPrimaryKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206040248369_AddAdditionalFieldToOrderAndProduct.cs" />
+    <Compile Include="Migrations\202206040248369_AddAdditionalFieldToOrderAndProduct.designer.cs">
+      <DependentUpon>202206040248369_AddAdditionalFieldToOrderAndProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
@@ -492,6 +496,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205270729045_UpdateAppUserPermissionPrimaryKey.resx">
       <DependentUpon>202205270729045_UpdateAppUserPermissionPrimaryKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206040248369_AddAdditionalFieldToOrderAndProduct.resx">
+      <DependentUpon>202206040248369_AddAdditionalFieldToOrderAndProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

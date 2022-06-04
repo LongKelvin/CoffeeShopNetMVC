@@ -88,6 +88,7 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             product.MoreImages = productVm.MoreImages;
             product.Price = productVm.Price;
             product.PromotionPrice = productVm.PromotionPrice;
+            product.OriginalPrice = productVm.OriginalPrice;
             product.Warranty = productVm.Warranty;
             product.HomeFlag = productVm.HomeFlag;
             product.ViewCount = productVm.ViewCount;
