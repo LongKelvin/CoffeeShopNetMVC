@@ -32,6 +32,8 @@
             $scope.product.UpdatedBy = 'AdminTest';
             $scope.product.MoreImages = JSON.stringify($scope.moreImages)
 
+            console.log($scope.product)
+
             ApiServices.post('api/Product/Update', $scope.product,
                 function (result) {
                     NotificationService.displaySuccess(result.data.Name + ' đã cập nhật thành công.');
@@ -65,8 +67,6 @@
                 }
 
                 CKEDITOR.instances['ckEditorContent'].setData($scope.product.Content)
-
-                console.log('ProductData: ', $scope.product)
             }, function (error) {
                 NotificationService.displayError(error.data);
             });
@@ -77,7 +77,6 @@
             finder.selectActionFunction = function (fileUrl) {
                 $scope.product.Images = fileUrl;
                 $scope.$apply();
-                console.log('file url: ', fileUrl)
             }
             finder.popup();
         }
@@ -88,7 +87,6 @@
             finder.selectActionFunction = function (fileUrl) {
                 $scope.moreImages.push(fileUrl);
                 $scope.$apply();
-                console.log('file url: ', $scope.moreImages)
             }
             finder.popup();
         }

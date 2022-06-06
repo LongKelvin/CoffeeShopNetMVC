@@ -103,6 +103,7 @@ namespace CoffeeShop.Services
             target.MetaDescription = source.MetaDescription;
             target.Status = source.Status;
             target.RowVersion = source.RowVersion;
+            target.OriginalPrice = source.OriginalPrice;
 
         }
 

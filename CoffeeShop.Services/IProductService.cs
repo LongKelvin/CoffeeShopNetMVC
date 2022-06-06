@@ -18,7 +18,7 @@ namespace CoffeeShop.Services
 
         IEnumerable<Product> GetAll(string keyWord);
 
-        IEnumerable<Product> GetAll();
+        IEnumerable<Product> GetAll(string[] includes = null);
 
         IEnumerable<Product> GetAllPaging(int page, int pageSize, out int totalRow);
 
@@ -49,5 +49,7 @@ namespace CoffeeShop.Services
         void IncreaseView(int productID);
 
         ProductCategory GetCategory(int productID);
+
+        bool SellProduct(int productId, int quantity);
     }
 }

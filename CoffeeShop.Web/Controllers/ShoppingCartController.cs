@@ -39,6 +39,13 @@ namespace CoffeeShop.Web.Controllers
 
             var currentAddedItem = new ShoppingCartViewModel();
 
+            var productById = _productService.GetById(productID);
+            if(productById.Quantity==0 || productById.Quantity < quantity)
+            {
+                return Json(new { status = false, count = cart.Count(), errorMessage = "Item quantity is not enough to sell" });
+            }
+
+
             //check if item aready in cart session
             if (cart.Any(x => x.ProductID == productID))
             {

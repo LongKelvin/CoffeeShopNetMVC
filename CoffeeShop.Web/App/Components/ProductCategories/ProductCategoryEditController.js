@@ -61,10 +61,10 @@
             });
         }
 
-        $('#parentIdDropdown').on('change', function () {
-            alert($('#parentIdDropdown').select2('data'))
-            alert($scope.productCategory.ParentID)
-        });
+        //$('#parentIdDropdown').on('change', function () {
+        //    alert($('#parentIdDropdown').select2('data'))
+        //    alert($scope.productCategory.ParentID)
+        //});
 
         loadParentCategory();
         loadProductCategoryDetail();

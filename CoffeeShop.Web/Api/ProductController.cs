@@ -44,7 +44,7 @@ namespace CoffeeShop.Web.Api
                 totalRow = listProduct.Count();
 
                 //Order by
-                IEnumerable<Product> query = listProduct.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize);
+                IEnumerable<Product> query = listProduct.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
 
                 //Map object using Automapper
                 var listProductVM = Mapper.Map<List<ProductViewModel>>(query);

@@ -17,13 +17,16 @@ namespace CoffeeShop.Web.Controllers
     {
         private readonly IPaymentMethodService _paymentMethodService;
         private readonly IOrderService _orderService;
+        private readonly IProductService _productServices;
 
         public PaymentController(IPaymentMethodService paymentMethodService,
             IErrorService errorService,
-            IOrderService orderService) : base(errorService)
+            IOrderService orderService,
+            IProductService productServices) : base(errorService)
         {
             _paymentMethodService = paymentMethodService;
             _orderService = orderService;
+            _productServices = productServices;
         }
 
         // GET: Payment
@@ -48,6 +51,7 @@ namespace CoffeeShop.Web.Controllers
 
             var cart = (List<ShoppingCartViewModel>)Session[Common.CommonConstants.SessionCart];
 
+            bool isSuccessSelling = true;
             var newOrder = new Order();
             EntityExtensions.UpdateOrder(newOrder, order);
 
@@ -68,10 +72,27 @@ namespace CoffeeShop.Web.Controllers
                     ProductID = item.ProductID,
                     Quantity = item.Quantity,
                 });
+
+                isSuccessSelling = _productServices.SellProduct(item.ProductID, item.Quantity);
+
+                if (isSuccessSelling == false)
+                    break;
             }
+
+            if (!isSuccessSelling)
+            {
+                return Json(new
+                {
+                    status = false,
+                    errorMessage = "Số lượng hàng trong kho không đủ để thực hiện giao dịch"
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            //IF TRUE THEN SAVE ALL CHANGES
 
             var orderResult = _orderService.Add(newOrder);
             _orderService.SaveChanges();
+            _productServices.SaveChanges();
 
             if (orderResult.ID <= 0)
                 return Json(new { status = false });

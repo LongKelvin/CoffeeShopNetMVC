@@ -140,6 +140,9 @@
                     cart.getTotalQuantity();
                     cartPanel.appendItem(result.data);
                 }
+                else {
+                    alert(result.errorMessage);
+                }
             }
         })
     },

@@ -47,6 +47,7 @@
                         console.log("selected item:", $scope.pageSize);
                         //get result from searchFunc
                         $scope.searchFunc({ page: 0, pageSize: $scope.pageSize });
+                        $scope.$apply();
                     }
                 }]
         }
