@@ -7,6 +7,7 @@ using CoffeeShop.Web.Models;
 
 using Microsoft.AspNet.Identity;
 
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -71,6 +72,7 @@ namespace CoffeeShop.Web.Controllers
                     OrderID = newOrder.ID,
                     ProductID = item.ProductID,
                     Quantity = item.Quantity,
+                    UnitPrice = item.Product.Price
                 });
 
                 isSuccessSelling = _productServices.SellProduct(item.ProductID, item.Quantity);
@@ -97,11 +99,21 @@ namespace CoffeeShop.Web.Controllers
             if (orderResult.ID <= 0)
                 return Json(new { status = false });
 
-            string successFrm = System.IO.File.ReadAllText(
-                   Server.MapPath("/Assets/Client/form/success-form/order_success_template.html"));
+            string successFrm = "";
+            try
+            {
+                successFrm = System.IO.File.ReadAllText(
+                 Server.MapPath("/Assets/Client/templates/order_success_template.html"));
 
-            successFrm = successFrm.Replace("{{DirectActionLink}}",
-                Url.Action("Index", "Product"));
+                successFrm = successFrm.Replace("{{DirectActionLink}}",
+                    Url.Action("Index", "Product"));
+            }
+            catch (Exception)
+            {
+                successFrm = "Thank you for your order, We will contact you as soon as possible";
+            }
+
+            Session[Common.CommonConstants.SessionCart] = null;
 
             return Json(new
             {

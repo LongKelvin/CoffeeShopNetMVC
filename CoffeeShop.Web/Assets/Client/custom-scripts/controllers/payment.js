@@ -76,7 +76,7 @@
             CustomerName: $('#txtFullName').val(),
             CustomerAddress: $('#txtAddress').val(),
             CustomerEmail: $('#txtEmail').val(),
-            CustomerMobile: $('#txtPhone').val(),
+            CustomerMobile: $('#txtTelephone').val(),
             PaymentMethodCode: $('input[name="paymentMethodRadioBtn"]:checked').val(),
             CustomerMessage: $('#txtNote').val(),
             PaymentStatus: false,
