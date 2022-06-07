@@ -91,6 +91,14 @@
     {
       "library": "checklist-model@1.0.0",
       "destination": "Assets/Admin/lib/checklist-model/"
+    },
+    {
+      "library": "Chart.js@3.8.0",
+      "destination": "Assets/Admin/lib/Chart.js/"
+    },
+    {
+      "library": "angular-chart.js@1.1.1",
+      "destination": "Assets/Admin/lib/angular-chart.js/"
     }
   ]
 }

@@ -1,0 +1,238 @@
+﻿  <!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><strong>Thống Kê</strong></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="Home">Trang chủ</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="StatisticRevenue">Thống Kê</a></li>
+                    <li class="breadcrumb-item active">Thống kê lợi nhuận</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Main content-->
+<section class="content overflow-hidden">
+    <div class="container-fluid">
+        <div class="card card-default color-palette-box">
+
+            <div class="row card-header justify-content-lg-between ">
+                <div class="col-lg-6 col-xs-12 col-md-6 col-sm-12">
+                    <div class="form-group row">
+                        <label>Từ ngày:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="far fa-calendar-alt"></i>
+                                </span>
+                            </div>
+                            <input ng-model="$scope.fromDate" type="date" class="form-control float-right" id="reservation">
+                        </div>
+                        <!--/.input group-->
+                    </div>
+
+                    <div class="form-group row">
+                        <label>Tới ngày:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="far fa-calendar-alt"></i>
+                                </span>
+                            </div>
+                            <input ng-model="$scope.toDate" type="date" class="form-control float-right" id="reservation">
+                        </div>
+                        <!--/.input group-->
+                    </div>
+                </div>
+
+                <div class="col-lg-4 offset-lg-2 float-lg-right col-xs-12 col-md-6 col-sm-12 justify-content-between space-vertical ">
+
+                    <div class=" row mt-4">
+                        <div class="float-sm-start col-6 ">
+                            <button type="button" class="btn btn-outline-success  w-100 ">
+                                <i class="fas fa-rectangle-list"> </i> Thống kê
+                            </button>
+                        </div>
+                        <div class="float-sm-end col-6 ">
+                            <button type="button" class="btn btn-outline-primary w-100  ">
+                                <i class="fa-solid fa-file-export"> </i> Xuất PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-default color-palette-box">
+        <div class="card-header">
+            <h5><b>Biểu đồ thống kê lợi nhuận theo tháng</b></h5>
+        </div>
+        <div class="card-body p-3">
+            <div class="chart">
+                <div class="chartjs-size-monitor">
+                    <div class="chartjs-size-monitor-expand">
+                        <div class="">
+                        </div>
+                    </div>
+                    <div class="chartjs-size-monitor-shrink">
+                        <div class="">
+                        </div>
+                    </div>
+                </div>
+                <canvas id="areaChart" style="min-height: 350px; height: 500px; max-height: 500px; max-width: 100%;
+                display: block; width: 764px;" width="764" height="500" class="chartjs-render-monitor">
+                </canvas>
+            </div>
+        </div>
+    </div>
+
+    <input id="data" hidden value="15" />
+
+    <div class="card card-default color-palette-box">
+        <div class="card-header">
+            <h5><b>Bảng dữ liệu chi tiết</b></h5>
+        </div>
+
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div id="statisticRevenueData" class="dataTables_wrapper dt-bootstrap4">
+
+                <div class="col-sm-12">
+                    <table id="statisticRevenue" class="table table-bordered table-striped dataTable dtr-inline"
+                           aria-describedby="example1_info">
+                        <thead>
+                            <tr>
+                                <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">#</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Ngày</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Doanh số</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Lợi nhuận</th>
+                        </thead>
+                        <tbody>
+
+                            <tr class="even" ng-repeat="item in data">
+                                <td class="dtr-control sorting_1" tabindex="0">{{$index+1}}</td>
+                                <td>{{item.Date |date:'dd/MM/yyyy'}}</td>
+                                <td>{{item.Revenues | currency:"₫"}}</td>
+                                <td>{{item.Benefit | currency:"₫"}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th rowspan="1" colspan="1">#</th>
+                                <th rowspan="1" colspan="1">Ngày</th>
+                                <th rowspan="1" colspan="1">Doanh số</th>
+                                <th rowspan="1" colspan="1">Lợi nhuận</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /.card-body -->
+</section><!-- /.content -->
+
+<script>
+
+    $(document).ready(function () {
+
+        var fromDate = "5/17/2022";
+        var toDate = "6/6/2022";
+
+        var config = {
+            param: {
+                fromDate: fromDate,
+                toDate: toDate
+            }
+        }
+        var getUrl = '/api/Statistic/GetRevenue?fromDate=' + config.param.fromDate + '&toDate=' + config.param.toDate;
+
+        $.ajax({
+            url: getUrl,
+            type: 'GET',
+            dataType: 'json',
+            success: function (result) {
+
+                var labels = [];
+                var revenues = [];
+                var benefits = [];
+
+                $.each(result, function (i, item) {
+
+                    labels.push(item.Date);
+                    revenues.push(item.Revenues);
+                    benefits.push(item.Benefit);
+
+                });
+
+                var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+
+                var areaChartData = {
+
+                    //labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Doanh số',
+                            backgroundColor: 'rgba(60,141,188,0.9)',
+                            borderColor: 'rgba(60,141,188,0.8)',
+                            pointRadius: true,
+                            pointColor: '#3b8bba',
+                            pointStrokeColor: 'rgba(60,141,188,1)',
+                            pointHighlightFill: '#fff',
+                            pointHighlightStroke: 'rgba(60,141,188,1)',
+                            data: revenues
+
+                        },
+                        {
+                            label: 'Lợi nhuận',
+                            backgroundColor: 'red',
+                            borderColor: 'red',
+                            pointRadius: true,
+                            pointColor: 'rgba(210, 214, 222, 1)',
+                            pointStrokeColor: '#c1c7d1',
+                            pointHighlightFill: '#fff',
+                            pointHighlightStroke: 'rgba(220,220,220,1)',
+                            data: benefits
+
+                        },
+                    ]
+                }
+
+                var areaChartOptions = {
+                    maintainAspectRatio: true,
+                    responsive: true,
+                    legend: {
+                        display: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            gridLines: {
+                                display: true,
+                            }
+                        }],
+                        yAxes: [{
+                            gridLines: {
+                                display: true,
+                            }
+                        }]
+                    }
+                }
+
+                // This will get the first returned node in the jQuery collection.
+                new Chart(areaChartCanvas, {
+                    type: 'line',
+                    data: areaChartData,
+                    options: areaChartOptions
+                })
+            }
+        });
+
+    });
+</script>

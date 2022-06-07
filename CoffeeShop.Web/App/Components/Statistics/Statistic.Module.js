@@ -1,14 +1,14 @@
 ﻿(function () {
-    angular.module('CoffeeShop.AppPermissions', ['CoffeeShop.Common']).config(config);
+    angular.module('CoffeeShop.Statistics', ['CoffeeShop.Common']).config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function config($stateProvider, $urlRouterProvider) {
-        $stateProvider.state('AccessDenied', {
-            url: "/ApplicationPermission/AccessDenied",
-            templateUrl: "/App/Components/Authorize/PermissionDenied.html",
+        $stateProvider.state('StatisticRevenues', {
+            url: "/Statistic/Revenue",
+            templateUrl: "/App/Components/Statistics/RevenueStatisticView.html",
             parent: 'Base',
-            controller: "PermissionDeniedController"
+            controller: "RevenueStatisticController"
         })
         //.state('ApplicationUserAdd', {
         //    url: "/ApplicationUser/Add",

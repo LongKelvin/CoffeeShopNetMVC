@@ -1,5 +1,4 @@
-﻿
-(function (app) {
+﻿(function (app) {
     app.controller('ProductCategoryEditController', ProductCategoryEditController);
 
     ProductCategoryEditController.$inject =
@@ -54,7 +53,6 @@
             ApiServices.get('api/ProductCategory/GetById/' + $stateParams.id, null, function (result) {
                 $scope.productCategory = result.data;
 
-                
                 console.log('productCategoryData: ', $scope.productCategory)
             }, function (error) {
                 NotificationService.displayError(error.data);

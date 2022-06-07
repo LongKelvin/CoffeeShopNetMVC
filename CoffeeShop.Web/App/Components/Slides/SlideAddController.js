@@ -27,7 +27,6 @@
                 });
             $state.go('Slides')
         }
-      
 
         $scope.ChooseImages = function () {
             var finder = new CKFinder();
@@ -38,6 +37,5 @@
             }
             finder.popup();
         }
-
     }
 })(angular.module('CoffeeShop.Slides'));
