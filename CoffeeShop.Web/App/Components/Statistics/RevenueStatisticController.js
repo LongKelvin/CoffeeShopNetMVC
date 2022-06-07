@@ -12,17 +12,30 @@
         //$scope.chartDataBenefit = [];
         //$scope.chartLabels = [];
 
-        $scope.fromDate = "5/17/2022";
-        $scope.toDate = "6/6/2022";
-
-        var config = {
-            param: {
-                fromDate: $scope.fromDate,
-                toDate: $scope.toDate
-            }
-        }
-
         function GetRevenueStatistic() {
+            var fromDate = $('#txtFromDate').val();
+            var toDate = $('#txtToDate').val();
+
+            if (util.isNullOrEmptyString(fromDate)) {
+                //get the first day of current month
+                fromDate = util.getFirstDateOfCurrentMonth().toString();
+            }
+
+            if (util.isNullOrEmptyString(toDate)) {
+                //get the first day of current month
+                toDate = util.getCurrentDayWithoutTime().toString();
+            }
+
+            fromDate = util.removeTimeFromDate(fromDate);
+            toDate = util.removeTimeFromDate(toDate);
+
+            var config = {
+                param: {
+                    fromDate: fromDate,
+                    toDate: toDate
+                }
+            }
+
             try {
                 ApiServices.get('/api/Statistic/GetRevenue?fromDate=' + config.param.fromDate + '&toDate=' + config.param.toDate, null, function (result) {
                     if (result.data == null) {
@@ -30,6 +43,7 @@
                     }
 
                     $scope.data = result.data;
+
                     //var labels = [];
                     //var revenues = [];
                     //var benefits = [];

@@ -30,7 +30,7 @@
                                     <i class="far fa-calendar-alt"></i>
                                 </span>
                             </div>
-                            <input ng-model="$scope.fromDate" type="date" class="form-control float-right" id="reservation">
+                            <input type="date" class="form-control float-right" id="txtFromDate">
                         </div>
                         <!--/.input group-->
                     </div>
@@ -43,7 +43,7 @@
                                     <i class="far fa-calendar-alt"></i>
                                 </span>
                             </div>
-                            <input ng-model="$scope.toDate" type="date" class="form-control float-right" id="reservation">
+                            <input type="date" class="form-control float-right" id="txtToDate">
                         </div>
                         <!--/.input group-->
                     </div>
@@ -53,12 +53,12 @@
 
                     <div class=" row mt-4">
                         <div class="float-sm-start col-6 ">
-                            <button type="button" class="btn btn-outline-success  w-100 ">
+                            <button type="button" class="btn btn-dark w-100" onclick="GetRevenues()" ng-click="GetRevenueStatistic()">
                                 <i class="fas fa-rectangle-list"> </i> Thống kê
                             </button>
                         </div>
                         <div class="float-sm-end col-6 ">
-                            <button type="button" class="btn btn-outline-primary w-100  ">
+                            <button type="button" class="btn btn-outline-primary w-100">
                                 <i class="fa-solid fa-file-export"> </i> Xuất PDF
                             </button>
                         </div>
@@ -84,14 +84,12 @@
                         </div>
                     </div>
                 </div>
-                <canvas id="areaChart" style="min-height: 350px; height: 500px; max-height: 500px; max-width: 100%;
+                <canvas id="myChart" style="min-height: 350px; height: 500px; max-height: 500px; max-width: 100%;
                 display: block; width: 764px;" width="764" height="500" class="chartjs-render-monitor">
                 </canvas>
             </div>
         </div>
     </div>
-
-    <input id="data" hidden value="15" />
 
     <div class="card card-default color-palette-box">
         <div class="card-header">
@@ -140,10 +138,60 @@
 
 <script>
 
-    $(document).ready(function () {
+    const labels = [];
 
-        var fromDate = "5/17/2022";
-        var toDate = "6/6/2022";
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Doanh số',
+            backgroundColor: 'rgb(0, 0, 255)',
+            borderColor: 'blue',
+            data: [],
+        },
+        {
+            label: 'Lợi nhuận',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'red',
+            data: [],
+        }]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {}
+
+    };
+
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+    $(document).ready(function () {
+        GetRevenues();
+    });
+
+    function GetRevenues() {
+
+        var fromDate = $('#txtFromDate').val();
+        var toDate = $('#txtToDate').val();
+
+        if (util.isNullOrEmptyString(fromDate)) {
+
+            //get the first day of current month
+            fromDate = util.getFirstDateOfCurrentMonth().toString();
+            //console.log('fromDate: ', fromDate)
+        }
+
+        if (util.isNullOrEmptyString(toDate)) {
+            //get current date without time
+            toDate = util.getCurrentDayWithoutTime().toString();
+            //console.log('toDate: ', toDate)
+        }
+
+        fromDate = util.removeTimeFromDate(fromDate);
+        toDate = util.removeTimeFromDate(toDate);
 
         var config = {
             param: {
@@ -151,6 +199,7 @@
                 toDate: toDate
             }
         }
+
         var getUrl = '/api/Statistic/GetRevenue?fromDate=' + config.param.fromDate + '&toDate=' + config.param.toDate;
 
         $.ajax({
@@ -158,6 +207,8 @@
             type: 'GET',
             dataType: 'json',
             success: function (result) {
+
+                // console.log('responseData:', result)
 
                 var labels = [];
                 var revenues = [];
@@ -168,71 +219,34 @@
                     labels.push(item.Date);
                     revenues.push(item.Revenues);
                     benefits.push(item.Benefit);
-
                 });
 
-                var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
-
-                var areaChartData = {
-
-                    //labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                var data = {
                     labels: labels,
-                    datasets: [
-                        {
-                            label: 'Doanh số',
-                            backgroundColor: 'rgba(60,141,188,0.9)',
-                            borderColor: 'rgba(60,141,188,0.8)',
-                            pointRadius: true,
-                            pointColor: '#3b8bba',
-                            pointStrokeColor: 'rgba(60,141,188,1)',
-                            pointHighlightFill: '#fff',
-                            pointHighlightStroke: 'rgba(60,141,188,1)',
-                            data: revenues
-
-                        },
-                        {
-                            label: 'Lợi nhuận',
-                            backgroundColor: 'red',
-                            borderColor: 'red',
-                            pointRadius: true,
-                            pointColor: 'rgba(210, 214, 222, 1)',
-                            pointStrokeColor: '#c1c7d1',
-                            pointHighlightFill: '#fff',
-                            pointHighlightStroke: 'rgba(220,220,220,1)',
-                            data: benefits
-
-                        },
-                    ]
-                }
-
-                var areaChartOptions = {
-                    maintainAspectRatio: true,
-                    responsive: true,
-                    legend: {
-                        display: true
+                    datasets: [{
+                        label: 'Doanh số',
+                        backgroundColor: 'rgb(0, 0, 255)',
+                        borderColor: 'blue',
+                        data: revenues,
                     },
-                    scales: {
-                        xAxes: [{
-                            gridLines: {
-                                display: true,
-                            }
-                        }],
-                        yAxes: [{
-                            gridLines: {
-                                display: true,
-                            }
-                        }]
-                    }
-                }
+                    {
+                        label: 'Lợi nhuận',
+                        backgroundColor: 'rgb(255, 99, 132)',
+                        borderColor: 'red',
+                        data: benefits,
+                    }]
+                };
 
-                // This will get the first returned node in the jQuery collection.
-                new Chart(areaChartCanvas, {
-                    type: 'line',
-                    data: areaChartData,
-                    options: areaChartOptions
-                })
+                myChart.labels = labels;
+                myChart.data = data;
+
+                //myChart.data.datasets.forEach(dataset => {
+                //    dataset.data = [100,1000,1500,200,50,12,11,8000]
+                //    //dataset.data[1] = benefits
+                //});
+                myChart.update();
+
             }
         });
-
-    });
+    }
 </script>

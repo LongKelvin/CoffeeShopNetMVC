@@ -55,7 +55,6 @@
 
         //Get price for shopping cart
         if (listInputPrice != null) {
-           
             $.each(listInputPrice, function (index, item) {
                 var tempPrice = parseInt($(item).val()) * parseFloat($(this).data('price'))
                 total += tempPrice;
@@ -63,11 +62,9 @@
         }
         //Get price for total payment
 
-           
-
         return total;
     },
-   
+
     loadData: async function () {
         var shippingFee = 20000;
 

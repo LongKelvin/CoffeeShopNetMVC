@@ -7,7 +7,6 @@ using System.Web.Http;
 
 namespace CoffeeShop.Web.Api
 {
-    
     [RoutePrefix("api/Statistic")]
     public class StatisticController : ApiControllerBase
     {

@@ -234,6 +234,8 @@
     <Content Include="Assets\Admin\css\alt\adminlte.plugins.css" />
     <Content Include="Assets\Admin\css\alt\adminlte.plugins.min.css" />
     <Content Include="Assets\Admin\custom-css\main-page.css" />
+    <Content Include="Assets\Admin\custom-scripts\chart.js" />
+    <Content Include="Assets\Admin\custom-scripts\util.js" />
     <Content Include="Assets\Admin\img\AdminLTELogo.png" />
     <Content Include="Assets\Admin\img\avatar.png" />
     <Content Include="Assets\Admin\img\avatar2.png" />
