@@ -9,9 +9,8 @@
         $scope.getUserName = getUserName;
 
         function getUserName() {
-            $scope.userName =  LoginService.getUserName();
+            $scope.userName = LoginService.getUserName();
         }
-
 
         $scope.getUserName();
     }

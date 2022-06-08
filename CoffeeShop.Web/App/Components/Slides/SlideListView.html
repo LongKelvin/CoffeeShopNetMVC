@@ -57,7 +57,7 @@
                     <thead>
 
                         <tr>
-                            <th  style="width: 10px">
+                            <th style="width: 10px">
                                 STT
                             </th>
                             <th class="selectedItem" style="width: 10px">
@@ -87,15 +87,13 @@
                             <td>{{item.URL}}</td>
                             <td>{{item.Description}} </td>
 
-                        
                             <td>{{item.ActionName}} </td>
-                            
 
                             <td>{{item.DisplayOrder}}</td>
                             <td>
                                 {{item.Images}}
                             </td>
-                           
+
                             <td>
                                 <span ng-class="{'badge bg-danger':item.Status==false,'badge bg-success':item.Status==true}">
                                     {{item.Status | statusFilter}}

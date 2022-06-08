@@ -1,10 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using System;
-
-using CoffeeShop.Data.Insfrastructure;
+﻿using CoffeeShop.Data.Insfrastructure;
 using CoffeeShop.Data.Repositories;
 using CoffeeShop.Models.Models;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using System.Linq;
 
 namespace CoffeeShop.UnitTest
@@ -12,10 +11,9 @@ namespace CoffeeShop.UnitTest
     [TestClass]
     public class PostCategoryRepositoryTest
     {
-        IDbFactory dbFactory;
-        IPostCategoryRepository postCategoryRepository;
-        IUnitOfWork unitOfWork;
-
+        private IDbFactory dbFactory;
+        private IPostCategoryRepository postCategoryRepository;
+        private IUnitOfWork unitOfWork;
 
         [TestInitialize]
         public void Initialize()
@@ -25,7 +23,6 @@ namespace CoffeeShop.UnitTest
             unitOfWork = new UnitOfWork(dbFactory);
         }
 
-
         [TestMethod]
         public void PostCategory_Repository_Create()
         {
@@ -33,7 +30,6 @@ namespace CoffeeShop.UnitTest
             {
                 Name = "Test-PostCategory",
                 Alias = "Test-PostCategory-Alias"
-
             };
 
             var createPostCategory = postCategoryRepository.Add(postCategory);
@@ -44,7 +40,6 @@ namespace CoffeeShop.UnitTest
             Assert.IsNotNull(createPostCategory);
             Assert.IsNotNull(loadedPostCategory);
             Assert.AreEqual(createPostCategory.Name, loadedPostCategory.Name);
-    
         }
 
         [TestMethod]

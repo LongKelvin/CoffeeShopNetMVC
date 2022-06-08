@@ -7,11 +7,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Moq;
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CoffeeShop.UnitTest.ServiceTest
 {
@@ -34,11 +31,10 @@ namespace CoffeeShop.UnitTest.ServiceTest
 
             listPostCategories = new List<PostCategory>
             {
-                new PostCategory() {ID=1 ,Name="PCG1",Status=true},
+                new PostCategory() { ID=1 ,  Name = "PCG1", Status = true },
                 new PostCategory() { ID = 2, Name = "PCG2", Status = true },
                 new PostCategory() { ID = 3, Name = "PCG3", Status = true }
             };
-
         }
 
         [TestMethod]
@@ -68,8 +64,8 @@ namespace CoffeeShop.UnitTest.ServiceTest
             //Setup
             _mockRepository.Setup(m => m.Add(category)).Returns((PostCategory p) =>
             {
-                  p.ID = 1;
-                  return p;
+                p.ID = 1;
+                return p;
             });
 
             //Call action

@@ -1,5 +1,4 @@
-﻿
-(function (app) {
+﻿(function (app) {
     app.controller('ProductCategoryEditController', ProductCategoryEditController);
 
     ProductCategoryEditController.$inject =
@@ -54,17 +53,16 @@
             ApiServices.get('api/ProductCategory/GetById/' + $stateParams.id, null, function (result) {
                 $scope.productCategory = result.data;
 
-                
                 console.log('productCategoryData: ', $scope.productCategory)
             }, function (error) {
                 NotificationService.displayError(error.data);
             });
         }
 
-        $('#parentIdDropdown').on('change', function () {
-            alert($('#parentIdDropdown').select2('data'))
-            alert($scope.productCategory.ParentID)
-        });
+        //$('#parentIdDropdown').on('change', function () {
+        //    alert($('#parentIdDropdown').select2('data'))
+        //    alert($scope.productCategory.ParentID)
+        //});
 
         loadParentCategory();
         loadProductCategoryDetail();

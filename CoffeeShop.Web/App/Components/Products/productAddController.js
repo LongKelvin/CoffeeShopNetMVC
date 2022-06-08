@@ -30,6 +30,8 @@
             //update MoreImages field
             $scope.product.MoreImages = JSON.stringify($scope.moreImages)
 
+            console.log($scope.product)
+
             ApiServices.post('api/Product/Create', $scope.product,
                 function (result) {
                     NotificationService.displaySuccess(result.data.Name + ' đã được thêm mới.');

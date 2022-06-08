@@ -11,9 +11,9 @@
         'CoffeeShop.ApplicationGroups',
         'CoffeeShop.ApplicationRoles',
         'CoffeeShop.ApplicationUsers',
+        'CoffeeShop.Statistics'
 
-    ]).config(config)
-        .config(configAuthentication);
+    ]).config(config).config(configAuthentication);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
@@ -37,7 +37,6 @@
                 controller: "HomeController"
             });
 
-
         $urlRouterProvider.otherwise('/Login');
     }
 
@@ -57,6 +56,9 @@
                     if (response.status == "403") {
                         $location.path('/AccessDenied');
                     }
+                    if (response.status == "302") {
+                        $location.path('/AccessDenied');
+                    }
                     //the same response/modified/or a new one need to be returned.
                     return response;
                 },
@@ -65,6 +67,9 @@
                         $location.path('/Login');
                     }
                     if (response.status == "403") {
+                        $location.path('/AccessDenied');
+                    }
+                    if (response.status == "302") {
                         $location.path('/AccessDenied');
                     }
                     return $q.reject(rejection);

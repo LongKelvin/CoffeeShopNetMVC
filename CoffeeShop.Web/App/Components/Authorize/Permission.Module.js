@@ -10,17 +10,17 @@
             parent: 'Base',
             controller: "PermissionDeniedController"
         })
-            //.state('ApplicationUserAdd', {
-            //    url: "/ApplicationUser/Add",
-            //    parent: 'Base',
-            //    templateUrl: "/App/Components/ApplicationUsers/ApplicationUserAddView.html",
-            //    controller: "ApplicationUserAddController"
-            //})
-            //.state('ApplicationUserEdit', {
-            //    url: "/ApplicationUser/Edit/:id",
-            //    templateUrl: "/App/Components/ApplicationUsers/ApplicationUserEditView.html",
-            //    controller: "ApplicationUserEditController",
-            //    parent: 'Base',
-            //});
+        //.state('ApplicationUserAdd', {
+        //    url: "/ApplicationUser/Add",
+        //    parent: 'Base',
+        //    templateUrl: "/App/Components/ApplicationUsers/ApplicationUserAddView.html",
+        //    controller: "ApplicationUserAddController"
+        //})
+        //.state('ApplicationUserEdit', {
+        //    url: "/ApplicationUser/Edit/:id",
+        //    templateUrl: "/App/Components/ApplicationUsers/ApplicationUserEditView.html",
+        //    controller: "ApplicationUserEditController",
+        //    parent: 'Base',
+        //});
     }
 })();

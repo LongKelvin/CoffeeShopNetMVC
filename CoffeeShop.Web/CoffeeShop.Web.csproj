@@ -89,6 +89,7 @@
     <Compile Include="Api\ProductCategoryController.cs" />
     <Compile Include="Api\ProductController.cs" />
     <Compile Include="Api\SlideController.cs" />
+    <Compile Include="Api\StatisticController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -204,6 +205,9 @@
     <Content Include="App\Components\Slides\SlideListController.js" />
     <Content Include="App\Components\Slides\SlideListView.html" />
     <Content Include="App\Components\Slides\Slides.Module.js" />
+    <Content Include="App\Components\Statistics\Statistic.Module.js" />
+    <Content Include="App\Components\Statistics\RevenueStatisticController.js" />
+    <Content Include="App\Components\Statistics\RevenueStatisticView.html" />
     <Content Include="App\Shared\Directives\PagerDirective.html" />
     <Content Include="App\Shared\Directives\PagerDirective.js" />
     <Content Include="App\Shared\Filters\StatusFilter.js" />
@@ -230,6 +234,8 @@
     <Content Include="Assets\Admin\css\alt\adminlte.plugins.css" />
     <Content Include="Assets\Admin\css\alt\adminlte.plugins.min.css" />
     <Content Include="Assets\Admin\custom-css\main-page.css" />
+    <Content Include="Assets\Admin\custom-scripts\chart.js" />
+    <Content Include="Assets\Admin\custom-scripts\util.js" />
     <Content Include="Assets\Admin\img\AdminLTELogo.png" />
     <Content Include="Assets\Admin\img\avatar.png" />
     <Content Include="Assets\Admin\img\avatar2.png" />
@@ -269,6 +275,8 @@
     <Content Include="Assets\Admin\js\pages\dashboard.js" />
     <Content Include="Assets\Admin\js\pages\dashboard2.js" />
     <Content Include="Assets\Admin\js\pages\dashboard3.js" />
+    <Content Include="Assets\Admin\lib\angular-chart.js\angular-chart.js" />
+    <Content Include="Assets\Admin\lib\angular-chart.js\angular-chart.min.js" />
     <Content Include="Assets\Admin\lib\angular-loading-bar\loading-bar.css" />
     <Content Include="Assets\Admin\lib\angular-loading-bar\loading-bar.js" />
     <Content Include="Assets\Admin\lib\angular-loading-bar\loading-bar.min.css" />
@@ -313,6 +321,12 @@
     <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.esm.min.js" />
     <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.js" />
     <Content Include="Assets\Admin\lib\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Assets\Admin\lib\Chart.js\chart.esm.js" />
+    <Content Include="Assets\Admin\lib\Chart.js\chart.esm.min.js" />
+    <Content Include="Assets\Admin\lib\Chart.js\chart.js" />
+    <Content Include="Assets\Admin\lib\Chart.js\chart.min.js" />
+    <Content Include="Assets\Admin\lib\Chart.js\helpers.esm.js" />
+    <Content Include="Assets\Admin\lib\Chart.js\helpers.esm.min.js" />
     <Content Include="Assets\Admin\lib\checklist-model\checklist-model.js" />
     <Content Include="Assets\Admin\lib\checklist-model\checklist-model.min.js" />
     <Content Include="Assets\Admin\lib\ckeditor5\translations\sv.min.js" />
@@ -1446,6 +1460,7 @@
     <Content Include="Assets\Admin\lib\jquery-ui-1.13.1.custom\LICENSE.txt" />
     <Content Include="Assets\Admin\lib\jquery-validate\jquery-validation-sri.json" />
     <Content Include="Assets\Admin\lib\checklist-model\checklist-model.min.js.map" />
+    <Content Include="Assets\Admin\lib\angular-chart.js\angular-chart.min.js.map" />
     <None Include="Assets\Admin\lib\jquery\jquery-3.4.1.intellisense.js" />
     <Content Include="Assets\Admin\lib\jquery-validate\additional-methods.js" />
     <Content Include="Assets\Admin\lib\jquery-validate\additional-methods.min.js" />
@@ -2179,6 +2194,7 @@
     <Content Include="Assets\Client\custom-scripts\common.js" />
     <Content Include="Assets\Client\custom-scripts\controllers\cartPanel.js" />
     <Content Include="Assets\Client\custom-scripts\controllers\contact.js" />
+    <Content Include="Assets\Client\custom-scripts\httpStatusCode.js" />
     <Content Include="Assets\Client\custom-scripts\controllers\payment.js" />
     <Content Include="Assets\Client\custom-scripts\controllers\shoppingCart.js" />
     <Content Include="Assets\Client\form\login-form\css\main.css" />
@@ -2299,7 +2315,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Components\Orders\" />
-    <Folder Include="App\Components\Statistics\" />
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Admin\css\skins\" />
     <Folder Include="Assets\Admin\templates\" />

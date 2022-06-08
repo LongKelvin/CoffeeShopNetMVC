@@ -65,7 +65,6 @@
 
                 NotificationService.displayError('Something went wrong, please try again later');
             }
-          
         }
 
         //function goToProductAddView() {
@@ -144,7 +143,6 @@
 
             $('#pconfirmDeleteModal').modal('hide');
         }
-
 
         $scope.getProducts();
     }

@@ -83,6 +83,7 @@ namespace CoffeeShop.Web.Models
         public decimal? PromotionPrice { get; set; } // decimal(18,2), null
 
         [Display(Name = "Original Price")]
+        [Required]
         public decimal OriginalPrice { get; set; }
 
         [Display(Name = "Warranty")]

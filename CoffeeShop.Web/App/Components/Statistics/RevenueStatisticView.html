@@ -1,0 +1,252 @@
+﻿  <!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><strong>Thống Kê</strong></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="Home">Trang chủ</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="StatisticRevenue">Thống Kê</a></li>
+                    <li class="breadcrumb-item active">Thống kê lợi nhuận</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Main content-->
+<section class="content overflow-hidden">
+    <div class="container-fluid">
+        <div class="card card-default color-palette-box">
+
+            <div class="row card-header justify-content-lg-between ">
+                <div class="col-lg-6 col-xs-12 col-md-6 col-sm-12">
+                    <div class="form-group row">
+                        <label>Từ ngày:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="far fa-calendar-alt"></i>
+                                </span>
+                            </div>
+                            <input type="date" class="form-control float-right" id="txtFromDate">
+                        </div>
+                        <!--/.input group-->
+                    </div>
+
+                    <div class="form-group row">
+                        <label>Tới ngày:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="far fa-calendar-alt"></i>
+                                </span>
+                            </div>
+                            <input type="date" class="form-control float-right" id="txtToDate">
+                        </div>
+                        <!--/.input group-->
+                    </div>
+                </div>
+
+                <div class="col-lg-4 offset-lg-2 float-lg-right col-xs-12 col-md-6 col-sm-12 justify-content-between space-vertical ">
+
+                    <div class=" row mt-4">
+                        <div class="float-sm-start col-6 ">
+                            <button type="button" class="btn btn-dark w-100" onclick="GetRevenues()" ng-click="GetRevenueStatistic()">
+                                <i class="fas fa-rectangle-list"> </i> Thống kê
+                            </button>
+                        </div>
+                        <div class="float-sm-end col-6 ">
+                            <button type="button" class="btn btn-outline-primary w-100">
+                                <i class="fa-solid fa-file-export"> </i> Xuất PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-default color-palette-box">
+        <div class="card-header">
+            <h5><b>Biểu đồ thống kê lợi nhuận theo tháng</b></h5>
+        </div>
+        <div class="card-body p-3">
+            <div class="chart">
+                <div class="chartjs-size-monitor">
+                    <div class="chartjs-size-monitor-expand">
+                        <div class="">
+                        </div>
+                    </div>
+                    <div class="chartjs-size-monitor-shrink">
+                        <div class="">
+                        </div>
+                    </div>
+                </div>
+                <canvas id="myChart" style="min-height: 350px; height: 500px; max-height: 500px; max-width: 100%;
+                display: block; width: 764px;" width="764" height="500" class="chartjs-render-monitor">
+                </canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-default color-palette-box">
+        <div class="card-header">
+            <h5><b>Bảng dữ liệu chi tiết</b></h5>
+        </div>
+
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div id="statisticRevenueData" class="dataTables_wrapper dt-bootstrap4">
+
+                <div class="col-sm-12">
+                    <table id="statisticRevenue" class="table table-bordered table-striped dataTable dtr-inline"
+                           aria-describedby="example1_info">
+                        <thead>
+                            <tr>
+                                <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">#</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Ngày</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Doanh số</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Lợi nhuận</th>
+                        </thead>
+                        <tbody>
+
+                            <tr class="even" ng-repeat="item in data">
+                                <td class="dtr-control sorting_1" tabindex="0">{{$index+1}}</td>
+                                <td>{{item.Date |date:'dd/MM/yyyy'}}</td>
+                                <td>{{item.Revenues | currency:"₫"}}</td>
+                                <td>{{item.Benefit | currency:"₫"}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th rowspan="1" colspan="1">#</th>
+                                <th rowspan="1" colspan="1">Ngày</th>
+                                <th rowspan="1" colspan="1">Doanh số</th>
+                                <th rowspan="1" colspan="1">Lợi nhuận</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /.card-body -->
+</section><!-- /.content -->
+
+<script>
+
+    const labels = [];
+
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Doanh số',
+            backgroundColor: 'rgb(0, 0, 255)',
+            borderColor: 'blue',
+            data: [],
+        },
+        {
+            label: 'Lợi nhuận',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'red',
+            data: [],
+        }]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {}
+
+    };
+
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+    $(document).ready(function () {
+        GetRevenues();
+    });
+
+    function GetRevenues() {
+
+        var fromDate = $('#txtFromDate').val();
+        var toDate = $('#txtToDate').val();
+
+        if (util.isNullOrEmptyString(fromDate)) {
+
+            //get the first day of current month
+            fromDate = util.getFirstDateOfCurrentMonth().toString();
+            //console.log('fromDate: ', fromDate)
+        }
+
+        if (util.isNullOrEmptyString(toDate)) {
+            //get current date without time
+            toDate = util.getCurrentDayWithoutTime().toString();
+            //console.log('toDate: ', toDate)
+        }
+
+        fromDate = util.removeTimeFromDate(fromDate);
+        toDate = util.removeTimeFromDate(toDate);
+
+        var config = {
+            param: {
+                fromDate: fromDate,
+                toDate: toDate
+            }
+        }
+
+        var getUrl = '/api/Statistic/GetRevenue?fromDate=' + config.param.fromDate + '&toDate=' + config.param.toDate;
+
+        $.ajax({
+            url: getUrl,
+            type: 'GET',
+            dataType: 'json',
+            success: function (result) {
+
+                // console.log('responseData:', result)
+
+                var labels = [];
+                var revenues = [];
+                var benefits = [];
+
+                $.each(result, function (i, item) {
+
+                    labels.push(item.Date);
+                    revenues.push(item.Revenues);
+                    benefits.push(item.Benefit);
+                });
+
+                var data = {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Doanh số',
+                        backgroundColor: 'rgb(0, 0, 255)',
+                        borderColor: 'blue',
+                        data: revenues,
+                    },
+                    {
+                        label: 'Lợi nhuận',
+                        backgroundColor: 'rgb(255, 99, 132)',
+                        borderColor: 'red',
+                        data: benefits,
+                    }]
+                };
+
+                myChart.labels = labels;
+                myChart.data = data;
+
+                //myChart.data.datasets.forEach(dataset => {
+                //    dataset.data = [100,1000,1500,200,50,12,11,8000]
+                //    //dataset.data[1] = benefits
+                //});
+                myChart.update();
+
+            }
+        });
+    }
+</script>

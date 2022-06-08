@@ -13,7 +13,7 @@ using System.Web.Http;
 
 namespace CoffeeShop.Web.Api
 {
-    [Authorize(Roles ="SuperAdmin")]
+    [Authorize(Roles = "SuperAdmin")]
     [RoutePrefix("api/ApplicationPermission")]
     public class ApplicationPermissionController : ApiControllerBase
     {
@@ -62,7 +62,7 @@ namespace CoffeeShop.Web.Api
         [HttpGet]
         public HttpResponseMessage GetPermissionByUserId(HttpRequestMessage request, string userId)
         {
-            if(string.IsNullOrEmpty(userId))
+            if (string.IsNullOrEmpty(userId))
                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, nameof(userId) + " không có giá trị.");
 
             var result = _appPermissionService.GetListPermissionByUserId(userId);
