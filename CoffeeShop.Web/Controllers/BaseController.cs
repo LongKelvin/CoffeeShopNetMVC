@@ -63,7 +63,7 @@ namespace CoffeeShop.Web.Controllers
                 };
 
                 _errorService.CreateError(error);
-                _errorService.Save();
+                
             }
             catch
             {

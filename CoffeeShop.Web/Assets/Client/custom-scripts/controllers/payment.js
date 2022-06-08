@@ -31,7 +31,7 @@
             },
             messages: {
                 LastName: "Customer Name is required",
-                StreetAddress: "Customer Name is required",
+                StreetAddress: "Customer Address is required",
                 Email: {
                     required: "Email is required",
                     email: "Email is not valid, please try again"
@@ -55,7 +55,7 @@
                 $('#txtFullName').val(userData.FullName);
                 $('#txtTelephone').val(userData.PhoneNumber);
                 $('#txtEmail').val(userData.Email);
-                $('#txtAddress').val(userData.Address);
+                $('#txtAddressStreet').val(userData.Address);
             }
         })
     },
@@ -64,7 +64,7 @@
         $('#txtFullName').val('');
         $('#txtTelephone').val('');
         $('#txtEmail').val('');
-        $('#txtAddress').val('');
+        $('#txtAddressStreet').val('');
     },
 
     createOrder: function () {
@@ -74,7 +74,7 @@
 
         var order = {
             CustomerName: $('#txtFullName').val(),
-            CustomerAddress: $('#txtAddress').val(),
+            CustomerAddress: $('#txtAddressStreet').val(),
             CustomerEmail: $('#txtEmail').val(),
             CustomerMobile: $('#txtTelephone').val(),
             PaymentMethodCode: $('input[name="paymentMethodRadioBtn"]:checked').val(),

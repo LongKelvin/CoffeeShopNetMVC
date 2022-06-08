@@ -6,6 +6,6 @@ namespace CoffeeShop.Services
     {
         Error CreateError(Error error);
 
-        void Save();
+        //void Save();
     }
 }

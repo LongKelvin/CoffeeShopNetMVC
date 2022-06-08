@@ -5,5 +5,6 @@ namespace CoffeeShop.Data.Repositories
 {
     public interface IErrorRepository : IRepository<Error>
     {
+        Error Create(Error error);
     }
 }

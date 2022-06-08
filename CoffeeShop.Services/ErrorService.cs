@@ -17,12 +17,13 @@ namespace CoffeeShop.Services
 
         public Error CreateError(Error error)
         {
-            return _errorRepository.Add(error);
+            return _errorRepository.Create(error);
         }
 
-        public void Save()
-        {
-            _unitOfWork.Commit();
-        }
+        //public void Save()
+        //{
+            
+        //    _unitOfWork.Commit();
+        //}
     }
 }
