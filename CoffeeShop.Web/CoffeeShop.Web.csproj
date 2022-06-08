@@ -2251,10 +2251,10 @@
     <Content Include="Assets\Client\images\client.jpg" />
     <Content Include="Assets\Client\images\favicon.png" />
     <Content Include="Assets\Client\images\icon-bank.png" />
-    <Content Include="Assets\Client\images\icon-credit-card.png" />
+    <Content Include="Assets\Client\images\icon-creditcard.png" />
+    <Content Include="Assets\Client\images\icon-momo.png" />
     <Content Include="Assets\Client\images\icon-shipcod.png" />
     <Content Include="Assets\Client\images\icon-zalopay.png" />
-    <Content Include="Assets\Client\images\ic_momo.png" />
     <Content Include="Assets\Client\images\logo.png" />
     <Content Include="Assets\Client\images\menu-item-1.jpg" />
     <Content Include="Assets\Client\images\menu-item-2.jpg" />
@@ -2312,6 +2312,7 @@
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\CartPanel.cshtml" />
     <Content Include="Views\Payment\PaymentTotal.cshtml" />
+    <None Include="Properties\PublishProfiles\CoffeeShopMVC.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Components\Orders\" />
