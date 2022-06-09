@@ -32,7 +32,7 @@
             $scope.product.UpdatedBy = 'AdminTest';
             $scope.product.MoreImages = JSON.stringify($scope.moreImages)
 
-            console.log($scope.product)
+            //console.log($scope.product)
 
             ApiServices.post('api/Product/Update', $scope.product,
                 function (result) {
@@ -49,7 +49,7 @@
             ApiServices.get('api/ProductCategory/GetAllParents', null, function (result) {
                 $scope.parentCategories = result.data;
             }, function () {
-                console.log('Cannot get list parent');
+                //console.log('Cannot get list parent');
             });
         }
 
@@ -66,7 +66,7 @@
                     $scope.moreImages = JSON.parse($scope.product.MoreImages)
                 }
 
-                CKEDITOR.instances['ckEditorContent'].setData($scope.product.Content)
+                CKEDITOR.instances['ckEditorContentEdit'].setData($scope.product.Content)
             }, function (error) {
                 NotificationService.displayError(error.data);
             });

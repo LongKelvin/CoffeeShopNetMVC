@@ -14,7 +14,7 @@
 
         function AddApplicationUser() {
             getCheckedGroup();
-            console.log('submit data', $scope.user);
+            //console.log('submit data', $scope.user);
             ApiServices.post('/api/ApplicationUser/Add', $scope.user, addSuccessed, addFailed);
         }
 

@@ -48,20 +48,20 @@
                     }
 
                     $scope.products = result.data.Items;
-                    console.log('product list: ', result)
+                    //console.log('product list: ', result)
                     $scope.page = result.data.Page;
                     $scope.pagesCount = result.data.TotalPages; //total pages that the query recevied
                     $scope.totalCount = result.data.TotalCount; //total row data from api result
                     $scope.itemPerPage = pageSize;
                 },
                     function () {
-                        console.log('Load Product failed.');
+                        //console.log('Load Product failed.');
                         NotificationService.displayError('Load Product failed.');
                     });
             }
             catch (e) {
-                console.log("Exception in getProductCategoies function: ")
-                    (console.error || console.log).call(console, e.stack || e);
+                //console.log("Exception in getProductCategoies function: ")
+                //    (console.error || console.log).call(console, e.stack || e);
 
                 NotificationService.displayError('Something went wrong, please try again later');
             }
@@ -103,7 +103,7 @@
                 }
             });
 
-            console.log('delete selected count: ', selectedItem);
+            //console.log('delete selected count: ', selectedItem);
 
             if (selectedItem.length <= 0) {
                 //$('m-content').html("Vui lòng chọn ít nhất một bản ghi để xóa!");

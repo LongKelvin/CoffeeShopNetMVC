@@ -54,13 +54,13 @@
                     $scope.itemPerPage = pageSize;
                 },
                     function () {
-                        console.log('Load Slide failed.');
+                        //console.log('Load Slide failed.');
                         NotificationService.displayError('Load Slide failed.');
                     });
             }
             catch (e) {
-                console.log("Exception in get slides function: ")
-                    (console.error || console.log).call(console, e.stack || e);
+                //console.log("Exception in get slides function: ")
+                    //(console.error || console.log).call(console, e.stack || e);
 
                 NotificationService.displayError('Something went wrong, please try again later');
             }
@@ -102,7 +102,7 @@
                 }
             });
 
-            console.log('delete selected count: ', selectedItem);
+            //console.log('delete selected count: ', selectedItem);
 
             if (selectedItem.length <= 0) {
                 //$('m-content').html("Vui lòng chọn ít nhất một bản ghi để xóa!");

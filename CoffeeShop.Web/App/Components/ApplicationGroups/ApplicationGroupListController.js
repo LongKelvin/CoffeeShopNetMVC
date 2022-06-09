@@ -54,13 +54,13 @@
                     $scope.itemPerPage = pageSize;
                 },
                     function () {
-                        console.log('Load ApplicationGroup failed.');
+                        //console.log('Load ApplicationGroup failed.');
                         NotificationService.displayError('Load ApplicationGroup failed.');
                     });
             }
             catch (e) {
-                console.log("Exception in get application groups function: ")
-                    (console.error || console.log).call(console, e.stack || e);
+                //console.log("Exception in get application groups function: ")
+                //    (console.error || console.log).call(console, e.stack || e);
 
                 NotificationService.displayError('Something went wrong, please try again later');
             }

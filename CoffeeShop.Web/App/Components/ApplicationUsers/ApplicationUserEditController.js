@@ -25,7 +25,7 @@
                     if ($scope.user.BirthDay != null)
                         $scope.user.BirthDay = new Date($scope.user.BirthDay);
 
-                    console.log('Get DATA: ', $scope.user)
+                    //console.log('Get DATA: ', $scope.user)
                 },
                 function (result) {
                     NotificationService.displayError(result.data);

@@ -57,12 +57,12 @@
                     $scope.itemPerPage = pageSize;
                 },
                     function () {
-                        console.log('Load productcategory failed.');
+                        //console.log('Load productcategory failed.');
                         NotificationService.displayError('Load productcategory failed.');
                     });
             }
             catch (e) {
-                console.log("Exception in getProductCategoies function: ")
+                //console.log("Exception in getProductCategoies function: ")
                     (console.error || console.log).call(console, e.stack || e);
 
                 NotificationService.displayError('Something went wrong, please try again later');
@@ -105,7 +105,7 @@
                 }
             });
 
-            console.log('delete selected count: ', selectedItem);
+            //console.log('delete selected count: ', selectedItem);
 
             if (selectedItem.length <= 0) {
                 //$('m-content').html("Vui lòng chọn ít nhất một bản ghi để xóa!");

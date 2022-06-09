@@ -92,11 +92,11 @@
             },
             success: function (response) {
                 if (response.status == true) {
-                    console.log("create order OK")
+                    //console.log("create order OK")
                     $('#paymentTitle').html(response.successMsg);
                 }
                 else {
-                    console.log("create order FAILED")
+                    //console.log("create order FAILED")
                     $('#paymentTitle').text("Something went wrong, Please try agin later");
                 }
             }
