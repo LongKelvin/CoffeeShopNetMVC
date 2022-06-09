@@ -275,8 +275,6 @@
     <Content Include="Assets\Admin\js\pages\dashboard.js" />
     <Content Include="Assets\Admin\js\pages\dashboard2.js" />
     <Content Include="Assets\Admin\js\pages\dashboard3.js" />
-    <Content Include="Assets\Admin\lib\angular-chart.js\angular-chart.js" />
-    <Content Include="Assets\Admin\lib\angular-chart.js\angular-chart.min.js" />
     <Content Include="Assets\Admin\lib\angular-loading-bar\loading-bar.css" />
     <Content Include="Assets\Admin\lib\angular-loading-bar\loading-bar.js" />
     <Content Include="Assets\Admin\lib\angular-loading-bar\loading-bar.min.css" />
@@ -327,8 +325,6 @@
     <Content Include="Assets\Admin\lib\Chart.js\chart.min.js" />
     <Content Include="Assets\Admin\lib\Chart.js\helpers.esm.js" />
     <Content Include="Assets\Admin\lib\Chart.js\helpers.esm.min.js" />
-    <Content Include="Assets\Admin\lib\checklist-model\checklist-model.js" />
-    <Content Include="Assets\Admin\lib\checklist-model\checklist-model.min.js" />
     <Content Include="Assets\Admin\lib\ckeditor5\translations\sv.min.js" />
     <Content Include="Assets\Admin\lib\ckeditor5\translations\th.js" />
     <Content Include="Assets\Admin\lib\ckeditor5\translations\th.min.js" />
@@ -1459,8 +1455,6 @@
     <Content Include="Assets\Admin\lib\jquery-ui-1.13.1.custom\jquery-ui.theme.min.css" />
     <Content Include="Assets\Admin\lib\jquery-ui-1.13.1.custom\LICENSE.txt" />
     <Content Include="Assets\Admin\lib\jquery-validate\jquery-validation-sri.json" />
-    <Content Include="Assets\Admin\lib\checklist-model\checklist-model.min.js.map" />
-    <Content Include="Assets\Admin\lib\angular-chart.js\angular-chart.min.js.map" />
     <None Include="Assets\Admin\lib\jquery\jquery-3.4.1.intellisense.js" />
     <Content Include="Assets\Admin\lib\jquery-validate\additional-methods.js" />
     <Content Include="Assets\Admin\lib\jquery-validate\additional-methods.min.js" />
@@ -2023,24 +2017,6 @@
     <Content Include="Assets\Admin\lib\jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Assets\Admin\lib\jquery\jquery.validate.unobtrusive.min.js" />
     <Content Include="Assets\Admin\lib\jquery\modernizr-2.8.3.js" />
-    <Content Include="Assets\Admin\lib\ngbootbox\dist\ngBootbox.js" />
-    <Content Include="Assets\Admin\lib\ngbootbox\dist\ngBootbox.min.js" />
-    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-1\app.js" />
-    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-1\app.min.js" />
-    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-1\custom-dialog.tpl.html" />
-    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-1\index.html" />
-    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\app.js" />
-    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\app.min.js" />
-    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\index.html" />
-    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\main.js" />
-    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\main.min.js" />
-    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\require.js" />
-    <Content Include="Assets\Admin\lib\ngbootbox\examples\example-2\require.min.js" />
-    <Content Include="Assets\Admin\lib\ngbootbox\examples\index.html" />
-    <Content Include="Assets\Admin\lib\ngbootbox\gulpfile.js" />
-    <Content Include="Assets\Admin\lib\ngbootbox\gulpfile.min.js" />
-    <Content Include="Assets\Admin\lib\ngbootbox\ngBootbox.js" />
-    <Content Include="Assets\Admin\lib\ngbootbox\ngBootbox.min.js" />
     <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\select2-bootstrap-5-theme.css" />
     <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\select2-bootstrap-5-theme.min.css" />
     <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\select2-bootstrap-5-theme.rtl.css" />
@@ -2295,6 +2271,8 @@
     <Content Include="Assets\Client\templates\order_success_template.html" />
     <Content Include="Assets\Client\templates\register_member_template.html" />
     <Content Include="Assets\Client\templates\response_template.html" />
+    <Content Include="favicon.ico" />
+    <Content Include="favicon.png" />
     <Content Include="Global.asax" />
     <Content Include="Libs\CKFinder.dll" />
     <Content Include="Libs\localLib\mustache\mustache.js" />
@@ -2483,11 +2461,6 @@
     <Content Include="Assets\Admin\lib\angularjs-sweetalert2\LICENSE" />
     <Content Include="Assets\Admin\lib\angularjs-sweetalert2\package.json" />
     <Content Include="Assets\Admin\lib\angularjs-sweetalert2\README.md" />
-    <Content Include="Assets\Admin\lib\ngbootbox\.npmignore" />
-    <Content Include="Assets\Admin\lib\ngbootbox\bower.json" />
-    <Content Include="Assets\Admin\lib\ngbootbox\package.json" />
-    <Content Include="Assets\Admin\lib\ngbootbox\README.md" />
-    <Content Include="Assets\Admin\lib\ngbootbox\tsd.json" />
     <Content Include="Assets\Admin\lib\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <Content Include="Assets\Admin\lib\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Assets\Admin\lib\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.ttf" />
@@ -2751,11 +2724,6 @@
     <PackageReference Include="WebGrease">
       <Version>1.6.0</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Assets\Admin\lib\ngbootbox\typings\angularjs\angular.d.ts" />
-    <TypeScriptCompile Include="Assets\Admin\lib\ngbootbox\typings\jquery\jquery.d.ts" />
-    <TypeScriptCompile Include="Assets\Admin\lib\ngbootbox\typings\tsd.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

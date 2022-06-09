@@ -63,11 +63,7 @@
       "library": "angularjs-sweetalert2@1.0.0",
       "destination": "Assets/Admin/lib/angularjs-sweetalert2/"
     },
-    {
-      "provider": "jsdelivr",
-      "library": "ngbootbox@0.2.0",
-      "destination": "Assets/Admin/lib/ngbootbox/"
-    },
+    
     {
       "library": "angular-local-storage@0.7.1",
       "destination": "Assets/Admin/lib/angular-local-storage/"
@@ -88,17 +84,11 @@
       "library": "jquery-validate@1.19.3",
       "destination": "Assets/Admin/lib/jquery-validate/"
     },
-    {
-      "library": "checklist-model@1.0.0",
-      "destination": "Assets/Admin/lib/checklist-model/"
-    },
+    
     {
       "library": "Chart.js@3.8.0",
       "destination": "Assets/Admin/lib/Chart.js/"
-    },
-    {
-      "library": "angular-chart.js@1.1.1",
-      "destination": "Assets/Admin/lib/angular-chart.js/"
     }
+    
   ]
 }
