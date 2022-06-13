@@ -17,7 +17,7 @@ using System.Web.Script.Serialization;
 
 namespace CoffeeShop.Web.Api
 {
-    [RoutePrefix("api/Product")]
+    [RoutePrefix(Common.CommonConstants.API_Product)]
     [Authorize]
     public class ProductController : ApiControllerBase
     {
@@ -69,7 +69,7 @@ namespace CoffeeShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                var ProductDetail = _productService.GetByCondition(x=>x.ID==Id, new string[] {"Tags"});
+                var ProductDetail = _productService.GetByCondition(x => x.ID == Id, new string[] { "Tags" });
 
                 if (ProductDetail == null)
                 {

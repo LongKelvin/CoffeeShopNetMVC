@@ -178,6 +178,17 @@
             public const string Delete = "Permissions.ApplicationRoles.Delete";
         }
 
+        public static class ApplicationPermissions
+        {
+            public const string View = "Permissions.ApplicationPermissions.View";
+
+            public const string Create = "Permissions.ApplicationPermissions.Create";
+
+            public const string Edit = "Permissions.ApplicationPermissions.Edit";
+
+            public const string Delete = "Permissions.ApplicationPermissions.Delete";
+        }
+
         public static class VisitorStatics
         {
             public const string View = "Permissions.VisitorStatics.View";

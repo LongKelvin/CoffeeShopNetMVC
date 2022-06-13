@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 
+using CoffeeShop.Common;
 using CoffeeShop.Common.ExceptionHandler;
 using CoffeeShop.Models.Models;
 using CoffeeShop.Services;
@@ -17,12 +18,11 @@ using System.Threading.Tasks;
 using System.Transactions;
 using System.Web.Http;
 using System.Web.Script.Serialization;
-using CoffeeShop.Common;
 
 namespace CoffeeShop.Web.Api
 {
-    [Authorize(Roles ="SuperAdmin")]
-    [RoutePrefix("api/ApplicationUser")]
+    [Authorize(Roles = CommonConstants.SuperAdmin)]
+    [RoutePrefix(CommonConstants.API_ApplicationUser)]
     public class ApplicationUserController : ApiControllerBase
     {
         private ApplicationUserManager _userManager;

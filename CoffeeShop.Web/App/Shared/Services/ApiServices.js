@@ -29,6 +29,7 @@
                 }
                 else if (error.status === 403) {
                     NotificationService.displayError('Permission denied.');
+                    console.log("Permission denied error code 403")
                     $state.go("AccessDenied");
                 }
                 else if (failure != null) {

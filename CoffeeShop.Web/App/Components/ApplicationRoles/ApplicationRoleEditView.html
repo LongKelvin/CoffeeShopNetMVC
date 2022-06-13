@@ -23,7 +23,7 @@
         <form name="frmUpdateApplicationRole" role="form" ng-submit="UpdateApplicationRole()" novalidate>
             <div class="row">
                 <!-- left column -->
-                <div class="col-12">
+                <div class="col-6">
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
@@ -44,6 +44,34 @@
                                 <input type="text" ng-model="role.Description" required name="pDescription"
                                        class="form-control" placeholder="Mô tả ...">
                                 <span class="text-danger" ng-show="frmUpdateApplicationRole.pDescription.$touched && frmUpdateApplicationRole.pDescription.$invalid">Bạn chưa nhập mô tả cho nhóm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Permission area-->
+                <div class="col-md-6">
+                    <div class="card card-success ">
+                        <div class="card-header">
+                            <h3 class="card-title">Permissions cho Roles</h3>
+                        </div>
+                        <div class="card-body" style="margin-top:13px">
+                            <!-- Minimal style -->
+
+                            <div class="row">
+                                <div class="col-sm-6" ng-repeat="permission in listAppPermissions">
+                                    <!-- checkbox -->
+                                    <div class="form-group clearfix">
+                                        <div class="icheck-success d-inline">
+                                            <input class="checkbox-permission" value="{{permission.Id}}" type="checkbox" id="permission_{{permission.Name}}"
+                                                   data-permission-description="{{role.Description}}"
+                                                   data-permission-name="{{permission.Name}}">
+                                            <label for="permission_{{permission.Name}}">
+                                                {{permission.Name}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -16,7 +16,7 @@ using System.Web.Script.Serialization;
 
 namespace CoffeeShop.Web.Api
 {
-    [RoutePrefix("api/ProductCategory")]
+    [RoutePrefix(Common.CommonConstants.API_ProductCategory)]
     [Authorize]
     public class ProductCategoryController : ApiControllerBase
     {
