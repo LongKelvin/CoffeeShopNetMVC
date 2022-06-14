@@ -70,7 +70,7 @@ namespace CoffeeShop.Data.Repositories
                 DbContext.SaveChanges();
                 result = true;
             }
-            catch (Exception ex)
+            catch 
             {
                 result = false;
             }

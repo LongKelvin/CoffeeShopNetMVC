@@ -5,14 +5,14 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 using Owin;
 
 using System;
-using Microsoft.Owin.Security.Cookies;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace CoffeeShop.Web.App_Start
 {
@@ -34,7 +34,6 @@ namespace CoffeeShop.Web.App_Start
                 Provider = new AuthorizationServerProvider(),
                 AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(30),
                 AllowInsecureHttp = true,
-
             });
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
 
@@ -46,10 +45,10 @@ namespace CoffeeShop.Web.App_Start
                 Provider = new CookieAuthenticationProvider
                 {
                     // Enables the application to validate the security stamp when the user logs in.
-                    // This is a security feature which is used when you change a password or add an external login to your account.  
+                    // This is a security feature which is used when you change a password or add an external login to your account.
                     OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
                         validateInterval: TimeSpan.FromMinutes(30),
-                        regenerateIdentity: (manager, user) 
+                        regenerateIdentity: (manager, user)
                         => user.GenerateUserIdentityAsync(manager, DefaultAuthenticationTypes.ApplicationCookie))
                 }
             };
@@ -76,12 +75,14 @@ namespace CoffeeShop.Web.App_Start
             //    ClientSecret = ""
             //});
         }
+
         public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
         {
             public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
             {
-                 context.Validated();
+                context.Validated();
             }
+
             public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
             {
                 var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin");
@@ -117,8 +118,6 @@ namespace CoffeeShop.Web.App_Start
                 }
             }
         }
-
-
 
         private static UserManager<ApplicationUser> CreateManager(IdentityFactoryOptions<UserManager<ApplicationUser>> options, IOwinContext context)
         {
