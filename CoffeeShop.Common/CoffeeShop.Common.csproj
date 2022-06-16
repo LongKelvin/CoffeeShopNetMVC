@@ -53,5 +53,10 @@
     <Compile Include="StringHelper.cs" />
     <Compile Include="ViewModel\RevenueStatisticViewModel.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

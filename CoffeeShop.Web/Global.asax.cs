@@ -1,5 +1,6 @@
 using CKFinder.Connector;
 
+using CoffeeShop.Services;
 using CoffeeShop.Web.Mappings;
 
 using Newtonsoft.Json;
@@ -30,6 +31,17 @@ namespace CoffeeShop.Web
                 .Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling
                 = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
+        }
+        protected void Application_Error()
+        {
+            var ex = Server.GetLastError();
+            //log the error!
+            var errorService = DependencyResolver.Current.GetService<IErrorService>();
+            if (errorService == null)
+                return;
+
+            errorService.LogError(ex);
 
         }
     }
