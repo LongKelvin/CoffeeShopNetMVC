@@ -11,6 +11,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Host.SystemWeb;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Facebook;
+using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 
 using Owin;
@@ -83,6 +84,8 @@ namespace CoffeeShop.Web.App_Start
 			//   consumerKey: "",
 			//   consumerSecret: "");
 
+			//ConfigHelper Facebook Authentication Options
+
 			var facebookAuthenticationOptions = new FacebookAuthenticationOptions
 			{
 				AppId = ConfigHelper.GetByKey(CommonConstants.FacebookAppId),
@@ -93,13 +96,14 @@ namespace CoffeeShop.Web.App_Start
 			facebookAuthenticationOptions.Scope.Add("email");
 
 			app.UseFacebookAuthentication(facebookAuthenticationOptions);
-			// app.UseGoogleAuthentication(new
-			// GoogleOAuth2AuthenticationOptions()
-			//{
-			//    ClientId = "",
-			//    ClientSecret = ""
-			//});
-		}
+
+
+			//Config Google Authentication Options
+			app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions(){
+				ClientId = ConfigHelper.GetByKey(CommonConstants.GoogleClientId),
+				ClientSecret = ConfigHelper.GetByKey(CommonConstants.GoogleClientSecret)
+				});
+			}
 
 		public class AuthorizationServerProvider: OAuthAuthorizationServerProvider
 		{
