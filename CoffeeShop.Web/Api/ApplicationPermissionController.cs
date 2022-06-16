@@ -1,11 +1,7 @@
-﻿using AutoMapper;
-
-using CoffeeShop.Models.Models;
+﻿using CoffeeShop.Models.Models;
 using CoffeeShop.Services;
 using CoffeeShop.Web.Infrastucture.Core;
-using CoffeeShop.Web.Models;
 
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -13,8 +9,8 @@ using System.Web.Http;
 
 namespace CoffeeShop.Web.Api
 {
-    [Authorize(Roles = "SuperAdmin")]
-    [RoutePrefix("api/ApplicationPermission")]
+    [Authorize(Roles = Common.CommonConstants.SuperAdmin)]
+    [RoutePrefix(Common.CommonConstants.API_ApplicationPermission)]
     public class ApplicationPermissionController : ApiControllerBase
     {
         private readonly IApplicationPermissionService _appPermissionService;
@@ -25,7 +21,7 @@ namespace CoffeeShop.Web.Api
             _appPermissionService = appPermissionService;
         }
 
-        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationUsers.View)]
+        //[PermissionAuthorize(Common.ApplicationPermissons.ApplicationPermissions.View)]
         [Route("GetListAll")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
@@ -33,10 +29,13 @@ namespace CoffeeShop.Web.Api
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                var model = _appPermissionService.GetAll().ToList();
+                var model = _appPermissionService.GetAll()
+                .OrderBy(o => o.Name)
+                .GroupBy(x => x.Module).ToList();
 
-                var modelVm = Mapper.Map<List<ApplicationPermissionViewModel>>(model);
-                response = request.CreateResponse(HttpStatusCode.OK, modelVm);
+                //var modelVm = Mapper.Map<List<ApplicationPermissionViewModel>>(model);
+                //response = request.CreateResponse(HttpStatusCode.OK, modelVm);
+                response = request.CreateResponse(HttpStatusCode.OK, model);
 
                 return response;
             });
@@ -81,6 +80,36 @@ namespace CoffeeShop.Web.Api
                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, nameof(userName) + " không tồn tại");
 
             var result = _appPermissionService.GetListPermissionByUserName(userName);
+            if (result == null)
+            {
+                return request.CreateErrorResponse(HttpStatusCode.NoContent, "No permission");
+            }
+            return request.CreateResponse(HttpStatusCode.OK, result);
+        }
+
+        [Route("GetPermissionByRoleName/{roleName}")]
+        [HttpGet]
+        public HttpResponseMessage GetPermissionByUserRoleName(HttpRequestMessage request, string roleName)
+        {
+            if (string.IsNullOrEmpty(roleName))
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, nameof(roleName) + " không tồn tại");
+
+            var result = _appPermissionService.GetListPermissionByRoleName(roleName);
+            if (result == null)
+            {
+                return request.CreateErrorResponse(HttpStatusCode.NoContent, "No permission");
+            }
+            return request.CreateResponse(HttpStatusCode.OK, result);
+        }
+
+        [Route("GetPermissionByRoleId/{roleId}")]
+        [HttpGet]
+        public HttpResponseMessage GetPermissionByUserRoleId(HttpRequestMessage request, string roleId)
+        {
+            if (string.IsNullOrEmpty(roleId))
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, nameof(roleId) + " không tồn tại");
+
+            var result = _appPermissionService.GetListPermissionByRoleId(roleId);
             if (result == null)
             {
                 return request.CreateErrorResponse(HttpStatusCode.NoContent, "No permission");

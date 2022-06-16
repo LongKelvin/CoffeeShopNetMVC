@@ -2,6 +2,8 @@
 using CoffeeShop.Data.Repositories;
 using CoffeeShop.Models.Models;
 
+using System;
+
 namespace CoffeeShop.Services
 {
     public class ErrorService : IErrorService
@@ -17,12 +19,31 @@ namespace CoffeeShop.Services
 
         public Error CreateError(Error error)
         {
-            return _errorRepository.Add(error);
+            return _errorRepository.Create(error);
         }
 
-        public void Save()
+        //public void Save()
+        //{
+        //    _unitOfWork.Commit();
+        //}
+
+        public void LogError(Exception ex)
         {
-            _unitOfWork.Commit();
+            try
+            {
+                Error error = new Error
+                {
+                    CreatedDate = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace
+                };
+
+                _errorRepository.Create(error);
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }

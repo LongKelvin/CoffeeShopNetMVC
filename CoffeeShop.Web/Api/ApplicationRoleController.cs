@@ -17,15 +17,19 @@ using System.Web.Script.Serialization;
 
 namespace CoffeeShop.Web.Api
 {
-    [RoutePrefix("api/ApplicationRole")]
+    [RoutePrefix(Common.CommonConstants.API_ApplicationRole)]
+    [Authorize]
     public class ApplicationRoleController : ApiControllerBase
     {
         private IApplicationRoleService _appRoleService;
+        private IApplicationPermissionService _appPermissionService;
 
         public ApplicationRoleController(IErrorService errorService,
-            IApplicationRoleService appRoleService) : base(errorService)
+            IApplicationRoleService appRoleService,
+            IApplicationPermissionService applicationPermissionService) : base(errorService)
         {
             _appRoleService = appRoleService;
+            _appPermissionService = applicationPermissionService;
         }
 
         [Route("GetListPaging")]
@@ -54,6 +58,8 @@ namespace CoffeeShop.Web.Api
         }
 
         [Route("GetListAll")]
+        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.View)]
+        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.Edit)]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
@@ -77,11 +83,14 @@ namespace CoffeeShop.Web.Api
             {
                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, nameof(id) + " không có giá trị.");
             }
+
             ApplicationRole appRole = _appRoleService.GetDetail(id);
+
             if (appRole == null)
             {
                 return request.CreateErrorResponse(HttpStatusCode.NoContent, "No group");
             }
+
             return request.CreateResponse(HttpStatusCode.OK, appRole);
         }
 
@@ -91,17 +100,28 @@ namespace CoffeeShop.Web.Api
         {
             if (ModelState.IsValid)
             {
+                if (applicationRoleViewModel.PermissionIds.Count() == 0)
+                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, "Role must have at least 1 permission");
+
                 var newAppRole = new ApplicationRole();
                 newAppRole.UpdateApplicationRole(applicationRoleViewModel);
                 try
                 {
-                    _appRoleService.Add(newAppRole);
+                    var newRole = _appRoleService.Add(newAppRole);
                     _appRoleService.SaveChanges();
+
+                    foreach (var permissionId in applicationRoleViewModel.PermissionIds)
+                    {
+                        _appRoleService.AddPermissionToRole(newRole.Id, permissionId);
+                    }
+
+                    _appRoleService.SaveChanges();
+
                     return request.CreateResponse(HttpStatusCode.OK, applicationRoleViewModel);
                 }
-                catch (NameDuplicatedException dex)
+                catch (NameDuplicatedException ndex)
                 {
-                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, dex.Message);
+                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, ndex.Message);
                 }
             }
             else
@@ -119,14 +139,30 @@ namespace CoffeeShop.Web.Api
                 var appRole = _appRoleService.GetDetail(applicationRoleViewModel.Id);
                 try
                 {
+                    bool result = true;
+                    var permissionIdForRole = applicationRoleViewModel.PermissionIds;
                     appRole.UpdateApplicationRole(applicationRoleViewModel, "Update");
-                    _appRoleService.Update(appRole);
+
+                    if (permissionIdForRole.Count() == 0)
+                    {
+                        result = _appRoleService.Update(appRole);
+                    }
+                    else
+                    {
+                        result = _appRoleService.Update(appRole, permissionIdForRole);
+                    }
+
                     _appRoleService.SaveChanges();
+
                     return request.CreateResponse(HttpStatusCode.OK, appRole);
                 }
                 catch (NameDuplicatedException dex)
                 {
                     return request.CreateErrorResponse(HttpStatusCode.BadRequest, dex.Message);
+                }
+                catch (Exception ex)
+                {
+                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
                 }
             }
             else
@@ -140,7 +176,7 @@ namespace CoffeeShop.Web.Api
         public HttpResponseMessage Delete(HttpRequestMessage request, string id)
         {
             var deleteRole = _appRoleService.GetByStringId(id);
-            if(deleteRole == null || deleteRole.IsSystemProtected)
+            if (deleteRole == null || deleteRole.IsSystemProtected)
                 return request.CreateResponse(HttpStatusCode.NotAcceptable, $"You cannot delete this role \"{deleteRole.Name}\" because it is protected by the system, Contact authorized person for more details");
 
             _appRoleService.Delete(id);

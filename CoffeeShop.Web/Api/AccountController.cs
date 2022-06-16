@@ -1,26 +1,16 @@
-﻿using CoffeeShop.Models.Models;
-using CoffeeShop.Web.App_Start;
-using CoffeeShop.Web.Models;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
+﻿using CoffeeShop.Web.App_Start;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.AspNet.Identity.Owin;
+
 using System.Net;
 using System.Net.Http;
-using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
-
-
-
-namespace  CoffeeShop.Web.Api
+namespace CoffeeShop.Web.Api
 {
-    [RoutePrefix("api/Account")]
+    [RoutePrefix(Common.CommonConstants.API_Account)]
     public class AccountController : ApiController
     {
         private ApplicationSignInManager _signInManager;
@@ -72,7 +62,7 @@ namespace  CoffeeShop.Web.Api
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(userName, password, rememberMe, shouldLockout: false);
-            return request.CreateResponse(HttpStatusCode.OK, new object[] { result , "Login success"});
+            return request.CreateResponse(HttpStatusCode.OK, new object[] { result, "Login success" });
         }
 
         [HttpPost]

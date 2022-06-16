@@ -29,5 +29,8 @@ namespace CoffeeShop.Data.Insfrastructure
         int Count(Expression<Func<T, bool>> where);
 
         bool CheckContains(Expression<Func<T, bool>> predicate);
+
+        CoffeeShopDbContext RequetsNewDbContextInstance();
+        
     }
 }

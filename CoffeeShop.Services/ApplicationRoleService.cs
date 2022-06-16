@@ -20,7 +20,9 @@ namespace CoffeeShop.Services
 
         ApplicationRole GetByStringId(string id);
 
-        void Update(ApplicationRole AppRole);
+        bool Update(ApplicationRole AppRole);
+
+        bool Update(ApplicationRole AppRole, List<string> listPermissionId);
 
         bool Delete(string id);
 
@@ -31,20 +33,30 @@ namespace CoffeeShop.Services
         IEnumerable<ApplicationRole> GetListRoleByGroupId(int groupId);
 
         void SaveChanges();
+
+        bool AddPermissionToRole(string roleId, string permissionId);
     }
 
     public class ApplicationRoleService : IApplicationRoleService
     {
         private IApplicationRoleRepository _appRoleRepository;
         private IApplicationRoleGroupRepository _appRoleGroupRepository;
+        private IApplicattionRolePermissionRepository _appRolePermissionRepository;
+        private IApplicationUserPermissionRepository _applicationUserPermissionRepository;
+
         private IUnitOfWork _unitOfWork;
 
         public ApplicationRoleService(IUnitOfWork unitOfWork,
-            IApplicationRoleRepository appRoleRepository, IApplicationRoleGroupRepository appRoleGroupRepository)
+            IApplicationRoleRepository appRoleRepository,
+            IApplicationRoleGroupRepository appRoleGroupRepository,
+            IApplicattionRolePermissionRepository appRolePermissionRepository,
+            IApplicationUserPermissionRepository applicationUserPermissionRepository)
         {
             this._appRoleRepository = appRoleRepository;
             this._appRoleGroupRepository = appRoleGroupRepository;
             this._unitOfWork = unitOfWork;
+            this._appRolePermissionRepository = appRolePermissionRepository;
+            this._applicationUserPermissionRepository = applicationUserPermissionRepository;
         }
 
         public ApplicationRole Add(ApplicationRole appRole)
@@ -70,8 +82,17 @@ namespace CoffeeShop.Services
             if (deleteRole == null || deleteRole.IsSystemProtected)
                 return false;
 
-            _appRoleRepository.DeleteMulti(x => x.Id == id);
-            return true;
+            try
+            {
+                _appRolePermissionRepository.DeleteMulti(x => x.RoleId.Equals(id));
+                _appRoleRepository.DeleteUserInRole(id);
+                _appRoleRepository.DeleteMulti(x => x.Id == id);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public IEnumerable<ApplicationRole> GetAll()
@@ -99,11 +120,12 @@ namespace CoffeeShop.Services
             _unitOfWork.Commit();
         }
 
-        public void Update(ApplicationRole AppRole)
+        public bool Update(ApplicationRole AppRole)
         {
             if (_appRoleRepository.CheckContains(x => x.Description == AppRole.Description && x.Id != AppRole.Id))
                 throw new NameDuplicatedException("Name cannot be duplicate");
             _appRoleRepository.Update(AppRole);
+            return true;
         }
 
         public IEnumerable<ApplicationRole> GetListRoleByGroupId(int groupId)
@@ -114,6 +136,50 @@ namespace CoffeeShop.Services
         public ApplicationRole GetByStringId(string id)
         {
             return _appRoleRepository.GetByStringId(id);
+        }
+
+        public bool AddPermissionToRole(string roleId, string permissionId)
+        {
+            return _appRolePermissionRepository.AddPermissionToRole(roleId, permissionId);
+        }
+
+        public bool AddPermissionToRole(string roleId, List<string> listPermissionId)
+        {
+            foreach (var permission in listPermissionId)
+            {
+                if (AddPermissionToRole(roleId, permission) == false)
+                    return false;
+            }
+            return true;
+        }
+
+        public bool Update(ApplicationRole AppRole, List<string> listPermissionId)
+        {
+            try
+            {
+                _appRolePermissionRepository.DeleteMulti(x => x.RoleId.Equals(AppRole.Id));
+                var addPermissionResult = AddPermissionToRole(AppRole.Id, listPermissionId);
+                if (addPermissionResult == false)
+                    return false;
+
+                var userIdByRoles = _appRoleRepository.GetListUserIdByRoleId(AppRole.Id);
+
+                //Delete old permission_users
+                _applicationUserPermissionRepository.DeleteMulti(x => userIdByRoles.Contains(x.UserId) && x.RoleId.Equals(AppRole.Id));
+
+                //Update new
+                foreach (var user in userIdByRoles)
+                {
+                    _applicationUserPermissionRepository.AddPermissionToUser(user, AppRole, listPermissionId);
+                }
+
+                SaveChanges();
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

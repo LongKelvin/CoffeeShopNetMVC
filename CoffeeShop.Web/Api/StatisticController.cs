@@ -7,7 +7,8 @@ using System.Web.Http;
 
 namespace CoffeeShop.Web.Api
 {
-    [RoutePrefix("api/Statistic")]
+    [Authorize]
+    [RoutePrefix(Common.CommonConstants.API_Statistic)]
     public class StatisticController : ApiControllerBase
     {
         private readonly IStatisticService _statisticService;

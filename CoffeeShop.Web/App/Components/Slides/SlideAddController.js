@@ -33,7 +33,7 @@
             finder.selectActionFunction = function (fileUrl) {
                 $scope.slide.Images = fileUrl;
                 $scope.$apply();
-                console.log('file url: ', fileUrl)
+                //console.log('file url: ', fileUrl)
             }
             finder.popup();
         }

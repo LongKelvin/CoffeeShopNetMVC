@@ -17,7 +17,7 @@ using System.Web.Script.Serialization;
 
 namespace CoffeeShop.Web.Api
 {
-    [RoutePrefix("api/Product")]
+    [RoutePrefix(Common.CommonConstants.API_Product)]
     [Authorize]
     public class ProductController : ApiControllerBase
     {
@@ -28,8 +28,8 @@ namespace CoffeeShop.Web.Api
             _productService = productService;
         }
 
-        [AllowAnonymous]
         // GET api/<controller>
+        [Authorize]
         [Route("GetAll")]
         public HttpResponseMessage GetAll(HttpRequestMessage request, string keyWord, int page, int pageSize = 20)
         {
@@ -69,7 +69,7 @@ namespace CoffeeShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                var ProductDetail = _productService.GetByCondition(x=>x.ID==Id, new string[] {"Tags"});
+                var ProductDetail = _productService.GetByCondition(x => x.ID == Id, new string[] { "Tags" });
 
                 if (ProductDetail == null)
                 {
@@ -84,7 +84,6 @@ namespace CoffeeShop.Web.Api
             });
         }
 
-        [AllowAnonymous]
         [Route("Create")]
         public HttpResponseMessage Create(HttpRequestMessage request, ProductViewModel ProductVM)
         {
@@ -148,7 +147,6 @@ namespace CoffeeShop.Web.Api
         }
 
         [Route("Delete")]
-        [AllowAnonymous]
         [HttpDelete]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
@@ -167,7 +165,6 @@ namespace CoffeeShop.Web.Api
         }
 
         [Route("DeleteMultiItems")]
-        [AllowAnonymous]
         [HttpDelete]
         public HttpResponseMessage DeleteMultiItems(HttpRequestMessage request, string ids)
         {

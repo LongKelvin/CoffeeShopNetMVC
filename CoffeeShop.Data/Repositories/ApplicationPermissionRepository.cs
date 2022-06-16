@@ -22,6 +22,10 @@ namespace CoffeeShop.Data.Repositories
         List<ApplicationPermission> GetListPermissionByUserName(string userName);
 
         CoffeeShopDbContext GetDbContext();
+
+        List<ApplicationPermission> GetListPermissionByRoleName(string roleName);
+
+        List<ApplicationPermission> GetListPermissionByRoleId(string roleId);
     }
 
     public class ApplicationPermissionRepository : RepositoryBase<ApplicationPermission>, IApplicationPermissionRepository
@@ -30,7 +34,7 @@ namespace CoffeeShop.Data.Repositories
         {
         }
 
-        public  CoffeeShopDbContext GetDbContext()
+        public CoffeeShopDbContext GetDbContext()
         {
             return DbContext;
         }
@@ -66,7 +70,7 @@ namespace CoffeeShop.Data.Repositories
                 DbContext.SaveChanges();
                 result = true;
             }
-            catch (Exception ex)
+            catch 
             {
                 result = false;
             }
@@ -92,7 +96,9 @@ namespace CoffeeShop.Data.Repositories
 
         public List<ApplicationPermission> GetListPermissionByUserName(string userName)
         {
-            var userId = DbContext.Users.Where(x => x.UserName.Equals(userName)).FirstOrDefault().Id;
+            var userId = DbContext.Users
+                .Where(x => x.UserName.Equals(userName)).FirstOrDefault().Id;
+
             return GetListPermissionByUserId(userId);
         }
 
@@ -105,6 +111,26 @@ namespace CoffeeShop.Data.Repositories
                         select u;
 
             return query.ToList();
+        }
+
+        public List<ApplicationPermission> GetListPermissionByRoleName(string roleName)
+        {
+            var roleIdByName = DbContext.ApplicationRoles
+                .Where(r => r.Name.Equals(roleName))
+                .Select(s => s.Id).FirstOrDefault();
+
+            return GetListPermissionByRoleId(roleIdByName);
+        }
+
+        public List<ApplicationPermission> GetListPermissionByRoleId(string roleId)
+        {
+            var permissionByRoleId = DbContext.ApplicationRolePermissions
+                .Where(x => x.RoleId.Equals(roleId))
+                .Select(i => i.PermissionId).ToList();
+
+            var listPermissions = DbContext.ApplicationPermissions
+                .Where(x => permissionByRoleId.Contains(x.Id)).ToList();
+            return listPermissions;
         }
     }
 }

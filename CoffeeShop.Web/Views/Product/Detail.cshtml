@@ -67,8 +67,16 @@
                         <div class="col-xl-7 col-lg-7 col-md-6">
                             <div class="single-product-details">
                                 <h2>@Model.Name</h2>
-                                <h5> <del>@Model.Price.ToString("N2")</del> @Model.PromotionPrice </h5>
-                                <p class="available-stock"><span> More than @Model.Quantity available / <a href="#">8 sold </a></span></p>
+                                @if (Model.PromotionPrice.HasValue)
+                                {
+                                    <h5> <del>@Model.Price.ToString("N2")</del> @Model.PromotionPrice </h5>
+                                }
+                                else
+                                {
+                                    <h5> @Model.Price.ToString("N2") </h5>
+                                }
+
+                                <p class="available-stock"><span> More than @Model.Quantity available </span></p>
                                 <p>
                                 </p>
                                 <h4>Short Description:</h4>
@@ -125,7 +133,7 @@
                                 <div class="media mb-3">
 
                                     <div class="media-body">
-                                        @Model.Content
+                                       @Html.Raw(Model.Content);
 
                                         <br />
                                         <small class="text-muted">Create date: @Model.CreatedDate</small><br />

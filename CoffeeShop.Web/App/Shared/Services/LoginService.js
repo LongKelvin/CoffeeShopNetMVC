@@ -1,7 +1,7 @@
 ﻿(function (app) {
     'use strict';
-    app.service('LoginService', ['$http', '$q', 'AuthenticationService', 'AuthData',
-        function ($http, $q, AuthenticationService, AuthData) {
+    app.service('LoginService', ['$http', '$q', '$window','AuthenticationService', 'AuthData', 'ApiServices','NotificationService',
+        function ($http, $q, $window, AuthenticationService, AuthData, ApiServices, NotificationService) {
             var userInfo;
             var deferred;
 
@@ -20,17 +20,20 @@
                         AuthenticationService.setTokenInfo(userInfo);
                         AuthData.authenticationData.isAuthenticated = true;
                         AuthData.authenticationData.userName = userName;
+                        AuthData.authenticationData.accessToken = userInfo.accessToken;
+
                         deferred.resolve(null);
 
                         //console.log('UserInfo_AfterLogin: ', userInfo)
                     },
-                    function (err, status) {
-                        AuthData.authenticationData.isAuthenticated = false;
-                        AuthData.authenticationData.userName = "";
-                        deferred.resolve(err);
+                    function (error) {
 
-                        // console.error('UserInfo_AfterLogin_HasError_Status: ', status)
-                        //console.error('UserInfo_AfterLogin_HasError_Error: ', err)
+                        AuthData.authenticationData.IsAuthenticated = false;
+                        AuthData.authenticationData.userName = "";
+                      
+                        deferred.resolve(error);
+                        NotificationService.displayError('Something went wrong and We could not sign out you from system!');
+                        NotificationService.displayError('Please try again later');
                     }
                 );
 
@@ -38,9 +41,22 @@
             }
 
             this.logOut = function () {
-                AuthenticationService.removeToken();
-                AuthData.authenticationData.isAuthenticated = false;
-                AuthData.authenticationData.userName = "";
+                ApiServices.post('api/Account/Logout', null, function (response) {
+                    console.log('response from server: ', response)
+
+                    if (response.data.success == true) {
+                        AuthenticationService.removeToken();
+                        AuthData.authenticationData.IsAuthenticated = false;
+                        AuthData.authenticationData.userName = "";
+                        AuthData.authenticationData.accessToken = "";
+                        $window.sessionStorage["TokenInfo"] = null;
+                        $window.sessionStorage.clear();
+                        $window.localStorage.clear();
+                    }
+                    
+
+
+                }, null);
             }
 
             this.getUserInfo = function () {

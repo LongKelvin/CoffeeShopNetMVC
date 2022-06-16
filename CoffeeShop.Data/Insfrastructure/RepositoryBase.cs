@@ -161,6 +161,11 @@ namespace CoffeeShop.Data.Insfrastructure
             return dataContext.Set<T>().Count<T>(predicate) > 0;
         }
 
+        public CoffeeShopDbContext RequetsNewDbContextInstance()
+        {
+            return new CoffeeShopDbContext();
+        }
+
         #endregion Implementation
     }
 }

@@ -223,6 +223,7 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
                 appRole.Id = appRoleViewModel.Id;
             else
                 appRole.Id = Guid.NewGuid().ToString();
+
             appRole.Name = appRoleViewModel.Name;
             appRole.Description = appRoleViewModel.Description;
             appRole.IsSystemProtected = false;

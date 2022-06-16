@@ -36,7 +36,7 @@
             ApiServices.get('api/Slide/GetById/' + $stateParams.id, null, function (result) {
                 $scope.slide = result.data;
 
-                console.log('SlideData: ', $scope.slide)
+                //console.log('SlideData: ', $scope.slide)
             }, function (error) {
                 NotificationService.displayError(error.data);
             });
@@ -47,7 +47,7 @@
             finder.selectActionFunction = function (fileUrl) {
                 $scope.Slide.Images = fileUrl;
                 $scope.$apply();
-                console.log('file url: ', fileUrl)
+                //console.log('file url: ', fileUrl)
             }
             finder.popup();
         }

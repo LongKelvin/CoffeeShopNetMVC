@@ -98,7 +98,7 @@
                 }
             });
 
-            console.log('delete selected count: ', selectedItem);
+            //console.log('delete selected count: ', selectedItem);
 
             if (selectedItem.length <= 0) {
                 //$('m-content').html("Vui lòng chọn ít nhất một bản ghi để xóa!");

@@ -340,6 +340,7 @@
     <Compile Include="Repositories\PaymentMethodRepository.cs" />
     <Compile Include="Repositories\PostCategoryRepository.cs" />
     <Compile Include="Repositories\ProductCategoryRepository.cs" />
+    <Compile Include="Repositories\ApplicationRolePermissionRepository.cs" />
     <Compile Include="Repositories\ShopInformationRepository.cs" />
     <Compile Include="Repositories\StatisticRepository.cs" />
     <Compile Include="Repositories\VisitorStatisticRepository.cs" />

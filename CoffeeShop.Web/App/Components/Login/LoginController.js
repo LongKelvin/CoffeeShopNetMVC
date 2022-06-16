@@ -1,6 +1,6 @@
 ﻿(function (app) {
-    app.controller('LoginController', ['$scope', '$injector', 'LoginService', 'NotificationService',
-        function ($scope, $injector, LoginService, NotificationService) {
+    app.controller('LoginController', ['$scope', '$injector',  'LoginService','$location' , 'NotificationService',
+        function ($scope, $injector, LoginService, $location, NotificationService) {
             $scope.loginData = {
                 userName: "",
                 password: ""
@@ -15,8 +15,9 @@
                             //console.error("Login failed, UserName or Password incorrect");
                         }
                         else {
-                            var stateService = $injector.get('$state');
-                            stateService.go('Products');
+                            //var stateService = $injector.get('$state');
+                            //stateService.go('Products');
+                            $location.path('/Products');
                             //console.log("Login successfull");
                         }
                     });

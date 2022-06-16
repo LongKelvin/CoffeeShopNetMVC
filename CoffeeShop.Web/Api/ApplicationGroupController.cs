@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 
+using CoffeeShop.Common;
 using CoffeeShop.Common.ExceptionHandler;
 using CoffeeShop.Models.Models;
 using CoffeeShop.Services;
@@ -16,13 +17,11 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Script.Serialization;
-using CoffeeShop.Common;
 
 namespace CoffeeShop.Web.Api
 {
-    [RoutePrefix("api/ApplicationGroup")]
+    [RoutePrefix(Common.CommonConstants.API_ApplicationGroup)]
     [Authorize]
-    
     public class ApplicationGroupController : ApiControllerBase
     {
         private IApplicationGroupService _appGroupService;
@@ -127,7 +126,6 @@ namespace CoffeeShop.Web.Api
                         {
                             GroupId = appGroup.ID,
                             RoleId = role.Id
-
                         });
                     }
                     _appRoleService.AddRolesToGroup(listRoleGroup, appGroup.ID);

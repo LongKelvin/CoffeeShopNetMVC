@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -47,7 +48,7 @@ namespace CoffeeShop.Common
             }
             catch (SmtpException smex)
             {
-
+                Trace.TraceError(smex.Message);
                 return false;
             }
         }
