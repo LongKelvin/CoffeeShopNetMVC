@@ -2170,6 +2170,7 @@
     <Content Include="Assets\Client\custom-scripts\common.js" />
     <Content Include="Assets\Client\custom-scripts\controllers\cartPanel.js" />
     <Content Include="Assets\Client\custom-scripts\controllers\contact.js" />
+    <Content Include="Assets\Client\custom-scripts\controllers\externalAuthentication.js" />
     <Content Include="Assets\Client\custom-scripts\httpStatusCode.js" />
     <Content Include="Assets\Client\custom-scripts\controllers\payment.js" />
     <Content Include="Assets\Client\custom-scripts\controllers\shoppingCart.js" />
@@ -2291,6 +2292,10 @@
     <Content Include="Views\ShoppingCart\CartPanel.cshtml" />
     <Content Include="Views\Payment\PaymentTotal.cshtml" />
     <None Include="Properties\PublishProfiles\CoffeeShopMVC.pubxml" />
+    <Content Include="Views\Account\_ExternalLoginPartial.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\ErrorHandler\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Components\Orders\" />
@@ -2690,19 +2695,25 @@
       <Version>6.0.3</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Owin">
-      <Version>4.2.0</Version>
+      <Version>4.0.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Owin.Host.SystemWeb">
-      <Version>4.2.0</Version>
+      <Version>4.0.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Owin.Security">
-      <Version>4.2.0</Version>
+      <Version>4.0.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Owin.Security.Cookies">
-      <Version>3.0.1</Version>
+      <Version>4.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Security.Facebook">
+      <Version>4.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Security.Google">
+      <Version>4.0.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Owin.Security.OAuth">
-      <Version>4.2.0</Version>
+      <Version>4.0.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.TypeScript.MSBuild">
       <Version>4.6.4</Version>
@@ -2717,6 +2728,9 @@
     </PackageReference>
     <PackageReference Include="Owin">
       <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Owin.Security.Providers">
+      <Version>2.26.0</Version>
     </PackageReference>
     <PackageReference Include="System.Data.SQLite.Core">
       <Version>1.0.115.5</Version>

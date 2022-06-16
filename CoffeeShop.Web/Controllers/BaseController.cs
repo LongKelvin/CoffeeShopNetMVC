@@ -19,27 +19,37 @@ namespace CoffeeShop.Web.Controllers
 
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
         {
-            string lang = null;
-            HttpCookie langCookie = Request.Cookies["culture"];
-            if (langCookie != null)
+            IAsyncResult result = null;
+            try
             {
-                lang = langCookie.Value;
-            }
-            else
-            {
-                var userLanguage = Request.UserLanguages;
-                var userLang = userLanguage != null ? userLanguage[0] : "";
-                if (userLang != "")
+                string lang = null;
+                HttpCookie langCookie = Request.Cookies["culture"];
+                if (langCookie != null)
                 {
-                    lang = userLang;
+                    lang = langCookie.Value;
                 }
                 else
                 {
-                    lang = Resources.LanguageManagerment.GetDefaultLanguage();
+                    var userLanguage = Request.UserLanguages;
+                    var userLang = userLanguage != null ? userLanguage[0] : "";
+                    if (userLang != "")
+                    {
+                        lang = userLang;
+                    }
+                    else
+                    {
+                        lang = Resources.LanguageManagerment.GetDefaultLanguage();
+                    }
                 }
+                new LanguageManagerment().SetLanguage(lang);
+                result = base.BeginExecuteCore(callback, state);
             }
-            new LanguageManagerment().SetLanguage(lang);
-            return base.BeginExecuteCore(callback, state);
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
+
+            return result;
         }
 
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
@@ -63,12 +73,27 @@ namespace CoffeeShop.Web.Controllers
                 };
 
                 _errorService.CreateError(error);
-                
             }
             catch
             {
                 throw;
             }
+        }
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            filterContext.ExceptionHandled = true;
+
+            //Log the error!!
+            LogError(filterContext.Exception);
+
+            //Redirect or return a view, but not both.
+            //filterContext.Result = RedirectToAction("Index", "ErrorHandler");
+            // OR
+            filterContext.Result = new ViewResult
+            {
+                ViewName = "~/Views/ErrorHandler/Index.cshtml"
+            };
         }
     }
 }

@@ -33,6 +33,9 @@
         public const string API_Slide= "api/Slide";
         public const string API_Statistic= "api/Statistic";
 
+        public const string FacebookAppId= "FacebookAppId";
+        public const string FacebookAppSecret= "FacebookAppSecret";
+
         public enum Sex
         {
             Male = 0,
