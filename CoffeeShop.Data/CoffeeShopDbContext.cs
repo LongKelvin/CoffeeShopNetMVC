@@ -34,6 +34,19 @@ namespace CoffeeShop.Data
         public virtual DbSet<ShopInformation> ShopInfos { get; set; }
         public virtual DbSet<ShopPaymentInfo> ShopPayments { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
+        public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
+
+        public virtual DbSet<ApplicationGroup> ApplicationGroups { get; set; }
+        public virtual DbSet<ApplicationRole> ApplicationRoles { get; set; }
+        public virtual DbSet<ApplicationRoleGroup> ApplicationRoleGroups { get; set; }
+        public virtual DbSet<ApplicationUserGroup> ApplicationUserGroups { get; set; }
+        public virtual DbSet<ApplicationRoleClaims> ApplicationRoleClaims { get; set; }
+        public virtual DbSet<ApplicationUserClaim> ApplicationUserClaims { get; set; }
+        public virtual DbSet<ApplicationPermission> ApplicationPermissions { get; set; }
+
+        public virtual DbSet<ApplicationRolePermission> ApplicationRolePermissions { get; set; }
+
+        public virtual DbSet<ApplicationUserPermission> ApplicationUserPermissions { get; set; }
 
         public static CoffeeShopDbContext Create()
         {
@@ -111,10 +124,29 @@ namespace CoffeeShop.Data
                 .IsUnicode(false);
 
             //Identity
-            modelBuilder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId }).ToTable("ApplicationUserRoles");
-            modelBuilder.Entity<IdentityUserLogin>().HasKey(i => i.UserId).ToTable("ApplicationUserLogins");
+            modelBuilder.Entity<IdentityUserRole>().ToTable("ApplicationUserRoles")
+                .Property(p => p.UserId).HasColumnName("UserId");
+            modelBuilder.Entity<IdentityUserRole>().Property(p => p.RoleId)
+                .HasColumnName("RoleId");
+
+            modelBuilder.Entity<IdentityUserRole>().HasKey(k => new { k.UserId, k.RoleId });
+
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("ApplicationUserLogins")
+                .Property(p => p.UserId).HasColumnName("UserId");
+            modelBuilder.Entity<IdentityUserLogin>().HasKey(k => new { k.UserId });
+
             modelBuilder.Entity<IdentityRole>().ToTable("ApplicationRoles");
-            modelBuilder.Entity<IdentityUserClaim>().HasKey(i => i.UserId).ToTable("ApplicationUserClaims");
+            modelBuilder.Entity<IdentityRole>().HasKey(k => new { k.Id });
+
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("ApplicationUserClaims")
+                 .Property(p => p.UserId).HasColumnName("UserId");
+            modelBuilder.Entity<IdentityUserClaim>().HasKey(k => new { k.UserId , k.Id});
+
+            modelBuilder.Entity<ApplicationPermission>().HasKey(k=>new { k.Id });
+
+            //Permission base Authorize
+            //modelBuilder.Entity<IdentityRoleClaim<string>>(entity => entity.Property(m => m.Id).HasMaxLength(85));
+            //modelBuilder.Entity<IdentityRoleClaim<string>>(entity => entity.Property(m => m.RoleId).HasMaxLength(85));
         }
     }
 }

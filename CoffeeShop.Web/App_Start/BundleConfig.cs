@@ -12,6 +12,9 @@ namespace CoffeeShop.Web
             bundles.Add(new ScriptBundle("~/js/jquery")
                 .Include("~/Assets/Admin/lib/jquery/jquery-3.4.1.min.js"));
 
+            bundles.Add(new ScriptBundle("~/js/jquery-ui")
+               .Include("~/Assets/Admin/lib/jquery-ui-1.13.1.custom/jquery-ui.min.js"));
+
             bundles.Add(new ScriptBundle("~/js/plugins").Include(
                  "~/Assets/Admin/lib/jquery-ui-1.13.1.custom/jquery-ui.min.js",
                  "~/Assets/Client/js/popper.min.js",

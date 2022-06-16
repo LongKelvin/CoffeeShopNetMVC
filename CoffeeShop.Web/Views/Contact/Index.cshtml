@@ -1,9 +1,9 @@
-﻿@*@using BotDetect.Web.Mvc;*@
+﻿@using BotDetect.Web.Mvc;
 @model CoffeeShop.Web.Models.ShopContactViewModel
 
 <link href="~/Assets/Admin/lib/font-awesome/css/all.css" rel="stylesheet" />
-@*<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl"
-      rel="stylesheet" type="text/css" />*@
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl"
+      rel="stylesheet" type="text/css" />
 <style>
     #map_area
     {
@@ -166,18 +166,18 @@
                                             </div>
                                         </div>
 
-                                        @*<div class="row">
-                                                <div class="col-md-12 form-group mb-3">
-                                                    <label for="message" class="col-form-label">Captcha *</label>
-                                                    @{
-                                                        MvcCaptcha mvcCaptcha = new MvcCaptcha("ContactCaptcha");
-                                                        mvcCaptcha.UserInputID = "CaptchaCode";
-                                                    }
-                                                    @Html.Captcha(mvcCaptcha)
-                                                    @Html.TextBoxFor(m => m.Feedback.CaptchaCode, new { @class = "form-control"})
-                                                    @Html.ValidationMessageFor(model => model.Feedback.CaptchaCode, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>*@
+                                        <div class="row">
+                                            <div class="col-md-12 form-group mb-3">
+                                                <label for="Captcha" class="col-form-label">Captcha *</label>
+                                                @{
+                                                    MvcCaptcha mvcCaptcha = new MvcCaptcha("ContactCaptcha");
+                                                    mvcCaptcha.UserInputID = "CaptchaCode";
+                                                }
+                                                @Html.Captcha(mvcCaptcha)
+                                                @Html.TextBox("CaptchaCode","", new { @class = "form-control" })
+                                                @Html.ValidationMessage("CaptchaCode", "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
 
                                         <div class="row">
                                             <div class="col-md-12 form-group">

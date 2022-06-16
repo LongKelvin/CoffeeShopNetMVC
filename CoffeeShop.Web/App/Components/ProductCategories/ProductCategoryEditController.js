@@ -1,5 +1,4 @@
-﻿
-(function (app) {
+﻿(function (app) {
     app.controller('ProductCategoryEditController', ProductCategoryEditController);
 
     ProductCategoryEditController.$inject =
@@ -31,7 +30,7 @@
             $scope.productCategory.UpdatedDate = new Date();
             $scope.productCategory.UpdatedBy = 'AdminTest';
 
-            console.log('update data:', $scope.productCategory)
+            //console.log('update data:', $scope.productCategory)
             ApiServices.post('api/ProductCategory/Update', $scope.productCategory,
                 function (result) {
                     NotificationService.displaySuccess(result.data.Name + ' đã cập nhật thành công.');
@@ -46,7 +45,7 @@
             ApiServices.get('api/ProductCategory/GetAllParents', null, function (result) {
                 $scope.parentCategories = result.data;
             }, function () {
-                console.log('Cannot get list parent');
+                //console.log('Cannot get list parent');
             });
         }
 
@@ -54,17 +53,16 @@
             ApiServices.get('api/ProductCategory/GetById/' + $stateParams.id, null, function (result) {
                 $scope.productCategory = result.data;
 
-                
-                console.log('productCategoryData: ', $scope.productCategory)
+                //console.log('productCategoryData: ', $scope.productCategory)
             }, function (error) {
                 NotificationService.displayError(error.data);
             });
         }
 
-        $('#parentIdDropdown').on('change', function () {
-            alert($('#parentIdDropdown').select2('data'))
-            alert($scope.productCategory.ParentID)
-        });
+        //$('#parentIdDropdown').on('change', function () {
+        //    alert($('#parentIdDropdown').select2('data'))
+        //    alert($scope.productCategory.ParentID)
+        //});
 
         loadParentCategory();
         loadProductCategoryDetail();

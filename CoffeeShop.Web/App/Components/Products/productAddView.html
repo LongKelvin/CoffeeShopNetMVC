@@ -59,7 +59,15 @@
                                 <span class="text-danger" ng-show="frmAddproduct.pCategoryId.$touched && frmAddproduct.pCategoryId.$invalid">Danh mục sản phẩm không được bỏ trống</span>
                             </div>
                             <div class="form-group">
-                                <label>Giá <span class="text-danger">*</span></label>
+                                <label>Giá Nhập <span class="text-danger">*</span></label>
+                                <input ng-model="product.OriginalPrice" type="number" class="form-control"
+                                       name="pOriginalPrice" required
+                                       value="0"
+                                       placeholder="Giá bán">
+                                <span class="text-danger" ng-show="frmAddproduct.pOriginalPrice.$touched && frmAddproduct.pOriginalPrice.$invalid">Giá sản phẩm là bắt buộc</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Giá Bán <span class="text-danger">*</span></label>
                                 <input ng-model="product.Price" type="number" class="form-control"
                                        name="pPrice" required
                                        value="0"
@@ -71,6 +79,14 @@
                                 <input ng-model="product.PromotionPrice" type="number" class="form-control"
                                        value="0"
                                        placeholder="Giá khuyến mãi">
+                            </div>
+                            <div class="form-group">
+                                <label>Số lượng</label>
+                                <input ng-model="product.Quantity" type="number" min="1" class="form-control"
+                                       value="100" required
+                                       placeholder="Số lượng nhập"
+                                       name="pQuantity">
+                                <span class="text-danger" ng-show="frmAddproduct.pQuantity.$touched && frmAddproduct.pQuantity.$invalid">Số lượng mặt hàng phải lớn hơn 0</span>
                             </div>
                             <div class="form-group">
                                 <label>Ngày sản xuất</label>
@@ -253,12 +269,12 @@
 <script>
 
     $(document).ready(function () {
-        $('#categoryIdDropdown').select2({
-            theme: 'bootstrap4'
-        });
+        //$('#categoryIdDropdown').select2({
+        //    theme: 'bootstrap4'
+        //});
 
-        $('#categoryIdDropdown').val('Chọn danh mục'); // Select the option with a default value
-        $('#categoryIdDropdown').trigger('change'); // Notify any JS components that the value changed
+        //$('#categoryIdDropdown').val('Chọn danh mục'); // Select the option with a default value
+        //$('#categoryIdDropdown').trigger('change'); // Notify any JS components that the value changed
 
         //var editor = CKEDITOR.replace('ckEditorContent');
         CKEDITOR.replace('ckEditorContent', {

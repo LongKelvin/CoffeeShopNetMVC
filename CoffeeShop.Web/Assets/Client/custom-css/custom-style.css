@@ -22,6 +22,11 @@
     list-style: none;
 }
 
+#btnDeleteItem
+{
+    cursor: pointer;
+}
+
 .product-name
 {
     font-weight: 700;
@@ -299,6 +304,57 @@
     border-top-right-radius: 0.2rem;
     border-bottom-right-radius: 0.2rem;
 }
+
+/*Account styles*/
+small
+{
+    font-size: 0.75rem;
+}
+
+.profile-photo
+{
+    width: 48px;
+    height: 48px;
+    border-radius: 20%;
+    overflow: hidden;
+}
+
+.dropdown-item:hover
+{
+    color: #eab676;
+}
+
+.profile
+{
+    display: flex;
+    gap: 2rem;
+    text-align: right;
+    justify-content: center;
+}
+
+.text-muted
+{
+    color: var(--color-info-dark);
+}
+
+.info
+{
+    justify-content: center;
+    vertical-align: central;
+    margin-top: 4px;
+}
+
+.dropdown-item:active
+{
+    background: white;
+    border: none;
+}
+
+.dropdown-item:focus
+{
+    background: white;
+    border: none;
+}
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px)
 {
@@ -333,6 +389,16 @@
     {
         width: 75%;
     }
+
+    .table-borderless
+    {
+        margin: 0;
+    }
+
+    .table-responsive
+    {
+        margin: 0;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -364,6 +430,16 @@
     .flexible-btn
     {
         width: 100%;
+    }
+
+    .table-borderless
+    {
+        margin: 0;
+    }
+
+    .table-responsive
+    {
+        margin: 0;
     }
 }
 
@@ -437,17 +513,20 @@
     margin: 0;
     background: white;
 }
-.ui-menu-item:hover
-{
-    background: white;
-    color: #eab676;
-}
+
+    .ui-menu-item:hover
+    {
+        background: white;
+        color: #eab676;
+    }
+
 .ui-menu-item-wrapper
 {
     margin: 0;
     color: black;
     width: 50%;
 }
+
     .ui-menu-item-wrapper:hover
     {
         margin: 0;
@@ -456,3 +535,15 @@
         border: none;
         width: 50%;
     }
+
+.remove-item
+{
+    cursor: pointer;
+}
+
+/*JQUERY VALIDATION ERROR*/
+.error
+{
+    color: red;
+    font-weight: 500;
+}

@@ -7,6 +7,6 @@
 
         // 3rd Party Modules
         'ui.router',
-
+        'LocalStorageModule'
     ]);
 })();

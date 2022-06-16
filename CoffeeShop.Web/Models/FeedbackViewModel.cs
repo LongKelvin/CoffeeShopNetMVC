@@ -27,8 +27,6 @@ namespace CoffeeShop.Web.Models
         [Required]
         public bool Status { get; set; }
 
-        //[Required(ErrorMessageResourceType = typeof(Resources.Resources),
-        //     ErrorMessageResourceName = nameof(Resources.Resources.CaptchaMessage_Failed))]
-        //public string CaptchaCode { get; set; }
+        public string CaptchaCode { get; set; }
     }
 }

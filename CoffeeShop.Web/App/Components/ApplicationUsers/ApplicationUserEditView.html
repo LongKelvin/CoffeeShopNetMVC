@@ -1,0 +1,129 @@
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><strong>Cập nhật thông tin người dùng</strong></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="Home">Trang chủ</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="ApplicationUsers">Quản lý người dùng</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="ApplicationUsers">Danh sách người dùng</a></li>
+                    <li class="breadcrumb-item active">Cập nhật thông tin người dùng</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <form name="frmUpdateApplicationUser" role="form" ng-submit="UpdateApplicationUser()" novalidate>
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-7">
+                    <!-- general form elements -->
+
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin chính</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Họ tên người dùng <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="user.FullName" required name="pName"
+                                       class="form-control" placeholder="Họ tên đầy đủ  ...">
+                                <span class="text-danger" ng-show="frmUpdateApplicationUser.pName.$touched && frmUpdateApplicationUser.pName.$invalid">Bạn chưa nhập họ tên</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Ngày sinh <span class="text-danger">*</span></label>
+                                <input ng-model="user.BirthDay" type="date" class="form-control" name="pBirthday" required>
+                                <span class="text-danger" ng-show="frmUpdateApplicationUser.pBirthday.$touched && frmUpdateApplicationUser.pBirthday.$invalid">Bạn chưa nhập ngày sinh</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Email <span class="text-danger">*</span> </label>
+                                <input type="email" ng-model="user.Email" required name="pEmail"
+                                       class="form-control" placeholder="example@gmail.com">
+                                <span class="text-danger" ng-show="frmUpdateApplicationUser.pEmail.$touched && frmUpdateApplicationUser.pEmail.$invalid">Bạn chưa nhập Email </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sở thích (Optional)  </label>
+                                <input type="text" ng-model="user.Bio" name="pBio"
+                                       class="form-control" placeholder="Sở thích cá nhân">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tên tài khoản <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="user.UserName" required name="pUserName"
+                                       class="form-control" placeholder="Tên tài khoản ...">
+                                <span class="text-danger" ng-show="frmUpdateApplicationUser.pUserName.$touched && frmUpdateApplicationUser.pUserName.$invalid">Bạn chưa nhập tên tài khoản</span>
+                            </div>
+
+                            <!--<div class="form-group">
+                                <label>Mật khẩu <span class="text-danger">*</span> </label>
+                                <input type="password" ng-model="user.Password" required name="pPassword"
+                                       class="form-control" placeholder="Nhập mật khẩu">
+                                <span class="text-danger" ng-show="frmUpdateApplicationUser.pPassword.$touched && frmUpdateApplicationUser.pPassword.$invalid">Bạn chưa nhập mật khẩu</span>
+                            </div>-->
+
+                            <div class="form-group">
+                                <label>Số điện thoại <span class="text-danger">*</span> </label>
+                                <input type="number" ng-model="user.PhoneNumber" required name="pPhoneNumber"
+                                       class="form-control" placeholder="Nhập số điện thoại bạn đang sử dụng">
+                                <span class="text-danger" ng-show="frmUpdateApplicationUser.pPhoneNumber.$touched && frmUpdateApplicationUser.pPhoneNumber.$invalid">Bạn chưa số điện thoại</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right column -->
+                <div class="col-md-5">
+                    <!-- general form elements -->
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">Thuộc nhóm</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12" ng-repeat="group in groups">
+                                    <!--checkbox-->
+                                    <div class="form-group clearfix">
+                                        <div class="icheck-success d-inline">
+                                            <input class="checkbox-group" value="{{group.ID}}"
+                                                   type="checkbox"
+                                                   id="gr_{{group.Name}}"
+                                                   data-group-description="{{group.Description}}"
+                                                   data-group-name="{{group.Name}}">
+                                            <label for="gr_{{group.Name}}">
+                                                {{group.Name}} : {{group.Description}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+
+                <button type="submit" ng-disabled="frmUpdateApplicationUser.$invalid" class="btn btn-primary">Cập nhật thông tin </button>
+                <button ui-sref="ApplicationUsers" class="btn btn-outline-secondary space-around">Hủy bỏ</button>
+            </div>
+        </form>
+
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->

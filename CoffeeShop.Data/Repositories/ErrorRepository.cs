@@ -8,5 +8,14 @@ namespace CoffeeShop.Data.Repositories
         public ErrorRepository(IDbFactory dbFactory) : base(dbFactory)
         {
         }
+
+        public Error Create(Error error)
+        {
+            var context = RequetsNewDbContextInstance();
+            context.Errors.Add(error);
+            context.SaveChanges();
+
+            return error;
+        }
     }
 }

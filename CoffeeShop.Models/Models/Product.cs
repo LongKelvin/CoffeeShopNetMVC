@@ -96,16 +96,19 @@ namespace CoffeeShop.Models.Models
         [Display(Name = "Promotion Price")]
         public decimal? PromotionPrice { get; set; } // decimal(18,2), null
 
+        [Display(Name = "Original Price")]
+        public decimal OriginalPrice { get; set; }
+
         [Display(Name = "Warranty")]
         public int? Warranty { get; set; } // int, null
 
-        [Display(Name="Mfg Date")]
+        [Display(Name = "Mfg Date")]
         public DateTime? ManufacturingDate { get; set; }
 
-        [Display(Name ="Exp Date")]
+        [Display(Name = "Exp Date")]
         public DateTime? ExpireDate { get; set; }
 
-        [Display(Name="Quantity")]
+        [Display(Name = "Quantity")]
         [Required]
         public int Quantity { get; set; }
 

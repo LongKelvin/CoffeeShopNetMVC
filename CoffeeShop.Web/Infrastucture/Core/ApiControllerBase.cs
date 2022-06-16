@@ -20,7 +20,6 @@ namespace CoffeeShop.Web.Infrastucture.Core
             _errorService = errorService;
         }
 
-        
         protected HttpResponseMessage CreateHttpResponse(
             HttpRequestMessage requestMessage, Func<HttpResponseMessage> function)
         {
@@ -55,7 +54,7 @@ namespace CoffeeShop.Web.Infrastucture.Core
             return response;
         }
 
-        private void LogError(Exception ex)
+        public void LogError(Exception ex)
         {
             try
             {
@@ -67,9 +66,9 @@ namespace CoffeeShop.Web.Infrastucture.Core
                 };
 
                 _errorService.CreateError(error);
-                _errorService.Save();
+                
             }
-            catch 
+            catch
             {
                 throw;
             }

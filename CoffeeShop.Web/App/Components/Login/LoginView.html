@@ -8,7 +8,7 @@
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
-                <form  role="form" name="frmLogin" ng-submit="loginSubmit()" method="post">
+                <form role="form" name="frmLogin" ng-submit="loginSubmit()" method="post">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="UserName" ng-model="loginData.userName">
                         <div class="input-group-append">
@@ -42,11 +42,11 @@
                     </div>
                 </form>
 
-                <div class="social-auth-links text-center mt-2 mb-3">
-                    <a href="#" class="btn btn-block btn-outline-primary">
+                <div class="social-auth-links text-center mt-2 mb-3 disabled">
+                    <a href="#" class="btn btn-block btn-outline-primary disabled">
                         <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
                     </a>
-                    <a href="#" class="btn btn-block btn-outline-danger">
+                    <a href="#" class="btn btn-block btn-outline-danger disabled">
                         <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
                     </a>
                 </div>

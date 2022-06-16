@@ -4,11 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoffeeShop.Models.Models
 {
-    [Table("Error")]
+    [Table("Errors")]
     public class Error
     {
         [Key]
         public int ID { get; set; }
+
         public string Message { get; set; }
         public string StackTrace { get; set; }
         public DateTime CreatedDate { get; set; }

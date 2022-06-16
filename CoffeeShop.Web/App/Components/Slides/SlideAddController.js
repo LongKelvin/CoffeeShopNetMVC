@@ -27,17 +27,15 @@
                 });
             $state.go('Slides')
         }
-      
 
         $scope.ChooseImages = function () {
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
                 $scope.slide.Images = fileUrl;
                 $scope.$apply();
-                console.log('file url: ', fileUrl)
+                //console.log('file url: ', fileUrl)
             }
             finder.popup();
         }
-
     }
 })(angular.module('CoffeeShop.Slides'));

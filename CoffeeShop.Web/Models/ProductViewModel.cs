@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoffeeShop.Web.Models
 {
+    [Serializable]
     public class ProductViewModel : ViewModelBase
     {
         
@@ -80,6 +81,10 @@ namespace CoffeeShop.Web.Models
 
         [Display(Name = "Promotion Price")]
         public decimal? PromotionPrice { get; set; } // decimal(18,2), null
+
+        [Display(Name = "Original Price")]
+        [Required]
+        public decimal OriginalPrice { get; set; }
 
         [Display(Name = "Warranty")]
         public int? Warranty { get; set; } // int, null

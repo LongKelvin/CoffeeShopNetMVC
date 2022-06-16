@@ -17,7 +17,7 @@ using System.Web.Script.Serialization;
 
 namespace CoffeeShop.Web.Api
 {
-    [RoutePrefix("api/Slide")]
+    [RoutePrefix(Common.CommonConstants.API_Slide)]
     [Authorize]
     public class SlideController : ApiControllerBase
     {
@@ -78,7 +78,7 @@ namespace CoffeeShop.Web.Api
 
                 //Map object using Automapper
                 var slideVM = Mapper.Map<SlideViewModel>(slideDetail);
-             
+
                 return request.CreateResponse(HttpStatusCode.OK, slideVM);
             });
         }
@@ -96,7 +96,6 @@ namespace CoffeeShop.Web.Api
 
                 var newSlide = new Slide();
                 EntityExtensions.UpdateSlide(newSlide, SlideVM);
-              
 
                 var result = _slideService.Add(newSlide);
                 _slideService.SaveChanges();
@@ -105,7 +104,6 @@ namespace CoffeeShop.Web.Api
                 return request.CreateResponse(HttpStatusCode.Created, responseResult);
             });
         }
-
 
         [Route("Update")]
         [HttpPost]

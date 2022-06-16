@@ -52,6 +52,8 @@
                 </div>
             </div>
 
+            <input hidden id="productList" />
+
             <div class="card-body p-0">
                 <table class="table">
                     <thead>
@@ -73,6 +75,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in products">
+
                             <td>
                                 <input type="checkbox" class="checkBox"
                                        value="{{item.ID}}" onclick="GetTotalSelectedItems()" />
@@ -223,6 +226,9 @@
                 selectedItem.push($(this).val());
             }
         });
+
+        //$('#listProduct').val(products)
+        //console.log('List product in view: ',$('#listProduct').val())
 
         //if (selectedItem.length == 0) {
         //    $('#delete-items').addClass('disabled');

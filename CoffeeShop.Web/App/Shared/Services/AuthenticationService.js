@@ -1,7 +1,8 @@
 ﻿(function (app) {
     'use strict';
-    app.service('AuthenticationService', ['$http', '$q', '$window',
-        function ($http, $q, $window) {
+
+    app.service('AuthenticationService', ['$http', '$q', '$window','$location', 'AuthData',
+        function ($http, $q, $window, $location, AuthData) {
             var tokenInfo;
 
             this.setTokenInfo = function (data) {
@@ -23,19 +24,32 @@
             this.init = function () {
                 if ($window.sessionStorage["TokenInfo"]) {
                     tokenInfo = JSON.parse($window.sessionStorage["TokenInfo"]);
-                    //console.log('Init $window.sessionStorage: ', tokenInfo)
-                    //console.log(' $window.sessionStorage: ', ($window.sessionStorage["TokenInfo"]))
+                    AuthData.authenticationData.IsAuthenticated = true;
+                    AuthData.authenticationData.userName = tokenInfo.userName;
+                    AuthData.authenticationData.accessToken = tokenInfo.accessToken;
                 }
             }
 
             this.setHeader = function () {
-                //console.log('tokenInfo_beforeSetHeader: ', tokenInfo)
+               
                 delete $http.defaults.headers.common['X-Requested-With'];
                 if ((tokenInfo != undefined) && (tokenInfo.accessToken != undefined) && (tokenInfo.accessToken != null) && (tokenInfo.accessToken != "")) {
                     $http.defaults.headers.common['Authorization'] = 'Bearer ' + tokenInfo.accessToken;
                     $http.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
-                    //console.log('tokenInfo_InSetHeader: ', tokenInfo)
+                }
+                else {
+
+                    
+                    //This is a dirty way to remove the token info from header when call ApiService
+                    //However when some method has call outside ApiService(using $http) then the trick
+                    //cannot work as well as expect
+                    
+                    $http.defaults.headers.common['Authorization'] = '';
+                    $http.defaults.headers.common['Content-Type'] = '';
+
+                    //force return to Login page
+                    $location.path('/Login');
                 }
             }
 
@@ -43,14 +57,15 @@
                 var url = 'api/Home/TestMethod';
                 var deferred = $q.defer();
                 $http.get(url).then(function () {
+
                     deferred.resolve(null);
                 }, function (error) {
+                    console.log(error)
                     deferred.reject(error);
                 });
                 return deferred.promise;
             }
 
             this.init();
-        }
-    ]);
-})(angular.module('CoffeeShop.Common'));
+        }]);
+}) (angular.module('CoffeeShop.Common'));

@@ -17,7 +17,7 @@ namespace CoffeeShop.Services
         public IUnitOfWork _unitOfWork { get; set; }
         public IProductRepository _productRepository { get; set; }
         public ITagRepository _tagRepository { get; set; }
-        public IProductCategoryRepository _productCategoryRepository { get; set; }  
+        public IProductCategoryRepository _productCategoryRepository { get; set; }
 
         public ProductService(IUnitOfWork unitOfWork,
             IProductRepository productRepository,
@@ -68,9 +68,9 @@ namespace CoffeeShop.Services
             _productRepository.Delete(id);
         }
 
-        public IEnumerable<Product> GetAll()
+        public IEnumerable<Product> GetAll(string[] includes = null)
         {
-            return _productRepository.GetAll(new string[] { "ProductCategory" });
+            return _productRepository.GetAll(includes);
             //var res =  _productRepository.GetAll(null);
         }
 
@@ -311,7 +311,6 @@ namespace CoffeeShop.Services
                 ID = t.ID,
                 Name = t.Name,
                 Type = t.Type,
-
             }).ToList();
         }
 
@@ -326,7 +325,6 @@ namespace CoffeeShop.Services
             {
                 product.ViewCount = 1;
             }
-
         }
 
         public ProductCategory GetCategory(int productID)
@@ -334,6 +332,17 @@ namespace CoffeeShop.Services
             var product = _productRepository.GetById(productID);
             return _productCategoryRepository.GetByCondition(
                 x => x.ID == product.CategoryID && x.Status == true);
+        }
+
+        public bool SellProduct(int productId, int quantity)
+        {
+            var product = _productRepository.GetById(productId);
+
+            if (product.Quantity < quantity)
+                return false;
+
+            product.Quantity -= quantity;
+            return true;
         }
 
         private CoffeeShopDbContext DbContext

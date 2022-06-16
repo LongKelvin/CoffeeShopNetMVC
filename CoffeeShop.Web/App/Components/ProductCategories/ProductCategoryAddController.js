@@ -36,7 +36,7 @@
             ApiServices.get('api/ProductCategory/GetAllParents', null, function (result) {
                 $scope.parentCategories = result.data;
             }, function () {
-                console.log('Cannot get list parent');
+                //console.log('Cannot get list parent');
             });
         }
 

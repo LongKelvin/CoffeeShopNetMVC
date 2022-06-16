@@ -9,9 +9,9 @@ namespace CoffeeShop.Services
     public class OrderDetailService : IOrderDetailService
     {
         public IUnitOfWork _unitOfWork { get; set; }
-        public IOderDetailRepository _orderDetailRepository { get; set; }
+        public IOrderDetailRepository _orderDetailRepository { get; set; }
 
-        public OrderDetailService(IUnitOfWork unitOfWork, IOderDetailRepository orderDetailRepository)
+        public OrderDetailService(IUnitOfWork unitOfWork, IOrderDetailRepository orderDetailRepository)
         {
             _unitOfWork = unitOfWork;
             _orderDetailRepository = orderDetailRepository;

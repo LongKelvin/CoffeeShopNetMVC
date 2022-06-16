@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoffeeShop.Web.Models
 {
@@ -10,7 +11,6 @@ namespace CoffeeShop.Web.Models
     {
         public OrderViewModel()
         {
-            this.OrderDetails = new HashSet<OrderDetailViewModel>();
         }
 
         [MaxLength(250)]
@@ -50,11 +50,9 @@ namespace CoffeeShop.Web.Models
         [Display(Name = "Create By")]
         public string CreatedBy { get; set; } // nvarchar(50), null
 
-        [MaxLength(250)]
-        [StringLength(250)]
-        [Required(ErrorMessage = "Payment Mehod is required")]
-        [Display(Name = "Payment Mehod")]
-        public string PaymentMehod { get; set; } // nvarchar(250), not null
+        [Required(ErrorMessage = "Payment Method is required")]
+        [Display(Name = "Payment Method")]
+        public int PaymentMethodCode { get; set; } // nvarchar(250), not null
 
         [MaxLength(50)]
         [StringLength(50)]
@@ -62,7 +60,16 @@ namespace CoffeeShop.Web.Models
         [Display(Name = "Payment Status")]
         public string PaymentStatus { get; set; } // nvarchar(50), not null
 
-        public virtual ICollection<OrderDetailViewModel> OrderDetails { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public bool Status { get; set; }
+
+        [StringLength(128)]
+        [Column(TypeName = "nvarchar")]
+        public string CustomerId { get; set; }
+
+        [ForeignKey("CustomerId")]
+        public virtual ApplicationUser User { get; set; }
+
+        //public virtual PaymentMethodViewModel PaymentMethod { get; set; }
     }
 }

@@ -1,69 +1,131 @@
 ﻿<link href="~/Assets/Client/custom-css/payment.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="payment-section custom-container mt-5 px-5 shadow mb-4">
+<section class="payment-section custom-container mt-5 px-1 px-lg-5 px-sm-1 shadow mb-4" id="paymentTitle">
     <div class="mb-4">
-        <h2><strong>Confirm order and pay</strong></h2> <span>please make the payment, after that you can enjoy all the features and benefits.</span>
+        <h2><strong>Confirm order and pay</strong></h2> <span>Please make the payment, after that you can enjoy all the features and benefits.</span>
     </div>
-    <div class="row flex-lg-row flex-sm-column-reverse">
-        <div class="col-md-8">
-            <div class="card p-3">
-                <h6 class="text-uppercase">Payment details</h6>
-                <div class="inputbox mt-3"> <input type="text" name="name" class="form-control" required="required"> <span>Name on card</span> </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <i class="fa fa-credit-card"></i> <span>Card Number</span> </div>
+    <div class="row flex-column-reverse flex-lg-row">
+        <div class="col-md-8 col-sm-12 m-sm-0">
+            <form method="post" name="frmPayment" id="frmPayment">
+                <div class="card p-3 m-sm-0">
+                    <div class="mt-4 mb-4 m-sm-0">
+                        <h6 class="text-uppercase"><b>Billing Address</b></h6>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <div class="row mt-3">
+                                <label class="container-rad ml-3" style=" min-height: auto">
+                                    <b class="ml-lg-3">Use the login user information </b>
+                                    <input type="checkbox" class="paymentMethodCode" name="checkboxGetUserInfo" id="btnAutoFillUserInfo">
+                                    <b class="checkmark" style="top:0"></b>
+                                </label>
+                            </div>
+                        }
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <div class="inputbox mt-3 mr-2"> <input id="txtFullName" type="text" name="FullName" class="form-control" required="required"> <span>Full Name</span> </div>
+                            </div>
+                           
+                            <div class="col-md-6">
+                                <div class="inputbox mt-3 mr-2"> <input id="txtTelephone" type="text" name="Telephone" class="form-control" required="required"> <span>Telephone</span> </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="inputbox mt-3 mr-2"> <input id="txtEmail" type="email" name="Email" class="form-control" required="required"> <span>Email</span> </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <div class="inputbox mt-3 mr-2"> <input id="txtAddressStreet" type="text" name="StreetAddress" class="form-control" required="required"> <span>Street Address</span> </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <div class="inputbox mt-3 mr-2"> <textarea id="txtNote" type="text" name="Note" class="form-control custom-input" placeholder="Note"></textarea> @*<span>Note</span>*@ </div>
+                            </div>
+                           
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="d-flex flex-row">
-                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Expiry</span> </div>
-                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>CVV</span> </div>
+
+                    <h6 class="text-uppercase mb-3"><b>Payment method</b></h6>
+                    <div class="col mb-5">
+                        <div class="row">
+                            @foreach (var item in (List<CoffeeShop.Web.Models.PaymentMethodViewModel>)ViewBag.PaymentOptions)
+                            {
+                                <div class="col-lg-6 col-sm-12">
+                                    <label class="container-rad  ">
+                                        <img src="@item.LogoImage" width="64" height="64" />
+                                        <b class="ml-lg-3">@item.PaymentName</b>
+                                        <input type="radio" name="paymentMethodRadioBtn" value="@item.ID" id="radButton_@item.PaymentCode">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            }
+
+
+                        </div>
+                    </div>
+
+                    <h6 id="paymentDetailTitle" style="display:none" class="text-uppercase mt-3"><b>Payment details</b></h6>
+                    <div id="paymentDetail_CreditCard" style="display:none" class="inputbox mt-3"> <input type="text" name="name" class="form-control" required="required"> <span>Name on card</span> </div>
+                    <div id="paymentDetail_CreditCard_Frm" style="display:none" class="row">
+                        <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <i class="fa fa-credit-card"></i> <span>Card Number</span> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex flex-row">
+                                <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Expiry</span> </div>
+                                <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>CVV</span> </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="mt-4 mb-4">
-                    <h6 class="text-uppercase">Billing Address</h6>
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Street Address</span> </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>City</span> </div>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-md-6">
-                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>State/Province</span> </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Zip code</span> </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </form>
             <div class="mt-4 mb-4 d-flex row">
                 <div class="btn-box col-lg-6 col-md-6 col-sm-12">
-                    <a class="btn-secondary flexible-btn text-center">PREVIOUS STEP</a>
+                    <a class="btn-secondary flexible-btn text-center" href="@Url.Action("Index","ShoppingCart")">PREVIOUS STEP</a>
                 </div>
-                <div class="btn-box col-lg-6 col-md-6 col-sm-12">
+                <div class="btn-box col-lg-6 col-md-6 col-sm-12" onclick="payment.createOrder()">
                     <a class="flexible-btn text-center">PAY</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card card-hightlight p-3 text-white mb-3 shadow ">
-                <span>You have to pay</span>
-                <div class="d-flex flex-row align-items-end mb-3">
-                    <h1 class="mb-0 yellow">$549</h1> <span>.99</span>
-                </div> 
-                <span>Enjoy all the features and perk after you complete the payment</span>
-                    <a href="#" class="yellow decoration">Know all the features</a>
-                <div class="hightlight"> <span>100% Guaranteed support and update for the next 5 years.</span> </div>
-            </div>
+        <div class="col-md-4 col-sm-12">
+            @{ Html.RenderAction("PaymentTotal", "Payment");}
+
         </div>
     </div>
 </section>
 
+@section Scripts
+{
+    <script src="~/Assets/Client/custom-scripts/controllers/shoppingCart.js"></script>
+    <script>
+        $(document).ready(function () {
+            cart.loadData();
+            $("#radButton_100").prop("checked", true).trigger("click");
+        })
+
+        $("input[name='paymentMethodRadioBtn']").change(function () {
+            $('#paymentDetailTitle').hide();
+            $('#paymentDetail_CreditCard').hide();
+            $('#paymentDetail_CreditCard_Frm').hide();
+        });
+
+        $('#radButton_104').change(function () {
+            if (this.checked) {
+                $('#paymentDetailTitle').show();
+                $('#paymentDetail_CreditCard').show();
+                $('#paymentDetail_CreditCard_Frm').show();
+            }
+        });
+
+        var textArea = $('#txtNote');
+        textArea.value += "'\r\n'";
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+    </script>
+}

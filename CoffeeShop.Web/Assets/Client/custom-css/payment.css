@@ -1,5 +1,4 @@
-﻿
-.payment-section .btn-box
+﻿.payment-section .btn-box
 {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -21,7 +20,7 @@
         -webkit-transition: all 0.3s;
         transition: all 0.3s;
         font-weight: 700;
-        cursor:pointer;
+        cursor: pointer;
     }
 
         .payment-section .btn-box a:hover
@@ -42,10 +41,10 @@
             background-color: transparent;
             color: #000000;
         }
+
 .card
 {
     border: none;
-    
 }
 
 .form-control
@@ -109,10 +108,22 @@ input::-webkit-inner-spin-button
     font-size: 12px
 }
 
+/*.custom-input:focus ~ span
+{
+    transform: translateX(-0px) translateY(-15px);
+    font-size: 12px
+}
+
+.custom-input ~ span
+{*/
+/*transform: translateX(-0px) translateY(-15px);*/
+/*font-size: 16px
+}*/
+
 .card-blue
 {
     background-color: #eab676;
-    color:black;
+    color: black;
 }
 
 .hightlight
@@ -135,16 +146,115 @@ input::-webkit-inner-spin-button
     font-size: 14px
 }
 
-
-.decoration:hover
-{
-    text-decoration: none;
-    color: #fdcc49
-}
+    .decoration:hover
+    {
+        text-decoration: none;
+        color: #fdcc49
+    }
 
 .card-hightlight
 {
     font-weight: 500;
     background-color: #002c3e;
     color: white;
+}
+
+/*PAYMENT METHOD*/
+/* The container of radio button */
+
+.container-rad
+{
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    min-height: 64px;
+    vertical-align: middle;
+}
+
+    /* Hide the browser's default radio button */
+    .container-rad input
+    {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+/* Create a custom radio button */
+.checkmark
+{
+    /* position: absolute;
+    top: 0;*/
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #80808019;
+    border-radius: 50%;
+    position: absolute;
+    top: 25%;
+}
+
+/* On mouse-over, add a grey background color */
+.container-rad:hover input ~ .checkmark
+{
+    background-color: #80808019;
+    border-style: solid;
+    border-color: hsl(89, 43%, 51%);
+}
+
+/* When the radio button is checked, add a blue background */
+.container-rad input:checked ~ .checkmark
+{
+    background-color: hsl(89, 43%, 51%);
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after
+{
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container-rad input:checked ~ .checkmark:after
+{
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container-rad .checkmark:after
+{
+    top: 2px;
+    left: 8px;
+    width: 8px;
+    height: 16px;
+    transform: rotate(45deg);
+    border-bottom: 4px solid #ffffff;
+    border-right: 4px solid #ffffff;
+    background: hsl(89, 43%, 51%);
+}
+
+@media only screen and (min-width: 600px)
+{
+    .container-rad
+    {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        margin-left: 0px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        min-height: 64px;
+        vertical-align: middle;
+    }
 }
