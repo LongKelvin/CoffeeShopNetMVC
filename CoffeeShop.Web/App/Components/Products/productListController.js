@@ -6,13 +6,14 @@
         '$scope',
         'ApiServices',
         'NotificationService',
+        'AuthenticationService',
         '$stateParams',
         '$state',
         '$http'
 
     ];
 
-    function ProductListController($scope, ApiServices, NotificationService) {
+    function ProductListController($scope, ApiServices, NotificationService, AuthenticationService) {
         //setup Controller
         $scope.title = 'ProductListController';
 
@@ -29,6 +30,13 @@
 
         $scope.showMultiDeleteDialog = showMultiDeleteDialog;
         $scope.deleteMultiProduct = deleteMultiProduct;
+
+        $scope.testAuthorize = testAuthorize;
+
+
+        function testAuthorize() {
+            AuthenticationService.validateRequest();
+        }
 
         function getProducts(page, pageSize) {
             page = page || 0;
@@ -144,6 +152,9 @@
             $('#pconfirmDeleteModal').modal('hide');
         }
 
+        $scope.testAuthorize();
         $scope.getProducts();
+
+        
     }
 })(angular.module('CoffeeShop.Products'));
