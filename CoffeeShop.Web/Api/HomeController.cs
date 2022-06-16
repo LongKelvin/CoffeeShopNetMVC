@@ -1,6 +1,7 @@
 ﻿using CoffeeShop.Services;
 using CoffeeShop.Web.Infrastucture.Core;
 
+using System.Net;
 using System.Web.Http;
 
 namespace CoffeeShop.Web.Api
@@ -20,7 +21,7 @@ namespace CoffeeShop.Web.Api
         [Route("TestMethod")]
         public string TestMothod()
         {
-            return "Login success";
+            return (HttpStatusCode.Unauthorized).ToString();
         }
     }
 }

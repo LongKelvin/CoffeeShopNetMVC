@@ -28,8 +28,8 @@ namespace CoffeeShop.Web.Api
             _productService = productService;
         }
 
-        [AllowAnonymous]
         // GET api/<controller>
+        [Authorize]
         [Route("GetAll")]
         public HttpResponseMessage GetAll(HttpRequestMessage request, string keyWord, int page, int pageSize = 20)
         {
@@ -84,7 +84,6 @@ namespace CoffeeShop.Web.Api
             });
         }
 
-        [AllowAnonymous]
         [Route("Create")]
         public HttpResponseMessage Create(HttpRequestMessage request, ProductViewModel ProductVM)
         {
@@ -148,7 +147,6 @@ namespace CoffeeShop.Web.Api
         }
 
         [Route("Delete")]
-        [AllowAnonymous]
         [HttpDelete]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
@@ -167,7 +165,6 @@ namespace CoffeeShop.Web.Api
         }
 
         [Route("DeleteMultiItems")]
-        [AllowAnonymous]
         [HttpDelete]
         public HttpResponseMessage DeleteMultiItems(HttpRequestMessage request, string ids)
         {
