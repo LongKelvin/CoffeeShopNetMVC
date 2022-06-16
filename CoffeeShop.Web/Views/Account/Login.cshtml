@@ -13,7 +13,6 @@
 
     @section Styles{
 
-
         <!--===============================================================================================-->
         <link rel="icon" type="image/png" href="~/favicon.ico" />
         <!--===============================================================================================-->
@@ -52,20 +51,19 @@
             <div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
 
                 @*<span class="login100-form-title p-b-53">
-                    Sign In With
-                </span>
+                        Sign In With
+                    </span>
 
-                <a href="#" class="btn-face m-b-20" onclick="externalLogin()">
-                    <i class="fa fa-facebook-official"></i>
-                    Facebook
+                    <a href="#" class="btn-face m-b-20" onclick="externalLogin()">
+                        <i class="fa fa-facebook-official"></i>
+                        Facebook
+                    </a>
 
-                </a>
+                    <a href="#" class="btn-google m-b-20">
 
-                <a href="#" class="btn-google m-b-20">
-
-                    <img src="~/Assets/Client/form/login-form/images/icons/icon-google.png" />
-                    Google
-                </a>*@
+                        <img src="~/Assets/Client/form/login-form/images/icons/icon-google.png" />
+                        Google
+                    </a>*@
 
                 @Html.Partial("_ExternalLoginPartial",new CoffeeShop.Web.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
 
@@ -103,7 +101,6 @@
                         <span class="pl-3 pt-2">
                             @Html.TextBoxFor(m => m.RememberMe, new { @style = "height:25px;width:25px;", @type = "checkbox", @value = "false" })
                         </span>
-
                     </div>
 
                     <div class="container-login100-form-btn m-t-17">
@@ -174,7 +171,6 @@
                 })
 
             }
-
         </script>
     }
 </body>
