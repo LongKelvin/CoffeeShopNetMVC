@@ -13,7 +13,8 @@
         'CoffeeShop.ApplicationUsers',
         'CoffeeShop.Statistics'
 
-    ]).config(config).config(configAuthentication);
+    ]).config(config)
+      .config(configAuthentication);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
