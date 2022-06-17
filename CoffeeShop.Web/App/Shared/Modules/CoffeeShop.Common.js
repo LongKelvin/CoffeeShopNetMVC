@@ -7,5 +7,7 @@
 
         // 3rd Party Modules
         'ui.router',
+        'ui.select',
+        'ngSanitize'
     ]);
 })();

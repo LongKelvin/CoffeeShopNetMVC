@@ -312,6 +312,18 @@
     <Compile Include="Migrations\202206170324388_ModifyProductModel.designer.cs">
       <DependentUpon>202206170324388_ModifyProductModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206170904079_Re-ConfigDbSettings.cs" />
+    <Compile Include="Migrations\202206170904079_Re-ConfigDbSettings.designer.cs">
+      <DependentUpon>202206170904079_Re-ConfigDbSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206170910269_RenameAppUserColumn.cs" />
+    <Compile Include="Migrations\202206170910269_RenameAppUserColumn.designer.cs">
+      <DependentUpon>202206170910269_RenameAppUserColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206170916327_AddNewAppUserColumn.cs" />
+    <Compile Include="Migrations\202206170916327_AddNewAppUserColumn.designer.cs">
+      <DependentUpon>202206170916327_AddNewAppUserColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
@@ -515,6 +527,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206170324388_ModifyProductModel.resx">
       <DependentUpon>202206170324388_ModifyProductModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206170904079_Re-ConfigDbSettings.resx">
+      <DependentUpon>202206170904079_Re-ConfigDbSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206170910269_RenameAppUserColumn.resx">
+      <DependentUpon>202206170910269_RenameAppUserColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206170916327_AddNewAppUserColumn.resx">
+      <DependentUpon>202206170916327_AddNewAppUserColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
