@@ -6,6 +6,8 @@ using CoffeeShop.Web.Infrastucture.Core;
 using CoffeeShop.Web.Infrastucture.Extensions;
 using CoffeeShop.Web.Models;
 
+using Newtonsoft.Json;
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -78,6 +80,19 @@ namespace CoffeeShop.Web.Api
 
                 //Map object using Automapper
                 var productCategotyVM = Mapper.Map<ProductViewModel>(ProductDetail);
+
+                var listMoreImages = productCategotyVM.MoreImages.Split(',').ToList();
+                try
+                {
+                    var jsonMoreImages = JsonConvert.SerializeObject(listMoreImages);
+                    productCategotyVM.MoreImages = jsonMoreImages;
+                }
+                catch (Exception ex)
+                {
+                    LogError(ex);
+                    productCategotyVM.MoreImages = string.Empty;
+                }
+
                 productCategotyVM.TagsString = EntityExtensions.GetTagStringFromProductTags(ProductDetail);
 
                 return request.CreateResponse(HttpStatusCode.OK, productCategotyVM);
@@ -97,6 +112,17 @@ namespace CoffeeShop.Web.Api
                 var newProduct = new Product();
                 EntityExtensions.UpdateProduct(newProduct, ProductVM);
                 newProduct.CreatedBy = User.Identity.Name;
+
+                try
+                {
+                    var jsonMoreImages = JsonConvert.DeserializeObject<List<string>>(newProduct.MoreImages);
+                    newProduct.MoreImages = string.Join(",", jsonMoreImages);
+                }
+                catch (Exception ex)
+                {
+                    LogError(ex);
+                    newProduct.MoreImages = null;
+                }
 
                 var result = _productService.Add(newProduct);
                 _productService.SaveChanges();
@@ -136,6 +162,17 @@ namespace CoffeeShop.Web.Api
                 var updateProduct = new Product();
                 EntityExtensions.UpdateProduct(updateProduct, ProductVM);
                 updateProduct.UpdatedBy = User.Identity.Name;
+
+                try
+                {
+                    var jsonMoreImages = JsonConvert.DeserializeObject<List<string>>(updateProduct.MoreImages);
+                    updateProduct.MoreImages = string.Join(",", jsonMoreImages);
+                }
+                catch (Exception ex)
+                {
+                    LogError(ex);
+                    updateProduct.MoreImages = null;
+                }
 
                 var result = _productService.Update(updateProduct);
                 _productService.SaveChanges();

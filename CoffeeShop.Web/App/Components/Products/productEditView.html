@@ -240,7 +240,7 @@
                             <div class="form-group">
 
                                 <div class="row">
-                                    <div ng-repeat="image in moreImages" class="col-sm-6 col-md-4 col-lg-3">
+                                    <div ng-repeat="image in moreImages track by $index" class="col-sm-6 col-md-4 col-lg-3">
                                         <figure>
                                             <img ng-src="{{image}}" class="fit-img img-thumbnail grayscale" width="150" height="150">
                                             <figcaption>Image {{$index+1}}</figcaption>

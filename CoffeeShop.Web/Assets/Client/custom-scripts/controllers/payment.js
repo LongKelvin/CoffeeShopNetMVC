@@ -97,7 +97,7 @@
                 }
                 else {
                     //console.log("create order FAILED")
-                    $('#paymentTitle').text("Something went wrong, Please try agin later");
+                    $('#paymentTitle').text("Something went wrong, Please try again later");
                 }
             }
         })

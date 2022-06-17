@@ -308,6 +308,10 @@
     <Compile Include="Migrations\202206060433399_AddRevenuesStatisticSP.designer.cs">
       <DependentUpon>202206060433399_AddRevenuesStatisticSP.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206170324388_ModifyProductModel.cs" />
+    <Compile Include="Migrations\202206170324388_ModifyProductModel.designer.cs">
+      <DependentUpon>202206170324388_ModifyProductModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
@@ -508,6 +512,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206060433399_AddRevenuesStatisticSP.resx">
       <DependentUpon>202206060433399_AddRevenuesStatisticSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206170324388_ModifyProductModel.resx">
+      <DependentUpon>202206170324388_ModifyProductModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
