@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -24,6 +25,10 @@ namespace CoffeeShop.Models.Models
         public int Sex { get; set; }
 
         public string ProfileImage { get; set; }
+
+        [Column("AdminAccessPermission")]
+        public bool AdminAccessPermission { get; set; }
+
         public virtual IEnumerable<Order> Orders { set; get; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager,

@@ -20,8 +20,8 @@
     <div class="container-fluid">
         <div class="card card-default color-palette-box">
             <!--<div class="card-header">
-                <h1 class="card-title"> <strong>Danh mục Sản phẩm</strong></h1>
-            </div>-->
+        <h1 class="card-title"> <strong>Danh mục Sản phẩm</strong></h1>
+    </div>-->
             <!-- /.card-header -->
             <div class="row card-header justify-content-lg-between ">
                 <div class="col-lg-6 col-xs-12 col-md-6 col-sm-12">
@@ -112,6 +112,16 @@
                     </tbody>
                 </table>
             </div>
+
+            <!--Show loading bar if in loading state-->
+          
+            <div ng-if="loading" class="h-100 d-flex align-items-center justify-content-center">
+                <div class="loader">
+                </div>
+            </div>
+
+
+
             <hr />
 
             <div class="card-body form-row justify-content-around">

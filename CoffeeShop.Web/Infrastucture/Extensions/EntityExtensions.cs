@@ -85,7 +85,6 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             product.CategoryID = productVm.CategoryID;
             product.Content = productVm.Content;
             product.Images = productVm.Images;
-            product.MoreImages = productVm.MoreImages;
             product.Price = productVm.Price;
             product.PromotionPrice = productVm.PromotionPrice;
             product.OriginalPrice = productVm.OriginalPrice;
@@ -104,6 +103,15 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             product.MetaDescription = productVm.MetaDescription;
             product.Status = productVm.Status;
             product.RowVersion = productVm.RowVersion;
+
+            if (string.IsNullOrEmpty(productVm.MoreImages) || (productVm.MoreImages == "[]"))
+            {
+                product.MoreImages = null;
+            }
+            else
+            {
+                product.MoreImages = productVm.MoreImages;
+            }
 
             if (string.IsNullOrEmpty(productVm.TagsString))
                 return;
@@ -202,7 +210,7 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             order.CustomerEmail = orderVm.CustomerEmail;
             order.CustomerMobile = orderVm.CustomerMobile;
             order.CustomerMessage = orderVm.CustomerMessage;
-            order.PaymentMethodID= orderVm.PaymentMethodCode;
+            order.PaymentMethodID = orderVm.PaymentMethodCode;
             order.CreatedDate = DateTime.Now;
             order.CreatedBy = orderVm.CreatedBy;
             order.Status = orderVm.Status;

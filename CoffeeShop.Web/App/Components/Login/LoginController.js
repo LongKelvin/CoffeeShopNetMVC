@@ -11,7 +11,8 @@
                     .then(function (response) {
                         //console.log('login_response_data: ', response)
                         if (response != null && response.data.error != undefined) {
-                            NotificationService.displayError("Login failed, UserName or Password incorrect");
+                            NotificationService.displayError(response.data.error);
+                            NotificationService.displayError(response.data.error_description);
                             //console.error("Login failed, UserName or Password incorrect");
                         }
                         else {

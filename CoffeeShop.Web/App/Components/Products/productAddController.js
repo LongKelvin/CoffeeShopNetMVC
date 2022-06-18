@@ -40,7 +40,13 @@
             }
 
             //update MoreImages field
-            $scope.product.MoreImages = JSON.stringify($scope.moreImages)
+            if ($scope.moreImages.length == 0) {
+                $scope.product.MoreImages = null;
+            }
+            else {
+                $scope.product.MoreImages = JSON.stringify($scope.moreImages)
+                //console.log('more images: ', $scope.product.MoreImages)
+            }
 
             //console.log($scope.product)
 
@@ -56,6 +62,8 @@
         function loadParentCategory() {
             ApiServices.get('api/ProductCategory/GetAllParents', null, function (result) {
                 $scope.parentCategories = result.data;
+
+                console.log($scope.parentCategories)
             }, function () {
                 //console.log('Cannot get list parent');
             });

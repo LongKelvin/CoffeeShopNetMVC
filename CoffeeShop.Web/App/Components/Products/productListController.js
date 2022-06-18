@@ -38,6 +38,7 @@
             AuthenticationService.validateRequest();
         }
 
+        $scope.loading = true;
         function getProducts(page, pageSize) {
             page = page || 0;
             pageSize = pageSize || 20;
@@ -61,6 +62,8 @@
                     $scope.pagesCount = result.data.TotalPages; //total pages that the query recevied
                     $scope.totalCount = result.data.TotalCount; //total row data from api result
                     $scope.itemPerPage = pageSize;
+
+                    $scope.loading = false;
                 },
                     function () {
                         //console.log('Load Product failed.');
@@ -155,6 +158,6 @@
         $scope.testAuthorize();
         $scope.getProducts();
 
-        
+
     }
 })(angular.module('CoffeeShop.Products'));

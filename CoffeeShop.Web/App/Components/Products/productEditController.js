@@ -63,7 +63,12 @@
 
                 var checkMoreImagesValue = CommonService.isNullOrEmpty($scope.product.MoreImages);
                 if (checkMoreImagesValue == false) { //check if MoreImages is not null or empty
+                    //console.log('moreImg list: ', $scope.product.MoreImages)
+                    //console.log('data img list: ', result.data.MoreImages)
                     $scope.moreImages = JSON.parse($scope.product.MoreImages)
+                    //$scope.moreImages.push($scope.product.MoreImages)
+
+                    //console.log('more images $scope ', $scope.moreImages)
                 }
 
                 CKEDITOR.instances['ckEditorContentEdit'].setData($scope.product.Content)
