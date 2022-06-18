@@ -67,10 +67,10 @@
                     if (rejection.status == "401") {
                         $location.path('/Login');
                     }
-                    if (response.status == "403") {
+                    if (rejection.status == "403") {
                         $location.path('/AccessDenied');
                     }
-                    if (response.status == "302") {
+                    if (rejection.status == "302") {
                         $location.path('/AccessDenied');
                     }
                     return $q.reject(rejection);

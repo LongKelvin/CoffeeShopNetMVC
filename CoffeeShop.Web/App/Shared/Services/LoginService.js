@@ -30,7 +30,6 @@
                         console.log(error)
                         AuthData.authenticationData.IsAuthenticated = false;
                         AuthData.authenticationData.userName = "";
-                        NotificationService.displayError('UserName or Password not valid');
                         deferred.resolve(error);
                         
                     }

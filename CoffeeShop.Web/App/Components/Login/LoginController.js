@@ -12,7 +12,7 @@
                         //console.log('login_response_data: ', response)
                         if (response != null && response.data.error != undefined) {
                             NotificationService.displayError(response.data.error);
-                            NotificationService.displayError(response.data.error_description);
+                            //NotificationService.displayError(response.data.error_description);
                             //console.error("Login failed, UserName or Password incorrect");
                         }
                         else {

@@ -148,7 +148,8 @@ namespace CoffeeShop.Web.App_Start
                     }
                     else
                     {
-                        context.SetError("invalid_grant", "User do not have permission to access the following resources: AdminControlPanel");
+                        //context.SetError("invalid_grant", "User do not have permission to access the following resources: AdminControlPanel");
+                        context.SetError("You do not have permission to access Admin Control Panel");
                         context.Rejected();
                     }
 
@@ -156,7 +157,8 @@ namespace CoffeeShop.Web.App_Start
                 }
                 else
                 {
-                    context.SetError("invalid_grant", "User Name or Password incorrect.'");
+                    //context.SetError("invalid_grant", "User Name or Password incorrect.'");
+                    context.SetError( "User Name or Password incorrect");
                     context.Rejected();
                 }
             }
