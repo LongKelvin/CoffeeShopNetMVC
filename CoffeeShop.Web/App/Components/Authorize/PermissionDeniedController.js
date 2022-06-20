@@ -6,12 +6,13 @@
     function PermissionDeniedController($scope, LoginService) {
         $scope.title = 'PermissionDeniedController';
 
-        $scope.getUserName = getUserName;
+        //$scope.getUserName = getUserName;
 
-        function getUserName() {
-            $scope.userName = LoginService.getUserName();
-        }
+        //function getUserName() {
+        //    $scope.userName = LoginService.getUserName();
+        //    console.log('username: ', $scope.userName.userName)
+        //}
 
-        $scope.getUserName();
+        //$scope.getUserName();
     }
 })(angular.module('CoffeeShop'));

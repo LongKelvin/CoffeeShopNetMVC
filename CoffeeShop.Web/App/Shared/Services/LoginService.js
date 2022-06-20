@@ -56,5 +56,9 @@
             this.getUserInfo = function () {
                 return userInfo;
             }
+
+            this.getUserName = function () {
+                return userInfo;
+            }
         }]);
 })(angular.module('CoffeeShop.Common'));

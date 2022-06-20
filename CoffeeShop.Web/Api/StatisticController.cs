@@ -21,6 +21,9 @@ namespace CoffeeShop.Web.Api
 
         [Route("GetRevenue")]
         [HttpGet]
+        [PermissionAuthorize(Common.ApplicationPermissons.Products.Edit)]
+        [PermissionAuthorize(Common.ApplicationPermissons.Products.View)]
+        [PermissionAuthorize(Common.ApplicationPermissons.Products.Delete)]
         public HttpResponseMessage GetRevenueStatistic(HttpRequestMessage request, string fromDate, string toDate)
         {
             if (string.IsNullOrEmpty(fromDate) || string.IsNullOrEmpty(toDate))

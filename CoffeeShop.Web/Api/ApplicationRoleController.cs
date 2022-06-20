@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 
+using CoffeeShop.Common;
 using CoffeeShop.Common.ExceptionHandler;
 using CoffeeShop.Models.Models;
 using CoffeeShop.Services;
@@ -32,6 +33,7 @@ namespace CoffeeShop.Web.Api
             _appPermissionService = applicationPermissionService;
         }
 
+        [PermissionAuthorize(ApplicationPermissons.ApplicationRoles.View)]
         [Route("GetListPaging")]
         [HttpGet]
         public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
@@ -77,6 +79,7 @@ namespace CoffeeShop.Web.Api
 
         [Route("Detail/{id}")]
         [HttpGet]
+        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.Edit)]
         public HttpResponseMessage Details(HttpRequestMessage request, string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -96,6 +99,9 @@ namespace CoffeeShop.Web.Api
 
         [HttpPost]
         [Route("Add")]
+        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.Edit)]
+        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.Create)]
+        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.View)]
         public HttpResponseMessage Create(HttpRequestMessage request, ApplicationRoleViewModel applicationRoleViewModel)
         {
             if (ModelState.IsValid)
@@ -132,6 +138,7 @@ namespace CoffeeShop.Web.Api
 
         [HttpPut]
         [Route("Update")]
+        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.Edit)]
         public HttpResponseMessage Update(HttpRequestMessage request, ApplicationRoleViewModel applicationRoleViewModel)
         {
             if (ModelState.IsValid)
@@ -173,6 +180,10 @@ namespace CoffeeShop.Web.Api
 
         [HttpDelete]
         [Route("Delete")]
+        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.Edit)]
+        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.View)]
+        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.Create)]
+        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.Delete)]
         public HttpResponseMessage Delete(HttpRequestMessage request, string id)
         {
             var deleteRole = _appRoleService.GetByStringId(id);
@@ -186,6 +197,10 @@ namespace CoffeeShop.Web.Api
 
         [Route("DeleteMulti")]
         [HttpDelete]
+        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.Edit)]
+        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.View)]
+        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.Create)]
+        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.Delete)]
         public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string ids)
         {
             return CreateHttpResponse(request, () =>

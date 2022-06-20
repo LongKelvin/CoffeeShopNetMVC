@@ -36,6 +36,12 @@
                 parent: 'Base',
                 templateUrl: "/App/Components/Home/HomeView.html",
                 controller: "HomeController"
+            })
+
+            .state('AccessDenied', {
+                url: "/AccessDenied",
+                templateUrl: "/App/Components/Authorize/PermissionDenied.html",
+                controller: "PermissionDeniedController"
             });
 
         $urlRouterProvider.otherwise('/Login');
