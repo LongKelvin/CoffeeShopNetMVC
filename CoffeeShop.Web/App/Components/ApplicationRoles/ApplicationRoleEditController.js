@@ -42,7 +42,6 @@
                 null,
                 function (response) {
                     $scope.listAppPermissions = response.data;
-                    
                 }, function (response) {
                     NotificationService.displayError('Không tải được danh sách permissions.');
                 });
@@ -56,7 +55,6 @@
                     $.each(result.data, function (i, permission) {
                         $('#permission_' + permission.Name).prop('checked', true);
                     });
-
                 }, function (response) {
                     NotificationService.displayError('Không tải được danh sách permissions.');
                 });

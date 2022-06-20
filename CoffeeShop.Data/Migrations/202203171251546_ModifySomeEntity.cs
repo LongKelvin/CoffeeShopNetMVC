@@ -1,8 +1,7 @@
 ﻿namespace CoffeeShop.Data.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class ModifySomeEntity : DbMigration
     {
         public override void Up()
@@ -44,7 +43,7 @@
             DropColumn("dbo.PostCategories", "UpdateDate");
             DropColumn("dbo.PostCategories", "UpdateBy");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.PostCategories", "UpdateBy", c => c.String(maxLength: 50));

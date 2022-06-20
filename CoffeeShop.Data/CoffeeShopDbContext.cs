@@ -140,9 +140,9 @@ namespace CoffeeShop.Data
 
             modelBuilder.Entity<IdentityUserClaim>().ToTable("ApplicationUserClaims")
                  .Property(p => p.UserId).HasColumnName("UserId");
-            modelBuilder.Entity<IdentityUserClaim>().HasKey(k => new { k.UserId , k.Id});
+            modelBuilder.Entity<IdentityUserClaim>().HasKey(k => new { k.UserId, k.Id });
 
-            modelBuilder.Entity<ApplicationPermission>().HasKey(k=>new { k.Id });
+            modelBuilder.Entity<ApplicationPermission>().HasKey(k => new { k.Id });
 
             //Permission base Authorize
             //modelBuilder.Entity<IdentityRoleClaim<string>>(entity => entity.Property(m => m.Id).HasMaxLength(85));

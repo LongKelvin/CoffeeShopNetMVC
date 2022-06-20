@@ -1,5 +1,4 @@
-﻿using CoffeeShop.Common.ViewModel;
-using CoffeeShop.Data.Insfrastructure;
+﻿using CoffeeShop.Data.Insfrastructure;
 using CoffeeShop.Data.Repositories;
 using CoffeeShop.Models.Models;
 
@@ -27,8 +26,8 @@ namespace CoffeeShop.Services
             var listOrderDetail = order.OrderDetails;
 
             order.OrderDetails = null;
-           
-            var orderResult =  _orderRepository.Add(order);
+
+            var orderResult = _orderRepository.Add(order);
             _unitOfWork.Commit();
 
             orderResult.OrderDetails = listOrderDetail;
@@ -36,7 +35,6 @@ namespace CoffeeShop.Services
             _unitOfWork.Commit();
 
             return orderResult;
-
         }
 
         public Order Delete(Order order)
@@ -80,7 +78,5 @@ namespace CoffeeShop.Services
             _orderRepository.Update(order);
             return order;
         }
-
-        
     }
 }

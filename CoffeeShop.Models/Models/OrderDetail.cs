@@ -21,7 +21,7 @@ namespace CoffeeShop.Models.Models
         [Display(Name = "Quantity")]
         public int? Quantity { get; set; } // int, null
 
-        public decimal  UnitPrice { get; set; }
+        public decimal UnitPrice { get; set; }
 
         public virtual Order Order { get; set; }
 

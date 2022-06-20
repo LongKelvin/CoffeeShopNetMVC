@@ -31,7 +31,6 @@
                         AuthData.authenticationData.IsAuthenticated = false;
                         AuthData.authenticationData.userName = "";
                         deferred.resolve(error);
-                        
                     }
                 );
 
@@ -51,9 +50,6 @@
                         $window.sessionStorage.clear();
                         $window.localStorage.clear();
                     }
-
-
-
                 }, null);
             }
 

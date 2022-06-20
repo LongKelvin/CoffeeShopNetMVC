@@ -66,7 +66,6 @@ namespace CoffeeShop.Web.Infrastucture.Core
                 };
 
                 _errorService.CreateError(error);
-                
             }
             catch
             {

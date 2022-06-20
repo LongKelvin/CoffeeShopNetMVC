@@ -1,8 +1,7 @@
 ﻿namespace CoffeeShop.Data.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class ModifyApplicationUserClaims : DbMigration
     {
         public override void Up()
@@ -20,21 +19,21 @@
             CreateIndex("dbo.ApplicationUserClaims", "ApplicationUser_Id");
             DropTable("dbo.IdentityUserClaims");
         }
-        
+
         public override void Down()
         {
             CreateTable(
                 "dbo.IdentityUserClaims",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(),
-                        ClaimType = c.String(),
-                        ClaimValue = c.String(),
-                        ApplicationUser_Id = c.String(maxLength: 128),
-                    })
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    UserId = c.String(),
+                    ClaimType = c.String(),
+                    ClaimValue = c.String(),
+                    ApplicationUser_Id = c.String(maxLength: 128),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             DropIndex("dbo.ApplicationUserClaims", new[] { "ApplicationUser_Id" });
             DropPrimaryKey("dbo.ApplicationUserClaims");
             DropColumn("dbo.ApplicationUserClaims", "ApplicationUser_Id");

@@ -6,7 +6,6 @@ using CoffeeShop.Models.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-
 namespace CoffeeShop.Services
 {
     public interface IApplicationPermissionService
@@ -32,6 +31,7 @@ namespace CoffeeShop.Services
         List<ApplicationUser> GetListUserByPermissionId(string permissionId);
 
         List<ApplicationPermission> GetListPermissionByRoleName(string roleName);
+
         List<ApplicationPermission> GetListPermissionByRoleId(string roleId);
 
         void SaveChanges();

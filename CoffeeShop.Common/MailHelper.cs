@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net;
+﻿using System.Diagnostics;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CoffeeShop.Common
 {
     public class MailHelper
-    { 
+    {
         public static bool SendMail(string toEmail, string subject, string content)
         {
             try

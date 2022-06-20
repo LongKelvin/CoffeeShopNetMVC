@@ -33,7 +33,6 @@
 
         $scope.testAuthorize = testAuthorize;
 
-
         function testAuthorize() {
             AuthenticationService.validateRequest();
         }
@@ -157,7 +156,5 @@
 
         $scope.testAuthorize();
         $scope.getProducts();
-
-
     }
 })(angular.module('CoffeeShop.Products'));

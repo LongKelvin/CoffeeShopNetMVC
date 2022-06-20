@@ -1,8 +1,7 @@
 ﻿namespace CoffeeShop.Data.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class UpdateAppPermission : DbMigration
     {
         public override void Up()
@@ -15,7 +14,7 @@
             AddForeignKey("dbo.ApplicationRolePermissions", "RoleId", "dbo.ApplicationPermissions", "Id", cascadeDelete: true);
             AddForeignKey("dbo.ApplicationUserPermissions", "PermissionId", "dbo.ApplicationPermissions", "Id", cascadeDelete: true);
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.ApplicationUserPermissions", "PermissionId", "dbo.ApplicationPermissions");

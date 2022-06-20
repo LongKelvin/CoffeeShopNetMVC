@@ -1,9 +1,6 @@
 ﻿using CoffeeShop.Common;
 using CoffeeShop.Data;
 using CoffeeShop.Models.Models;
-using CoffeeShop.Web.Infrastucture.Core;
-
-using Evernote.EDAM.Type;
 
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -58,17 +55,14 @@ namespace CoffeeShop.Web.App_Start
                     // Enables the application to validate the security stamp when the user logs in.
                     // This is a security feature which is used when you change a password or add an external login to your account.
 
-
                     OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user
                             .GenerateUserIdentityAsync(manager, DefaultAuthenticationTypes.ApplicationCookie))
                 },
 
-
                 // This line to force use SystemWebCookieManager for OWIN
                 CookieManager = new SystemWebCookieManager()
-
             };
 
             app.UseCookieAuthentication(authCookieOptions);
@@ -97,7 +91,6 @@ namespace CoffeeShop.Web.App_Start
             facebookAuthenticationOptions.Scope.Add("email");
 
             app.UseFacebookAuthentication(facebookAuthenticationOptions);
-
 
             //Config Google Authentication Options
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
@@ -152,13 +145,11 @@ namespace CoffeeShop.Web.App_Start
                         context.SetError("You do not have permission to access Admin Control Panel");
                         context.Rejected();
                     }
-
-
                 }
                 else
                 {
                     //context.SetError("invalid_grant", "User Name or Password incorrect.'");
-                    context.SetError( "User Name or Password incorrect");
+                    context.SetError("User Name or Password incorrect");
                     context.Rejected();
                 }
             }

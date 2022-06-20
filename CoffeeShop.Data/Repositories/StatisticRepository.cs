@@ -33,7 +33,7 @@ namespace CoffeeShop.Data.Repositories
             };
 
             return DbContext.Database
-                .SqlQuery<RevenueStatisticViewModel>("GetRevenueStatistic @fromDate, @toDate",parameters).ToList();
+                .SqlQuery<RevenueStatisticViewModel>("GetRevenueStatistic @fromDate, @toDate", parameters).ToList();
         }
     }
 }

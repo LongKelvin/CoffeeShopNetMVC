@@ -60,7 +60,7 @@
             }
             catch (e) {
                 //console.log("Exception in get slides function: ")
-                    //(console.error || console.log).call(console, e.stack || e);
+                //(console.error || console.log).call(console, e.stack || e);
 
                 NotificationService.displayError('Something went wrong, please try again later');
             }

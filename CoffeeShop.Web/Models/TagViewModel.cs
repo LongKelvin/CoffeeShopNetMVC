@@ -1,6 +1,4 @@
-﻿using CoffeeShop.Models.Models;
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CoffeeShop.Web.Models
@@ -12,6 +10,7 @@ namespace CoffeeShop.Web.Models
             this.Posts = new HashSet<PostViewModel>();
             this.Products = new HashSet<ProductViewModel>();
         }
+
         [Display(Name = "ID")]
         public string ID { get; set; } // varchar(50), not null
 
