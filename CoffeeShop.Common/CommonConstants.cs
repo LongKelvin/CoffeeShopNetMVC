@@ -39,7 +39,8 @@
         public const string GoogleClientId = "GoogleClientId";
         public const string GoogleClientSecret = "GoogleClientSecret";
 
-        public const string FILE_ExcelUploadedPath = "~/UploadedFiles/Excels";
+        public const string EXCEL_UPLOAD_PATH = "ExcelUploadPath";
+        public const string EXCEL_EXPORT_PATH = "ExcelExportPath";
 
         public enum Sex
         {

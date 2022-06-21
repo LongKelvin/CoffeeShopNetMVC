@@ -14,6 +14,7 @@ using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -244,7 +245,7 @@ namespace CoffeeShop.Web.Api
             if (!Request.Content.IsMimeMultipartContent())
                 return Request.CreateErrorResponse(HttpStatusCode.UnsupportedMediaType, "Định dạng không được hỗ trợ");
 
-            var rootFolderPath = HttpContext.Current.Server.MapPath(Common.CommonConstants.FILE_ExcelUploadedPath);
+            var rootFolderPath = HttpContext.Current.Server.MapPath(ConfigHelper.GetByKey(CommonConstants.EXCEL_UPLOAD_PATH));
             if (!Directory.Exists(rootFolderPath))
                 Directory.CreateDirectory(rootFolderPath);
 
@@ -388,6 +389,33 @@ namespace CoffeeShop.Web.Api
                     }
                 }
                 return listProducts;
+            }
+        }
+
+        [HttpGet]
+        [Route("ExportToExcel")]
+        public async Task<HttpResponseMessage> ExportToExcel(HttpRequestMessage request, string keyWord = null)
+        {
+            string fileName = string.Concat("Product_" + DateTime.Now.ToString("yyyyMMddhhmmsss") + ".xlsx");
+            var folderReport = ConfigHelper.GetByKey(CommonConstants.EXCEL_EXPORT_PATH);
+            string filePath = HttpContext.Current.Server.MapPath(folderReport);
+
+            if (!Directory.Exists(filePath))
+                Directory.CreateDirectory(filePath);
+
+            string fullPath = Path.Combine(filePath, fileName);
+
+            try
+            {
+                var data = _productService.GetAll(keyWord).ToList();
+                await ReportHelper.GenerateExcelXls(data, fullPath);
+                Trace.WriteLine($"PATH DOWNLOAD URL: {Path.Combine(folderReport, fileName)}");
+                return request.CreateResponse(HttpStatusCode.OK, Path.Combine(folderReport, fileName));
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                return request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
     }

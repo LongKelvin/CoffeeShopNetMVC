@@ -50,7 +50,7 @@
                                         class=" form-control w-100"
                                         required name="pCategoryId"
                                         ng-options="option.ID as option.Name for option in parentCategories">
-                                    <option value=''>Chọn danh mục</option>
+                                    <option value='' selected>Chọn danh mục</option>
                                 </select>
                                 <span class="text-danger" ng-show="frmImportProduct.pCategoryId.$touched && frmImportProduct.pCategoryId.$invalid">Danh mục sản phẩm không được bỏ trống</span>
                             </div>

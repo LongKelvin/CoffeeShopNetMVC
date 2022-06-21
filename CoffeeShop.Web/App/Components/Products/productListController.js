@@ -30,6 +30,7 @@
 
         $scope.showMultiDeleteDialog = showMultiDeleteDialog;
         $scope.deleteMultiProduct = deleteMultiProduct;
+        $scope.exportToExcel = exportToExcel;
 
         $scope.testAuthorize = testAuthorize;
 
@@ -152,6 +153,25 @@
             })
 
             $('#pconfirmDeleteModal').modal('hide');
+        }
+
+        function exportToExcel() {
+            var config = {
+                params: {
+                    keyWord: $scope.keyWord,
+                }
+            }
+
+            ApiServices.get('api/Product/ExportToExcel', config, function (response) {
+                console.log('url path:', response)
+                if (response.status = 200) {
+                    //console.log('url path:', response)
+                    window.location.href = response.data;
+                }
+            }, function (error) {
+                //console.log('url path error:', response)
+                NotificationService.displayError(error);
+            })
         }
 
         $scope.testAuthorize();
