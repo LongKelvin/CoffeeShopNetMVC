@@ -192,6 +192,8 @@
     <Content Include="App\Components\ProductCategories\ProductCategoryEditView.html" />
     <Content Include="App\Components\ProductCategories\ProductCategoryListController.js" />
     <Content Include="App\Components\ProductCategories\ProductCategoryListView.html" />
+    <Content Include="App\Components\Products\ProductExcelImportController.js" />
+    <Content Include="App\Components\Products\ProductExcelImportView.html" />
     <Content Include="App\Components\Products\Products.Module.js" />
     <Content Include="App\Components\Products\ProductAddController.js" />
     <Content Include="App\Components\Products\ProductAddView.html" />
@@ -209,6 +211,7 @@
     <Content Include="App\Components\Statistics\Statistic.Module.js" />
     <Content Include="App\Components\Statistics\RevenueStatisticController.js" />
     <Content Include="App\Components\Statistics\RevenueStatisticView.html" />
+    <Content Include="App\Shared\Directives\fileUpload.directive.js" />
     <Content Include="App\Shared\Directives\PagerDirective.html" />
     <Content Include="App\Shared\Directives\PagerDirective.js" />
     <Content Include="App\Shared\Filters\StatusFilter.js" />
@@ -2161,6 +2164,7 @@
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\CartPanel.cshtml" />
     <Content Include="Views\Payment\PaymentTotal.cshtml" />
+    <Content Include="Assets\Admin\templates\product-import-template.xlsx" />
     <None Include="Properties\PublishProfiles\CoffeeShopMVC.pubxml" />
     <Content Include="Views\Account\_ExternalLoginPartial.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -2171,7 +2175,6 @@
     <Folder Include="App\Components\Orders\" />
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Admin\css\skins\" />
-    <Folder Include="Assets\Admin\templates\" />
     <Folder Include="Lang\" />
     <Folder Include="UploadFiles\" />
   </ItemGroup>
@@ -2509,6 +2512,9 @@
     </PackageReference>
     <PackageReference Include="EntityFramework">
       <Version>6.4.4</Version>
+    </PackageReference>
+    <PackageReference Include="EPPlus">
+      <Version>6.0.5</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNet.Identity.Core">
       <Version>2.2.3</Version>

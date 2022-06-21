@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 
+using CoffeeShop.Common;
 using CoffeeShop.Models.Models;
 using CoffeeShop.Services;
 using CoffeeShop.Web.Infrastucture.Core;
@@ -8,12 +9,17 @@ using CoffeeShop.Web.Models;
 
 using Newtonsoft.Json;
 
+using OfficeOpenXml;
+
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Script.Serialization;
 
@@ -229,6 +235,160 @@ namespace CoffeeShop.Web.Api
 
                 return request.CreateResponse(HttpStatusCode.OK);
             });
+        }
+
+        [Route("ImportFromExcel")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> ImportFromExcel()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+                return Request.CreateErrorResponse(HttpStatusCode.UnsupportedMediaType, "Định dạng không được hỗ trợ");
+
+            var rootFolderPath = HttpContext.Current.Server.MapPath(Common.CommonConstants.FILE_ExcelUploadedPath);
+            if (!Directory.Exists(rootFolderPath))
+                Directory.CreateDirectory(rootFolderPath);
+
+            var provider = new MultipartFormDataStreamProvider(rootFolderPath);
+            var result = await Request.Content.ReadAsMultipartAsync(provider);
+
+            // Show all the key-value pairs.
+            // Just for debug
+            //foreach (var key in result.FormData.AllKeys)
+            //{
+            //    foreach (var val in result.FormData.GetValues(key))
+            //    {
+            //        Trace.WriteLine(string.Format("{0}: {1}", key, val));
+            //    }
+            //}
+
+            //foreach (MultipartFileData file in result.FileData)
+            //{
+            //    Trace.WriteLine(file.Headers.ContentDisposition.FileName);
+            //    Trace.WriteLine("Server file path: " + file.LocalFileName);
+            //}
+
+            if (result.FormData["CategoryId"] == null)
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bạn chưa chọn danh mục sản phẩm");
+
+            //Upload files
+            int addedCount = 0;
+            int categoryId = 0;
+
+            int.TryParse(result.FormData["CategoryId"], out categoryId);
+
+            var categoryById = _productService.GetCategory(categoryId);
+            if (categoryById == null)
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Danh mục sản phâm không đúng");
+
+            if (result.FileData.Count <= 0)
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "File rỗng, không có dữ liệu để nhập vào hệ thống");
+
+            try
+            {
+                foreach (var fileData in result.FileData)
+                {
+                    if (string.IsNullOrEmpty(fileData.Headers.ContentDisposition.FileName))
+                        return Request.CreateResponse(HttpStatusCode.NotAcceptable, "File không đúng định dạng");
+
+                    string fileName = fileData.Headers.ContentDisposition.FileName;
+                    if (fileName.StartsWith("\"") && fileName.EndsWith("\""))
+                        fileName = fileName.Trim('"');
+
+                    if (fileName.Contains(@"/") || fileName.Contains(@"\"))
+                        fileName = Path.GetFileName(fileName);
+
+                    var fullPath = Path.Combine(rootFolderPath, fileName);
+                    File.Copy(fileData.LocalFileName, fullPath, true);
+
+                    //Insert to database
+                    var listProduct = this.ReadProductFromExcel(fullPath, categoryId);
+                    if (listProduct.Count > 0)
+                    {
+                        foreach (var product in listProduct)
+                        {
+                            _productService.Add(product);
+                            addedCount++;
+                        }
+
+                        _productService.SaveChanges();
+                    }
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, $"Đã nhập thành công {addedCount} sản phẩm");
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, $"Đã có lỗi xảy ra, Vui lòng kiểm tra lại file Excel để format theo đúng mẫu Excel từ hệ thống");
+            }
+        }
+
+        private List<Product> ReadProductFromExcel(string fullPath, int categoryId)
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            using (var package = new ExcelPackage(new FileInfo(fullPath)))
+            {
+                ExcelWorksheet workSheet = package.Workbook.Worksheets.FirstOrDefault();
+
+                //Delete empty row from Excel
+                workSheet.TrimLastEmptyRows();
+
+                List<Product> listProducts = new List<Product>();
+                ProductViewModel productViewModel;
+                Product product;
+
+                decimal originalPrice = 0;
+                decimal price = 0;
+                decimal promotionPrice;
+                int quantity = 0;
+
+                for (int i = workSheet.Dimension.Start.Row + 1; i <= workSheet.Dimension.End.Row; i++)
+                {
+                    try
+                    {
+                        productViewModel = new ProductViewModel
+                        {
+                            Name = workSheet.Cells[i, 1].Value.ToString(),
+                            Alias = Common.StringHelper.ToUnsignString(workSheet.Cells[i, 1].Value.ToString()),
+                            Description = workSheet.Cells[i, 2].Value.ToString(),
+
+                            //This block throw exception about casting data type
+                            //OriginalPrice = (decimal)workSheet.Cells[i, 3].Value,
+                            //Price = (decimal)workSheet.Cells[i, 4].Value,
+                            //PromotionPrice = (decimal?)workSheet.Cells[i, 5].Value,
+                            //Quantity = (int)workSheet.Cells[i, 6].Value,
+
+                            Status = Common.ExcelHelper.ExtractTrueFalseValue(workSheet.Cells[i, 7].Value),
+                            HomeFlag = Common.ExcelHelper.ExtractTrueFalseValue(workSheet.Cells[i, 8].Value),
+                            HotFlag = Common.ExcelHelper.ExtractTrueFalseValue(workSheet.Cells[i, 9].Value),
+                            CategoryID = categoryId,
+                        };
+
+                        int.TryParse(workSheet.Cells[i, 6].Value.ToString().Replace(",", ""), out quantity);
+                        productViewModel.Quantity = quantity;
+
+                        decimal.TryParse(workSheet.Cells[i, 3].Value.ToString().Replace(",", ""), out originalPrice);
+                        productViewModel.OriginalPrice = originalPrice;
+
+                        decimal.TryParse(workSheet.Cells[i, 4].Value.ToString().Replace(",", ""), out price);
+                        productViewModel.Price = price;
+
+                        if (decimal.TryParse(workSheet.Cells[i, 5].Value.ToString(), out promotionPrice))
+                        {
+                            productViewModel.PromotionPrice = promotionPrice;
+                        }
+
+                        product = new Product();
+                        product.UpdateProduct(productViewModel);
+                        listProducts.Add(product);
+                    }
+                    catch (Exception eex)
+                    {
+                        LogError(eex);
+                        return listProducts;
+                    }
+                }
+                return listProducts;
+            }
         }
     }
 }
