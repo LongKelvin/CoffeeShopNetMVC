@@ -17,6 +17,7 @@ namespace CoffeeShop.Services
         void Delete(int id);
 
         IEnumerable<Product> GetAll(string keyWord);
+        IEnumerable<Product> GetAll(string keyWord, string[] includes=null);
 
         IEnumerable<Product> GetAll(string[] includes = null);
 

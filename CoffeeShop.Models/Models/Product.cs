@@ -77,7 +77,6 @@ namespace CoffeeShop.Models.Models
         public int? ViewCount { get; set; } // int, null
 
         [Display(Name = "More Images")]
-        [Column(TypeName = "xml")]
         public string MoreImages { get; set; } // XML(.), null
 
         [MaxLength(500)]

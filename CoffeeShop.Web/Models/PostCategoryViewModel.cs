@@ -1,6 +1,4 @@
-﻿using CoffeeShop.Models.Models;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -40,14 +38,12 @@ namespace CoffeeShop.Web.Models
         [Display(Name = "Home Flag")]
         public bool? HomeFlag { get; set; } // bit, null
 
-      
         [Display(Name = "Images")]
         public string Images { get; set; } // nvarchar(500), null
 
         [Display(Name = "Description")]
         public string Description { get; set; } // nvarchar(500), null
 
-        
         [Display(Name = "Name")]
         public string Name { get; set; } // nvarchar(250), not null
 

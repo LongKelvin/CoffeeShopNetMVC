@@ -31,6 +31,5 @@ namespace CoffeeShop.Data.Insfrastructure
         bool CheckContains(Expression<Func<T, bool>> predicate);
 
         CoffeeShopDbContext RequetsNewDbContextInstance();
-        
     }
 }

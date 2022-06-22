@@ -25,16 +25,18 @@
     @*Library*@
     <link href="~/Assets/Admin/lib/icheck-bootstrap/icheck-bootstrap.css" rel="stylesheet" />
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    @*<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />*@
     @*<link href="~/Assets/Admin/lib/select2/css/select2.css" rel="stylesheet" />*@
     @*@<link href="~/Assets/Admin/lib/select2-bootstrap-css/select2-bootstrap.css" rel="stylesheet" />
 
-    @*<link href="~/Assets/Admin/lib/select2-bootstrap-theme/select2-bootstrap.css" rel="stylesheet" />
-        <link href="~/Assets/Admin/lib/select2-bootstrap-5-theme/select2-bootstrap-5-theme.css" rel="stylesheet" />
-        <link href="~/Assets/Admin/lib/select2-bootstrap4-theme/select2-bootstrap4.css" rel="stylesheet" />*@
+        @*<link href="~/Assets/Admin/lib/select2-bootstrap-theme/select2-bootstrap.css" rel="stylesheet" />
+            <link href="~/Assets/Admin/lib/select2-bootstrap-5-theme/select2-bootstrap-5-theme.css" rel="stylesheet" />
+            <link href="~/Assets/Admin/lib/select2-bootstrap4-theme/select2-bootstrap4.css" rel="stylesheet" />*@
     @*<link href="~/Assets/Admin/lib/ckeditor/contents.css" rel="stylesheet" />*@
 
-    <link href="~/Assets/Admin/lib/angular-loading-bar/loading-bar.css" rel="stylesheet" />
+    @*<link href="~/Assets/Admin/lib/angular-loading-bar/loading-bar.css" rel="stylesheet" />*@
+    <link href="~/Assets/Admin/lib/angular-ui-select/select.min.css" rel="stylesheet" />
+    <link href="~/Assets/Admin/lib/angular-loading-bar/loading-bar.min.css" rel="stylesheet" />
 </head>
 <body id="main-body" ng-app="CoffeeShop" ng-controller="RootController">
 
@@ -65,16 +67,16 @@
     @*angularJS lib*@
     <!-- 3rd party libraries -->
     <script src="~/Assets/Admin/lib/angular.js/angular.js"></script>
+    <script src="~/Assets/Admin/lib/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="~/Assets/Admin/lib/angular-ui-router/angular-ui-router.js"></script>
 
-
-    <script src="~/Assets/Admin/lib/angular-loading-bar/loading-bar.js"></script>
+    @*<script src="~/Assets/Admin/lib/angular-loading-bar/loading-bar.js"></script>*@
 
     <script src="~/Assets/Admin/lib/toastr.js/toastr.min.js"></script>
-    <script src="~/Assets/Admin/lib/angular-local-storage/angular-local-storage.min.js"></script>
+    @*<script src="~/Assets/Admin/lib/angular-local-storage/angular-local-storage.min.js"></script>*@
 
     @*<script src="~/Assets/Admin/lib/select2/js/select2.js" defer></script>*@
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>*@
 
     @*<script src="~/Assets/Admin/lib/bootbox.js/bootbox.js"></script>*@
     @*<script src="~/Assets/Admin/lib/ngbootbox/ngBootbox.js"></script>*@
@@ -85,6 +87,8 @@
     @*<script src="~/Assets/Admin/lib/ng-ckeditor/ng-ckeditor.js"></script>*@
     @*<script src="~/Assets/Admin/lib/checklist-model/checklist-model.js"></script>*@
     <script src="~/Assets/Admin/lib/Chart.js/chart.js"></script>
+    <script src="~/Assets/Admin/lib/angular-ui-select/select.min.js"></script>
+    <script src="~/Assets/Admin/lib/angular-loading-bar/loading-bar.min.js"></script>
 
     @*custom scripts*@
     <script src="~/Assets/Admin/custom-scripts/util.js"></script>
@@ -120,6 +124,7 @@
     <script src="~/App/Components/Products/ProductAddController.js"></script>
     <script src="~/App/Components/Products/ProductEditController.js"></script>
     <script src="~/App/Components/Products/ProductListController.js"></script>
+    <script src="~/App/Components/Products/ProductExcelImportController.js"></script>
 
     <script src="~/App/Components/ProductCategories/ProductCategoryAddController.js"></script>
     <script src="~/App/Components/ProductCategories/ProductCategoryEditController.js"></script>

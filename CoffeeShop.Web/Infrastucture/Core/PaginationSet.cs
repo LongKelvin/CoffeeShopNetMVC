@@ -13,7 +13,6 @@ namespace CoffeeShop.Web.Infrastucture.Core
         public int Count
         {
             get { return (Items != null) ? Items.Count() : 0; }
-           
         }
 
         public List<T> Items { get; set; }

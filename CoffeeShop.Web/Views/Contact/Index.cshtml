@@ -124,71 +124,71 @@
 
                                 @if (ViewData["SuccessMsg"] != null)
                                 {
-                                    <div class="alert alert-success" role="alert">
-                                        <strong>
-                                            @ViewData["SuccessMsg"]
-                                        </strong>
-                                    </div>
+                                <div class="alert alert-success" role="alert">
+                                    <strong>
+                                        @ViewData["SuccessMsg"]
+                                    </strong>
+                                </div>
                                 }
                                 else
                                 {
-                                    <form class="mb-5" method="post" action="@Url.Action("SendFeedbackToAdmin","Contact")" id="contactForm" name="contactForm">
-                                        <div class="row">
-                                            <div class="col-md-6 form-group mb-3">
-                                                <label for="" class="col-form-label">Name *</label>
-                                                @*<input type="text" class="form-control" name="Model.Feedback.Name" id="Feedback_Name" placeholder="Your name">*@
-                                                @Html.TextBoxFor(m => m.Feedback.Name, new { @class = "form-control", @placeholder = "Your name" })
-                                                @Html.ValidationMessageFor(model => model.Feedback.Name, "", new { @class = "text-danger" })
-                                            </div>
-                                            <div class="col-md-6 form-group mb-3">
-                                                <label for="" class="col-form-label">Email *</label>
-                                                @*<input type="text" class="form-control" name="Feedback.Email" id="Feedback_Email" placeholder="Your email">*@
-                                                @Html.TextBoxFor(m => m.Feedback.Email, new { @class = "form-control", @placeholder = "Your email" })
-                                                @Html.ValidationMessageFor(model => model.Feedback.Email, "", new { @class = "text-danger" })
-                                            </div>
+                                <form class="mb-5" method="post" action="@Url.Action("SendFeedbackToAdmin","Contact")" id="contactForm" name="contactForm">
+                                    <div class="row">
+                                        <div class="col-md-6 form-group mb-3">
+                                            <label for="" class="col-form-label">Name *</label>
+                                            @*<input type="text" class="form-control" name="Model.Feedback.Name" id="Feedback_Name" placeholder="Your name">*@
+                                            @Html.TextBoxFor(m => m.Feedback.Name, new { @class = "form-control", @placeholder = "Your name" })
+                                            @Html.ValidationMessageFor(model => model.Feedback.Name, "", new { @class = "text-danger" })
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-md-12 form-group mb-3">
-                                                <label for="budget" class="col-form-label">Subject:</label>
-                                                @*<input type="text" class="form-control" name="Feedback.EmailSubject" id="Feedback_EmailSubject" placeholder="Your email subject">*@
-                                                @Html.TextBoxFor(m => m.Feedback.EmailSubject, new { @class = "form-control", @placeholder = "Email subject" })
-                                                @Html.ValidationMessageFor(model => model.Feedback.EmailSubject, "", new { @class = "text-danger" })
-                                            </div>
+                                        <div class="col-md-6 form-group mb-3">
+                                            <label for="" class="col-form-label">Email *</label>
+                                            @*<input type="text" class="form-control" name="Feedback.Email" id="Feedback_Email" placeholder="Your email">*@
+                                            @Html.TextBoxFor(m => m.Feedback.Email, new { @class = "form-control", @placeholder = "Your email" })
+                                            @Html.ValidationMessageFor(model => model.Feedback.Email, "", new { @class = "text-danger" })
                                         </div>
+                                    </div>
 
-                                        <div class="row">
-                                            <div class="col-md-12 form-group mb-3">
-                                                <label for="message" class="col-form-label">Message *</label>
-                                                @*<textarea class="form-control" name="Feedback.Message" id="Feedback_Message" cols="30" rows="4" placeholder="Write your message"></textarea>*@
-                                                @Html.TextAreaFor(m => m.Feedback.Message, new { @class = "form-control", @placeholder = "Write your message" })
-                                                @Html.ValidationMessageFor(model => model.Feedback.Message, "", new { @class = "text-danger" })
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-md-12 form-group mb-3">
+                                            <label for="budget" class="col-form-label">Subject:</label>
+                                            @*<input type="text" class="form-control" name="Feedback.EmailSubject" id="Feedback_EmailSubject" placeholder="Your email subject">*@
+                                            @Html.TextBoxFor(m => m.Feedback.EmailSubject, new { @class = "form-control", @placeholder = "Email subject" })
+                                            @Html.ValidationMessageFor(model => model.Feedback.EmailSubject, "", new { @class = "text-danger" })
                                         </div>
+                                    </div>
 
-                                        <div class="row">
-                                            <div class="col-md-12 form-group mb-3">
-                                                <label for="Captcha" class="col-form-label">Captcha *</label>
-                                                @{
+                                    <div class="row">
+                                        <div class="col-md-12 form-group mb-3">
+                                            <label for="message" class="col-form-label">Message *</label>
+                                            @*<textarea class="form-control" name="Feedback.Message" id="Feedback_Message" cols="30" rows="4" placeholder="Write your message"></textarea>*@
+                                            @Html.TextAreaFor(m => m.Feedback.Message, new { @class = "form-control", @placeholder = "Write your message" })
+                                            @Html.ValidationMessageFor(model => model.Feedback.Message, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12 form-group mb-3">
+                                            <label for="Captcha" class="col-form-label">Captcha *</label>
+                                            @{
                                                     MvcCaptcha mvcCaptcha = new MvcCaptcha("ContactCaptcha");
                                                     mvcCaptcha.UserInputID = "CaptchaCode";
-                                                }
-                                                @Html.Captcha(mvcCaptcha)
-                                                @Html.TextBox("CaptchaCode","", new { @class = "form-control" })
-                                                @Html.ValidationMessage("CaptchaCode", "", new { @class = "text-danger" })
-                                            </div>
+                                            }
+                                            @Html.Captcha(mvcCaptcha)
+                                            @Html.TextBox("CaptchaCode","", new { @class = "form-control" })
+                                            @Html.ValidationMessage("CaptchaCode", "", new { @class = "text-danger" })
                                         </div>
+                                    </div>
 
-                                        <div class="row">
-                                            <div class="col-md-12 form-group">
-                                                <div class="btn-box">
-                                                    <a style="background:white;  border:none">
-                                                        <input class="btn-checkout text-center flexible-btn" type="submit" value="Send Message" />
-                                                    </a>
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-md-12 form-group">
+                                            <div class="btn-box">
+                                                <a style="background:white;  border:none">
+                                                    <input class="btn-checkout text-center flexible-btn" type="submit" value="Send Message" />
+                                                </a>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
+                                </form>
                                 }
 
                                 <div id="form-message-warning mt-4"></div>

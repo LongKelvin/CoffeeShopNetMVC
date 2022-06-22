@@ -77,8 +77,8 @@ namespace CoffeeShop.Services
         }
 
         public void DeleteMultiItems(int[] ids)
-        {  
-             _productCategoryRepository.DeleteMulti(x => ids.Contains(x.ID));
+        {
+            _productCategoryRepository.DeleteMulti(x => ids.Contains(x.ID));
         }
     }
 }

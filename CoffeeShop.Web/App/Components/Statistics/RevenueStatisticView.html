@@ -138,34 +138,34 @@
 
 <script>
 
-    const labels = [];
+    //const labels = [];
 
-    const data = {
-        labels: labels,
-        datasets: [{
-            label: 'Doanh số',
-            backgroundColor: 'rgb(0, 0, 255)',
-            borderColor: 'blue',
-            data: [],
-        },
-        {
-            label: 'Lợi nhuận',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'red',
-            data: [],
-        }]
-    };
+    //const data = {
+    //    //labels: labels,
+    //    datasets: [{
+    //        label: 'Doanh số',
+    //        backgroundColor: 'rgb(0, 0, 255)',
+    //        borderColor: 'blue',
+    //        data: [],
+    //    },
+    //    {
+    //        label: 'Lợi nhuận',
+    //        backgroundColor: 'rgb(255, 99, 132)',
+    //        borderColor: 'red',
+    //        data: [],
+    //    }]
+    //};
 
-    const config = {
+    const configChart = {
         type: 'line',
-        data: data,
+        //data: data,
         options: {}
 
     };
 
     const myChart = new Chart(
         document.getElementById('myChart'),
-        config
+        configChart
     );
 
     $(document).ready(function () {
@@ -202,13 +202,19 @@
 
         var getUrl = '/api/Statistic/GetRevenue?fromDate=' + config.param.fromDate + '&toDate=' + config.param.toDate;
 
+        var tokenInfo = JSON.parse(window.sessionStorage["TokenInfo"]);
+
         $.ajax({
+            contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+            headers: {
+                'Authorization': 'Bearer ' + tokenInfo.accessToken,
+                
+            },
             url: getUrl,
             type: 'GET',
             dataType: 'json',
+           
             success: function (result) {
-
-                // console.log('responseData:', result)
 
                 var labels = [];
                 var revenues = [];
@@ -244,6 +250,7 @@
                 //    dataset.data = [100,1000,1500,200,50,12,11,8000]
                 //    //dataset.data[1] = benefits
                 //});
+
                 myChart.update();
 
             }

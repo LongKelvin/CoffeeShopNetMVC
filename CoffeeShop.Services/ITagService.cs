@@ -21,6 +21,7 @@ namespace CoffeeShop.Services
         IEnumerable<Tag> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow);
 
         Tag GetById(int id);
+
         Tag GetByIdString(string id);
 
         void SaveChanges();

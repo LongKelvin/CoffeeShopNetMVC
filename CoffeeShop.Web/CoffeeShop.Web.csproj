@@ -113,6 +113,7 @@
     <Compile Include="Infrastucture\Core\ApiControllerBase.cs" />
     <Compile Include="Infrastucture\Core\PaginationSet.cs" />
     <Compile Include="Infrastucture\Core\PermissionAuthorizeAttribute.cs" />
+    <Compile Include="Infrastucture\Core\ServiceFactory.cs" />
     <Compile Include="Infrastucture\Extensions\EntityExtensions.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -191,6 +192,8 @@
     <Content Include="App\Components\ProductCategories\ProductCategoryEditView.html" />
     <Content Include="App\Components\ProductCategories\ProductCategoryListController.js" />
     <Content Include="App\Components\ProductCategories\ProductCategoryListView.html" />
+    <Content Include="App\Components\Products\ProductExcelImportController.js" />
+    <Content Include="App\Components\Products\ProductExcelImportView.html" />
     <Content Include="App\Components\Products\Products.Module.js" />
     <Content Include="App\Components\Products\ProductAddController.js" />
     <Content Include="App\Components\Products\ProductAddView.html" />
@@ -208,6 +211,7 @@
     <Content Include="App\Components\Statistics\Statistic.Module.js" />
     <Content Include="App\Components\Statistics\RevenueStatisticController.js" />
     <Content Include="App\Components\Statistics\RevenueStatisticView.html" />
+    <Content Include="App\Shared\Directives\fileUpload.directive.js" />
     <Content Include="App\Shared\Directives\PagerDirective.html" />
     <Content Include="App\Shared\Directives\PagerDirective.js" />
     <Content Include="App\Shared\Filters\StatusFilter.js" />
@@ -252,6 +256,7 @@
     <Content Include="Assets\Admin\img\credit\visa.png" />
     <Content Include="Assets\Admin\img\default-150x150.png" />
     <Content Include="Assets\Admin\img\icons.png" />
+    <Content Include="Assets\Admin\img\permission-denied.png" />
     <Content Include="Assets\Admin\img\photo1.png" />
     <Content Include="Assets\Admin\img\photo2.png" />
     <Content Include="Assets\Admin\img\photo3.jpg" />
@@ -279,10 +284,8 @@
     <Content Include="Assets\Admin\lib\angular-loading-bar\loading-bar.js" />
     <Content Include="Assets\Admin\lib\angular-loading-bar\loading-bar.min.css" />
     <Content Include="Assets\Admin\lib\angular-loading-bar\loading-bar.min.js" />
-    <Content Include="Assets\Admin\lib\angular-local-storage\angular-local-storage.js" />
-    <Content Include="Assets\Admin\lib\angular-local-storage\angular-local-storage.min.js" />
-    <Content Include="Assets\Admin\lib\angular-sweetalert\SweetAlert.js" />
-    <Content Include="Assets\Admin\lib\angular-sweetalert\SweetAlert.min.js" />
+    <Content Include="Assets\Admin\lib\angular-sanitize\angular-sanitize.js" />
+    <Content Include="Assets\Admin\lib\angular-sanitize\angular-sanitize.min.js" />
     <Content Include="Assets\Admin\lib\angular-ui-router\angular-ui-router.js" />
     <Content Include="Assets\Admin\lib\angular-ui-router\angular-ui-router.min.js" />
     <Content Include="Assets\Admin\lib\angular-ui-router\resolveService.js" />
@@ -291,12 +294,14 @@
     <Content Include="Assets\Admin\lib\angular-ui-router\stateEvents.min.js" />
     <Content Include="Assets\Admin\lib\angular-ui-router\ui-router-angularjs.js" />
     <Content Include="Assets\Admin\lib\angular-ui-router\ui-router-angularjs.min.js" />
+    <Content Include="Assets\Admin\lib\angular-ui-select\select.css" />
+    <Content Include="Assets\Admin\lib\angular-ui-select\select.js" />
+    <Content Include="Assets\Admin\lib\angular-ui-select\select.min.css" />
+    <Content Include="Assets\Admin\lib\angular-ui-select\select.min.js" />
     <Content Include="Assets\Admin\lib\angular.js\angular-csp.css" />
     <Content Include="Assets\Admin\lib\angular.js\angular-csp.min.css" />
     <Content Include="Assets\Admin\lib\angular.js\angular.js" />
     <Content Include="Assets\Admin\lib\angular.js\angular.min.js" />
-    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\SweetAlert2.js" />
-    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\SweetAlert2.min.js" />
     <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-grid.css" />
     <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="Assets\Admin\lib\bootstrap\css\bootstrap-grid.rtl.css" />
@@ -1455,6 +1460,9 @@
     <Content Include="Assets\Admin\lib\jquery-ui-1.13.1.custom\jquery-ui.theme.min.css" />
     <Content Include="Assets\Admin\lib\jquery-ui-1.13.1.custom\LICENSE.txt" />
     <Content Include="Assets\Admin\lib\jquery-validate\jquery-validation-sri.json" />
+    <Content Include="Assets\Admin\lib\angular-ui-select\select.min.css.map" />
+    <Content Include="Assets\Admin\lib\angular-ui-select\select.min.js.map" />
+    <Content Include="Assets\Admin\lib\angular-sanitize\angular-sanitize.min.js.map" />
     <None Include="Assets\Admin\lib\jquery\jquery-3.4.1.intellisense.js" />
     <Content Include="Assets\Admin\lib\jquery-validate\additional-methods.js" />
     <Content Include="Assets\Admin\lib\jquery-validate\additional-methods.min.js" />
@@ -2017,148 +2025,14 @@
     <Content Include="Assets\Admin\lib\jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Assets\Admin\lib\jquery\jquery.validate.unobtrusive.min.js" />
     <Content Include="Assets\Admin\lib\jquery\modernizr-2.8.3.js" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\select2-bootstrap-5-theme.css" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\select2-bootstrap-5-theme.min.css" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\select2-bootstrap-5-theme.rtl.css" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\select2-bootstrap-5-theme.rtl.min.css" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-css\select2-bootstrap.css" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-css\select2-bootstrap.min.css" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-theme\select2-bootstrap.css" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-theme\select2-bootstrap.min.css" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap4-theme\select2-bootstrap4.css" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap4-theme\select2-bootstrap4.min.css" />
-    <Content Include="Assets\Admin\lib\select2\css\select2.css" />
-    <Content Include="Assets\Admin\lib\select2\css\select2.min.css" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\af.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\af.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ar.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ar.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\az.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\az.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\bg.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\bg.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\bn.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\bn.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\bs.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\bs.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ca.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ca.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\cs.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\cs.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\da.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\da.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\de.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\de.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\dsb.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\dsb.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\el.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\el.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\en.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\en.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\es.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\es.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\et.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\et.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\eu.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\eu.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\fa.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\fa.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\fi.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\fi.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\fr.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\fr.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\gl.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\gl.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\he.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\he.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\hi.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\hi.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\hr.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\hr.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\hsb.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\hsb.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\hu.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\hu.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\hy.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\hy.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\id.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\id.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\is.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\is.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\it.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\it.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ja.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ja.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ka.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ka.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\km.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\km.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ko.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ko.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\lt.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\lt.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\lv.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\lv.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\mk.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\mk.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ms.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ms.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\nb.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\nb.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ne.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ne.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\nl.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\nl.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\pl.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\pl.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ps.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ps.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\pt-BR.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\pt-BR.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\pt.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\pt.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ro.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ro.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ru.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\ru.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\sk.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\sk.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\sl.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\sl.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\sq.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\sq.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\sr-Cyrl.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\sr-Cyrl.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\sr.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\sr.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\sv.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\sv.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\th.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\th.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\tk.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\tk.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\tr.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\tr.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\uk.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\uk.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\vi.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\vi.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\zh-CN.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\zh-CN.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\zh-TW.js" />
-    <Content Include="Assets\Admin\lib\select2\js\i18n\zh-TW.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\select2.full.js" />
-    <Content Include="Assets\Admin\lib\select2\js\select2.full.min.js" />
-    <Content Include="Assets\Admin\lib\select2\js\select2.js" />
-    <Content Include="Assets\Admin\lib\select2\js\select2.min.js" />
     <Content Include="Assets\Admin\lib\slim-scroll\slimscroll.js" />
     <Content Include="Assets\Admin\lib\slim-scroll\slimscroll.min.js" />
-    <Content Include="Assets\Admin\lib\sweetalert\sweetalert.min.js" />
     <Content Include="Assets\Admin\lib\toastr.js\toastr.css" />
     <Content Include="Assets\Admin\lib\toastr.js\toastr.min.css" />
     <Content Include="Assets\Admin\lib\toastr.js\toastr.min.js" />
     <Content Include="Assets\Admin\lib\typescripts\typescript.js" />
     <Content Include="Assets\Admin\lib\typescripts\typescript.min.js" />
+    <None Include="Assets\Admin\templates\product-report-template.cshtml" />
     <Content Include="Assets\Client\css\bootstrap.css" />
     <Content Include="Assets\Client\css\font-awesome.min.css" />
     <Content Include="Assets\Client\css\responsive.css" />
@@ -2291,17 +2165,18 @@
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\CartPanel.cshtml" />
     <Content Include="Views\Payment\PaymentTotal.cshtml" />
+    <Content Include="Assets\Admin\templates\product-import-template.xlsx" />
     <None Include="Properties\PublishProfiles\CoffeeShopMVC.pubxml" />
     <Content Include="Views\Account\_ExternalLoginPartial.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\ErrorHandler\Index.cshtml" />
+    <Content Include="Views\Shared\Templates\ProductListTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Components\Orders\" />
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Admin\css\skins\" />
-    <Folder Include="Assets\Admin\templates\" />
     <Folder Include="Lang\" />
     <Folder Include="UploadFiles\" />
   </ItemGroup>
@@ -2451,21 +2326,6 @@
     <Content Include="Assets\Admin\lib\font-awesome\webfonts\fa-v4compatibility.ttf" />
     <Content Include="Assets\Admin\lib\font-awesome\webfonts\fa-v4compatibility.woff2" />
     <Content Include="Assets\Admin\lib\toastr.js\toastr.js.map" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_disabled.scss" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_dropdown.scss" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_include-all.scss" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_input-group.scss" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_layout.scss" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_multiple.scss" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\select2-bootstrap-5-theme.scss" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_single.scss" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_sizing.scss" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_validation.scss" />
-    <Content Include="Assets\Admin\lib\select2-bootstrap-5-theme\src\_variables.scss" />
-    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\bower.json" />
-    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\LICENSE" />
-    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\package.json" />
-    <Content Include="Assets\Admin\lib\angularjs-sweetalert2\README.md" />
     <Content Include="Assets\Admin\lib\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <Content Include="Assets\Admin\lib\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Assets\Admin\lib\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.ttf" />
@@ -2655,6 +2515,12 @@
     <PackageReference Include="EntityFramework">
       <Version>6.4.4</Version>
     </PackageReference>
+    <PackageReference Include="EPPlus">
+      <Version>6.0.5</Version>
+    </PackageReference>
+    <PackageReference Include="HtmlRenderer.PdfSharp">
+      <Version>1.5.0.6</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNet.Identity.Core">
       <Version>2.2.3</Version>
     </PackageReference>
@@ -2734,6 +2600,9 @@
     </PackageReference>
     <PackageReference Include="System.Data.SQLite.Core">
       <Version>1.0.115.5</Version>
+    </PackageReference>
+    <PackageReference Include="WebApiContrib.Formatting.Razor">
+      <Version>2.3.0</Version>
     </PackageReference>
     <PackageReference Include="WebGrease">
       <Version>1.6.0</Version>

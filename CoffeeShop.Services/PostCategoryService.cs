@@ -60,7 +60,7 @@ namespace CoffeeShop.Services
 
         public void Update(PostCategory postCategory)
         {
-             _postCategoryRepository.Update(postCategory);
+            _postCategoryRepository.Update(postCategory);
         }
 
         public IEnumerable<PostCategory> GetAllByParentId(int parentId)

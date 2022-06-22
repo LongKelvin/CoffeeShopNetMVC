@@ -17,19 +17,19 @@
                         <h6 class="text-uppercase"><b>Billing Address</b></h6>
                         @if (Request.IsAuthenticated)
                         {
-                            <div class="row mt-3">
-                                <label class="container-rad ml-3" style=" min-height: auto">
-                                    <b class="ml-lg-3">Use the login user information </b>
-                                    <input type="checkbox" class="paymentMethodCode" name="checkboxGetUserInfo" id="btnAutoFillUserInfo">
-                                    <b class="checkmark" style="top:0"></b>
-                                </label>
-                            </div>
+                        <div class="row mt-3">
+                            <label class="container-rad ml-3" style=" min-height: auto">
+                                <b class="ml-lg-3">Use the login user information </b>
+                                <input type="checkbox" class="paymentMethodCode" name="checkboxGetUserInfo" id="btnAutoFillUserInfo">
+                                <b class="checkmark" style="top:0"></b>
+                            </label>
+                        </div>
                         }
                         <div class="row mt-2">
                             <div class="col-md-12">
                                 <div class="inputbox mt-3 mr-2"> <input id="txtFullName" type="text" name="FullName" class="form-control" required="required"> <span>Full Name</span> </div>
                             </div>
-                           
+
                             <div class="col-md-6">
                                 <div class="inputbox mt-3 mr-2"> <input id="txtTelephone" type="text" name="Telephone" class="form-control" required="required"> <span>Telephone</span> </div>
                             </div>
@@ -46,7 +46,6 @@
                             <div class="col-md-12">
                                 <div class="inputbox mt-3 mr-2"> <textarea id="txtNote" type="text" name="Note" class="form-control custom-input" placeholder="Note"></textarea> @*<span>Note</span>*@ </div>
                             </div>
-                           
                         </div>
                     </div>
 
@@ -55,17 +54,15 @@
                         <div class="row">
                             @foreach (var item in (List<CoffeeShop.Web.Models.PaymentMethodViewModel>)ViewBag.PaymentOptions)
                             {
-                                <div class="col-lg-6 col-sm-12">
-                                    <label class="container-rad  ">
-                                        <img src="@item.LogoImage" width="64" height="64" />
-                                        <b class="ml-lg-3">@item.PaymentName</b>
-                                        <input type="radio" name="paymentMethodRadioBtn" value="@item.ID" id="radButton_@item.PaymentCode">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
+                            <div class="col-lg-6 col-sm-12">
+                                <label class="container-rad  ">
+                                    <img src="@item.LogoImage" width="64" height="64" />
+                                    <b class="ml-lg-3">@item.PaymentName</b>
+                                    <input type="radio" name="paymentMethodRadioBtn" value="@item.ID" id="radButton_@item.PaymentCode">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
                             }
-
-
                         </div>
                     </div>
 
@@ -95,7 +92,6 @@
         </div>
         <div class="col-md-4 col-sm-12">
             @{ Html.RenderAction("PaymentTotal", "Payment");}
-
         </div>
     </div>
 </section>
@@ -125,7 +121,7 @@
 
         var textArea = $('#txtNote');
         textArea.value += "'\r\n'";
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
+        //textArea.setLineWrap(true);
+        //textArea.setWrapStyleWord(true);
     </script>
 }

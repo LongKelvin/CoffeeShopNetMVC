@@ -1,12 +1,10 @@
-﻿using CoffeeShop.Web.Resources;
-
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace CoffeeShop.Web.Models
 {
     public class FeedbackViewModel : ViewModelBase
-{
+    {
         [Required(ErrorMessageResourceType = typeof(Resources.Resources),
             ErrorMessageResourceName = nameof(Resources.Resources.RequiredNameMessage))]
         public string Name { get; set; }

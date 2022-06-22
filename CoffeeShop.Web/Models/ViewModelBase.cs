@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CoffeeShop.Web.Models
+﻿namespace CoffeeShop.Web.Models
 {
     public class ViewModelBase
     {

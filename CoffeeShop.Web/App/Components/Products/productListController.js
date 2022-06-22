@@ -30,14 +30,16 @@
 
         $scope.showMultiDeleteDialog = showMultiDeleteDialog;
         $scope.deleteMultiProduct = deleteMultiProduct;
+        $scope.exportToExcel = exportToExcel;
+        $scope.exportToPdf = exportToPdf;
 
         $scope.testAuthorize = testAuthorize;
-
 
         function testAuthorize() {
             AuthenticationService.validateRequest();
         }
 
+        $scope.loading = true;
         function getProducts(page, pageSize) {
             page = page || 0;
             pageSize = pageSize || 20;
@@ -61,6 +63,8 @@
                     $scope.pagesCount = result.data.TotalPages; //total pages that the query recevied
                     $scope.totalCount = result.data.TotalCount; //total row data from api result
                     $scope.itemPerPage = pageSize;
+
+                    $scope.loading = false;
                 },
                     function () {
                         //console.log('Load Product failed.');
@@ -152,9 +156,45 @@
             $('#pconfirmDeleteModal').modal('hide');
         }
 
+        function exportToExcel() {
+            var config = {
+                params: {
+                    keyWord: $scope.keyWord,
+                }
+            }
+
+            ApiServices.get('api/Product/ExportToExcel', config, function (response) {
+                console.log('url path:', response)
+                if (response.status = 200) {
+                    //console.log('url path:', response)
+                    window.location.href = response.data;
+                }
+            }, function (error) {
+                //console.log('url path error:', response)
+                NotificationService.displayError(error);
+            })
+        }
+
+        function exportToPdf() {
+            var config = {
+                params: {
+                    keyWord: $scope.keyWord,
+                }
+            }
+
+            ApiServices.get('api/Product/ExportToPdf', config, function (response) {
+                console.log('url path:', response)
+                if (response.status = 200) {
+                    console.log('url path:', response)
+                    window.location.href = response.data;
+                }
+            }, function (error) {
+                console.log('url path error:', response)
+                NotificationService.displayError(error);
+            })
+        }
+
         $scope.testAuthorize();
         $scope.getProducts();
-
-        
     }
 })(angular.module('CoffeeShop.Products'));

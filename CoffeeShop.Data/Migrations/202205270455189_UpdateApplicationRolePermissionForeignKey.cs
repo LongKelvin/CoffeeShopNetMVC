@@ -1,8 +1,7 @@
 ﻿namespace CoffeeShop.Data.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class UpdateApplicationRolePermissionForeignKey : DbMigration
     {
         public override void Up()
@@ -14,7 +13,7 @@
             RenameIndex(table: "dbo.ApplicationRolePermissions", name: "IX_RoleId", newName: "IX_PermissionId");
             RenameIndex(table: "dbo.ApplicationRolePermissions", name: "__mig_tmp__0", newName: "IX_RoleId");
         }
-        
+
         public override void Down()
         {
             RenameIndex(table: "dbo.ApplicationRolePermissions", name: "IX_RoleId", newName: "__mig_tmp__0");

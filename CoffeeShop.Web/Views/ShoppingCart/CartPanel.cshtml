@@ -19,7 +19,6 @@
     </div>
 </div>
 
-
 <script type="x-tmpl-mustache" id="cartPanelTemplate">
     <li class="order-item row" id="item_{{itemProductID}}">
         <div class="item-image col-4 flexiable-img">
@@ -32,18 +31,16 @@
                 <strong class="itemQty" data-price="{{itemUnitPrice}}">{{itemQuantity}}</strong> x <span class="product-price">{{itemUnitPriceF}}</span>
             </p>
         </div>
-        <div class="col-2 w-100 btn-close remove-item"  data-id="{{itemProductID}}" >
-            <button type="button" class="close"  >
+        <div class="col-2 w-100 btn-close remove-item"  data-id="{{itemProductID}}">
+            <button type="button" class="close">
                 <span
                       class="text-danger" onclick="deleteItemInCartPanel({{itemProductID}})" aria-hidden="true">&times;
     </span>
             </button>
         </div>
 
-
-            @*<button type="button" onclick="deleteItemInCartPanel({{itemProductID}})" data-id="{{itemProductID}}"  class="close" style="background-color:pink" >
+            @*<button type="button" onclick="deleteItemInCartPanel({{itemProductID}})" data-id="{{itemProductID}}"  class="close" style="background-color:pink">
                 remove
             </button>*@
-
     </li>
 </script>

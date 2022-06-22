@@ -1,6 +1,6 @@
 ﻿(function (app) {
     'use strict';
-    app.service('LoginService', ['$http', '$q', '$window','AuthenticationService', 'AuthData', 'ApiServices','NotificationService',
+    app.service('LoginService', ['$http', '$q', '$window', 'AuthenticationService', 'AuthData', 'ApiServices', 'NotificationService',
         function ($http, $q, $window, AuthenticationService, AuthData, ApiServices, NotificationService) {
             var userInfo;
             var deferred;
@@ -27,13 +27,10 @@
                         //console.log('UserInfo_AfterLogin: ', userInfo)
                     },
                     function (error) {
-
+                        console.log(error)
                         AuthData.authenticationData.IsAuthenticated = false;
                         AuthData.authenticationData.userName = "";
-                      
                         deferred.resolve(error);
-                        NotificationService.displayError('Something went wrong and We could not sign out you from system!');
-                        NotificationService.displayError('Please try again later');
                     }
                 );
 
@@ -53,13 +50,14 @@
                         $window.sessionStorage.clear();
                         $window.localStorage.clear();
                     }
-                    
-
-
                 }, null);
             }
 
             this.getUserInfo = function () {
+                return userInfo;
+            }
+
+            this.getUserName = function () {
                 return userInfo;
             }
         }]);
