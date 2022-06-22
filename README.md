@@ -55,7 +55,7 @@ _Below is an example of how we can run this project._
    ```sh
    git clone https://github.com/LongKelvin/CoffeeShopNetMVC.git
    ```
-2. Change conection string in CoffeeShop.Web/ConnectionString.config to match your connection string
+2. Change connection string in CoffeeShop.Web/ConnectionString.config to match your connection string
    ```config
    <connectionStrings>
 	<add name="CoffeeShopConnection" connectionString="Data Source=YOUR_SQLSERVER_DATA_SOURCE;Integrated Security=True;Initial Catalog=CoffeeShopDatabase_MVC; User ID=YOUR_ID;Password=YOU_PASSWORD;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient"/>
