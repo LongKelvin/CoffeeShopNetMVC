@@ -64,8 +64,8 @@ _Below is an example of how we can run this project._
 3. Change some settings in AppSettings.conifg (if needed) for example
    ```config
    <!--Login with google-->
-	<add key="GoogleCLientId" value="813953845042-cm86eafs2efhk6np8v803vr2eprilo2k.apps.googleusercontent.com" />
-	<add key="GoogleCLientSecret" value="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" />
+	<add key="GoogleCLientId" value="813xxxxx45042-xxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com" />
+	<add key="GoogleCLientSecret" value="XXXXXX-jxxxxxxxxxxxxxx5VM5hT" />
    ```
 4. Open Visual Studio and start project (remember to select startup project to CoffeeShop.Web)
 <p align="right">(<a href="#top">back to top</a>)</p>
