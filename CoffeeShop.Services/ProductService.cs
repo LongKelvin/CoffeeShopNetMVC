@@ -345,6 +345,13 @@ namespace CoffeeShop.Services
             return true;
         }
 
+        public IEnumerable<Product> GetAll(string keyWord, string[] includes = null)
+        {
+            if (includes.Length <= 0)
+                return GetAll(keyWord);
+            return _productRepository.GetMulti(x => x.Name.Contains(keyWord) || x.Alias.Contains(keyWord), includes);
+        }
+
         private CoffeeShopDbContext DbContext
         {
             get { return _productRepository.DbContext; }

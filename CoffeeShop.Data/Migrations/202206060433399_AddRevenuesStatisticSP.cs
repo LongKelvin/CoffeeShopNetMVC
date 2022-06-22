@@ -1,8 +1,7 @@
 ﻿namespace CoffeeShop.Data.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class AddRevenuesStatisticSP : DbMigration
     {
         public override void Up()
@@ -28,7 +27,7 @@
                 group by o.CreatedDate"
               );
         }
-        
+
         public override void Down()
         {
             DropStoredProcedure("dbo.GetRevenueStatistic");

@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-
-using CoffeeShop.Models.Models;
+﻿using CoffeeShop.Models.Models;
 using CoffeeShop.Web.Models;
 
 using System;
@@ -236,9 +234,9 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             appRole.Description = appRoleViewModel.Description;
             appRole.IsSystemProtected = false;
         }
+
         public static void UpdateUser(this ApplicationUser appUser, ApplicationUserViewModel appUserViewModel, string action = "Add")
         {
-
             appUser.Id = appUserViewModel.Id;
             appUser.FullName = appUserViewModel.FullName;
             appUser.BirthDay = appUserViewModel.BirthDay;

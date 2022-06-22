@@ -30,9 +30,7 @@
                         console.log(error)
                         AuthData.authenticationData.IsAuthenticated = false;
                         AuthData.authenticationData.userName = "";
-                        NotificationService.displayError('UserName or Password not valid');
                         deferred.resolve(error);
-                        
                     }
                 );
 
@@ -52,13 +50,14 @@
                         $window.sessionStorage.clear();
                         $window.localStorage.clear();
                     }
-
-
-
                 }, null);
             }
 
             this.getUserInfo = function () {
+                return userInfo;
+            }
+
+            this.getUserName = function () {
                 return userInfo;
             }
         }]);

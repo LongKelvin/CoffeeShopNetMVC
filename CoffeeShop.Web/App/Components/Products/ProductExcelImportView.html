@@ -1,0 +1,124 @@
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><strong>Nhập sản phẩm từ Excel</strong></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="Home">Trang chủ</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="Products">Sản phẩm</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="ProductImport">Danh sách sản phẩm</a></li>
+                    <li class="breadcrumb-item active">Nhập sản phẩm từ Excel</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <form name="frmImportProduct" role="form" ng-submit="ImportProduct()" novalidate enctype="multipart/form-data">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-6">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin chính</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Chọn File Excel <span class="text-danger">*</span></label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="fileInput" name="excelFile"
+                                           onchange="angular.element(this).scope().SelectFile(event)">
+                                    <label class="custom-file-label" for="customFile" id="fileInput">Chọn File</label>
+                                </div>
+                                <span class="text-danger" ng-show="frmImportProduct.excelFile.$touched && frmImportProduct.excelFile.$invalid">Bạn chưa chọn file</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Danh mục <span class="text-danger">*</span></label>
+                                <select ng-model="categoryId" id="categoryIdDropdown"
+                                        ng-init="categoryId=''"
+                                        class=" form-control w-100"
+                                        required name="pCategoryId"
+                                        ng-options="option.ID as option.Name for option in parentCategories">
+                                    <option value='' selected>Chọn danh mục</option>
+                                </select>
+                                <span class="text-danger" ng-show="frmImportProduct.pCategoryId.$touched && frmImportProduct.pCategoryId.$invalid">Danh mục sản phẩm không được bỏ trống</span>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <!-- general form elements disabled -->
+                    <div class="card card-lightblue">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin SEO</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Từ khóa SEO</label>
+                                        <input ng-model="product.MetaKeyword"
+                                               type="text" class="form-control"
+                                               placeholder="Chọn từ phù hợp để làm từ khóa ...">
+                                    </div>
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Từ khóa mô tả</label>
+                                        <input ng-model="product.MetaDescription"
+                                               type="text" class="form-control"
+                                               placeholder="Từ khóa mô tả về sản phẩm ...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tags cho sản phẩm</label>
+                                        <input ng-model="product.TagsString"
+                                               type="text" class="form-control"
+                                               placeholder="Tags liên quan ...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+
+                <!--/.col (right) -->
+            </div>
+            <div class="card-footer">
+                <button type="submit" ng-disabled="frmImportProduct.$invalid" class="btn btn-primary">Nhập dữ liệu Excel</button>
+                <button ui-sref="Products" class="btn btn-outline-secondary space-around">Hủy bỏ</button>
+            </div>
+        </form>
+
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+<script>
+
+    $(document).ready(function () {
+        $('#fileInput').on('change', function () {
+            //get the file name
+            var fileName = $(this).val();
+            //console.log('file name: ', fileName)
+            //replace the "Choose a file" label
+            $(this).next('.custom-file-label').html(fileName);
+        })
+    });
+</script>

@@ -60,7 +60,7 @@ namespace CoffeeShop.Common
         /// <returns></returns>
         public static string GetStringBetween(string sourceString, string specialCharacter)
         {
-            return sourceString.Split(new string[] { $"{specialCharacter}" }, 3, 
+            return sourceString.Split(new string[] { $"{specialCharacter}" }, 3,
                 StringSplitOptions.None)[1];
         }
 
@@ -72,7 +72,7 @@ namespace CoffeeShop.Common
         /// <param name="sourceString"></param>
         /// <param name="lastCharacter"></param>
         /// <returns></returns>
-        public static string GetStringAfterLasCharacter(string sourceString, string lastCharacter)
+        public static string GetStringAfterLastCharacter(string sourceString, string lastCharacter)
         {
             return sourceString.Substring(sourceString.LastIndexOf(lastCharacter) + 1);
         }

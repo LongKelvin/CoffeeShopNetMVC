@@ -31,6 +31,7 @@ namespace CoffeeShop.Web.Models
         [Required]
         [Display(Name = "Code")]
         public string Code { get; set; }
+
         public string ReturnUrl { get; set; }
 
         [Display(Name = "Remember this browser?")]
@@ -68,14 +69,13 @@ namespace CoffeeShop.Web.Models
 
     public class RegisterViewModel
     {
-        
-        [Display(Name ="First Name")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required, Display(Name ="User Name")]
+        [Required, Display(Name = "User Name")]
         public string UserName { get; set; }
 
         [Required]
@@ -94,7 +94,7 @@ namespace CoffeeShop.Web.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Display(Name ="Phone Number ")]
+        [Display(Name = "Phone Number ")]
         public string PhoneNumber { get; set; }
 
         public string CaptchaCode { get; set; }

@@ -14,7 +14,7 @@
         'CoffeeShop.Statistics'
 
     ]).config(config)
-      .config(configAuthentication);
+        .config(configAuthentication);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
@@ -36,6 +36,12 @@
                 parent: 'Base',
                 templateUrl: "/App/Components/Home/HomeView.html",
                 controller: "HomeController"
+            })
+
+            .state('AccessDenied', {
+                url: "/AccessDenied",
+                templateUrl: "/App/Components/Authorize/PermissionDenied.html",
+                controller: "PermissionDeniedController"
             });
 
         $urlRouterProvider.otherwise('/Login');
@@ -67,10 +73,10 @@
                     if (rejection.status == "401") {
                         $location.path('/Login');
                     }
-                    if (response.status == "403") {
+                    if (rejection.status == "403") {
                         $location.path('/AccessDenied');
                     }
-                    if (response.status == "302") {
+                    if (rejection.status == "302") {
                         $location.path('/AccessDenied');
                     }
                     return $q.reject(rejection);

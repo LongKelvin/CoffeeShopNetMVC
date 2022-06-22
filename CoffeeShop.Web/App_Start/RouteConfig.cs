@@ -33,7 +33,6 @@ namespace CoffeeShop.Web
             url: "{alias}-id-{id}",
             defaults: new { controller = "Product", action = "Detail", id = UrlParameter.Optional });
 
-
             routes.MapRoute(
             name: "ProductByTag",
             url: "tag/{tagName}",

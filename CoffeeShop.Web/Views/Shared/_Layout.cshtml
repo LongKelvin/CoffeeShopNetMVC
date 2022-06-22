@@ -13,7 +13,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <link async rel="shortcut icon" href="~/favicon.png" type="">
-  
+
     <title>The Coffee Way</title>
 
     @*@Styles.Render("~/css/base")*@
@@ -140,37 +140,37 @@
 
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <li class="nav-item">
-                                    <div class="btn-group profile">
-                                        <div class="info">
-                                            <p>Hey <a><b>@User.Identity.Name</b></a></p>
-                                        </div>
-
-                                        <div class="profile-photo dropdown-toggle dropdown-toggle-split"
-                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="~/Assets/Admin/img/avatar.png" width="48" height="48" />
-                                        </div>
-
-                                        <div class="dropdown-menu">
-                                            <form action="@Url.Action("LogOut","Account")" method="post">
-                                                @Html.AntiForgeryToken()
-                                                <a class="dropdown-item" href="#">Account Settings</a>
-                                                <div class="dropdown-divider"></div>
-                                                <button class="dropdown-item" type="submit">
-                                                    Log Out
-                                                </button>
-                                            </form>
-                                        </div>
+                            <li class="nav-item">
+                                <div class="btn-group profile">
+                                    <div class="info">
+                                        <p>Hey <a><b>@User.Identity.Name</b></a></p>
                                     </div>
-                                </li>
+
+                                    <div class="profile-photo dropdown-toggle dropdown-toggle-split"
+                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="~/Assets/Admin/img/avatar.png" width="48" height="48" />
+                                    </div>
+
+                                    <div class="dropdown-menu">
+                                        <form action="@Url.Action("LogOut","Account")" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <a class="dropdown-item" href="#">Account Settings</a>
+                                            <div class="dropdown-divider"></div>
+                                            <button class="dropdown-item" type="submit">
+                                                Log Out
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
                             }
                             else
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Login","Account")">
-                                        LOG IN
-                                    </a>
-                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Login","Account")">
+                                    LOG IN
+                                </a>
+                            </li>
                             }
                         </ul>
                     </div>
@@ -181,7 +181,7 @@
 
         @if (IsSectionDefined("slider_section"))
         {
-            @RenderSection("slider_section", required: true);
+        @RenderSection("slider_section", required: true);
         }
     </div>
 
@@ -208,7 +208,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
 
     @*@Scripts.Render("~/js/jquery")*@
     @*@Scripts.RenderFormat(@"<script src="" {0}"" async></script>", "~/js/jquery")*@
@@ -239,7 +238,6 @@
                 // adding classname 'active' to current click li
                 $(this).addClass("active");
             });
-
         </script>
     }
 

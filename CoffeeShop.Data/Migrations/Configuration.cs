@@ -53,7 +53,7 @@
                     {
                         Id = Guid.NewGuid().ToString(),
                         Name = permission,
-                        Type = StringHelper.GetStringAfterLasCharacter(permission, "."),
+                        Type = StringHelper.GetStringAfterLastCharacter(permission, "."),
                         Module = StringHelper.GetStringBetween(permission, "."),
                         Description = $"Default App Permission for {permission}",
                         IsSystemProtected = true

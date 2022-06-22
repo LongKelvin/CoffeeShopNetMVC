@@ -16,7 +16,7 @@ namespace CoffeeShop.Data.Repositories
         {
         }
 
-        public void AddPermissionToUser(string userId,ApplicationRole appRole, List<string> listPermissionId)
+        public void AddPermissionToUser(string userId, ApplicationRole appRole, List<string> listPermissionId)
         {
             var listPermissionUser = new List<ApplicationUserPermission>();
             foreach (var permissionId in listPermissionId)
@@ -27,12 +27,10 @@ namespace CoffeeShop.Data.Repositories
                     PermissionId = permissionId,
                     RoleId = appRole.Id,
                     RoleName = appRole.Name
-                   
                 });
             }
 
             DbContext.ApplicationUserPermissions.AddRange(listPermissionUser);
-
         }
     }
 }

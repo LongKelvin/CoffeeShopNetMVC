@@ -1,5 +1,4 @@
-﻿using CoffeeShop.Common.ViewModel;
-using CoffeeShop.Models.Models;
+﻿using CoffeeShop.Models.Models;
 
 using System.Collections.Generic;
 
@@ -24,7 +23,5 @@ namespace CoffeeShop.Services
         Order GetById(int id);
 
         void SaveChanges();
-
-       
     }
 }

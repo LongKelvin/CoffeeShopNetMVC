@@ -1,11 +1,5 @@
 ﻿using CoffeeShop.Models.Models;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace CoffeeShop.Services
 {
     public static class ModelsEntityExtensions
@@ -104,7 +98,6 @@ namespace CoffeeShop.Services
             target.Status = source.Status;
             target.RowVersion = source.RowVersion;
             target.OriginalPrice = source.OriginalPrice;
-
         }
 
         public static void UpdateTag(this Tag source, Tag target)
@@ -113,6 +106,5 @@ namespace CoffeeShop.Services
             target.Name = source.Name;
             target.Type = source.Type;
         }
-
     }
 }

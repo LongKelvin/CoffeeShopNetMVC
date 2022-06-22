@@ -1,8 +1,7 @@
 ﻿namespace CoffeeShop.Data.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class addLocationInfo : DbMigration
     {
         public override void Up()
@@ -17,7 +16,7 @@
             DropColumn("dbo.ShopInfo", "Mobiphone1");
             DropColumn("dbo.ShopInfo", "Mobiphone2");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.ShopInfo", "Mobiphone2", c => c.String());
