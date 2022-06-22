@@ -1,12 +1,12 @@
 ﻿using OfficeOpenXml;
 
-using System;
+using PdfSharp;
+
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web.UI.WebControls;
+
+using TheArtOfDev.HtmlRenderer.PdfSharp;
 
 namespace CoffeeShop.Common
 {
@@ -25,6 +25,31 @@ namespace CoffeeShop.Common
                     package.Save();
                 }
             });
+        }
+
+        public static async Task GeneratePdf(string htmlTemplate, string filePath)
+        {
+            await Task.Run(() =>
+            {
+                using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                {
+                    var pdf = PdfGenerator.GeneratePdf(htmlTemplate, DefaultPdfConfig());
+                    pdf.Save(fs);
+                }
+            });
+        }
+
+        public static PdfGenerateConfig DefaultPdfConfig()
+        {
+            return new PdfGenerateConfig
+            {
+                PageSize = PageSize.A4,
+                MarginTop = 5,
+                MarginBottom = 5,
+                MarginLeft = 25,
+                MarginRight = 5,
+                PageOrientation = PageOrientation.Landscape,
+            };
         }
     }
 }

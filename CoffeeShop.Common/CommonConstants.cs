@@ -42,6 +42,8 @@
         public const string EXCEL_UPLOAD_PATH = "ExcelUploadPath";
         public const string EXCEL_EXPORT_PATH = "ExcelExportPath";
 
+        public const string PDF_EXPORT_PATH = "PdfExportPath";
+
         public enum Sex
         {
             Male = 0,

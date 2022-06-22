@@ -26,7 +26,7 @@ using System.Web.Script.Serialization;
 
 namespace CoffeeShop.Web.Api
 {
-    [RoutePrefix(Common.CommonConstants.API_Product)]
+    [RoutePrefix(CommonConstants.API_Product)]
     [Authorize]
     public class ProductController : ApiControllerBase
     {
@@ -147,9 +147,7 @@ namespace CoffeeShop.Web.Api
             return CreateHttpResponse(request, () =>
             {
                 var model = _productService.GetAll();
-
                 var responseData = Mapper.Map<List<Product>, List<ProductViewModel>>(model.ToList());
-
                 var response = request.CreateResponse(HttpStatusCode.OK, responseData);
                 return response;
             });
@@ -349,7 +347,7 @@ namespace CoffeeShop.Web.Api
                         productViewModel = new ProductViewModel
                         {
                             Name = workSheet.Cells[i, 1].Value.ToString(),
-                            Alias = Common.StringHelper.ToUnsignString(workSheet.Cells[i, 1].Value.ToString()),
+                            Alias = StringHelper.ToUnsignString(workSheet.Cells[i, 1].Value.ToString()),
                             Description = workSheet.Cells[i, 2].Value.ToString(),
 
                             //This block throw exception about casting data type
@@ -358,9 +356,9 @@ namespace CoffeeShop.Web.Api
                             //PromotionPrice = (decimal?)workSheet.Cells[i, 5].Value,
                             //Quantity = (int)workSheet.Cells[i, 6].Value,
 
-                            Status = Common.ExcelHelper.ExtractTrueFalseValue(workSheet.Cells[i, 7].Value),
-                            HomeFlag = Common.ExcelHelper.ExtractTrueFalseValue(workSheet.Cells[i, 8].Value),
-                            HotFlag = Common.ExcelHelper.ExtractTrueFalseValue(workSheet.Cells[i, 9].Value),
+                            Status = ExcelHelper.ExtractTrueFalseValue(workSheet.Cells[i, 7].Value),
+                            HomeFlag = ExcelHelper.ExtractTrueFalseValue(workSheet.Cells[i, 8].Value),
+                            HotFlag = ExcelHelper.ExtractTrueFalseValue(workSheet.Cells[i, 9].Value),
                             CategoryID = categoryId,
                         };
 
@@ -409,6 +407,40 @@ namespace CoffeeShop.Web.Api
             {
                 var data = _productService.GetAll(keyWord).ToList();
                 await ReportHelper.GenerateExcelXls(data, fullPath);
+                Trace.WriteLine($"PATH DOWNLOAD URL: {Path.Combine(folderReport, fileName)}");
+                return request.CreateResponse(HttpStatusCode.OK, Path.Combine(folderReport, fileName));
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                return request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ExportToPdf")]
+        public async Task<HttpResponseMessage> ExportToPdf(HttpRequestMessage request, string keyWord)
+        {
+            string fileName = string.Concat("Product_" + DateTime.Now.ToString("yyyyMMddhhmmsss") + ".pdf");
+            var folderReport = ConfigHelper.GetByKey(CommonConstants.PDF_EXPORT_PATH);
+            string filePath = HttpContext.Current.Server.MapPath(folderReport);
+
+            if (!Directory.Exists(filePath))
+                Directory.CreateDirectory(filePath);
+
+            string fullPath = Path.Combine(filePath, fileName);
+
+            try
+            {
+                //var data = _productService.GetAll(keyWord, new string[] { "ProductCategory" }).ToList();
+                var data = _productService.GetAll(keyWord).ToList();
+
+                //string htmlTemplate = File.ReadAllText(HttpContext.Current.Server.MapPath("/Assets/Admin/templates/product-report-template.html"));
+                string razorViewTemplate = File.ReadAllText(HttpContext.Current.Server.MapPath("/Views/Shared/Templates/ProductListTemplate.cshtml"));
+                razorViewTemplate = razorViewTemplate.Replace("{{CreatedDate}}", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString());
+                var htmlParseViewData = RazorEngine.Razor.Parse(razorViewTemplate, data);
+
+                await ReportHelper.GeneratePdf(htmlParseViewData, fullPath);
                 Trace.WriteLine($"PATH DOWNLOAD URL: {Path.Combine(folderReport, fileName)}");
                 return request.CreateResponse(HttpStatusCode.OK, Path.Combine(folderReport, fileName));
             }
