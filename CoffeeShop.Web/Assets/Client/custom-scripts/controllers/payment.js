@@ -25,7 +25,7 @@
                 },
                 Telephone: {
                     required: true,
-                    number:true
+                    number: true
                 }
 
             },
@@ -80,7 +80,10 @@
             PaymentMethodCode: $('input[name="paymentMethodRadioBtn"]:checked').val(),
             CustomerMessage: $('#txtNote').val(),
             PaymentStatus: false,
-            Status: true
+            Status: true,
+            TotalAmount: $('#rawTotalAmount').val(),
+            TotalItemPrice: $('#rawTotalPrice').val(),
+            ShippingFee: $('#rawShippingFee').val()
         }
 
         $.ajax({
@@ -92,8 +95,11 @@
             },
             success: function (response) {
                 if (response.status == true) {
+                    console.log(response);
                     //console.log("create order OK")
-                    $('#paymentTitle').html(response.successMsg);
+                    //$('#paymentTitle').html(response.successMsg);
+                    var returnUrl = response.payUrl;
+                    window.location.href = returnUrl;
                 }
                 else {
                     //console.log("create order FAILED")

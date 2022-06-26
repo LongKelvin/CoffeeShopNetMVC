@@ -78,5 +78,12 @@ namespace CoffeeShop.Services
             _orderRepository.Update(order);
             return order;
         }
+
+        public bool UpdatePaymentStatus(int orderID, bool value)
+        {
+            var updateOrder = _orderRepository.GetById(orderID);
+            updateOrder.PaymentStatus = value.ToString();
+            return updateOrder.ID > 0;
+        }
     }
 }

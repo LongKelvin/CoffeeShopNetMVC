@@ -115,6 +115,8 @@
     <Compile Include="Infrastucture\Core\PermissionAuthorizeAttribute.cs" />
     <Compile Include="Infrastucture\Core\ServiceFactory.cs" />
     <Compile Include="Infrastucture\Extensions\EntityExtensions.cs" />
+    <Compile Include="Infrastucture\PaymentIntegrated\MomoPaymentRequest.cs" />
+    <Compile Include="Infrastucture\PaymentIntegrated\MomoSecurity.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationGroupViewModel.cs" />
@@ -123,6 +125,7 @@
     <Compile Include="Models\ApplicationUserViewModel.cs" />
     <Compile Include="Models\FeedbackViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MomoPayment\MomoPaymentRequest.cs" />
     <Compile Include="Models\OrderDetailViewModel.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\PageViewModel.cs" />
@@ -2172,6 +2175,7 @@
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\ErrorHandler\Index.cshtml" />
     <Content Include="Views\Shared\Templates\ProductListTemplate.cshtml" />
+    <Content Include="Views\Payment\ConfirmPaymentClient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Components\Orders\" />

@@ -69,6 +69,12 @@ namespace CoffeeShop.Models.Models
         [Column(TypeName = "nvarchar")]
         public string CustomerId { get; set; }
 
+        public decimal? TotalAmount { get; set; }
+
+        public decimal? TotalItemPrice { get; set; }
+
+        public decimal? ShippingFee { get; set; }
+
         [ForeignKey("CustomerId")]
         public virtual ApplicationUser User { get; set; }
 

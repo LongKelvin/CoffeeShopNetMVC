@@ -213,6 +213,9 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             order.CreatedBy = orderVm.CreatedBy;
             order.Status = orderVm.Status;
             order.PaymentStatus = orderVm.PaymentStatus;
+            order.TotalAmount = orderVm.TotalAmount;
+            order.TotalItemPrice = orderVm.TotalItemPrice;
+            order.ShippingFee = orderVm.ShippingFee;
             //order.OrderDetails = Mapper.Map<List<OrderDetail>>(orderVm);
         }
 

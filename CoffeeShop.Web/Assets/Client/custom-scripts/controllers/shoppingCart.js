@@ -45,6 +45,12 @@
             $('#orderTotalPrice').text(numeral(cart.getTotalPriceOrder()).format('0,0'));
             $('#totalAmount').text(numeral(totalAmount).format('0,0'));
 
+            $('#rawTotalAmount').val(totalAmount);
+            $('#rawTotalPrice').val(cart.getTotalPriceOrder());
+            $('#rawShippingFee').val(shippingFee);
+
+            console.log('raw total amount: ', totalAmount)
+
             cart.updateItemQuantity(productID, quantity)
         });
     },
@@ -115,6 +121,11 @@
 
                         $('#orderTotalPrice').text(numeral(cart.getTotalPriceOrder()).format('0,0'));
                         $('#totalAmount').text(numeral(totalAmount).format('0,0'));
+
+                        $('#rawTotalAmount').val(totalAmount);
+                        $('#rawTotalPrice').val(cart.getTotalPriceOrder());
+                        $('#rawShippingFee').val(shippingFee);
+
 
                         cart.registerEvent();
                     }
