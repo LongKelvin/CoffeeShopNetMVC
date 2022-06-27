@@ -164,7 +164,7 @@
             }
 
             ApiServices.get('api/Product/ExportToExcel', config, function (response) {
-                console.log('url path:', response)
+                //console.log('url path:', response)
                 if (response.status = 200) {
                     //console.log('url path:', response)
                     window.location.href = response.data;

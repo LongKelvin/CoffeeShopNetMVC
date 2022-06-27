@@ -34,6 +34,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
+    <LegacyPublishPropertiesPageEnabled>true</LegacyPublishPropertiesPageEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -2048,7 +2050,7 @@
     <Content Include="Assets\Client\custom-scripts\controllers\cartPanel.js" />
     <Content Include="Assets\Client\custom-scripts\controllers\contact.js" />
     <Content Include="Assets\Client\custom-scripts\controllers\externalAuthentication.js" />
-    <Content Include="Assets\Client\custom-scripts\httpStatusCode.js" />
+    <Content Include="Assets\Client\custom-scripts\paymentCode.js" />
     <Content Include="Assets\Client\custom-scripts\controllers\payment.js" />
     <Content Include="Assets\Client\custom-scripts\controllers\shoppingCart.js" />
     <Content Include="Assets\Client\form\login-form\css\main.css" />
@@ -2176,6 +2178,8 @@
     <Content Include="Views\ErrorHandler\Index.cshtml" />
     <Content Include="Views\Shared\Templates\ProductListTemplate.cshtml" />
     <Content Include="Views\Payment\ConfirmPaymentClient.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\KCoffee - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Components\Orders\" />

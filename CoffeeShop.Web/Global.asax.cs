@@ -2,6 +2,7 @@ using CKFinder.Connector;
 
 using CoffeeShop.Services;
 using CoffeeShop.Web.Mappings;
+using CoffeeShop.Web.Utilities;
 
 using Newtonsoft.Json;
 
@@ -32,6 +33,8 @@ namespace CoffeeShop.Web
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling
                 = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 
+            log4net.Config.XmlConfigurator.Configure();
+
         }
         protected void Application_Error()
         {
@@ -42,6 +45,7 @@ namespace CoffeeShop.Web
                 return;
 
             errorService.LogError(ex);
+            Log4net.Error(ex.Message, ex);
 
         }
     }

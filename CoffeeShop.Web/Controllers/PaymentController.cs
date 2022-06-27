@@ -142,7 +142,8 @@ namespace CoffeeShop.Web.Controllers
                             {
                                 status = true,
                                 message = GetSuccessMessage(),
-                                payUrl = result
+                                payUrl = result,
+                                paymentCode = PaymentMethodCode.MOMO
                             }, JsonRequestBehavior.AllowGet); ;
                         }
                     }
@@ -155,7 +156,8 @@ namespace CoffeeShop.Web.Controllers
                         jsonResult = Json(new
                         {
                             status = true,
-                            successMsg = result
+                            successMsg = result,
+                            paymentCode = PaymentMethodCode.SHIPCOD
                         }, JsonRequestBehavior.AllowGet);
                         ResetCartShoppingSession();
                     }
