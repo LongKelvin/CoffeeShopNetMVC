@@ -333,6 +333,10 @@
     <Compile Include="Migrations\202206230533422_AddNewFieldToProductModel.designer.cs">
       <DependentUpon>202206230533422_AddNewFieldToProductModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206280944544_AddExtraFieldToOrderDetail.cs" />
+    <Compile Include="Migrations\202206280944544_AddExtraFieldToOrderDetail.designer.cs">
+      <DependentUpon>202206280944544_AddExtraFieldToOrderDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
@@ -548,6 +552,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206230533422_AddNewFieldToProductModel.resx">
       <DependentUpon>202206230533422_AddNewFieldToProductModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206280944544_AddExtraFieldToOrderDetail.resx">
+      <DependentUpon>202206280944544_AddExtraFieldToOrderDetail.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

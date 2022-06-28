@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 
+using CoffeeShop.Common;
 using CoffeeShop.Models.Models;
 using CoffeeShop.Services;
 using CoffeeShop.Web.Infrastucture.Extensions;
@@ -26,15 +27,18 @@ namespace CoffeeShop.Web.Controllers
         private readonly IPaymentMethodService _paymentMethodService;
         private readonly IOrderService _orderService;
         private readonly IProductService _productServices;
+        private readonly IShopInfoService _shopInfoService;
 
         public PaymentController(IPaymentMethodService paymentMethodService,
             IErrorService errorService,
             IOrderService orderService,
-            IProductService productServices) : base(errorService)
+            IProductService productServices,
+            IShopInfoService shopInfoService) : base(errorService)
         {
             _paymentMethodService = paymentMethodService;
             _orderService = orderService;
             _productServices = productServices;
+            _shopInfoService = shopInfoService;
         }
 
         // GET: Payment
@@ -83,7 +87,9 @@ namespace CoffeeShop.Web.Controllers
                     OrderID = newOrder.ID,
                     ProductID = item.ProductID,
                     Quantity = item.Quantity,
-                    UnitPrice = item.Product.Price
+                    UnitPrice = item.Product.Price,
+                    ProductName = item.Product.Name,
+                    TotalPrice = item.Product.Price * item.Quantity
                 });
 
                 isSuccessSelling = _productServices.SellProduct(item.ProductID, item.Quantity);
@@ -159,6 +165,12 @@ namespace CoffeeShop.Web.Controllers
                             successMsg = result,
                             paymentCode = PaymentMethodCode.SHIPCOD
                         }, JsonRequestBehavior.AllowGet);
+
+                        //Send Confirmation Email
+                        var emailContent = RenderHtmlEmailForOrderConfirmation(order);
+                        MailHelper.SendMail(order.CustomerEmail, "[COFFEE_WAY] - ORDER CONFIRMATION", emailContent);
+                        SendNewOrderMailToAppManagerment(order);
+                        //Reset session
                         ResetCartShoppingSession();
                     }
                     break;
@@ -208,6 +220,62 @@ namespace CoffeeShop.Web.Controllers
             return resultFromMomo;
         }
 
+        /// <summary>
+        /// Momo will return some information include error code for checking
+        /// errorCode = 0: No error, Payment success
+        /// More information visit: https://developers.momo.vn/v3/docs/payment/api/wallet/onetime/#payment
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ConfirmPaymentClient()
+        {
+            var orderIdStr = Session[SessionCurrentOrderID].ToString();
+            int orderId = int.Parse(orderIdStr);
+
+            try
+            {
+                var responseRawUrl = Request.Path;
+                JObject responseUrl = JObject.Parse(responseRawUrl);
+                Trace.WriteLine("Return from MoMo: " + responseUrl.ToString());
+
+                var statusFromMomo = responseUrl.GetValue("resultCode").ToString();
+
+                if (statusFromMomo != "0") //failed
+                {
+                    _orderService.UpdatePaymentStatus(orderId, false);
+                    ViewBag.successForm = GetFailedMessage();
+                }
+                else
+                {
+                    ViewBag.successForm = GetSuccessMessage();
+                    _orderService.UpdatePaymentStatus(orderId, false);
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+
+            var order = _orderService.GetById(orderId, new string[] { "OrderDetails" });
+
+            var emailContent = RenderHtmlEmailForOrderConfirmation(order);
+
+            MailHelper.SendMail(order.CustomerEmail, "[COFFEE_WAY] - ORDER CONFIRMATION", emailContent);
+            SendNewOrderMailToAppManagerment(order);
+
+            ResetCartShoppingSession();
+
+            //hiển thị thông báo cho người dùng
+            return View();
+        }
+
+        [HttpPost]
+        public void SavePayment()
+        {
+            //cập nhật dữ liệu vào db
+        }
+
+        #region Helper method
+
         private string GetSuccessMessage()
         {
             string successFrm = string.Empty;
@@ -227,34 +295,67 @@ namespace CoffeeShop.Web.Controllers
             return successFrm;
         }
 
+        private string GetFailedMessage()
+        {
+            string faliedFrm = string.Empty;
+            try
+            {
+                faliedFrm = System.IO.File.ReadAllText(
+                 Server.MapPath("/Assets/Client/templates/order_failed_template.html"));
+
+                faliedFrm = faliedFrm.Replace("{{DirectActionLink}}",
+                    Url.Action("Index", "Product"));
+            }
+            catch (Exception)
+            {
+                faliedFrm = "An error has occurred. Your order payment failed. " +
+                    "We are sorry that your order payment was not successful. " +
+                    "HOWEVER, we still accept your order and convert the payment method to SHIP COD." +
+                    "Your order will be delivered as usual.";
+            }
+
+            return faliedFrm;
+        }
+
         private void ResetCartShoppingSession()
         {
             Session[SessionCurrentOrderID] = null;
             Session[SessionCart] = null;
         }
 
-        /// <summary>
-        /// Momo will return some information include error code for checking
-        /// errorCode = 0: No error, Payment success
-        /// More information visit: https://developers.momo.vn/v3/docs/payment/api/wallet/onetime/#payment
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult ConfirmPaymentClient()
+        private string RenderHtmlEmailForOrderConfirmation(Order order)
         {
-            var orderIdStr = Session[SessionCurrentOrderID].ToString();
-            int orderId = int.Parse(orderIdStr);
-            _orderService.UpdatePaymentStatus(orderId, true);
+            var orderConfimation = new OrderConfirmationViewModel
+            {
+                Order = order,
+                ShopInfo = _shopInfoService.GetShopInfo()
+            };
 
-            ResetCartShoppingSession();
-            ViewBag.successForm = GetSuccessMessage();
-            //hiển thị thông báo cho người dùng
-            return View();
+            try
+            {
+                string razorViewTemplate = System.IO.File.ReadAllText(Server.MapPath("/Views/Shared/Templates/OrderConfirmationTemplate.cshtml"));
+                return RazorEngine.Razor.Parse(razorViewTemplate, orderConfimation);
+            }
+            catch
+            {
+                return "Đơn hàng của bạn đã được xác nhận";
+            }
         }
 
-        [HttpPost]
-        public void SavePayment()
+        private void SendNewOrderMailToAppManagerment(Order order)
         {
-            //cập nhật dữ liệu vào db
+            var adminEmail = ConfigHelper.GetByKey("AdminEmail");
+            var orderConfimation = new OrderConfirmationViewModel
+            {
+                Order = order,
+                ShopInfo = _shopInfoService.GetShopInfo()
+            };
+
+            string razorViewTemplate = System.IO.File.ReadAllText(Server.MapPath("/Views/Shared/Templates/NewOrderNotificationTemplate.cshtml"));
+            var emailContent = RazorEngine.Razor.Parse(razorViewTemplate, orderConfimation);
+            MailHelper.SendMail(adminEmail, "[COFFEE_WAY] - NEW ORDER NOTIFICATION ", emailContent);
         }
+
+        #endregion Helper method
     }
 }

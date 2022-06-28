@@ -128,6 +128,7 @@
     <Compile Include="Models\FeedbackViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MomoPayment\MomoPaymentRequest.cs" />
+    <Compile Include="Models\OrderConfirmationViewModel.cs" />
     <Compile Include="Models\OrderDetailViewModel.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\PageViewModel.cs" />
@@ -154,6 +155,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\Log4net.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
@@ -2045,6 +2047,7 @@
     <Content Include="Assets\Client\custom-css\checkout-style.css" />
     <Content Include="Assets\Client\custom-css\contact.css" />
     <Content Include="Assets\Client\custom-css\custom-style.css" />
+    <Content Include="Assets\Client\custom-css\order-confirmation-style.css" />
     <Content Include="Assets\Client\custom-css\payment.css" />
     <Content Include="Assets\Client\custom-scripts\common.js" />
     <Content Include="Assets\Client\custom-scripts\controllers\cartPanel.js" />
@@ -2148,6 +2151,7 @@
     <Content Include="Assets\Client\templates\images\image-7.png" />
     <Content Include="Assets\Client\templates\images\image-8.png" />
     <Content Include="Assets\Client\templates\images\image-9.png" />
+    <Content Include="Assets\Client\templates\order_failed_template.html" />
     <Content Include="Assets\Client\templates\order_success_template.html" />
     <Content Include="Assets\Client\templates\register_member_template.html" />
     <Content Include="Assets\Client\templates\response_template.html" />
@@ -2180,6 +2184,8 @@
     <Content Include="Views\Payment\ConfirmPaymentClient.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\KCoffee - Web Deploy.pubxml" />
+    <Content Include="Views\Shared\Templates\OrderConfirmationTemplate.cshtml" />
+    <Content Include="Views\Shared\Templates\NewOrderNotificationTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Components\Orders\" />
@@ -2528,6 +2534,9 @@
     </PackageReference>
     <PackageReference Include="HtmlRenderer.PdfSharp">
       <Version>1.5.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="log4net">
+      <Version>2.0.14</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNet.Identity.Core">
       <Version>2.2.3</Version>

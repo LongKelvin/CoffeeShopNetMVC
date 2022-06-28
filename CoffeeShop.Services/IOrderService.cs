@@ -22,6 +22,8 @@ namespace CoffeeShop.Services
 
         Order GetById(int id);
 
+        Order GetById(int id, string[] includes);
+
         bool UpdatePaymentStatus(int orderID, bool value);
 
         void SaveChanges();
