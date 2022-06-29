@@ -12,5 +12,13 @@ namespace CoffeeShop.Web.Models
         public Order Order { get; set; }
 
         public ShopInformation ShopInfo { get; set; }
+
+        public string PaymentStatus { get; set; }
+
+        public string OrderStatus { get; set; }
+
+        public string ShippingStatus { get; set; }
+
+        public string PaymentMethod { get; set; }
     }
 }

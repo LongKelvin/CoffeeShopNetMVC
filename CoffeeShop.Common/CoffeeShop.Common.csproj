@@ -82,6 +82,7 @@
     <Compile Include="IdentityConstant\ApplicationPermissons.cs" />
     <Compile Include="MailHelper.cs" />
     <Compile Include="IdentityConstant\Permission.cs" />
+    <Compile Include="OrderHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IdentityConstant\Roles.cs" />
     <Compile Include="ReportHelper.cs" />

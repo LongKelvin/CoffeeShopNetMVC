@@ -22,7 +22,6 @@
         public const string Admin = "Admin";
         public const string BasicUser = "BasicUser";
 
-
         public const string MomoPaymentInfo = "Thanh toán hóa đơn CoffeeWay qua MOMO";
 
         public const string API_ApplicationPermission = "api/ApplicationPermission";
@@ -81,6 +80,33 @@
             ZALO_PAY = 102,
             INTERNET_BANKING = 103,
             CREDIT_CARD = 104
+        }
+
+        //Order status
+        public enum OrderStatus
+        {
+            Pending,
+            Processing,
+            Complete,
+            Cancel,
+            Refunded
+        }
+
+        //Payment status
+        public enum PaymentStatus
+        {
+            Pending,
+            Paid,
+            Refunded
+        }
+
+        //Shipping status
+        public enum ShippingStatus
+        {
+            NotYetShipped,
+            Shipped,
+            Delivered,
+            ShippingNotRequired
         }
     }
 }

@@ -2161,6 +2161,12 @@
     <Content Include="Libs\CKFinder.dll" />
     <Content Include="Libs\localLib\mustache\mustache.js" />
     <Content Include="Libs\localLib\mustache\mustache.min.js" />
+    <Content Include="Libs\localLib\waitMe\img.svg" />
+    <Content Include="Libs\localLib\waitMe\index.html" />
+    <Content Include="Libs\localLib\waitMe\waitMe.css" />
+    <Content Include="Libs\localLib\waitMe\waitMe.js" />
+    <Content Include="Libs\localLib\waitMe\waitMe.min.css" />
+    <Content Include="Libs\localLib\waitMe\waitMe.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2175,6 +2181,8 @@
     <Content Include="Views\ShoppingCart\CartPanel.cshtml" />
     <Content Include="Views\Payment\PaymentTotal.cshtml" />
     <Content Include="Assets\Admin\templates\product-import-template.xlsx" />
+    <Content Include="Libs\localLib\waitMe\LICENSE.md" />
+    <Content Include="Libs\localLib\waitMe\README.md" />
     <None Include="Properties\PublishProfiles\CoffeeShopMVC.pubxml" />
     <Content Include="Views\Account\_ExternalLoginPartial.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />

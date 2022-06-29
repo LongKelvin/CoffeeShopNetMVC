@@ -30,17 +30,17 @@
                 {
                     index = index + 1;
 
-                    <tr>
-                        <td>@index</td>
-                        <td>@item.Name</td>
-                        <td>@item.CategoryID</td>
-                        <td>@item.Price.ToString("C0", CultureInfo.CreateSpecificCulture("vn-VN"))</td>
-                        <td>@item.PromotionPrice</td>
-                        <td>@item.ViewCount</td>
-                        <td>@item.CreatedBy</td>
-                        <td>@item.CreatedDate</td>
-                        <td>@item.Status</td>
-                    </tr>
+                <tr>
+                    <td>@index</td>
+                    <td>@item.Name</td>
+                    <td>@item.CategoryID</td>
+                    <td>@item.Price.ToString("C0", CultureInfo.CreateSpecificCulture("vn-VN"))</td>
+                    <td>@item.PromotionPrice</td>
+                    <td>@item.ViewCount</td>
+                    <td>@item.CreatedBy</td>
+                    <td>@item.CreatedDate</td>
+                    <td>@item.Status</td>
+                </tr>
                 }
             </tbody>
         </table>

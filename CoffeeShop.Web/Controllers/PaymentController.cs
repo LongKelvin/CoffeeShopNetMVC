@@ -241,13 +241,13 @@ namespace CoffeeShop.Web.Controllers
 
                 if (statusFromMomo != "0") //failed
                 {
-                    _orderService.UpdatePaymentStatus(orderId, false);
+                    _orderService.UpdatePaymentStatus(orderId, (int)PaymentStatus.Pending);
                     ViewBag.successForm = GetFailedMessage();
                 }
                 else
                 {
                     ViewBag.successForm = GetSuccessMessage();
-                    _orderService.UpdatePaymentStatus(orderId, false);
+                    _orderService.UpdatePaymentStatus(orderId, (int)PaymentStatus.Paid);
                 }
             }
             catch (Exception ex)
@@ -348,7 +348,11 @@ namespace CoffeeShop.Web.Controllers
             var orderConfimation = new OrderConfirmationViewModel
             {
                 Order = order,
-                ShopInfo = _shopInfoService.GetShopInfo()
+                ShopInfo = _shopInfoService.GetShopInfo(),
+                PaymentStatus = OrderHelper.GetPaymentStatus(order.PaymentStatus),
+                PaymentMethod = _paymentMethodService.GetById(order.PaymentMethodID).PaymentName,
+                OrderStatus = OrderHelper.GetOrderStatus(order.OrderStatus),
+                ShippingStatus = OrderHelper.GetShippingStatus(order.ShippingStatus),
             };
 
             string razorViewTemplate = System.IO.File.ReadAllText(Server.MapPath("/Views/Shared/Templates/NewOrderNotificationTemplate.cshtml"));

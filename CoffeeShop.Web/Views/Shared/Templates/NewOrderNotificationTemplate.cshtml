@@ -140,13 +140,20 @@
                                                         <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:0px 10px 10px 15px;font-family:'Montserrat',sans-serif;" align="left">
 
                                                             <div class="v-text-align" style="color: #34495e; line-height: 150%; text-align: left; word-wrap: break-word;">
-                                                                <p style="font-size: 14px; line-height: 150%;">Payment status: @Model.Order.PaymentStatus | Payment Method: @Model.Order.PaymentMethodID</p>
+                                                                <p style="font-size: 14px; line-height: 150%;">Payment status: @Model.PaymentStatus | Payment Method: @Model.PaymentMethod</p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:0px 10px 10px 15px;font-family:'Montserrat',sans-serif;" align="left">
+
+                                                            <div class="v-text-align" style="color: #34495e; line-height: 150%; text-align: left; word-wrap: break-word;">
+                                                                <p style="font-size: 14px; line-height: 150%;">Order status: @Model.OrderStatus | Shipping Status: @Model.ShippingStatus</p>
                                                             </div>
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-
 
                                             <table id="u_content_text_87" style="font-family:'Montserrat',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
                                                 <tbody>
@@ -1163,8 +1170,6 @@
                             </div>
                         </div>
                     </div>
-
-
 
                     <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
                 </td>

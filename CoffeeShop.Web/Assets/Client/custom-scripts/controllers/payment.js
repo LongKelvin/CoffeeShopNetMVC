@@ -80,13 +80,14 @@ var payment = {
             CustomerMobile: $('#txtTelephone').val(),
             PaymentMethodCode: $('input[name="paymentMethodRadioBtn"]:checked').val(),
             CustomerMessage: $('#txtNote').val(),
-            PaymentStatus: false,
+            PaymentStatus: paymentStatus.Pending,
             Status: true,
             TotalAmount: $('#rawTotalAmount').val(),
             TotalItemPrice: $('#rawTotalPrice').val(),
             ShippingFee: $('#rawShippingFee').val()
         }
 
+        this.showLoadingBar();
         $.ajax({
             url: 'Payment/CreateOrder',
             dataType: 'json',
@@ -96,6 +97,7 @@ var payment = {
             },
             success: function (response) {
                 if (response.status == true) {
+                   
                     //console.log(response);
                     //console.log("create order OK")
                     //$('#paymentTitle').html(response.successMsg);
@@ -125,6 +127,26 @@ var payment = {
             }
         })
     },
+
+    showLoadingBar: function () {
+        $('#frmPayment').waitMe({
+            effect: 'bounce',
+            text: 'Please waiting ...',
+            bg: 'rgba(255, 255, 255, 0.7)',
+            color: '#000',
+            maxSize: '',
+            waitTime: -1,
+            textPos: 'vertical',
+            fontSize: '',
+            source: '',
+            onClose: function () { }
+        });
+    },
+
+    hideLoadingBar: function () {
+        $('#frmPayment').waitMe("hide");
+    }
 }
 
 payment.init();
+
