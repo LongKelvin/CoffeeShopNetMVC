@@ -1,6 +1,7 @@
 ﻿using CoffeeShop.Models.Models;
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CoffeeShop.Services
 {
@@ -27,5 +28,7 @@ namespace CoffeeShop.Services
         bool UpdatePaymentStatus(int orderID, int value);
 
         void SaveChanges();
+
+        Task SaveChangesAsync();
     }
 }

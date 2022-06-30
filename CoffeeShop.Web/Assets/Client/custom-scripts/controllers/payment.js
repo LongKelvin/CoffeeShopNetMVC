@@ -89,7 +89,7 @@ var payment = {
 
         this.showLoadingBar();
         $.ajax({
-            url: 'Payment/CreateOrder',
+            url: 'Payment/CheckOut',
             dataType: 'json',
             type: 'POST',
             data: {
@@ -97,7 +97,7 @@ var payment = {
             },
             success: function (response) {
                 if (response.status == true) {
-                   
+
                     //console.log(response);
                     //console.log("create order OK")
                     //$('#paymentTitle').html(response.successMsg);

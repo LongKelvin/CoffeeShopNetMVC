@@ -99,9 +99,9 @@ namespace CoffeeShop.Web.Api
 
         [HttpPost]
         [Route("Add")]
-        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.Edit)]
-        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.Create)]
-        [PermissionAuthorize(Common.ApplicationPermissons.ApplicationRoles.View)]
+        [PermissionAuthorize(ApplicationPermissons.ApplicationRoles.Edit)]
+        [PermissionAuthorize(ApplicationPermissons.ApplicationRoles.Create)]
+        [PermissionAuthorize(ApplicationPermissons.ApplicationRoles.View)]
         public HttpResponseMessage Create(HttpRequestMessage request, ApplicationRoleViewModel applicationRoleViewModel)
         {
             if (ModelState.IsValid)

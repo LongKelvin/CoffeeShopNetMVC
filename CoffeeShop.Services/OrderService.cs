@@ -3,6 +3,7 @@ using CoffeeShop.Data.Repositories;
 using CoffeeShop.Models.Models;
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CoffeeShop.Services
 {
@@ -91,6 +92,11 @@ namespace CoffeeShop.Services
         public Order GetById(int id, string[] includes)
         {
             return _orderRepository.GetByCondition(x => x.ID == id, includes);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _unitOfWork.CommitAsync();
         }
     }
 }

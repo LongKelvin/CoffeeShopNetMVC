@@ -107,7 +107,7 @@ namespace CoffeeShop.Web.Controllers
 
             if (newRegisterUser != null)
             {
-                await _userManager.AddToRolesAsync(newRegisterUser.Id, new string[] { "User" });
+                await _userManager.AddToRolesAsync(newRegisterUser.Id, new string[] { "BasicUser" });
             }
 
             ViewData["SuccessMsg"] = "Create account successfull";
@@ -119,15 +119,17 @@ namespace CoffeeShop.Web.Controllers
                 Url.Action("Login", "Account"));
 
             //Send mail to new register account
-            SendResponseEmailToCustomer(registerVM.UserName, registerVM);
+            var sendResponseMail = SendResponseEmailToCustomer(registerVM.UserName, registerVM);
 
             //Update view
             ViewBag.SuccessForm = successForm;
             MvcCaptcha.ResetCaptcha("ContactCaptcha");
+
+            await sendResponseMail;
             return View(registerVM);
         }
 
-        public void SendResponseEmailToCustomer(string userName, RegisterViewModel registerVM)
+        public async Task SendResponseEmailToCustomer(string userName, RegisterViewModel registerVM)
         {
             string content = System.IO.File.ReadAllText(
                 Server.MapPath("/Assets/Client/templates/register_member_template.html"));
@@ -149,7 +151,7 @@ namespace CoffeeShop.Web.Controllers
             string currentLink = ConfigHelper.GetByKey("CurrentLink");
             content = content.Replace("{{ShopWebsiteLink}}", currentLink);
 
-            MailHelper.SendMail(registerVM.Email, "[COFFEE_WAY] - WELCOME TO COFFEE WAY ", content);
+            await MailHelper.SendMailAsync(registerVM.Email, "[COFFEE_WAY] - WELCOME TO COFFEE WAY ", content);
         }
 
         [HttpGet]
