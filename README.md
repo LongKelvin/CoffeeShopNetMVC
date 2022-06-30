@@ -11,6 +11,10 @@
    A small website for coffeeshop
     
   </p>
+  <p align="center">
+   [Demo Link] https://kcoffee.azurewebsites.net/
+  </p>
+ 
 </div>
 
 <!-- ABOUT THE PROJECT -->
