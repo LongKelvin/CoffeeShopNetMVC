@@ -47,6 +47,10 @@ namespace CoffeeShop.Data
         public virtual DbSet<ApplicationRolePermission> ApplicationRolePermissions { get; set; }
 
         public virtual DbSet<ApplicationUserPermission> ApplicationUserPermissions { get; set; }
+        public virtual DbSet<OrderStatus> OrderStatus { get; set; }
+        public virtual DbSet<PaymentStatus> PaymentStatus { get; set; }
+
+        public virtual DbSet<ShippingStatus> ShippingStatus { get; set; }
 
         public static CoffeeShopDbContext Create()
         {

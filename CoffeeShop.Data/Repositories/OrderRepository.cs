@@ -12,5 +12,12 @@ namespace CoffeeShop.Data.Repositories
         {
 
         }
+
+        bool IOrderRepository.Delete(int id)
+        {
+            var oderById = DbContext.Orders.Where(x => x.ID == id).FirstOrDefault();
+            oderById.Status = false;
+            return true;
+        }
     }
 }

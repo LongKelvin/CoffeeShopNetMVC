@@ -3,6 +3,7 @@
     using CoffeeShop.Common;
     using CoffeeShop.Models.Models;
 
+
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -38,6 +39,78 @@
             CreatePagesSample(context);
             CreateShopInfo(context);
             CreatePaymentMethodSample(context);
+            CreateOrderStatus(context);
+            CreatePaymentStatus(context);
+            CreateShippingStatus(context);
+        }
+
+        private void CreateShippingStatus(CoffeeShopDbContext context)
+        {
+            if (context.ShippingStatus.Count() == 0)
+            {
+                List<ShippingStatus> listShippingStatus = new List<ShippingStatus>();
+                foreach (CommonConstants.ShippingStatus status in (CommonConstants.ShippingStatus[])Enum.GetValues(typeof(CommonConstants.ShippingStatus)))
+                {
+                    listShippingStatus.Add(new ShippingStatus
+                    {
+                        ID = (int)status,
+                        StatusCode = (int)status,
+                        StatusName = status.ToString(),
+                        StatusDescription = "Default status " + status.ToString(),
+                        IsActive = true,
+                        IsCanDelete = false,
+                    });
+
+                }
+                context.ShippingStatus.AddRange(listShippingStatus);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreatePaymentStatus(CoffeeShopDbContext context)
+        {
+            if (context.PaymentStatus.Count() == 0)
+            {
+                List<PaymentStatus> listPaymentStatus = new List<PaymentStatus>();
+                foreach (CommonConstants.PaymentStatus status in (CommonConstants.PaymentStatus[])Enum.GetValues(typeof(CommonConstants.PaymentStatus)))
+                {
+                    listPaymentStatus.Add(new PaymentStatus
+                    {
+                        ID = (int)status,
+                        StatusCode = (int)status,
+                        StatusName = status.ToString(),
+                        StatusDescription = "Default status " + status.ToString(),
+                        IsActive = true,
+                        IsCanDelete = false,
+                    });
+
+                }
+                context.PaymentStatus.AddRange(listPaymentStatus);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateOrderStatus(CoffeeShopDbContext context)
+        {
+            if (context.OrderStatus.Count() == 0)
+            {
+                List<OrderStatus> listOrderStatus = new List<OrderStatus>();
+                foreach (CommonConstants.OrderStatus status in (CommonConstants.OrderStatus[])Enum.GetValues(typeof(CommonConstants.OrderStatus)))
+                {
+                    listOrderStatus.Add(new OrderStatus
+                    {
+                        ID = (int)status,
+                        StatusCode = (int)status,
+                        StatusName = status.ToString(),
+                        StatusDescription = "Default status " + status.ToString(),
+                        IsActive = true,
+                        IsCanDelete = false,
+                    });
+
+                }
+                context.OrderStatus.AddRange(listOrderStatus);
+                context.SaveChanges();
+            }
         }
 
         private void CreateAppDefaultPermission(CoffeeShopDbContext context)

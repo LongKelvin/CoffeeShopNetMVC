@@ -5,5 +5,6 @@ namespace CoffeeShop.Data.Repositories
 {
     public interface IOrderRepository : IRepository<Order>
     {
+        new bool Delete(int id);
     }
 }

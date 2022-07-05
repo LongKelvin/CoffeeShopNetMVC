@@ -37,6 +37,7 @@
     @*<link href="~/Assets/Admin/lib/angular-loading-bar/loading-bar.css" rel="stylesheet" />*@
     <link href="~/Assets/Admin/lib/angular-ui-select/select.min.css" rel="stylesheet" />
     <link href="~/Assets/Admin/lib/angular-loading-bar/loading-bar.min.css" rel="stylesheet" />
+    <link href="~/Libs/localLib/waitMe/waitMe.min.css" rel="stylesheet" />
 </head>
 <body id="main-body" ng-app="CoffeeShop" ng-controller="RootController">
 
@@ -89,6 +90,7 @@
     <script src="~/Assets/Admin/lib/Chart.js/chart.js"></script>
     <script src="~/Assets/Admin/lib/angular-ui-select/select.min.js"></script>
     <script src="~/Assets/Admin/lib/angular-loading-bar/loading-bar.min.js"></script>
+    <script src="~/Libs/localLib/waitMe/waitMe.min.js"></script>
 
     @*custom scripts*@
     <script src="~/Assets/Admin/custom-scripts/util.js"></script>
@@ -107,6 +109,7 @@
     <script src="~/App/Components/ApplicationUsers/ApplicationUsers.module.js"></script>
     <script src="~/App/Components/Authorize/Permission.Module.js"></script>
     <script src="~/App/Components/Statistics/Statistic.Module.js"></script>
+    <script src="~/App/Components/Orders/Order.Module.js"></script>
 
     <script src="~/App/app.js"></script>
 
@@ -149,8 +152,13 @@
     <script src="~/App/Components/Authorize/PermissionDeniedController.js"></script>
     <script src="~/App/Components/Statistics/RevenueStatisticController.js"></script>
 
+    <script src="~/App/Components/Orders/OrderListController.js"></script>
+
     @*AngularJS Filter*@
     <script src="~/App/Shared/Filters/StatusFilter.js"></script>
+    <script src="~/App/Shared/Filters/OrderStatusFilter.js"></script>
+    <script src="~/App/Shared/Filters/PaymentStatusFilter.js"></script>
+    <script src="~/App/Shared/Filters/ShippingStatusFilter.js"></script>
 
     @*AngularJS Directive*@
     <script src="~/App/Shared/Directives/PagerDirective.js"></script>

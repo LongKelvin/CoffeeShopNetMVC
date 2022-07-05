@@ -88,6 +88,7 @@
     <Compile Include="Api\ApplicationRoleController.cs" />
     <Compile Include="Api\ApplicationUserController.cs" />
     <Compile Include="Api\HomeController.cs" />
+    <Compile Include="Api\OrderController.cs" />
     <Compile Include="Api\PostCategoryController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />
     <Compile Include="Api\ProductController.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Models\MomoPayment\MomoPaymentRequest.cs" />
     <Compile Include="Models\OrderConfirmationViewModel.cs" />
     <Compile Include="Models\OrderDetailViewModel.cs" />
+    <Compile Include="Models\OrderStatusUpdateViewModel.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\PageViewModel.cs" />
     <Compile Include="Models\PaymentMethodViewModel.cs" />
@@ -191,6 +193,9 @@
     <Content Include="App\Components\Home\RootController.js" />
     <Content Include="App\Components\Login\LoginController.js" />
     <Content Include="App\Components\Login\LoginView.html" />
+    <Content Include="App\Components\Orders\Order.Module.js" />
+    <Content Include="App\Components\Orders\OrderListController.js" />
+    <Content Include="App\Components\Orders\OrderListView.html" />
     <Content Include="App\Components\ProductCategories\ProductCategory.Module.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -222,6 +227,9 @@
     <Content Include="App\Shared\Directives\fileUpload.directive.js" />
     <Content Include="App\Shared\Directives\PagerDirective.html" />
     <Content Include="App\Shared\Directives\PagerDirective.js" />
+    <Content Include="App\Shared\Filters\OrderStatusFilter.js" />
+    <Content Include="App\Shared\Filters\PaymentStatusFilter.js" />
+    <Content Include="App\Shared\Filters\ShippingStatusFilter.js" />
     <Content Include="App\Shared\Filters\StatusFilter.js" />
     <Content Include="App\Shared\Modules\CoffeeShop.Common.js" />
     <Content Include="App\Shared\Services\AuthData.js" />
@@ -2197,7 +2205,6 @@
     <Content Include="Views\Shared\Templates\NewOrderNotificationTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\Components\Orders\" />
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Admin\css\skins\" />
     <Folder Include="Lang\" />

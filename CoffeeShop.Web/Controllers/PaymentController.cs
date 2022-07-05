@@ -318,13 +318,13 @@ namespace CoffeeShop.Web.Controllers
 
                 if (statusFromMomo != "0") //failed
                 {
-                    _orderService.UpdatePaymentStatus(orderId, (int)PaymentStatus.Pending);
+                    _orderService.UpdatePaymentStatus(orderId, (int)Common.CommonConstants.PaymentStatus.Pending);
                     ViewBag.successForm = GetFailedMessage();
                 }
                 else
                 {
                     ViewBag.successForm = GetSuccessMessage();
-                    _orderService.UpdatePaymentStatus(orderId, (int)PaymentStatus.Paid);
+                    _orderService.UpdatePaymentStatus(orderId, (int)Common.CommonConstants.PaymentStatus.Paid);
                 }
             }
             catch (Exception ex)

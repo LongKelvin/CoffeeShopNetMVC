@@ -35,6 +35,7 @@
         public const string API_Product = "api/Product";
         public const string API_Slide = "api/Slide";
         public const string API_Statistic = "api/Statistic";
+        public const string API_Order = "api/Order";
 
         public const string FacebookAppId = "FacebookAppId";
         public const string FacebookAppSecret = "FacebookAppSecret";
@@ -86,10 +87,13 @@
         public enum OrderStatus
         {
             Pending,
+            Confirmed,
             Processing,
+            Shipping,
             Complete,
-            Cancel,
-            Refunded
+            Canceled,
+            Refunded,
+            Falied
         }
 
         //Payment status
@@ -97,16 +101,18 @@
         {
             Pending,
             Paid,
-            Refunded
+            Refunded,
+            Canceled
         }
 
         //Shipping status
         public enum ShippingStatus
         {
             NotYetShipped,
-            Shipped,
+            Shipping,
             Delivered,
-            ShippingNotRequired
+            ShippingNotRequired,
+            Canceled
         }
     }
 }

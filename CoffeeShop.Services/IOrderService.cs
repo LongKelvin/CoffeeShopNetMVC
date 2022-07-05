@@ -13,7 +13,7 @@ namespace CoffeeShop.Services
 
         Order Delete(Order order);
 
-        Order Delete(int id);
+        bool Delete(int id);
 
         IEnumerable<Order> GetAll();
 
@@ -30,5 +30,11 @@ namespace CoffeeShop.Services
         void SaveChanges();
 
         Task SaveChangesAsync();
+
+        Task<List<Order>> GetAllAsync();
+
+        bool UpdateOrderStatus(int orderId, int orderStatus);
+
+        bool CancelOrder(int orderId, string note);
     }
 }

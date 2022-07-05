@@ -11,7 +11,8 @@
         'CoffeeShop.ApplicationGroups',
         'CoffeeShop.ApplicationRoles',
         'CoffeeShop.ApplicationUsers',
-        'CoffeeShop.Statistics'
+        'CoffeeShop.Statistics',
+        'CoffeeShop.Orders'
 
     ]).config(config)
         .config(configAuthentication);

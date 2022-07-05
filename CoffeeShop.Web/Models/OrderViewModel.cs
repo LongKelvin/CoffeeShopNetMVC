@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoffeeShop.Web.Models
 {
-    public class OrderViewModel
+    public class OrderViewModel : ViewModelBase
     {
         public OrderViewModel()
         {
@@ -81,6 +81,8 @@ namespace CoffeeShop.Web.Models
         public decimal? TotalItemPrice { get; set; }
 
         public decimal? ShippingFee { get; set; }
+
+        public string Note { get; set; }
 
         [ForeignKey("CustomerId")]
         public virtual ApplicationUser User { get; set; }

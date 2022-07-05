@@ -18,6 +18,10 @@
 
                     return CommonConstants.PaymentStatus.Refunded.ToString();
 
+                case (int)CommonConstants.PaymentStatus.Canceled:
+
+                    return CommonConstants.PaymentStatus.Canceled.ToString();
+
                 default: return null;
             }
         }
@@ -30,21 +34,33 @@
 
                     return CommonConstants.OrderStatus.Pending.ToString();
 
+                case (int)CommonConstants.OrderStatus.Confirmed:
+
+                    return CommonConstants.OrderStatus.Confirmed.ToString();
+
                 case (int)CommonConstants.OrderStatus.Processing:
 
                     return CommonConstants.OrderStatus.Processing.ToString();
+
+                case (int)CommonConstants.OrderStatus.Shipping:
+
+                    return CommonConstants.OrderStatus.Shipping.ToString();
 
                 case (int)CommonConstants.OrderStatus.Complete:
 
                     return CommonConstants.OrderStatus.Complete.ToString();
 
-                case (int)CommonConstants.OrderStatus.Cancel:
+                case (int)CommonConstants.OrderStatus.Canceled:
 
-                    return CommonConstants.OrderStatus.Cancel.ToString();
+                    return CommonConstants.OrderStatus.Canceled.ToString();
 
                 case (int)CommonConstants.OrderStatus.Refunded:
 
                     return CommonConstants.OrderStatus.Refunded.ToString();
+
+                case (int)CommonConstants.OrderStatus.Falied:
+
+                    return CommonConstants.OrderStatus.Falied.ToString();
 
                 default: return null;
             }
@@ -58,9 +74,9 @@
 
                     return CommonConstants.ShippingStatus.NotYetShipped.ToString();
 
-                case (int)CommonConstants.ShippingStatus.Shipped:
+                case (int)CommonConstants.ShippingStatus.Shipping:
 
-                    return CommonConstants.ShippingStatus.Shipped.ToString();
+                    return CommonConstants.ShippingStatus.Shipping.ToString();
 
                 case (int)CommonConstants.ShippingStatus.Delivered:
 
@@ -69,6 +85,10 @@
                 case (int)CommonConstants.ShippingStatus.ShippingNotRequired:
 
                     return CommonConstants.ShippingStatus.ShippingNotRequired.ToString();
+
+                case (int)CommonConstants.ShippingStatus.Canceled:
+
+                    return CommonConstants.ShippingStatus.Canceled.ToString();
 
                 default: return null;
             }
