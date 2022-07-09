@@ -9,7 +9,6 @@ using CoffeeShop.Web.Infrastucture.PaymentIntegrated;
 using CoffeeShop.Web.Models;
 using CoffeeShop.Web.Models.MomoPayment;
 
-
 using Microsoft.AspNet.Identity;
 
 using Newtonsoft.Json.Linq;
@@ -17,7 +16,9 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
@@ -31,17 +32,20 @@ namespace CoffeeShop.Web.Controllers
         private readonly IOrderService _orderService;
         private readonly IProductService _productServices;
         private readonly IShopInfoService _shopInfoService;
+        private readonly IApplicationNotificationService _appNotificationService;
 
         public PaymentController(IPaymentMethodService paymentMethodService,
             IErrorService errorService,
             IOrderService orderService,
             IProductService productServices,
-            IShopInfoService shopInfoService) : base(errorService)
+            IShopInfoService shopInfoService,
+            IApplicationNotificationService appNotificationService) : base(errorService)
         {
             _paymentMethodService = paymentMethodService;
             _orderService = orderService;
             _productServices = productServices;
             _shopInfoService = shopInfoService;
+            _appNotificationService = appNotificationService;
         }
 
         // GET: Payment
@@ -77,25 +81,26 @@ namespace CoffeeShop.Web.Controllers
             var newOrder = taskFetchDataFromJson.Result;
 
             //5. Save to database
-
             var orderResult = await CreateOrderAsync(newOrder, cart);
-
             if (orderResult is null)
             {
                 return Json(new { status = false, errorMsg = "Create order failed" }, JsonRequestBehavior.AllowGet);
             }
 
+            //6. Send notification to user (if create order success)
+            CreateAppNotificationForOrder(orderResult);
+            //7Send notification to admin page
             NotificationHub.SendNotification(orderResult.ID.ToString());
-
+            //background worker to send notification to user
+            //SendNotificationBackground(orderResult);
             Session[SessionCurrentOrderID] = orderResult.ID;
 
-            //6. Handle payment method and response suitable action to user
-
+            //7. Handle payment method and response suitable action to user
             //Get payment method code
             //Handle action for each payment type
             int paymentMethodCode = _paymentMethodService.GetById(orderResult.PaymentMethodID).PaymentCode;
 
-            return await HandlePaymentMethodAsync(orderResult, paymentMethodCode);
+            return HandlePaymentMethodAsync(orderResult, paymentMethodCode);
         }
 
         [HttpPost]
@@ -139,7 +144,7 @@ namespace CoffeeShop.Web.Controllers
             return orderResult;
         }
 
-        private async Task<JsonResult> HandlePaymentMethodAsync(Order order, int paymentMethodCode)
+        private JsonResult HandlePaymentMethodAsync(Order order, int paymentMethodCode)
         {
             JsonResult jsonResult = new JsonResult();
             switch (paymentMethodCode)
@@ -181,14 +186,16 @@ namespace CoffeeShop.Web.Controllers
                         }, JsonRequestBehavior.AllowGet);
 
                         //Send Confirmation Email
-                        var taskSendMailToCustomer = SendConfirmationEmailToCustomerAsync(order);
-                        var taskSendMailToAdmin = SendNewOrderMailToAppManagermentAsync(order);
+                        //var taskSendMailToCustomer = SendConfirmationEmailToCustomerAsync(order);
+                        //var taskSendMailToAdmin = SendNewOrderMailToAppManagermentAsync(order);
 
                         //Reset session
-                        ResetCartShoppingSession();
+                        //await ResetCartShoppingSession();
 
-                        await taskSendMailToCustomer;
-                        await taskSendMailToAdmin;
+                        SendMailForNewOrderBackground(order);
+
+                        //await taskSendMailToCustomer;
+                        //await taskSendMailToAdmin;
                     }
                     break;
             }
@@ -196,83 +203,49 @@ namespace CoffeeShop.Web.Controllers
             return jsonResult;
         }
 
-        public async Task SendConfirmationEmailToCustomerAsync(Order order)
-        {
-            Action actionSendEmail = async () =>
-            {
-                var emailContent = RenderHtmlEmailForOrderConfirmation(order);
-                await MailHelper.SendMailAsync(order.CustomerEmail, "[COFFEE_WAY] - ORDER CONFIRMATION", emailContent);
-            };
-            Task taskSendEmail = new Task(actionSendEmail);
-            taskSendEmail.Start();
+        #region Background Worker Methods
 
-            await taskSendEmail;
+        private void SendMailForNewOrderBackground(Order order)
+        {
+            var shopInfo = _shopInfoService.GetShopInfo();
+            var paymentMethod = _paymentMethodService.GetById(order.PaymentMethodID);
+
+            Func<CancellationToken, Task> sendMailToAdmin = async (cancellationToken) =>
+            {
+                await SendNewOrderMailToAppManagermentAsync(order, shopInfo, paymentMethod);
+            };
+
+            HostingEnvironment.QueueBackgroundWorkItem(ct => sendMailToAdmin(ct));
+
+            Func<CancellationToken, Task> sendMailToCustomer = async (cancellationToken) =>
+            {
+                await SendConfirmationEmailToCustomerAsync(order, shopInfo);
+            };
+
+            HostingEnvironment.QueueBackgroundWorkItem(ct => sendMailToCustomer(ct));
         }
 
-        public async Task SendNewOrderMailToAppManagermentAsync(Order order)
+        #endregion Background Worker Methods
+
+        #region Async Task Methods
+
+        //Save and send notification
+        private void CreateAppNotificationForOrder(Order orderResult)
         {
-            Action actionSendEmail = async () =>
+            //6. Save notification to database
+
+            _appNotificationService.Create(new ApplicationNotification
             {
-                var adminEmail = ConfigHelper.GetByKey("AdminEmail");
-                var orderConfimation = new OrderConfirmationViewModel
-                {
-                    Order = order,
-                    ShopInfo = _shopInfoService.GetShopInfo(),
-                    PaymentStatus = OrderHelper.GetPaymentStatus(order.PaymentStatus),
-                    PaymentMethod = _paymentMethodService.GetById(order.PaymentMethodID).PaymentName,
-                    OrderStatus = OrderHelper.GetOrderStatus(order.OrderStatus),
-                    ShippingStatus = OrderHelper.GetShippingStatus(order.ShippingStatus),
-                };
+                Message = "New order",
+                Url = "/Order/Detail/" + orderResult.ID,
+                Status = true,
+                IsReaded = false,
+                Type = NotificationType_Order,
+                ExtraValue = orderResult.ID.ToString(),
+                DateCreated = DateTime.Now
+            });
 
-                string razorViewTemplate = System.IO.File.ReadAllText(Server.MapPath("/Views/Shared/Templates/NewOrderNotificationTemplate.cshtml"));
-                var emailContent = RazorEngine.Razor.Parse(razorViewTemplate, orderConfimation);
-                await MailHelper.SendMailAsync(adminEmail, "[COFFEE_WAY] - NEW ORDER NOTIFICATION ", emailContent);
-            };
-            Task taskSendEmail = new Task(actionSendEmail);
-            taskSendEmail.Start();
-
-            await taskSendEmail;
-        }
-
-        private string HandleMomoPayment(Order order)
-        {
-            //create and seek default value for momo payment config
-
-            MomoPaymentRequestModel momoRequestModel = new MomoPaymentRequestModel();
-            MomoPaymentConfigModel momoConfig = new MomoPaymentConfigModel();
-
-            //config some data for request
-            momoRequestModel.orderInfo = MomoPaymentInfo;
-            momoRequestModel.orderId = order.ID.ToString();
-            momoRequestModel.amount = order.TotalAmount.ToString();
-            momoRequestModel.requestId = order.ID.ToString() + DateTime.Now.Ticks.ToString();
-            momoRequestModel.extraData = "";
-            MomoSecurity crypto = new MomoSecurity();
-            //sign signature SHA256
-            string signature = crypto.signSHA256(momoRequestModel.ToRawHashString(), momoConfig.secretKey);
-
-            //set signature for requets
-            momoRequestModel.signature = signature;
-
-            var message = momoRequestModel.ToJObject();
-
-            string resultFromMomo = string.Empty;
-
-            try
-            {
-                string responseFromMomo = MomoPaymentRequest.SendPaymentRequest(momoConfig.endpoint, message.ToString());
-                JObject jmessage = JObject.Parse(responseFromMomo);
-                Trace.WriteLine("Return from MoMo: " + jmessage.ToString());
-
-                resultFromMomo = jmessage.GetValue("payUrl").ToString();
-            }
-            catch (Exception ex)
-            {
-                Trace.WriteLine(ex.ToString());
-                return null;
-            }
-
-            return resultFromMomo;
+            _appNotificationService.SaveChanges();
         }
 
         private async Task<Order> FetchOrderDataFromJsonAsync(string orderVM)
@@ -338,16 +311,62 @@ namespace CoffeeShop.Web.Controllers
             var order = _orderService.GetById(orderId, new string[] { "OrderDetails" });
 
             //Send Confirmation Email
-            var taskSendMailToCustomer = SendConfirmationEmailToCustomerAsync(order);
-            var taskSendMailToAdmin = SendNewOrderMailToAppManagermentAsync(order);
+            //var taskSendMailToCustomer = SendConfirmationEmailToCustomerAsync(order);
+            //var taskSendMailToAdmin = SendNewOrderMailToAppManagermentAsync(order);
 
             //Reset session
-            ResetCartShoppingSession();
+            await ResetCartShoppingSession();
 
-            await taskSendMailToCustomer;
-            await taskSendMailToAdmin;
+            //Send mail to customer and server
+            SendMailForNewOrderBackground(order);
+
+            //await taskSendMailToCustomer;
+            //await taskSendMailToAdmin;
             //hiển thị thông báo cho người dùng
             return View();
+        }
+
+        #endregion Async Task Methods
+
+        private string HandleMomoPayment(Order order)
+        {
+            //create and seek default value for momo payment config
+
+            MomoPaymentRequestModel momoRequestModel = new MomoPaymentRequestModel();
+            MomoPaymentConfigModel momoConfig = new MomoPaymentConfigModel();
+
+            //config some data for request
+            momoRequestModel.orderInfo = MomoPaymentInfo;
+            momoRequestModel.orderId = order.ID.ToString();
+            momoRequestModel.amount = order.TotalAmount.ToString();
+            momoRequestModel.requestId = order.ID.ToString() + DateTime.Now.Ticks.ToString();
+            momoRequestModel.extraData = "";
+            MomoSecurity crypto = new MomoSecurity();
+            //sign signature SHA256
+            string signature = crypto.signSHA256(momoRequestModel.ToRawHashString(), momoConfig.secretKey);
+
+            //set signature for requets
+            momoRequestModel.signature = signature;
+
+            var message = momoRequestModel.ToJObject();
+
+            string resultFromMomo = string.Empty;
+
+            try
+            {
+                string responseFromMomo = MomoPaymentRequest.SendPaymentRequest(momoConfig.endpoint, message.ToString());
+                JObject jmessage = JObject.Parse(responseFromMomo);
+                Trace.WriteLine("Return from MoMo: " + jmessage.ToString());
+
+                resultFromMomo = jmessage.GetValue("payUrl").ToString();
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.ToString());
+                return null;
+            }
+
+            return resultFromMomo;
         }
 
         [HttpPost]
@@ -357,6 +376,52 @@ namespace CoffeeShop.Web.Controllers
         }
 
         #region Helper method
+
+        public async Task SendConfirmationEmailToCustomerAsync(Order order, ShopInformation shopInfo)
+        {
+            Action actionSendEmail = async () =>
+            {
+                var emailContent = RenderHtmlEmailForOrderConfirmation(order, shopInfo);
+                await MailHelper.SendMailAsync(order.CustomerEmail, "[COFFEE_WAY] - ORDER CONFIRMATION", emailContent);
+            };
+            Task taskSendEmail = new Task(actionSendEmail);
+            taskSendEmail.Start();
+
+            await taskSendEmail;
+        }
+
+        public async Task SendNewOrderMailToAppManagermentAsync(Order order, ShopInformation shopInfo, PaymentMethod paymentMethod)
+        {
+            Action actionSendEmail = async () =>
+            {
+                var adminEmail = ConfigHelper.GetByKey("AdminEmail");
+                var orderConfimation = new OrderConfirmationViewModel
+                {
+                    Order = order,
+                    ShopInfo = shopInfo,
+                    //ShopInfo = new ShopInformation
+                    //{
+                    //    Name = "CoffeeWay",
+                    //    Telephone = "0123456789",
+                    //    Address = "Tp HCM",
+                    //    Email = "coffeeway@gmail.com"
+                    //},
+                    PaymentStatus = OrderHelper.GetPaymentStatus(order.PaymentStatus),
+                    //PaymentMethod = _paymentMethodService.GetById(order.PaymentMethodID).PaymentName,
+                    PaymentMethod = paymentMethod.PaymentName,
+                    OrderStatus = OrderHelper.GetOrderStatus(order.OrderStatus),
+                    ShippingStatus = OrderHelper.GetShippingStatus(order.ShippingStatus),
+                };
+
+                string razorViewTemplate = System.IO.File.ReadAllText(Server.MapPath("/Views/Shared/Templates/NewOrderNotificationTemplate.cshtml"));
+                var emailContent = RazorEngine.Razor.Parse(razorViewTemplate, orderConfimation);
+                await MailHelper.SendMailAsync(adminEmail, "[COFFEE_WAY] - NEW ORDER NOTIFICATION ", emailContent);
+            };
+            Task taskSendEmail = new Task(actionSendEmail);
+            taskSendEmail.Start();
+
+            await taskSendEmail;
+        }
 
         private string GetSuccessMessage()
         {
@@ -399,18 +464,32 @@ namespace CoffeeShop.Web.Controllers
             return faliedFrm;
         }
 
-        private void ResetCartShoppingSession()
+        private async Task ResetCartShoppingSession()
         {
-            Session[SessionCurrentOrderID] = null;
-            Session[SessionCart] = null;
+            Task task = new Task(() =>
+            {
+                Session[SessionCurrentOrderID] = null;
+                Session[SessionCart] = null;
+            });
+
+            task.Start();
+            await task;
         }
 
-        private string RenderHtmlEmailForOrderConfirmation(Order order)
+        private string RenderHtmlEmailForOrderConfirmation(Order order, ShopInformation shopInfo)
         {
             var orderConfimation = new OrderConfirmationViewModel
             {
                 Order = order,
-                ShopInfo = _shopInfoService.GetShopInfo()
+                //ShopInfo = _shopInfoService.GetShopInfo()
+                //ShopInfo = new ShopInformation
+                //{
+                //    Name = "CoffeeWay",
+                //    Telephone = "01234579",
+                //    Email = "coffeeway@gmail.com"
+                //}
+
+                ShopInfo = shopInfo
             };
 
             try

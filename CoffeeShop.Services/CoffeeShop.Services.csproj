@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationGroupService.cs" />
+    <Compile Include="ApplicationNotificationService.cs" />
     <Compile Include="ApplicationPermissionService.cs" />
     <Compile Include="ApplicationRoleService.cs" />
     <Compile Include="EntityExtension.cs" />

@@ -102,6 +102,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\Startup.SignalR.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Models\ApplicationNotification.cs" />
     <Compile Include="NotificationHub\NotificationHub.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />

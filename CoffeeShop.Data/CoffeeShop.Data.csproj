@@ -361,9 +361,18 @@
     <Compile Include="Migrations\202207090903447_AddnotificationsTable.designer.cs">
       <DependentUpon>202207090903447_AddnotificationsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207090922245_AddExtraValueToNotificationTable.cs" />
+    <Compile Include="Migrations\202207090922245_AddExtraValueToNotificationTable.designer.cs">
+      <DependentUpon>202207090922245_AddExtraValueToNotificationTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207091235302_AddDateTimeToNotificationTable.cs" />
+    <Compile Include="Migrations\202207091235302_AddDateTimeToNotificationTable.designer.cs">
+      <DependentUpon>202207091235302_AddDateTimeToNotificationTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
+    <Compile Include="Repositories\ApplicationNotificationRepository.cs" />
     <Compile Include="Repositories\ApplicationPermissionRepository.cs" />
     <Compile Include="Repositories\ApplicationRoleGroupRepository.cs" />
     <Compile Include="Repositories\ApplicationRoleRepository.cs" />
@@ -597,6 +606,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207090903447_AddnotificationsTable.resx">
       <DependentUpon>202207090903447_AddnotificationsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207090922245_AddExtraValueToNotificationTable.resx">
+      <DependentUpon>202207090922245_AddExtraValueToNotificationTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207091235302_AddDateTimeToNotificationTable.resx">
+      <DependentUpon>202207091235302_AddDateTimeToNotificationTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
