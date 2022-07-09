@@ -1,5 +1,6 @@
 ﻿/// <reference path="../../shared/services/notificationservice.js" />
 /// <reference path="../../shared/services/apiservices.js" />
+
 (function (app) {
     app.controller('OrderListController', OrderListController);
 
@@ -48,6 +49,8 @@
         $scope.confirmOrder = confirmOrder;
         $scope.cancelOrder = cancelOrder;
         $scope.showCancelOrderConfirm = showCancelOrderConfirm;
+
+        $scope.getNotificationFromServer = getNotificationFromServer;
 
         function getOrderList(page, pageSize) {
             page = page || 0;
@@ -331,6 +334,42 @@
             }
         }
 
+        //Hub connection
+        function getNotificationFromServer() {
+            console.log('ready to start jquery')
+            // Reference the auto-generated proxy for the hub.
+            var notificationHub = $.connection.notificationHub;
+            console.log('chatHub connection: ', notificationHub);
+            // Create a function that the hub can call back to display messages.
+            notificationHub.client.addNewMessageToPage = function (message) {
+                /*e_preventDefault();*/
+                //e_stopPropagation();
+                getOrderList();
+                NotificationService.displaySuccess('Bạn có 1 đơn hàng mới,  Mã đơn #' + message);
+                playAudio();
+            };
+            // Get the user name and store it to prepend to messages.
+
+            // Start the connection.
+            $.connection.hub.logging = true;
+            $.connection.hub.start().done(function () {
+                //$('#sendmessage').click(function () {
+                //    // Call the Send method on the hub.
+                //    notificationHub.server.send($('#displayname').val(), $('#message').val());
+                //    // Clear text box and reset focus for next comment.
+                //    $('#message').val('').focus();
+                //});
+                console.log('$.connection.hub.start().done')
+            });
+        }
+
+        function playAudio() {
+            var audio = new Audio('/Assets/Admin/audio/sweet_text.mp3');
+            console.log(audio);
+            audio.play();
+        };
+
+        $scope.getNotificationFromServer();
         $scope.getOrderList();
         $scope.loadListOrderStatus();
     }

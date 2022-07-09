@@ -36,5 +36,7 @@ namespace CoffeeShop.Services
         bool UpdateOrderStatus(int orderId, int orderStatus);
 
         bool CancelOrder(int orderId, string note);
+
+
     }
 }

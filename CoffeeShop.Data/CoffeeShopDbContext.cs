@@ -35,6 +35,7 @@ namespace CoffeeShop.Data
         public virtual DbSet<ShopPaymentInfo> ShopPayments { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
+        public virtual DbSet<ApplicationNotification> ApplicationNotifications { get; set; }
 
         public virtual DbSet<ApplicationGroup> ApplicationGroups { get; set; }
         public virtual DbSet<ApplicationRole> ApplicationRoles { get; set; }

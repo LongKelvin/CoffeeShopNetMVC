@@ -114,5 +114,8 @@
             ShippingNotRequired,
             Canceled
         }
+
+        //Notification Type
+        public const string NotificationType_Order = "Order";
     }
 }

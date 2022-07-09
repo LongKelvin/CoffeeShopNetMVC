@@ -203,5 +203,25 @@ namespace CoffeeShop.Web.Api
                 return request.CreateResponse(HttpStatusCode.OK);
             });
         }
+
+        [HttpGet]
+        [Route("GetOrderDetail/{id:int}")]
+        public HttpResponseMessage GetOrderDetail(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                if (id == 0 || id < 0)
+                {
+                    return request.CreateResponse(HttpStatusCode.BadRequest, "ID is invalid");
+                }
+
+                var orderById = _orderService.GetById(id, new string[] { "OrderDetails" });
+
+                if (orderById == null)
+                    return request.CreateResponse(HttpStatusCode.BadRequest, "Order not found");
+
+                return request.CreateResponse(HttpStatusCode.OK, orderById);
+            });
+        }
     }
 }

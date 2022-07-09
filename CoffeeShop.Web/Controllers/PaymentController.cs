@@ -9,6 +9,7 @@ using CoffeeShop.Web.Infrastucture.PaymentIntegrated;
 using CoffeeShop.Web.Models;
 using CoffeeShop.Web.Models.MomoPayment;
 
+
 using Microsoft.AspNet.Identity;
 
 using Newtonsoft.Json.Linq;
@@ -83,6 +84,8 @@ namespace CoffeeShop.Web.Controllers
             {
                 return Json(new { status = false, errorMsg = "Create order failed" }, JsonRequestBehavior.AllowGet);
             }
+
+            NotificationHub.SendNotification(orderResult.ID.ToString());
 
             Session[SessionCurrentOrderID] = orderResult.ID;
 

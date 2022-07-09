@@ -29,6 +29,7 @@ namespace CoffeeShop.Web.App_Start
         {
             // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=316888
 
+            ConfigureSignalR(app);
             ConfigAutofac(app);
             ConfigureAuth(app);
         }
@@ -61,6 +62,9 @@ namespace CoffeeShop.Web.App_Start
             builder.RegisterAssemblyTypes(typeof(PostCategoryService).Assembly)
                 .Where(t => t.Name.EndsWith("Service"))
                 .AsImplementedInterfaces().InstancePerRequest();
+
+            ////Hub notificaton
+            //builder.RegisterType<NotificationHub>().AsSelf().InstancePerRequest();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
