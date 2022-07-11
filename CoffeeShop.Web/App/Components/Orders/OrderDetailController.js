@@ -4,14 +4,14 @@
     OrderDetailController.$inject = [
         '$scope',
         'ApiServices',
-        '$stateParams',
+        '$state',
         'NotificationService',
-        'CommonService',
-        '$http'
+        '$stateParams',
+        'CommonService'
 
     ];
 
-    function OrderDetailController($scope, ApiServices, NotificationService, $stateParams, CommonService) {
+    function OrderDetailController($scope, ApiServices, $state, NotificationService, $stateParams, CommonService) {
         //setup Controller
         $scope.title = 'OrderDetailController';
 
@@ -35,12 +35,13 @@
         $scope.loadOrderDetail = loadOrderDetail;
 
         function loadOrderDetail() {
-            console.log('id => ', $stateParams.id)
-
-            ApiServices.get('api/Order/GetOrderDetail/' + $stateParams.id, function (response) {
+            ApiServices.get('api/Order/GetOrderDetail/' + $stateParams.id, null, function (response) {
+                console.log('detail ', response)
                 $scope.orderDetail = response.data;
+
+                console.log('order detials: ', $scope.orderDetail)
             }, function (error) {
-                NotificationService.error(error.data);
+                NotificationService.displayError(error.data);
             });
         }
 
@@ -68,6 +69,7 @@
                 NotificationService.displayError('Hủy đơn hàng không thành công');
             })
             $('#cancelOrderModal').modal('hide');
+            $state.go("Orders")
         }
 
         function updateOrderStatus() {

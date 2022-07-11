@@ -87,7 +87,9 @@
     <Compile Include="Api\ApplicationPermissionController.cs" />
     <Compile Include="Api\ApplicationRoleController.cs" />
     <Compile Include="Api\ApplicationUserController.cs" />
+    <Compile Include="Api\AppNotificationController.cs" />
     <Compile Include="Api\HomeController.cs" />
+    <Compile Include="Api\InvoiceController.cs" />
     <Compile Include="Api\OrderController.cs" />
     <Compile Include="Api\PostCategoryController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />
@@ -102,7 +104,9 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\Startup.SignalR.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Models\ApplicationNotification.cs" />
+    <Compile Include="Models\ApplicationNewNotificationSet.cs" />
+    <Compile Include="Models\ApplicationNotificationViewModel.cs" />
+    <Compile Include="Models\OrderInvoiceViewModel.cs" />
     <Compile Include="NotificationHub\NotificationHub.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -2215,6 +2219,7 @@
     <None Include="Properties\PublishProfiles\KCoffee - Web Deploy.pubxml" />
     <Content Include="Views\Shared\Templates\OrderConfirmationTemplate.cshtml" />
     <Content Include="Views\Shared\Templates\NewOrderNotificationTemplate.cshtml" />
+    <Content Include="Views\Shared\Templates\InvoiceTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

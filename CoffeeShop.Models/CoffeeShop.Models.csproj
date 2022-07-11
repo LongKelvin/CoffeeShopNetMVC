@@ -88,6 +88,7 @@
     <Compile Include="Models\MenuGroup.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
+    <Compile Include="Models\OrderInvoice.cs" />
     <Compile Include="Models\OrderStatus.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\PaymentMethod.cs" />

@@ -20,6 +20,7 @@ namespace CoffeeShop.Data
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderInvoice> OrderInvoices { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<PostCategory> PostCategories { get; set; }
         public virtual DbSet<Post> Posts { get; set; }

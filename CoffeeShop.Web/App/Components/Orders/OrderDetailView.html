@@ -5,43 +5,17 @@
     <title></title>
 </head>
 <body>
+    <h1>DETAIL ORDERS</h1>
     <div class="form-control">
-       <table>
-           <tr ng-repeat="item in orderDetail">
-
-               <td>
-                   <input type="checkbox" class="checkBox"
-                          value="{{item.ID}}" onclick="GetTotalSelectedItems()" />
-               </td>
-               <td>{{$index+1}}</td>
-               <td>{{item.ID}}</td>
-               <td>
-                   <span ng-class="getOrderStatusStyle({{item.OrderStatus}})" style="font-size:14px; color:white">
-                       {{item.OrderStatus | orderStatusFilter}}
-                   </span>
-               </td>
-
-               <td style="color:white">
-                   <span ng-class="getPaymentStatusStyle({{item.PaymentStatus}})" style="font-size:14px; color:white">
-                       {{item.PaymentStatus | paymentStatusFilter}}
-                   </span>
-               </td>
-
-               <td>
-                   <span ng-class="getShippingStatusStyle({{item.ShippingStatus}})" style="font-size:14px; color:white">
-                       {{item.ShippingStatus | shippingStatusFilter}}
-                   </span>
-               </td>
-
-               <td>
-                   <a href="mailto:{{item.CustomerEmail}}"> {{item.CustomerEmail}}</a>
-               </td>
-               <td class="optional-sm">
-                   {{item.CreatedDate | date:'dd/MM/yyyy'}}
-               </td>
-               <td><strong>{{item.TotalAmount | currency:'₫':0}}</strong></td>
-           </tr>
-       </table>
+        <div>
+            <h3>{{orderDetail.CustomerName}}</h3>
+            <h3>{{orderDetail.ID}}</h3>
+            <h3>{{orderDetail.CustomerMobile}}</h3>
+            <h3>{{orderDetail.TotalAmount}}</h3>
+            <h3>{{orderDetail.OrderDetails.ProductName}}</h3>
+            <h3>{{orderDetail.OrderDetails.UnitPrice}}</h3>
+            <h3>{{orderDetail.OrderDetails.Quantity}}</h3>
+        </div>
     </div>
 </body>
 </html>

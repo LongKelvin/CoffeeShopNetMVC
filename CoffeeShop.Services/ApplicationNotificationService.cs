@@ -12,8 +12,11 @@ namespace CoffeeShop.Services
         void Create(ApplicationNotification notification);
 
         void Update(ApplicationNotification notification);
+        void MakeAsReadedNotification(int notificationId);
 
         void Delete(int id);
+
+        ApplicationNotification GetById(int id);
 
         IEnumerable<ApplicationNotification> GetAll();
 
@@ -51,6 +54,11 @@ namespace CoffeeShop.Services
             return _appNotificationRepository.GetAll();
         }
 
+        public ApplicationNotification GetById(int id)
+        {
+           return _appNotificationRepository.GetById(id);
+        }
+
         public ApplicationNotification GetDetail(int id)
         {
             return _appNotificationRepository.GetById(id);
@@ -59,6 +67,16 @@ namespace CoffeeShop.Services
         public List<ApplicationNotification> GetTop10NewNotification()
         {
             return _appNotificationRepository.GetTop10NewNotification();
+        }
+
+        public void MakeAsReadedNotification(int notificationId)
+        {
+            var updateNotification = _appNotificationRepository.GetById(notificationId);
+            if(updateNotification == null)
+                return;
+
+            updateNotification.IsReaded = true;
+            _appNotificationRepository.Update(updateNotification);
         }
 
         public void SaveChanges()

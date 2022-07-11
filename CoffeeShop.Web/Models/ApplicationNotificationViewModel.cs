@@ -1,4 +1,6 @@
-﻿namespace CoffeeShop.Web.Models
+﻿using System;
+
+namespace CoffeeShop.Web.Models
 {
     public class ApplicationNotificationViewModel : ViewModelBase
     {
@@ -17,5 +19,8 @@
         /// For this, we can access the detail about notifications
         /// </summary>
         public string ExtraValue { get; set; }
+
+        public DateTime DateCreated { get; set; }
+
     }
 }

@@ -51,6 +51,7 @@
         $scope.showCancelOrderConfirm = showCancelOrderConfirm;
 
         $scope.getNotificationFromServer = getNotificationFromServer;
+        $scope.createInvoice = createInvoice;
 
         function getOrderList(page, pageSize) {
             page = page || 0;
@@ -336,21 +337,19 @@
 
         //Hub connection
         function getNotificationFromServer() {
-            console.log('ready to start jquery')
-            // Reference the auto-generated proxy for the hub.
+            //console.log('ready to start jquery')
+            //Reference the auto-generated proxy for the hub.
             var notificationHub = $.connection.notificationHub;
-            console.log('chatHub connection: ', notificationHub);
+            //console.log('chatHub connection: ', notificationHub);
             // Create a function that the hub can call back to display messages.
             notificationHub.client.addNewMessageToPage = function (message) {
-                /*e_preventDefault();*/
-                //e_stopPropagation();
                 getOrderList();
-                NotificationService.displaySuccess('Bạn có 1 đơn hàng mới,  Mã đơn #' + message);
-                playAudio();
+                //NotificationService.displaySuccess('Bạn có 1 đơn hàng mới,  Mã đơn #' + message);
+                //playAudio();
             };
-            // Get the user name and store it to prepend to messages.
+            //Get the user name and store it to prepend to messages.
 
-            // Start the connection.
+            //Start the connection.
             $.connection.hub.logging = true;
             $.connection.hub.start().done(function () {
                 //$('#sendmessage').click(function () {
@@ -359,15 +358,31 @@
                 //    // Clear text box and reset focus for next comment.
                 //    $('#message').val('').focus();
                 //});
-                console.log('$.connection.hub.start().done')
+                //console.log('$.connection.hub.start().done')
             });
         }
 
-        function playAudio() {
-            var audio = new Audio('/Assets/Admin/audio/sweet_text.mp3');
-            console.log(audio);
-            audio.play();
-        };
+        //function playAudio() {
+        //    var audio = new Audio('/Assets/Admin/audio/sweet_text.mp3');
+        //    console.log(audio);
+        //    audio.play();
+        //};
+
+        function createInvoice(orderId) {
+            ApiServices.post('api/Invoice/CreateInvoice/' + orderId, null, function (response) {
+                ApiServices.get('api/Invoice/ExportInvoice/' + orderId, null, function (response) {
+                    if (response.status = 200) {
+                        NotificationService.displaySuccess('Đã tạo hóa đơn cho đơn hàng #' + orderId);
+                        console.log('url path:', response)
+                        window.location.href = response.data;
+                    }
+                }, function (error) {
+                    NotificationService.displayError('Tạo hóa đơn thất bạ');
+                })
+            }, function () {
+                NotificationService.displayError('Tạo hóa đơn thất bại');
+            })
+        }
 
         $scope.getNotificationFromServer();
         $scope.getOrderList();

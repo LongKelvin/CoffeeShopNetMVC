@@ -92,6 +92,7 @@
     <Compile Include="MenuGroupService.cs" />
     <Compile Include="MenuService.cs" />
     <Compile Include="OrderDetailService.cs" />
+    <Compile Include="OrderInvoiceService.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="PageService.cs" />
     <Compile Include="PaymentMethodService.cs" />

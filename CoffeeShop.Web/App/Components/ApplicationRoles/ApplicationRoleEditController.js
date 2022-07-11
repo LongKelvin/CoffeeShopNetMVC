@@ -52,7 +52,8 @@
                 null,
                 function (response) {
                     $scope.listPermissionByRole = response.data;
-                    $.each(result.data, function (i, permission) {
+                    console.log('response data: ', response.data )
+                    $.each($scope.listPermissionByRole, function (i, permission) {
                         $('#permission_' + permission.Name).prop('checked', true);
                     });
                 }, function (response) {

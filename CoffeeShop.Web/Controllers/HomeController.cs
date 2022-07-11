@@ -13,14 +13,22 @@ namespace CoffeeShop.Web.Controllers
         private IShopInfoService _shopInfoService;
         private IProductService _productService;
         private ISlideService _slideService;
+        //private IOrderInvoiceService _orderInvoiceService;
+        //private IOrderService _orderService;
 
-        public HomeController(IShopInfoService shopInfoService, IProductService productService,
-            ISlideService slideService, IErrorService errorService) : base(errorService)
+        public HomeController(IShopInfoService shopInfoService,
+            IProductService productService,
+            ISlideService slideService,
+            IErrorService errorService
+            //IOrderInvoiceService orderInvoiceService,
+            /*IOrderService orderService*/) : base(errorService)
 
         {
             _shopInfoService = shopInfoService;
             _productService = productService;
             _slideService = slideService;
+            //_orderInvoiceService = orderInvoiceService;
+            //_orderService = orderService;
         }
 
         // GET: Home

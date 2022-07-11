@@ -236,7 +236,7 @@ namespace CoffeeShop.Web.Controllers
 
             _appNotificationService.Create(new ApplicationNotification
             {
-                Message = "New order",
+                Message = "You received a new order, order number #" + orderResult.ID,
                 Url = "/Order/Detail/" + orderResult.ID,
                 Status = true,
                 IsReaded = false,
