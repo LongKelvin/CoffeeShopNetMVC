@@ -12,7 +12,6 @@
         '$stateParams',
         '$state',
         '$http'
-
     ];
 
     function OrderListController($scope, ApiServices, NotificationService, CommonService) {

@@ -4,7 +4,6 @@ using CoffeeShop.Services;
 using CoffeeShop.Web.Infrastucture.Core;
 
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -35,14 +34,14 @@ namespace CoffeeShop.Web.Api
                 HttpResponseMessage response = null;
                 if (!ModelState.IsValid)
                 {
-                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                    return request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
                 }
                 else
                 {
-                    var invoice = _orderInvoiceService.GetByCondition(x => x.Order.Equals(orderId));
+                    var invoice = _orderInvoiceService.GetByCondition(x => x.OrderId.Equals(orderId));
                     if (invoice != null)
                     {
-                        return response = request.CreateResponse(HttpStatusCode.OK);
+                        return request.CreateResponse(HttpStatusCode.OK);
                     }
 
                     var orderById = _orderService.GetById(orderId, new string[] { "OrderDetails" });
@@ -69,37 +68,77 @@ namespace CoffeeShop.Web.Api
         [HttpGet]
         public async Task<HttpResponseMessage> ExportToPdf(HttpRequestMessage request, int orderId)
         {
-            var invoiceById = _orderInvoiceService.GetByCondition(x => x.OrderId.Equals(orderId));
+            var invoiceById = _orderInvoiceService.GetByCondition(x => x.OrderId == (orderId));
             var orderById = _orderService.GetById(orderId, new string[] { "OrderDetails" });
-
-            string fileName = string.Concat("Invoice_" + invoiceById.OrderId + DateTime.Now.ToString("yyyyMMddhhmmsss") + ".pdf");
-            var folderReport = ConfigHelper.GetByKey(CommonConstants.INVOICE_PDF_EXPORT_PATH);
-            string filePath = HttpContext.Current.Server.MapPath(folderReport);
-
-            if (!Directory.Exists(filePath))
-                Directory.CreateDirectory(filePath);
-
-            string fullPath = Path.Combine(filePath, fileName);
-
             invoiceById.Order = orderById;
+
+            var htmlTemplatePath = HttpContext.Current.Server.MapPath("/Views/Shared/Templates/InvoiceTemplate.cshtml");
+
+            var renderHtmlTask = RenderRazorViewAsync(invoiceById, htmlTemplatePath);
+
+            var folderReport = ConfigHelper.GetByKey(CommonConstants.INVOICE_PDF_EXPORT_PATH);
+            var filePath = HttpContext.Current.Server.MapPath(folderReport);
+            var createPdfPathTask = CreateInvoicePathAsync(invoiceById.OrderId.ToString(), filePath);
+
+            await Task.WhenAll(renderHtmlTask, createPdfPathTask);
 
             try
             {
-                var data = invoiceById;
-                //string htmlTemplate = File.ReadAllText(HttpContext.Current.Server.MapPath("/Assets/Admin/templates/product-report-template.html"));
-                string razorViewTemplate = File.ReadAllText(HttpContext.Current.Server.MapPath("/Views/Shared/Templates/InvoiceTemplate.cshtml"));
-                razorViewTemplate = razorViewTemplate.Replace("{{CreatedDate}}", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString());
-                var htmlParseViewData = RazorEngine.Razor.Parse(razorViewTemplate, data);
-
-                await ReportHelper.GeneratePdf(htmlParseViewData, fullPath, CommonConstants.PDF_INVOICE_TYPE);
-                Trace.WriteLine($"PATH DOWNLOAD URL: {Path.Combine(folderReport, fileName)}");
-                return request.CreateResponse(HttpStatusCode.OK, Path.Combine(folderReport, fileName));
+                await ReportHelper.GeneratePdf(renderHtmlTask.Result, createPdfPathTask.Result[0], CommonConstants.PDF_INVOICE_TYPE);
+                return request.CreateResponse(HttpStatusCode.OK, Path.Combine(folderReport, createPdfPathTask.Result[1]));
             }
             catch (Exception ex)
             {
                 LogError(ex);
                 return request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
+        }
+
+        /// <summary>
+        /// This function is for rendering the Razor view to HTML.
+        /// </summary>
+        /// <param name="invoice"></param>
+        /// <returns></returns>
+        private async Task<string> RenderRazorViewAsync(OrderInvoice invoice, string templatePath)
+        {
+            Func<object, string> funcRenderHtmlView = (x) =>
+            {
+                string razorViewTemplate = File.ReadAllText(templatePath);
+                //razorViewTemplate = razorViewTemplate.Replace("{{CreatedDate}}", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString());
+                return RazorEngine.Razor.Parse(razorViewTemplate, x);
+            };
+
+            var task = new Task<string>(funcRenderHtmlView, invoice);
+            task.Start();
+
+            return await task;
+        }
+
+        /// <summary>
+        /// This function aim to create invoice path
+        /// Result from this function return an string[] with 2 element:
+        /// fullPath: the full path of file that pdf will be created
+        /// fileName: the name of file
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        private async Task<string[]> CreateInvoicePathAsync(string orderId, string filePath)
+        {
+            Func<object, string[]> funcCreateInvoicePath = (x) =>
+            {
+                dynamic f = x;
+                string fileName = string.Concat("Invoice_" + f.orderIdStr + DateTime.Now.ToString("yyyyMMddhhmmsss") + ".pdf");
+
+                if (!Directory.Exists(f.filePath))
+                    Directory.CreateDirectory(f.filePath);
+
+                var fullPath = Path.Combine(filePath, fileName);
+                return new string[] { fullPath, fileName };
+            };
+
+            var task = new Task<string[]>(funcCreateInvoicePath, new { orderIdStr = orderId, filePath = filePath });
+            task.Start();
+            return await task;
         }
     }
 }
