@@ -13,6 +13,9 @@ namespace CoffeeShop.Models.Models
         public Order()
         {
             this.OrderDetails = new HashSet<OrderDetail>();
+            this.PaymentStatus = (int)Common.CommonConstants.PaymentStatus.Pending;
+            this.OrderStatus = (int)Common.CommonConstants.OrderStatus.Pending;
+            this.ShippingStatus = (int)Common.CommonConstants.ShippingStatus.NotYetShipped;
         }
 
         [MaxLength(250)]
@@ -56,11 +59,20 @@ namespace CoffeeShop.Models.Models
         [Display(Name = "Payment Method Id")]
         public int PaymentMethodID { get; set; } // nvarchar(250), not null
 
-        [MaxLength(50)]
-        [StringLength(50)]
+        [Range(0, 3, ErrorMessage = "Payment status value is not valid")]
         [Required(ErrorMessage = "Payment Status is required")]
         [Display(Name = "Payment Status")]
-        public string PaymentStatus { get; set; } // nvarchar(50), not null
+        public int PaymentStatus { get; set; } // nvarchar(50), not null
+
+        [Range(0, 7, ErrorMessage = "Order status value is not valid")]
+        [Display(Name = "Order Status")]
+        [Required(ErrorMessage = "Order Status is required")]
+        public int OrderStatus { get; set; }
+
+        [Range(0, 4, ErrorMessage = "Shipping status value is not valid")]
+        [Display(Name = "Shipping Status")]
+        [Required(ErrorMessage = "Shipping Status is required")]
+        public int ShippingStatus { get; set; }
 
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public bool Status { get; set; }
@@ -74,6 +86,8 @@ namespace CoffeeShop.Models.Models
         public decimal? TotalItemPrice { get; set; }
 
         public decimal? ShippingFee { get; set; }
+
+        public string Note { get; set; }
 
         [ForeignKey("CustomerId")]
         public virtual ApplicationUser User { get; set; }

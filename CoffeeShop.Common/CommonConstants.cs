@@ -6,6 +6,8 @@
         public const string PostTag = "Post";
         public const string DefaultFooterId = "default";
 
+        public const string PDF_INVOICE_TYPE = "InvoiceType";
+
         public const string SessionCart = "SessionCart";
         public const string SessionCartCurrentItem = "SessionCartCurrentItem";
         public const string SessionCurrentOrderID = "SessionCurrentOrderID";
@@ -22,7 +24,6 @@
         public const string Admin = "Admin";
         public const string BasicUser = "BasicUser";
 
-
         public const string MomoPaymentInfo = "Thanh toán hóa đơn CoffeeWay qua MOMO";
 
         public const string API_ApplicationPermission = "api/ApplicationPermission";
@@ -36,6 +37,9 @@
         public const string API_Product = "api/Product";
         public const string API_Slide = "api/Slide";
         public const string API_Statistic = "api/Statistic";
+        public const string API_Order = "api/Order";
+        public const string API_AppNotification = "api/Notification";
+        public const string API_Invoice = "api/Invoice";
 
         public const string FacebookAppId = "FacebookAppId";
         public const string FacebookAppSecret = "FacebookAppSecret";
@@ -47,6 +51,7 @@
         public const string EXCEL_EXPORT_PATH = "ExcelExportPath";
 
         public const string PDF_EXPORT_PATH = "PdfExportPath";
+        public const string INVOICE_PDF_EXPORT_PATH = "InvoiceExportPath";
 
         //Momo Payment Config
         public const string MOMO_PARTNER_CODE = "MOMO_PARTNER_CODE";
@@ -82,5 +87,40 @@
             INTERNET_BANKING = 103,
             CREDIT_CARD = 104
         }
+
+        //Order status
+        public enum OrderStatus
+        {
+            Pending,
+            Confirmed,
+            Processing,
+            Shipping,
+            Complete,
+            Canceled,
+            Refunded,
+            Falied
+        }
+
+        //Payment status
+        public enum PaymentStatus
+        {
+            Pending,
+            Paid,
+            Refunded,
+            Canceled
+        }
+
+        //Shipping status
+        public enum ShippingStatus
+        {
+            NotYetShipped,
+            Shipping,
+            Delivered,
+            ShippingNotRequired,
+            Canceled
+        }
+
+        //Notification Type
+        public const string NotificationType_Order = "Order";
     }
 }

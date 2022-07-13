@@ -1,12 +1,7 @@
-using CKFinder.Connector;
-
 using CoffeeShop.Services;
 using CoffeeShop.Web.Mappings;
 using CoffeeShop.Web.Utilities;
 
-using Newtonsoft.Json;
-
-using System.Configuration;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -35,7 +30,9 @@ namespace CoffeeShop.Web
 
             log4net.Config.XmlConfigurator.Configure();
 
+            //SqlDependency.Start(ConfigurationManager.ConnectionStrings["CoffeeShopConnection"].ConnectionString);
         }
+
         protected void Application_Error()
         {
             var ex = Server.GetLastError();
@@ -46,7 +43,11 @@ namespace CoffeeShop.Web
 
             errorService.LogError(ex);
             Log4net.Error(ex.Message, ex);
-
         }
+
+        //protected void Application_End()
+        //{
+        //    SqlDependency.Stop(ConfigurationManager.ConnectionStrings["CoffeeShopConnection"].ConnectionString);
+        //}
     }
 }

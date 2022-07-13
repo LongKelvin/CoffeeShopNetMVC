@@ -11,11 +11,13 @@
             "onclick": null,
             "fadeIn": 500,
             "fadeOut": 1500,
-            "timeOut": 6000,
-            "extendedTimeOut": 2000
+            "timeOut": 8000,
+            "extendedTimeOut": 3000
         };
 
         function displaySuccess(message) {
+
+         
             toastr.success(message);
         }
 

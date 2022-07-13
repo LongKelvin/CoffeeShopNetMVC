@@ -39,6 +39,28 @@ namespace CoffeeShop.Common
             });
         }
 
+        public static async Task GeneratePdf(string htmlTemplate, string filePath, string type)
+        {
+            await Task.Run(() =>
+            {
+                using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                {
+                    if (type == CommonConstants.PDF_INVOICE_TYPE)
+                    {
+                        var pdf = PdfGenerator.GeneratePdf(htmlTemplate, InvoicePdfConfig());
+                        pdf.Save(fs);
+                    }
+
+                    else
+                    {
+                        var pdf = PdfGenerator.GeneratePdf(htmlTemplate, DefaultPdfConfig());
+                        pdf.Save(fs);
+                    }
+
+                }
+            });
+        }
+
         public static PdfGenerateConfig DefaultPdfConfig()
         {
             return new PdfGenerateConfig
@@ -49,6 +71,19 @@ namespace CoffeeShop.Common
                 MarginLeft = 25,
                 MarginRight = 5,
                 PageOrientation = PageOrientation.Landscape,
+            };
+        }
+
+        public static PdfGenerateConfig InvoicePdfConfig()
+        {
+            return new PdfGenerateConfig
+            {
+                PageSize = PageSize.A5,
+                MarginTop = 5,
+                MarginBottom = 5,
+                MarginLeft = 5,
+                MarginRight = 5,
+                PageOrientation = PageOrientation.Portrait,
             };
         }
     }

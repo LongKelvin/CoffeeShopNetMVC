@@ -1,11 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace CoffeeShop.Common
 {
     public class MailHelper
     {
-        public static bool SendMail(string toEmail, string subject, string content)
+        public static async Task<bool> SendMailAsync(string toEmail, string subject, string content)
         {
             try
             {
@@ -36,7 +37,7 @@ namespace CoffeeShop.Common
                 mail.IsBodyHtml = true;
                 mail.Priority = MailPriority.High;
 
-                smtpClient.Send(mail);
+                await smtpClient.SendMailAsync(mail);
 
                 return true;
             }

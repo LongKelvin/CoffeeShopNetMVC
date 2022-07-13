@@ -61,7 +61,7 @@ namespace CoffeeShop.Web.Controllers
             }
         }
 
-        private void LogError(Exception ex)
+        public void LogError(Exception ex)
         {
             try
             {

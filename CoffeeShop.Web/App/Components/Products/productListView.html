@@ -51,16 +51,22 @@
                         </div>
 
                         <div class="float-sm-end col-6 mt-3">
-                            <button type="button" class="btn btn-outline-success w-100"
-                                    ng-click="exportToPdf()">
-                                <i class="fa-solid fa-file-export"> </i> Xuất PDF
+                            <button type="button" class="btn btn-outline-dark w-100 dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa-solid fa-file-export"> </i> Xuất File
                             </button>
-                        </div>
-                        <div class="float-sm-end col-6 mt-3">
-                            <button type="button" class="btn btn-outline-primary w-100"
-                                    ng-click="exportToExcel()">
-                                <i class="fa-solid fa-file-excel"> </i> Xuất EXCEL
-                            </button>
+
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item" ng-click="exportToPdf()">
+                                    <i class="fa-solid fa-file-export"> </i>
+                                    Xuất PDF
+                                </button>
+                                <div class="dropdown-divider"></div>
+                                <button class="dropdown-item" ng-click="exportToExcel()">
+                                    <i class="fa-solid fa-file-excel"> </i>
+                                    Xuất EXCEL
+                                </button>
+                            </div>
                         </div>
 
                         <div class="float-sm-end col-6 mt-3">
@@ -68,11 +74,6 @@
                                 <i class="fa-solid fa-file-download"> </i> Tải Excel Template
                             </a>
                         </div>
-
-
-
-
-
                     </div>
                 </div>
             </div>

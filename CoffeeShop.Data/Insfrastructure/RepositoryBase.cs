@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace CoffeeShop.Data.Insfrastructure
 {
@@ -105,6 +106,20 @@ namespace CoffeeShop.Data.Insfrastructure
             }
 
             return dataContext.Set<T>().AsQueryable();
+        }
+
+        public Task<List<T>> GetAllAsync(string[] includes = null)
+        {
+            //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
+            if (includes != null && includes.Count() > 0)
+            {
+                var query = dataContext.Set<T>().Include(includes.First());
+                foreach (var include in includes.Skip(1))
+                    query = query.Include(include);
+                return query.AsQueryable().ToListAsync();
+            }
+
+            return dataContext.Set<T>().AsQueryable().ToListAsync();
         }
 
         public T GetByCondition(Expression<Func<T, bool>> expression, string[] includes = null)

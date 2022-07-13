@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationGroupService.cs" />
+    <Compile Include="ApplicationNotificationService.cs" />
     <Compile Include="ApplicationPermissionService.cs" />
     <Compile Include="ApplicationRoleService.cs" />
     <Compile Include="EntityExtension.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="MenuGroupService.cs" />
     <Compile Include="MenuService.cs" />
     <Compile Include="OrderDetailService.cs" />
+    <Compile Include="OrderInvoiceService.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="PageService.cs" />
     <Compile Include="PaymentMethodService.cs" />

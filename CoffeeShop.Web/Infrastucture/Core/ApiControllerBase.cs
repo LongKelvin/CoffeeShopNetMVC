@@ -58,14 +58,27 @@ namespace CoffeeShop.Web.Infrastucture.Core
         {
             try
             {
-                Error error = new Error
+                if (ex == null)
                 {
-                    CreatedDate = DateTime.Now,
-                    Message = ex.Message,
-                    StackTrace = ex.StackTrace
-                };
+                    var errorDetail = $"Error orccur in {nameof(LogError)} - controller {nameof(ApiControllerBase)} - Exception was null but error invoke.";
+                    Error e = new Error
+                    {
+                        CreatedDate = DateTime.Now,
+                        Message = errorDetail,
+                    };
+                    _errorService.CreateError(e);
+                }
+                else
+                {
+                    Error error = new Error
+                    {
+                        CreatedDate = DateTime.Now,
+                        Message = ex.Message,
+                        StackTrace = ex.StackTrace
+                    };
 
-                _errorService.CreateError(error);
+                    _errorService.CreateError(error);
+                }
             }
             catch
             {

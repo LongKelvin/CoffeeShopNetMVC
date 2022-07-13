@@ -71,4 +71,19 @@
     $(document).ready(function () {
 
     });
+
+    function showLoadingBar() {
+        $('#frmLogin').waitMe({
+            effect: 'bounce',
+            text: 'Please waiting ...',
+            bg: 'rgba(255, 255, 255, 0.7)',
+            color: '#000',
+            maxSize: '',
+            waitTime: -1,
+            textPos: 'vertical',
+            fontSize: '',
+            source: '',
+            onClose: function () { }
+        });
+    };
 </script>

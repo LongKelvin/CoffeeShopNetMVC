@@ -333,9 +333,54 @@
     <Compile Include="Migrations\202206230533422_AddNewFieldToProductModel.designer.cs">
       <DependentUpon>202206230533422_AddNewFieldToProductModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206280944544_AddExtraFieldToOrderDetail.cs" />
+    <Compile Include="Migrations\202206280944544_AddExtraFieldToOrderDetail.designer.cs">
+      <DependentUpon>202206280944544_AddExtraFieldToOrderDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206290108427_AddMoreEntitiesToOrderTable.cs" />
+    <Compile Include="Migrations\202206290108427_AddMoreEntitiesToOrderTable.designer.cs">
+      <DependentUpon>202206290108427_AddMoreEntitiesToOrderTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207010708247_AddExtraTable.cs" />
+    <Compile Include="Migrations\202207010708247_AddExtraTable.designer.cs">
+      <DependentUpon>202207010708247_AddExtraTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207010747193_ModifyStatusTable.cs" />
+    <Compile Include="Migrations\202207010747193_ModifyStatusTable.designer.cs">
+      <DependentUpon>202207010747193_ModifyStatusTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207050603392_UpdateOrderModel.cs" />
+    <Compile Include="Migrations\202207050603392_UpdateOrderModel.designer.cs">
+      <DependentUpon>202207050603392_UpdateOrderModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207051403491_AddNoteToOrder.cs" />
+    <Compile Include="Migrations\202207051403491_AddNoteToOrder.designer.cs">
+      <DependentUpon>202207051403491_AddNoteToOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207090903447_AddnotificationsTable.cs" />
+    <Compile Include="Migrations\202207090903447_AddnotificationsTable.designer.cs">
+      <DependentUpon>202207090903447_AddnotificationsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207090922245_AddExtraValueToNotificationTable.cs" />
+    <Compile Include="Migrations\202207090922245_AddExtraValueToNotificationTable.designer.cs">
+      <DependentUpon>202207090922245_AddExtraValueToNotificationTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207091235302_AddDateTimeToNotificationTable.cs" />
+    <Compile Include="Migrations\202207091235302_AddDateTimeToNotificationTable.designer.cs">
+      <DependentUpon>202207091235302_AddDateTimeToNotificationTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207110834472_AddOrderInvoiceTable.cs" />
+    <Compile Include="Migrations\202207110834472_AddOrderInvoiceTable.designer.cs">
+      <DependentUpon>202207110834472_AddOrderInvoiceTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207110942289_UpdateChanges.cs" />
+    <Compile Include="Migrations\202207110942289_UpdateChanges.designer.cs">
+      <DependentUpon>202207110942289_UpdateChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
+    <Compile Include="Repositories\ApplicationNotificationRepository.cs" />
     <Compile Include="Repositories\ApplicationPermissionRepository.cs" />
     <Compile Include="Repositories\ApplicationRoleGroupRepository.cs" />
     <Compile Include="Repositories\ApplicationRoleRepository.cs" />
@@ -362,6 +407,7 @@
     <Compile Include="Repositories\IVisitorStatisticRepository.cs" />
     <Compile Include="Repositories\ITagRepository.cs" />
     <Compile Include="Repositories\ISlideRepository.cs" />
+    <Compile Include="Repositories\OrderInvoiceRepository.cs" />
     <Compile Include="Repositories\PaymentMethodRepository.cs" />
     <Compile Include="Repositories\PostCategoryRepository.cs" />
     <Compile Include="Repositories\ProductCategoryRepository.cs" />
@@ -548,6 +594,39 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206230533422_AddNewFieldToProductModel.resx">
       <DependentUpon>202206230533422_AddNewFieldToProductModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206280944544_AddExtraFieldToOrderDetail.resx">
+      <DependentUpon>202206280944544_AddExtraFieldToOrderDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206290108427_AddMoreEntitiesToOrderTable.resx">
+      <DependentUpon>202206290108427_AddMoreEntitiesToOrderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207010708247_AddExtraTable.resx">
+      <DependentUpon>202207010708247_AddExtraTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207010747193_ModifyStatusTable.resx">
+      <DependentUpon>202207010747193_ModifyStatusTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207050603392_UpdateOrderModel.resx">
+      <DependentUpon>202207050603392_UpdateOrderModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207051403491_AddNoteToOrder.resx">
+      <DependentUpon>202207051403491_AddNoteToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207090903447_AddnotificationsTable.resx">
+      <DependentUpon>202207090903447_AddnotificationsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207090922245_AddExtraValueToNotificationTable.resx">
+      <DependentUpon>202207090922245_AddExtraValueToNotificationTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207091235302_AddDateTimeToNotificationTable.resx">
+      <DependentUpon>202207091235302_AddDateTimeToNotificationTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207110834472_AddOrderInvoiceTable.resx">
+      <DependentUpon>202207110834472_AddOrderInvoiceTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207110942289_UpdateChanges.resx">
+      <DependentUpon>202207110942289_UpdateChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

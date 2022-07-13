@@ -140,37 +140,37 @@
 
                             @if (User.Identity.IsAuthenticated)
                             {
-                            <li class="nav-item">
-                                <div class="btn-group profile">
-                                    <div class="info">
-                                        <p>Hey <a><b>@User.Identity.Name</b></a></p>
-                                    </div>
+                                <li class="nav-item">
+                                    <div class="btn-group profile">
+                                        <div class="info">
+                                            <p>Hey <a><b>@User.Identity.Name</b></a></p>
+                                        </div>
 
-                                    <div class="profile-photo dropdown-toggle dropdown-toggle-split"
-                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img src="~/Assets/Admin/img/avatar.png" width="48" height="48" />
-                                    </div>
+                                        <div class="profile-photo dropdown-toggle dropdown-toggle-split"
+                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="~/Assets/Admin/img/avatar.png" width="48" height="48" />
+                                        </div>
 
-                                    <div class="dropdown-menu">
-                                        <form action="@Url.Action("LogOut","Account")" method="post">
-                                            @Html.AntiForgeryToken()
-                                            <a class="dropdown-item" href="#">Account Settings</a>
-                                            <div class="dropdown-divider"></div>
-                                            <button class="dropdown-item" type="submit">
-                                                Log Out
-                                            </button>
-                                        </form>
+                                        <div class="dropdown-menu">
+                                            <form action="@Url.Action("LogOut","Account")" method="post">
+                                                @Html.AntiForgeryToken()
+                                                <a class="dropdown-item" href="#">Account Settings</a>
+                                                <div class="dropdown-divider"></div>
+                                                <button class="dropdown-item" type="submit">
+                                                    Log Out
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
                             }
                             else
                             {
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Login","Account")">
-                                    LOG IN
-                                </a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Login","Account")">
+                                        LOG IN
+                                    </a>
+                                </li>
                             }
                         </ul>
                     </div>
@@ -181,7 +181,7 @@
 
         @if (IsSectionDefined("slider_section"))
         {
-        @RenderSection("slider_section", required: true);
+            @RenderSection("slider_section", required: true);
         }
     </div>
 
@@ -219,19 +219,23 @@
     @*bootstrap js*@
     <script defer src="~/Assets/Client/js/bootstrap.js"></script>
     <script src="~/Libs/localLib/mustache/mustache.js"></script>
+
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="~/Libs/localLib/waitMe/waitMe.min.js"></script>
+    <script src="~/Assets/Admin/lib/toastr.js/toastr.min.js"></script>
 
     <script src="~/Assets/Admin/lib/jquery-validate/jquery.validate.js"></script>
     <script src="~/Assets/Admin/lib/jquery-validate/additional-methods.js"></script>
     <script src="~/Assets/Client/custom-scripts/controllers/externalAuthentication.js"></script>
+    <script src="~/Assets/Client/custom-scripts/signalr.js"></script>
     <script src="~/Assets/Client/custom-scripts/paymentCode.js"></script>
     <script src="~/Assets/Client/custom-scripts/controllers/cartPanel.js"></script>
     <script src="~/Assets/Client/custom-scripts/controllers/shoppingCart.js"></script>
-
     <script src="~/Assets/Client/custom-scripts/controllers/payment.js"></script>
-    @section Scripts{
-        <script>
 
+    @section Scripts{
+
+        <script>
             $("#nav-menu").on('click', 'li', function () {
                 // remove classname 'active' from all li who already has classname 'active'
                 $("#nav-menu li.active").removeClass("active");

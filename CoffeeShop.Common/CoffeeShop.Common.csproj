@@ -79,9 +79,12 @@
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="ExcelHelper.cs" />
     <Compile Include="ExceptionHandler\NameDuplicatedException.cs" />
+    <Compile Include="ExceptionHandler\OrderQuantityNotValidException.cs" />
     <Compile Include="IdentityConstant\ApplicationPermissons.cs" />
     <Compile Include="MailHelper.cs" />
     <Compile Include="IdentityConstant\Permission.cs" />
+    <Compile Include="OrderHelper.cs" />
+    <Compile Include="OrderInvoiceHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IdentityConstant\Roles.cs" />
     <Compile Include="ReportHelper.cs" />
