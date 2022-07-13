@@ -31,7 +31,7 @@ namespace CoffeeShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                var listResult = _appNotificationService.GetTop10NewNotification().OrderBy(x => x.ID);
+                var listResult = _appNotificationService.GetTop10NewNotification().OrderByDescending(x => x.ID);
 
                 var listNotification = new ApplicationNotificationSet
                 {

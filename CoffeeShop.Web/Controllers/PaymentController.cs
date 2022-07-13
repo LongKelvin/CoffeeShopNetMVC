@@ -94,6 +94,7 @@ namespace CoffeeShop.Web.Controllers
             //background worker to send notification to user
             //SendNotificationBackground(orderResult);
             Session[SessionCurrentOrderID] = orderResult.ID;
+            Session[SessionCart] = null;
 
             //7. Handle payment method and response suitable action to user
             //Get payment method code

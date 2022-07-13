@@ -22,7 +22,8 @@
             box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
             padding: 2mm;
             margin: 0 auto;
-            width: 44mm;
+            max-width: 44mm;
+            min-width:44mm;
             background: #fff;
         }
 
@@ -206,16 +207,16 @@
                     {
                         <tr class="service">
                             <td class="tableitem">
-                                <p class="Rate">@item.ProductName</p>
+                                <p class="Rate" style="font-size: 8px;">@item.ProductName</p>
                             </td>
                             <td class="tableitem">
-                                <p class="Rate">@item.Quantity</p>
+                                <p class="Rate" style="font-size: 8px;">@item.Quantity</p>
                             </td>
                             <td class="tableitem">
-                                <p class="Rate">@String.Format(culInfo, "{0:c0}", @item.UnitPrice)</p>
+                                <p class="Rate" style="font-size: 8px;">@String.Format(culInfo, "{0:c0}", @item.UnitPrice)</p>
                             </td>
                             <td class="tableitem">
-                                <p class="Rate">@String.Format(culInfo, "{0:c0}", @item.TotalPrice)</p>
+                                <p class="Rate" style="font-size: 8px;">@String.Format(culInfo, "{0:c0}", @item.TotalPrice)</p>
                             </td>
                         </tr>
 
