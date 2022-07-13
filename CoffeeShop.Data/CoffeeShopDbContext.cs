@@ -20,6 +20,7 @@ namespace CoffeeShop.Data
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderInvoice> OrderInvoices { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<PostCategory> PostCategories { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
@@ -35,6 +36,7 @@ namespace CoffeeShop.Data
         public virtual DbSet<ShopPaymentInfo> ShopPayments { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
+        public virtual DbSet<ApplicationNotification> ApplicationNotifications { get; set; }
 
         public virtual DbSet<ApplicationGroup> ApplicationGroups { get; set; }
         public virtual DbSet<ApplicationRole> ApplicationRoles { get; set; }
@@ -47,6 +49,10 @@ namespace CoffeeShop.Data
         public virtual DbSet<ApplicationRolePermission> ApplicationRolePermissions { get; set; }
 
         public virtual DbSet<ApplicationUserPermission> ApplicationUserPermissions { get; set; }
+        public virtual DbSet<OrderStatus> OrderStatus { get; set; }
+        public virtual DbSet<PaymentStatus> PaymentStatus { get; set; }
+
+        public virtual DbSet<ShippingStatus> ShippingStatus { get; set; }
 
         public static CoffeeShopDbContext Create()
         {

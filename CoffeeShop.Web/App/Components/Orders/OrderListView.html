@@ -1,0 +1,430 @@
+﻿  <!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><strong>Danh sách đơn hàng</strong></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="Home">Trang chủ</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="Products">Đơn hàng</a></li>
+                    <li class="breadcrumb-item active">Danh sách đơn hàng</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Main content-->
+<section class="content overflow-hidden">
+    <div class="container-fluid">
+        <div class="card card-default color-palette-box">
+            <!--<div class="card-header">
+                <h1 class="card-title"> <strong>Danh mục Sản phẩm</strong></h1>
+            </div>-->
+            <!-- /.card-header -->
+            <div class="row card-header justify-content-lg-between ">
+                <div class="col-lg-6 col-xs-12 col-md-6 col-sm-12">
+                    <div class="input-group display-flex">
+                        <input ng-model="keyWord" type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm ..."
+                               aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button ng-click="getOrderList()" class="btn btn-outline-primary" type="button">
+                                <i class="fa-solid fa-magnifying-glass"> </i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 offset-lg-2 float-lg-right col-xs-12 col-md-6 col-sm-12 justify-content-between space-vertical ">
+                    <div class=" row">
+                        <!--<div class="float-sm-start col-6 ">
+                            <button type="button" class="btn btn-success  w-100 " ui-sref="ProductAdd">
+                                <i class="fas fa-plus"> </i> Thêm mới
+                            </button>
+                        </div>
+
+                        <div class="float-sm-end col-6">
+                            <button class="btn btn-primary w-100" ui-sref="ProductImport">
+                                <i class="fa-solid fa-file-import"> </i> Nhập từ Excel
+                            </button>
+                        </div>-->
+
+                        <div class="float-sm-end col-6">
+                            <button type="button" class="btn btn-outline-dark w-100 dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa-solid fa-file-export"> </i> Xuất File
+                            </button>
+
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item" ng-click="exportToPdf()">
+                                    <i class="fa-solid fa-file-export"> </i>
+                                    Xuất PDF
+                                </button>
+                                <div class="dropdown-divider"></div>
+                                <button class="dropdown-item" ng-click="exportToExcel()">
+                                    <i class="fa-solid fa-file-excel"> </i>
+                                    Xuất EXCEL
+                                </button>
+                            </div>
+                        </div>
+
+                        <!--<div class="float-sm-end col-6 mt-3">
+                            <a href="../../../Assets/Admin/templates/product-import-template.xlsx" class="btn btn-outline-success w-100  ">
+                                <i class="fa-solid fa-file-download"> </i> Tải Excel Template
+                            </a>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+
+            <input hidden id="productList" />
+
+            <div class="card-body p-0">
+                <table class="table">
+                    <thead>
+
+                        <tr>
+                            <th class="selectedItem" style="width: 10px">
+                                Chọn
+                            </th>
+                            <th style="width: 10px">
+                                STT
+                            </th>
+                            <th style="width: 10%">Mã đơn hàng</th>
+                            <th class="optional-sm" style="width: 10%">TT Đơn hàng</th>
+                            <th style="width: 10%">TT Thanh toán</th>
+                            <th style="width: 10%">TT Giao hàng</th>
+                            <th style="width: 15%">Email Khách hàng</th>
+                            <th class="optional-sm" style="width: 10%">Ngày đặt hàng</th>
+                            <th class="optional-sm" style="width: 10%">Tổng tiền</th>
+                            <th style="width: 15%">Thao tác</th>
+                            <th style="width: 10%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in orders">
+
+                            <td>
+                                <input type="checkbox" class="checkBox"
+                                       value="{{item.ID}}" onclick="GetTotalSelectedItems()" />
+                            </td>
+                            <td>{{$index+1}}</td>
+                            <td>{{item.ID}}</td>
+                            <td>
+                                <span ng-class="getOrderStatusStyle({{item.OrderStatus}})" style="font-size:14px; color:white">
+                                    {{item.OrderStatus | orderStatusFilter}}
+                                </span>
+                            </td>
+
+                            <td style="color:white">
+                                <span ng-class="getPaymentStatusStyle({{item.PaymentStatus}})" style="font-size:14px; color:white">
+                                    {{item.PaymentStatus | paymentStatusFilter}}
+                                </span>
+                            </td>
+
+                            <td>
+                                <span ng-class="getShippingStatusStyle({{item.ShippingStatus}})" style="font-size:14px; color:white">
+                                    {{item.ShippingStatus | shippingStatusFilter}}
+                                </span>
+                            </td>
+
+                            <td>
+                                <a href="mailto:{{item.CustomerEmail}}"> {{item.CustomerEmail}}</a>
+                            </td>
+                            <td class="optional-sm">
+                                {{item.CreatedDate | date:'dd/MM/yyyy'}}
+                            </td>
+                            <td><strong>{{item.TotalAmount | currency:'₫':0}}</strong></td>
+
+                            <td>
+                                <button ui-sref="OrderDetail({id:item.ID})" class="btn btn-sm btn-outline-primary"><i class="fa fa-eye"></i></button>
+                                <button ui-sref="OrderEdit({id:item.ID})" class="btn btn-sm btn-outline-primary"><i class="fa fa-pencil"></i></button>
+                                <button ng-click="showDeleteDialog(item.ID)" class="btn  btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
+                            </td>
+                            <td>
+                                <button ng-if="item.OrderStatus == 0" ng-click="showOrderUpdateConfirmStatusModal(item.ID)" type="button" class="btn btn-outline-success btn-sm">
+                                    Xác nhận
+                                </button>
+                                <button ng-if="item.OrderStatus == 1 || item.OrderStatus == 2 || item.OrderStatus == 3" ng-click="showOrderUpdateStatusModal(item.ID)" type="button" class="btn btn-primary btn-sm">
+                                    Cập nhật
+                                </button>
+                            </td>
+                            <td>
+                                <button ng-click="createInvoice(item.ID)" class="btn  btn-sm btn-outline-success"><i class="fa fa-download"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--Show loading bar if in loading state-->
+
+            <div ng-if="loading" class="h-100 d-flex align-items-center justify-content-center">
+                <div class="loader">
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="card-body form-row justify-content-around">
+                <div class="col-6">
+                    <div class="float-left justify-content-around ">
+                        <strong>
+                            Số bản ghi đang được chọn: <span id="SelectedCount" class="text-primary">{{selectedCount}}</span>
+                        </strong>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="float-right justify-content-around ">
+                        <span class="card-body">
+                            <span class="card-title">
+                                <strong>Xóa các bản ghi đã chọn &nbsp;</strong>
+                                <button id="delete-items" ng-click="showMultiDeleteDialog()" class="btn  btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <!--Pager directives-->
+            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" pageSize="3" search-func="getOrderList(page, pageSize)"></pager-directive>
+            <div class="card-footer form-row justify-content-around">
+                <div class="col-6">
+                    <div class="float-left justify-content-around ">
+                        <span class="card-title">
+                            <strong>
+                                Trang <span class="text-primary">{{page+1}}</span> / <span class="text-primary">{{pagesCount}}</span>
+                            </strong>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="float-right justify-content-around ">
+                        <span class="card-title">
+                            <strong>
+                                Tổng số bản ghi: <span class="text-primary">{{totalCount}}</span>
+                            </strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section><!-- /.content -->
+<!-- Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cfirmTitle"><strong>Bạn chắc chắn muốn xóa đơn hàng này?</strong></h5>
+            </div>
+            <div class="modal-body">
+                <span>Dữ liệu bị xóa sẽ không thể khôi phục lại!</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Hủy bỏ</button>
+                <button ng-click="deleteOrder()" type="button" class="btn btn-danger">&nbsp; &nbsp; Xóa&nbsp;&nbsp;  </button>
+                <input id="deleteId" hidden />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---Modal confirmation order--->
+<div class="modal fade" id="confirmOrderModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cfirmTitle"><strong>Xác nhận đơn hàng?</strong></h5>
+            </div>
+            <div class="modal-body">
+                <span>Trạng thái đơn hàng sẽ được chuyển thành <span class="badge badge-success">Đã xác nhận</span></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Hủy bỏ</button>
+                <button ng-click="confirmOrder()" type="button" class="btn btn-success">Xác nhận </button>
+                <input id="orderId" hidden />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal for delete multi items-->
+<div class="modal fade" id="confirmMultiDeleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cfirmTitle"><strong>Bạn chắc chắn muốn xóa?</strong></h5>
+            </div>
+            <div class="modal-body" id="m-content">
+                <span>Dữ liệu bị xóa sẽ không thể khôi phục lại!</span>
+                <br />
+                <span>Số bản ghi sẽ bị xóa: &nbsp;<span class="danger" id="totalDeleteCount"></span> </span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Hủy bỏ</button>
+                <button id="delMultiBtn" ng-click="deleteMultiOrder()" type="button" class="btn btn-danger">&nbsp; &nbsp; Xóa&nbsp;&nbsp;  </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal confirm cancel order-->
+<div class="modal fade" id="cancelOrderModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cfirmTitle"><strong>Bạn chắc chắn muốn hủy đơn hàng?</strong></h5>
+            </div>
+            <div class="modal-body" id="m-content">
+                <span>Bạn sẽ không thể cập nhật được trạng thái đơn hàng sau khi hủy! </span>
+                <br />
+                <span class="form-label mt-1"><b>Lý do hủy đơn hàng</b></span>
+                <textarea id="orderNote" ng-model="orderStatus.Note" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Hủy bỏ</button>
+                <button id="delMultiBtn" ng-click="cancelOrder()" type="button" class="btn btn-danger">Hủy đơn hàng  </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Update order status-->
+<div class="modal fade" id="updateOrderStatusModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cfirmTitle"><strong>Cập nhật trạng thái đơn hàng</strong></h5>
+            </div>
+            <div class="modal-body" id="m-content">
+                <form class="col-12 align-items-center space-around">
+
+                    <div class="row">
+                        <div class="col-6 col-md-6 col-sm-12">
+                            <label class="visually-hidden" for="specificSizeInputName">Trạng thái đơn hàng:</label>
+                            <label ng-class="getOrderStatusStyle({{orderStatus.OrderStatus}})">{{orderStatus.OrderStatus | orderStatusFilter}}</label>
+                        </div>
+                        <input hidden id="previousOrderStatus" value="{{orderStatus.OrderStatus}}" />
+
+                        <div class="col-3">
+                            <button class="btn btn-info w-100" type="button" id="btnChageOrderStatus">
+                                Thay đổi trạng thái
+                            </button>
+                        </div>
+
+                        <div class="col-3">
+                            <button type="button" class="btn btn-danger ml-2 w-100" id="btnCancelOrder" ng-click="showCancelOrderConfirm()">
+                                Hủy đơn hàng
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2" id="orderStatusSelect">
+                        <div class="col-6 col-md-6 col-sm-12">
+                        </div>
+                        <div class="col-3 form-select w-100">
+                            <select ng-model="orderStatus.OrderStatus"
+                                    class=" form-control w-100"
+                                    required name="pCategoryId"
+                                    ng-options="option.ID as option.StatusName for option in listOrderStatus">
+                            </select>
+                        </div>
+                        <div class="col-3 w-100">
+                            <button type="button" class="btn btn-info w-40" id="btnCofirmStatus">
+                                OK
+                            </button>
+                            <button type="button" class="btn btn-secondary ml-2 w-50" id="btnBack" ng-click="setOrderStatusBeforeChange()">
+                                Hủy
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal" ng-click="setOrderStatusBeforeChange()">Hủy bỏ</button>
+                <button id="btnUpdateStatus" ng-click="updateOrderStatus()" type="button" class="btn btn-primary">Cập nhật  </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<script src="../../../Scripts/jquery.signalR-2.2.2.min.js"></script>-->
+<!--Reference the autogenerated SignalR hub script. -->
+<!--<script src="../signalr/hubs"></script>-->
+<!--SignalR script to update the chat page and send messages.-->
+<script>
+
+    $(document).ready(function () {
+        $('#orderStatusSelect').hide();
+        $(window).bind("resize", function () {
+            // console.log($(this).width())
+            if ($(this).width() <= 1024) {
+                $('#main-body').addClass('sidebar-collapse');
+                $('#main-body').addClass('sidebar-closed');
+            }
+            else {
+
+                $('#main-body').removeClass('sidebar-collapse');
+                $('#main-body').removeClass('sidebar-closed');
+            }
+        })
+
+        var selectedItem = new Array();
+        $('input:checkbox.checkBox').each(function () {
+            if ($(this).prop('checked')) {
+                selectedItem.push($(this).val());
+            }
+        });
+
+        //$('#listProduct').val(products)
+        //console.log('List product in view: ',$('#listProduct').val())
+
+        //if (selectedItem.length == 0) {
+        //    $('#delete-items').addClass('disabled');
+
+        //} else {
+        //    $('#delete-items').removeClass('disabled');
+        //}
+
+        GetTotalSelectedItems();
+
+        $('.optional-select').hide();
+    });
+
+    function GetTotalSelectedItems() {
+        totalSelectedItems = 0;
+        $('input:checkbox.checkBox').each(function () {
+            if ($(this).prop('checked')) {
+                totalSelectedItems = totalSelectedItems + 1;
+            }
+        });
+
+        //console.log("GetMethod -> total selected : ", totalSelectedItems)
+        $('#SelectedCount').html(totalSelectedItems);
+        return totalSelectedItems;
+    }
+
+    $('#btnChageOrderStatus').click(function (e) {
+        $('#orderStatusSelect').show();
+        $('#btnCancelOrder').hide();
+    })
+
+    $('#btnBack').click(function (e) {
+        $('#orderStatusSelect').hide();
+        $('#btnCancelOrder').show();
+    })
+
+    $('#btnCofirmStatus').click(function (e) {
+        $('#orderStatusSelect').hide();
+        $('#btnCancelOrder').show();
+    })
+
+    $('#btnUpdateStatus').click(function (e) {
+        $('#updateOrderStatusModal').modal('hide');
+    })
+</script>

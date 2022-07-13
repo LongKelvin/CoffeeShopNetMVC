@@ -14,7 +14,7 @@ namespace CoffeeShop.Web.Mappings
 {
     public class AutoMapperConfiguration
     {
-        
+
         public static void Configure()
         {
 
@@ -39,6 +39,7 @@ namespace CoffeeShop.Web.Mappings
                 cfg.CreateMap<ApplicationRole, ApplicationRoleViewModel>();
                 cfg.CreateMap<ApplicationUser, ApplicationUserViewModel>();
                 cfg.CreateMap<ApplicationPermission, ApplicationPermissionViewModel>();
+                cfg.CreateMap<ApplicationNotification, ApplicationNotificationViewModel>();
             });
 
 

@@ -213,6 +213,9 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             order.CreatedBy = orderVm.CreatedBy;
             order.Status = orderVm.Status;
             order.PaymentStatus = orderVm.PaymentStatus;
+            order.TotalAmount = orderVm.TotalAmount;
+            order.TotalItemPrice = orderVm.TotalItemPrice;
+            order.ShippingFee = orderVm.ShippingFee;
             //order.OrderDetails = Mapper.Map<List<OrderDetail>>(orderVm);
         }
 
@@ -244,5 +247,16 @@ namespace CoffeeShop.Web.Infrastucture.Extensions
             appUser.UserName = appUserViewModel.UserName;
             appUser.PhoneNumber = appUserViewModel.PhoneNumber;
         }
+
+        //public static void UpdateInvoice(this OrderInvoice invoice, OrderInvoiceViewModel invoiceVm)
+        //{
+        //    invoice.ID = invoiceVm.ID;
+        //    invoice.InvoiceCode = Common.OrderInvoiceHelper.GenerateInvoiceCode(invoiceVm.OrderId.ToString());
+        //    invoice.OrderId = invoiceVm.OrderId;
+        //    invoice.Cashier = invoice.Cashier;
+        //    invoice.CreatedDate = DateTime.Now;
+        //    invoice.RowVersion = invoiceVm.RowVersion;
+        //    invoice.Status = invoiceVm.Status;
+        //}
     }
 }

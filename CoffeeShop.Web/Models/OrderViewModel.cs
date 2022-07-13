@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoffeeShop.Web.Models
 {
-    public class OrderViewModel
+    public class OrderViewModel : ViewModelBase
     {
         public OrderViewModel()
         {
@@ -54,11 +54,20 @@ namespace CoffeeShop.Web.Models
         [Display(Name = "Payment Method")]
         public int PaymentMethodCode { get; set; } // nvarchar(250), not null
 
-        [MaxLength(50)]
-        [StringLength(50)]
+        [Range(0, 2, ErrorMessage = "Payment status value is not valid")]
         [Required(ErrorMessage = "Payment Status is required")]
         [Display(Name = "Payment Status")]
-        public string PaymentStatus { get; set; } // nvarchar(50), not null
+        public int PaymentStatus { get; set; } // nvarchar(50), not null
+
+        [Range(0, 4, ErrorMessage = "Order status value is not valid")]
+        [Display(Name = "Order Status")]
+        [Required(ErrorMessage = "Order Status is required")]
+        public int OrderStatus { get; set; }
+
+        [Range(0, 3, ErrorMessage = "Shipping status value is not valid")]
+        [Display(Name = "Shipping Status")]
+        [Required(ErrorMessage = "Shipping Status is required")]
+        public int ShippingStatus { get; set; }
 
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public bool Status { get; set; }
@@ -66,6 +75,14 @@ namespace CoffeeShop.Web.Models
         [StringLength(128)]
         [Column(TypeName = "nvarchar")]
         public string CustomerId { get; set; }
+
+        public decimal? TotalAmount { get; set; }
+
+        public decimal? TotalItemPrice { get; set; }
+
+        public decimal? ShippingFee { get; set; }
+
+        public string Note { get; set; }
 
         [ForeignKey("CustomerId")]
         public virtual ApplicationUser User { get; set; }

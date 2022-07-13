@@ -1,4 +1,6 @@
-﻿namespace CoffeeShop.Data.Insfrastructure
+﻿using System.Threading.Tasks;
+
+namespace CoffeeShop.Data.Insfrastructure
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -18,6 +20,11 @@
         public void Commit()
         {
             DbContext.SaveChanges();
+        }
+
+        public async Task CommitAsync()
+        {
+            await DbContext.SaveChangesAsync();
         }
     }
 }

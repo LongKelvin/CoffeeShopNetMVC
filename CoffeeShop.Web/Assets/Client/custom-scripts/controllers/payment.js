@@ -1,4 +1,5 @@
-﻿var payment = {
+﻿/// <reference path="../paymentcode.js" />
+var payment = {
     init: function () {
         payment.registerEvent();
     },
@@ -25,7 +26,7 @@
                 },
                 Telephone: {
                     required: true,
-                    number:true
+                    number: true
                 }
 
             },
@@ -79,12 +80,16 @@
             CustomerMobile: $('#txtTelephone').val(),
             PaymentMethodCode: $('input[name="paymentMethodRadioBtn"]:checked').val(),
             CustomerMessage: $('#txtNote').val(),
-            PaymentStatus: false,
-            Status: true
+            PaymentStatus: paymentStatus.Pending,
+            Status: true,
+            TotalAmount: $('#rawTotalAmount').val(),
+            TotalItemPrice: $('#rawTotalPrice').val(),
+            ShippingFee: $('#rawShippingFee').val()
         }
 
+        this.showLoadingBar();
         $.ajax({
-            url: 'Payment/CreateOrder',
+            url: 'Payment/CheckOut',
             dataType: 'json',
             type: 'POST',
             data: {
@@ -92,8 +97,28 @@
             },
             success: function (response) {
                 if (response.status == true) {
+
+                    //console.log(response);
                     //console.log("create order OK")
-                    $('#paymentTitle').html(response.successMsg);
+                    //$('#paymentTitle').html(response.successMsg);
+                    var paymentCodeResponse = response.paymentCode;
+
+                    switch (paymentCodeResponse) {
+                        case paymentCode.ShipCod: {
+                            $('#paymentTitle').html(response.successMsg);
+                        }
+                            break;
+
+                        case paymentCode.MoMo: {
+                            var returnUrl = response.payUrl;
+                            window.location.href = returnUrl;
+                        }
+                            break;
+                        default: {
+                            $('#paymentTitle').text("Something went wrong, Please try again later");
+                        }
+                    }
+
                 }
                 else {
                     //console.log("create order FAILED")
@@ -102,6 +127,26 @@
             }
         })
     },
+
+    showLoadingBar: function () {
+        $('#frmPayment').waitMe({
+            effect: 'bounce',
+            text: 'Please waiting ...',
+            bg: 'rgba(255, 255, 255, 0.7)',
+            color: '#000',
+            maxSize: '',
+            waitTime: -1,
+            textPos: 'vertical',
+            fontSize: '',
+            source: '',
+            onClose: function () { }
+        });
+    },
+
+    hideLoadingBar: function () {
+        $('#frmPayment').waitMe("hide");
+    }
 }
 
 payment.init();
+

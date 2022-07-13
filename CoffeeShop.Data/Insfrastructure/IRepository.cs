@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace CoffeeShop.Data.Insfrastructure
 {
@@ -31,5 +32,7 @@ namespace CoffeeShop.Data.Insfrastructure
         bool CheckContains(Expression<Func<T, bool>> predicate);
 
         CoffeeShopDbContext RequetsNewDbContextInstance();
+
+        Task<List<T>> GetAllAsync(string[] includes = null);
     }
 }

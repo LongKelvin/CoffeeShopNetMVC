@@ -15,8 +15,8 @@
         function ImportProduct() {
             AuthenticationService.setHeader();
 
-            console.log('categoryId: ', $scope.categoryId)
-            console.log('files: ', $scope.files)
+            //console.log('categoryId: ', $scope.categoryId)
+            //console.log('files: ', $scope.files)
 
             $http({
                 method: 'post',

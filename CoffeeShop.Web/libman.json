@@ -61,6 +61,11 @@
     {
       "library": "angular-loading-bar@0.9.0",
       "destination": "Assets/Admin/lib/angular-loading-bar/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "signalr.js@2.4.3",
+      "destination": "Assets/Admin/lib/signalr.js/"
     }
   ]
 }

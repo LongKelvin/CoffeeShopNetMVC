@@ -39,7 +39,7 @@
 
             this.logOut = function () {
                 ApiServices.post('api/Account/Logout', null, function (response) {
-                    console.log('response from server: ', response)
+                    //console.log('response from server: ', response)
 
                     if (response.data.success == true) {
                         AuthenticationService.removeToken();

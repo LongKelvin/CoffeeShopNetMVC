@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="payment-section custom-container mt-5 px-1 px-lg-5 px-sm-1 shadow mb-4" id="paymentTitle">
+    <div class="mb-4">
+        <h2><strong>Confirm order and pay</strong></h2>
+    </div>
+
+    @Html.Raw(ViewBag.successForm)
+    
+</section>

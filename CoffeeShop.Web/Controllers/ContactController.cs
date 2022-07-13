@@ -7,6 +7,7 @@ using CoffeeShop.Web.Infrastucture.Extensions;
 using CoffeeShop.Web.Models;
 
 using System;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace CoffeeShop.Web.Controllers
@@ -44,7 +45,7 @@ namespace CoffeeShop.Web.Controllers
 
         [HttpPost]
         [CaptchaValidationActionFilter("CaptchaCode", "ContactCaptcha", "Captcha code is incorrect, please try again")]
-        public ActionResult SendFeedbackToAdmin(ShopContactViewModel shopContactVM)
+        public async Task<ActionResult> SendFeedbackToAdmin(ShopContactViewModel shopContactVM)
         {
             if (ModelState.IsValid)
             {
@@ -69,21 +70,23 @@ namespace CoffeeShop.Web.Controllers
 
                 //Get admin mail data
                 var adminEmail = ConfigHelper.GetByKey("AdminEmail");
-                MailHelper.SendMail(adminEmail, "[COFFEE_WAY] - THƯ PHẢN HỒI TỪ KHÁCH HÀNG", content);
+                var sendFeedbackMail = MailHelper.SendMailAsync(adminEmail, "[COFFEE_WAY] - THƯ PHẢN HỒI TỪ KHÁCH HÀNG", content);
 
-                SendResponseEmailToCustomer(shopContactVM.Feedback.Email, shopContactVM.Feedback.Name);
+                var sendResponseMail = SendResponseEmailToCustomer(shopContactVM.Feedback.Email, shopContactVM.Feedback.Name);
 
                 //feedbackVm.Name = "";
                 //feedbackVm.Message = "";
                 //feedbackVm.Email = "";
                 MvcCaptcha.ResetCaptcha("ContactCaptcha");
+
+                await Task.WhenAll(sendResponseMail, sendFeedbackMail);
                 return View(nameof(Index), GetContactInfo());
             }
 
             return View(nameof(Index), shopContactVM);
         }
 
-        public void SendResponseEmailToCustomer(string email, string name)
+        public async Task SendResponseEmailToCustomer(string email, string name)
         {
             string content = System.IO.File.ReadAllText(
                 Server.MapPath("/Assets/Client/templates/response_template.html"));
@@ -96,7 +99,7 @@ namespace CoffeeShop.Web.Controllers
             content = content.Replace("{{ShopWebsiteLink}}", shopInfo.ShopInfo.Website);
             content = content.Replace("{{ShopName}}", shopInfo.ShopInfo.Name);
 
-            MailHelper.SendMail(email, "[COFFEE_WAY] - THANKS FOR FEEDBACK", content);
+            await MailHelper.SendMailAsync(email, "[COFFEE_WAY] - THANKS FOR FEEDBACK", content);
         }
     }
 }

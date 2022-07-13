@@ -1,4 +1,6 @@
-﻿(function (app) {
+﻿/// <reference path="../../../libs/locallib/waitme/waitme.min.js" />
+
+(function (app) {
     app.controller('LoginController', ['$scope', '$injector', 'LoginService', '$location', 'NotificationService',
         function ($scope, $injector, LoginService, $location, NotificationService) {
             $scope.loginData = {
@@ -7,6 +9,7 @@
             };
 
             $scope.loginSubmit = function () {
+                //showLoadingBar();
                 LoginService.login($scope.loginData.userName, $scope.loginData.password)
                     .then(function (response) {
                         //console.log('login_response_data: ', response)
@@ -22,6 +25,7 @@
                             //console.log("Login successfull");
                         }
                     });
-            }
+            };
+
         }]);
 })(angular.module('CoffeeShop'));
