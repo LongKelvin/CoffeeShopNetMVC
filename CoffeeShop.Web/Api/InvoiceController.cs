@@ -73,7 +73,6 @@ namespace CoffeeShop.Web.Api
             invoiceById.Order = orderById;
 
             var htmlTemplatePath = HttpContext.Current.Server.MapPath("/Views/Shared/Templates/InvoiceTemplate.cshtml");
-
             var renderHtmlTask = RenderRazorViewAsync(invoiceById, htmlTemplatePath);
 
             var folderReport = ConfigHelper.GetByKey(CommonConstants.INVOICE_PDF_EXPORT_PATH);

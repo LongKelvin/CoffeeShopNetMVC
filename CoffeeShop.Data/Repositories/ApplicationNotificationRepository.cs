@@ -21,7 +21,7 @@ namespace CoffeeShop.Data.Repositories
 
         public List<ApplicationNotification> GetTop10NewNotification()
         {
-            return DbContext.ApplicationNotifications.Where(x => x.Status == true).Take(10).ToList();
+            return DbContext.ApplicationNotifications.Where(x => x.Status == true).OrderByDescending(d=>d.DateCreated).Take(15).ToList();
         }
     }
 }
