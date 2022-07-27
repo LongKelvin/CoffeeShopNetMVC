@@ -45,23 +45,30 @@ namespace CoffeeShop.Common
         {
             await Task.Run(() =>
             {
-                using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                try
                 {
-                    // instantiate a html to pdf converter object
-                    HtmlToPdf converter = new HtmlToPdf
+                    using (FileStream fs = new FileStream(filePath, FileMode.Create))
                     {
-                        Options =
+                        // instantiate a html to pdf converter object
+                        HtmlToPdf converter = new HtmlToPdf
+                        {
+                            Options =
                         {
                             PdfPageSize = PdfPageSize.A4,
                             PdfPageOrientation = PdfPageOrientation.Portrait,
                         }
-                    };
+                        };
 
-                    PdfDocument doc = converter.ConvertHtmlString(htmlTemplateContent, filePath);
-                    // save pdf document
-                    doc.Save(fs);
-                    // close pdf document
-                    doc.Close();
+                        PdfDocument doc = converter.ConvertHtmlString(htmlTemplateContent, filePath);
+                        // save pdf document
+                        doc.Save(fs);
+                        // close pdf document
+                        doc.Close();
+                    }
+                }
+                catch
+                {
+                    throw;
                 }
             });
         }
