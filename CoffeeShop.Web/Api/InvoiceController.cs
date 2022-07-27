@@ -83,7 +83,7 @@ namespace CoffeeShop.Web.Api
 
             try
             {
-                await ReportHelper.GeneratePdf(renderHtmlTask.Result, createPdfPathTask.Result[0], CommonConstants.PDF_INVOICE_TYPE);
+                await ReportHelper.GeneratePdfInvoice(renderHtmlTask.Result, createPdfPathTask.Result[0]);
                 return request.CreateResponse(HttpStatusCode.OK, Path.Combine(folderReport, createPdfPathTask.Result[1]));
             }
             catch (Exception ex)

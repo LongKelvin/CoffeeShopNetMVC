@@ -7,13 +7,19 @@ using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
+using System.Web.Http.Filters;
 
 namespace CoffeeShop.Web.Infrastucture.Core
 {
-    public class ApiControllerBase : ApiController
+    public class ApiControllerBase : ApiController, IExceptionLogger
     {
         private IErrorService _errorService;
+
+        public bool AllowMultiple => throw new NotImplementedException();
 
         public ApiControllerBase(IErrorService errorService)
         {
@@ -84,6 +90,12 @@ namespace CoffeeShop.Web.Infrastucture.Core
             {
                 throw;
             }
+        }
+
+        public Task LogAsync(ExceptionLoggerContext context, CancellationToken cancellationToken)
+        {
+            LogError(context.Exception);
+            return Task.FromResult(0);
         }
     }
 }

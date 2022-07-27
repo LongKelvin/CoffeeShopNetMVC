@@ -2,6 +2,8 @@
 
 using PdfSharp;
 
+using SelectPdf;
+
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -39,6 +41,31 @@ namespace CoffeeShop.Common
             });
         }
 
+        public static async Task GeneratePdfInvoice(string htmlTemplateContent, string filePath)
+        {
+            await Task.Run(() =>
+            {
+                using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                {
+                    // instantiate a html to pdf converter object
+                    HtmlToPdf converter = new HtmlToPdf
+                    {
+                        Options =
+                        {
+                            PdfPageSize = PdfPageSize.A4,
+                            PdfPageOrientation = PdfPageOrientation.Portrait,
+                        }
+                    };
+
+                    PdfDocument doc = converter.ConvertHtmlString(htmlTemplateContent, filePath);
+                    // save pdf document
+                    doc.Save(fs);
+                    // close pdf document
+                    doc.Close();
+                }
+            });
+        }
+
         public static async Task GeneratePdf(string htmlTemplate, string filePath, string type)
         {
             await Task.Run(() =>
@@ -50,13 +77,11 @@ namespace CoffeeShop.Common
                         var pdf = PdfGenerator.GeneratePdf(htmlTemplate, InvoicePdfConfig());
                         pdf.Save(fs);
                     }
-
                     else
                     {
                         var pdf = PdfGenerator.GeneratePdf(htmlTemplate, DefaultPdfConfig());
                         pdf.Save(fs);
                     }
-
                 }
             });
         }
