@@ -412,6 +412,7 @@ namespace CoffeeShop.Web.Api
             }
             catch (Exception ex)
             {
+
                 LogError(ex);
                 return request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
@@ -440,14 +441,18 @@ namespace CoffeeShop.Web.Api
                 razorViewTemplate = razorViewTemplate.Replace("{{CreatedDate}}", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString());
                 var htmlParseViewData = RazorEngine.Razor.Parse(razorViewTemplate, data);
 
-                await ReportHelper.GeneratePdf(htmlParseViewData, fullPath);
+                //await ReportHelper.GeneratePdf(htmlParseViewData, fullPath);
+                var fileContent = await GeneratePdfFromAzureFunction(htmlParseViewData, fileName, WkHtmlToPdfDotNet.PaperKind.A4, WkHtmlToPdfDotNet.Orientation.Landscape);
+                File.WriteAllBytes(fullPath, fileContent);
+
                 Trace.WriteLine($"PATH DOWNLOAD URL: {Path.Combine(folderReport, fileName)}");
                 return request.CreateResponse(HttpStatusCode.OK, Path.Combine(folderReport, fileName));
             }
-            catch (Exception ex)
+            catch
             {
-                LogError(ex);
-                return request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                //LogError(ex);
+                throw;
+                //return request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
     }

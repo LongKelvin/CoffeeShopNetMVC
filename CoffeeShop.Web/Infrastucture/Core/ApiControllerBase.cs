@@ -1,5 +1,9 @@
-﻿using CoffeeShop.Models.Models;
+﻿using CoffeeShop.Common;
+using CoffeeShop.Models.Models;
 using CoffeeShop.Services;
+using CoffeeShop.Web.Models.AzureFunction.PdfGenerator;
+
+using Newtonsoft.Json;
 
 using System;
 using System.Data.Entity.Infrastructure;
@@ -7,13 +11,21 @@ using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
+
+using WkHtmlToPdfDotNet;
 
 namespace CoffeeShop.Web.Infrastucture.Core
 {
-    public class ApiControllerBase : ApiController
+    public class ApiControllerBase : ApiController, IExceptionLogger
     {
         private IErrorService _errorService;
+
+        public bool AllowMultiple => throw new NotImplementedException();
 
         public ApiControllerBase(IErrorService errorService)
         {
@@ -83,6 +95,36 @@ namespace CoffeeShop.Web.Infrastucture.Core
             catch
             {
                 throw;
+            }
+        }
+
+        public Task LogAsync(ExceptionLoggerContext context, CancellationToken cancellationToken)
+        {
+            LogError(context.Exception);
+            return Task.FromResult(0);
+        }
+
+        public async Task<byte[]> GeneratePdfFromAzureFunction(string htmlContent, string fileName, PaperKind paperKind = PaperKind.A4, Orientation orientation = Orientation.Portrait)
+        {
+            var azurePdfFunctionUrl = ConfigHelper.GetByKey(CommonConstants.AZURE_PDF_FUNCTION_URL);
+            using (HttpClient client = new HttpClient())
+            {
+                var req = new HtmlRequest
+                {
+                    HtmlContent = htmlContent,
+                    FileName = fileName,
+                    PaperKind = paperKind,
+                    Orientation = orientation
+                };
+                string json = JsonConvert.SerializeObject(req);
+                var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+                var byteContent = new ByteArrayContent(buffer);
+
+                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                HttpResponseMessage response = await client.PostAsync(azurePdfFunctionUrl, byteContent);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsByteArrayAsync();
             }
         }
     }

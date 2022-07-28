@@ -122,5 +122,15 @@
 
         //Notification Type
         public const string NotificationType_Order = "Order";
+
+        //PDF CONFIG
+        public enum Orientation
+        {
+            Landscape = 0,
+            Portrait = 1
+        }
+
+        //AZURE FUNCTION
+        public const string AZURE_PDF_FUNCTION_URL = "AZURE_PDF_FUNCTION_URL";
     }
 }
