@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 
 using TheArtOfDev.HtmlRenderer.PdfSharp;
 
+using WkHtmlToPdfDotNet;
+
 namespace CoffeeShop.Common
 {
     public static class ReportHelper
@@ -33,10 +35,18 @@ namespace CoffeeShop.Common
         {
             await Task.Run(() =>
             {
-                using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                try
                 {
-                    var pdf = PdfGenerator.GeneratePdf(htmlTemplate, DefaultPdfConfig());
-                    pdf.Save(fs);
+                    using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                    {
+                        PdfGenerator.AddFontFamilyMapping("arial", "calibril");
+                        var pdf = PdfGenerator.GeneratePdf(htmlTemplate, DefaultPdfConfig());
+                        pdf.Save(fs);
+                    }
+                }
+                catch
+                {
+                    throw;
                 }
             });
         }
@@ -65,6 +75,41 @@ namespace CoffeeShop.Common
                         // close pdf document
                         doc.Close();
                     }
+                }
+                catch
+                {
+                    throw;
+                }
+            });
+        }
+
+        public static async Task GeneratePdfFileUsingWkHtmlToPdf(string htmlContent, string filePath, PaperKind paperKind = PaperKind.A4, Orientation orientation = Orientation.Portrait)
+        {
+            await Task.Run(() =>
+            {
+                try
+                {
+                    var converter = new SynchronizedConverter(new PdfTools());
+                    var doc = new HtmlToPdfDocument()
+                    {
+                        GlobalSettings = {
+                            ColorMode = ColorMode.Color,
+                            Orientation = orientation,
+                            PaperSize = paperKind,
+                            Margins = new MarginSettings() { Top = 10 },
+                            Out = filePath,
+                         },
+                        Objects = {
+                           new ObjectSettings() {
+                                PagesCount = true,
+                                HtmlContent =   htmlContent,
+                                WebSettings = { DefaultEncoding = "utf-8" },
+                                //HeaderSettings = { FontSize = 9, Right = "Page [page] of [toPage]", Line = true, Spacing = 2.812 }
+                            },
+                        }
+                    };
+
+                    converter.Convert(doc);
                 }
                 catch
                 {
@@ -102,7 +147,6 @@ namespace CoffeeShop.Common
                 MarginBottom = 5,
                 MarginLeft = 25,
                 MarginRight = 5,
-                PageOrientation = PageOrientation.Landscape,
             };
         }
 
@@ -115,7 +159,6 @@ namespace CoffeeShop.Common
                 MarginBottom = 5,
                 MarginLeft = 5,
                 MarginRight = 5,
-                PageOrientation = PageOrientation.Portrait,
             };
         }
     }

@@ -34,9 +34,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
+    <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
     <LegacyPublishPropertiesPageEnabled>true</LegacyPublishPropertiesPageEnabled>
     <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+    <IncludeIisSettings>false</IncludeIisSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +47,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
+    <LegacyPublishPropertiesPageEnabled>true</LegacyPublishPropertiesPageEnabled>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CKFinder, Version=2.6.0.2792, Culture=neutral, PublicKeyToken=579e7adc719a1423, processorArchitecture=MSIL">
@@ -106,6 +109,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Models\ApplicationNewNotificationSet.cs" />
     <Compile Include="Models\ApplicationNotificationViewModel.cs" />
+    <Compile Include="Models\AzureFunction\PdfGenerator\HtmlRequest.cs" />
     <Compile Include="Models\OrderInvoiceViewModel.cs" />
     <Compile Include="NotificationHub\NotificationHub.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -2254,6 +2258,7 @@
     <Content Include="Views\ErrorHandler\Index.cshtml" />
     <Content Include="Views\Shared\Templates\ProductListTemplate.cshtml" />
     <Content Include="Views\Payment\ConfirmPaymentClient.cshtml" />
+    <None Include="Properties\PublishProfiles\coffeeshopstore - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\KCoffee - Web Deploy.pubxml" />
     <Content Include="Views\Shared\Templates\OrderConfirmationTemplate.cshtml" />
@@ -2605,6 +2610,12 @@
     <PackageReference Include="EPPlus">
       <Version>6.0.6</Version>
     </PackageReference>
+    <PackageReference Include="Haukcode.WkHtmlToPdfDotNet">
+      <Version>1.5.82</Version>
+    </PackageReference>
+    <PackageReference Include="HtmlRenderer.Core">
+      <Version>1.5.0.6</Version>
+    </PackageReference>
     <PackageReference Include="HtmlRenderer.PdfSharp">
       <Version>1.5.0.6</Version>
     </PackageReference>
@@ -2707,7 +2718,7 @@
       <Version>2.26.0</Version>
     </PackageReference>
     <PackageReference Include="PdfSharp">
-      <Version>1.50.5147</Version>
+      <Version>1.32.3057</Version>
     </PackageReference>
     <PackageReference Include="Select.HtmlToPdf.NetCore">
       <Version>22.1.0</Version>
