@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeShop.Web", "CoffeeSho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeShop.UnitTest", "CoffeeShop.UnitTest\CoffeeShop.UnitTest.csproj", "{D8FD8C3D-0E3E-4352-A611-01B38E47997C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeShop.PdfGenerator", "CoffeeShop.PdfGenerator\CoffeeShop.PdfGenerator.csproj", "{E51FA81B-A8B3-4AFD-899D-2A545CFFAE68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{D8FD8C3D-0E3E-4352-A611-01B38E47997C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8FD8C3D-0E3E-4352-A611-01B38E47997C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8FD8C3D-0E3E-4352-A611-01B38E47997C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E51FA81B-A8B3-4AFD-899D-2A545CFFAE68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E51FA81B-A8B3-4AFD-899D-2A545CFFAE68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E51FA81B-A8B3-4AFD-899D-2A545CFFAE68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E51FA81B-A8B3-4AFD-899D-2A545CFFAE68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

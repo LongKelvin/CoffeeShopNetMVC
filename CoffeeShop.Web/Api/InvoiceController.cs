@@ -2,14 +2,22 @@
 using CoffeeShop.Models.Models;
 using CoffeeShop.Services;
 using CoffeeShop.Web.Infrastucture.Core;
+using CoffeeShop.Web.Models.AzureFunction.PdfGenerator;
+
+using Evernote.EDAM.Type;
+
+using Newtonsoft.Json;
 
 using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+
+using WkHtmlToPdfDotNet;
 
 namespace CoffeeShop.Web.Api
 {
@@ -83,13 +91,17 @@ namespace CoffeeShop.Web.Api
 
             try
             {
-                await ReportHelper.GeneratePdf(renderHtmlTask.Result, createPdfPathTask.Result[0], CommonConstants.PDF_INVOICE_TYPE);
+                var fileContent = await GeneratePdfFromAzureFunction(renderHtmlTask.Result, createPdfPathTask.Result[1]);
+                File.WriteAllBytes(createPdfPathTask.Result[0], fileContent);
+                //await ReportHelper.GeneratePdf(renderHtmlTask.Result, createPdfPathTask.Result[0], Common.CommonConstants.PDF_INVOICE_TYPE);
+                //await ReportHelper.GeneratePdfFileUsingWkHtmlToPdf(renderHtmlTask.Result, createPdfPathTask.Result[0], WkHtmlToPdfDotNet.PaperKind.A6);
                 return request.CreateResponse(HttpStatusCode.OK, Path.Combine(folderReport, createPdfPathTask.Result[1]));
             }
             catch (Exception ex)
             {
                 LogError(ex);
-                return request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                throw;
+                //return request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
 
@@ -140,4 +152,5 @@ namespace CoffeeShop.Web.Api
             return await task;
         }
     }
+
 }

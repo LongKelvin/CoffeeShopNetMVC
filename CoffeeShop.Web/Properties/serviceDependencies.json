@@ -3,11 +3,6 @@
     "mssql1": {
       "type": "mssql",
       "connectionId": "CoffeeShopDbContext"
-    },
-    "signalr1": {
-      "type": "signalr",
-      "connectionId": "Azure:SignalR:ConnectionString",
-      "dynamicId": null
     }
   }
 }
