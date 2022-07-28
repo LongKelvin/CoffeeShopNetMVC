@@ -189,7 +189,7 @@
                     window.location.href = response.data;
                 }
             }, function (error) {
-                console.log('url path error:', response)
+                console.log('url path error:', error)
                 NotificationService.displayError(error);
             })
         }

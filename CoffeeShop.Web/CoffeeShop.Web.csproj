@@ -37,6 +37,7 @@
     <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
     <LegacyPublishPropertiesPageEnabled>true</LegacyPublishPropertiesPageEnabled>
     <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+    <IncludeIisSettings>false</IncludeIisSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +47,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
+    <LegacyPublishPropertiesPageEnabled>true</LegacyPublishPropertiesPageEnabled>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CKFinder, Version=2.6.0.2792, Culture=neutral, PublicKeyToken=579e7adc719a1423, processorArchitecture=MSIL">
@@ -106,6 +109,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Models\ApplicationNewNotificationSet.cs" />
     <Compile Include="Models\ApplicationNotificationViewModel.cs" />
+    <Compile Include="Models\AzureFunction\PdfGenerator\HtmlRequest.cs" />
     <Compile Include="Models\OrderInvoiceViewModel.cs" />
     <Compile Include="NotificationHub\NotificationHub.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -155,6 +159,11 @@
     <Compile Include="Models\TagViewModel.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\LanguageManagerment.cs" />
     <Compile Include="Resources\Resource.vi.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2063,6 +2072,7 @@
     <Content Include="Assets\Admin\lib\typescripts\typescript.min.js" />
     <None Include="Assets\Admin\templates\product-report-template.cshtml" />
     <Content Include="Assets\Client\css\bootstrap.css" />
+    <Content Include="Assets\Client\css\font-awesome.css" />
     <Content Include="Assets\Client\css\font-awesome.min.css" />
     <Content Include="Assets\Client\css\responsive.css" />
     <Content Include="Assets\Client\css\style.css" />
@@ -2079,6 +2089,7 @@
     <Content Include="Assets\Client\custom-scripts\controllers\payment.js" />
     <Content Include="Assets\Client\custom-scripts\controllers\shoppingCart.js" />
     <Content Include="Assets\Client\custom-scripts\signalr.js" />
+    <Content Include="Assets\Client\fonts\fontawesome-webfont.svg" />
     <Content Include="Assets\Client\form\login-form\css\main.css" />
     <Content Include="Assets\Client\form\login-form\css\util.css" />
     <Content Include="Assets\Client\form\login-form\fonts\font-awesome-4.7.0\css\font-awesome.css" />
@@ -2208,13 +2219,46 @@
     <Content Include="Assets\Admin\templates\product-import-template.xlsx" />
     <Content Include="Libs\localLib\waitMe\LICENSE.md" />
     <Content Include="Libs\localLib\waitMe\README.md" />
-    <None Include="Properties\PublishProfiles\CoffeeShopMVC.pubxml" />
+    <Content Include="Assets\Client\fonts\fontawesome-webfont.eot" />
+    <Content Include="Assets\Client\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Assets\Client\fonts\fontawesome-webfont.woff" />
+    <Content Include="Assets\Client\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Assets\Client\fonts\FontAwesome.otf" />
+    <Content Include="Assets\Client\less\animated.less" />
+    <Content Include="Assets\Client\less\bordered-pulled.less" />
+    <Content Include="Assets\Client\less\core.less" />
+    <Content Include="Assets\Client\less\fixed-width.less" />
+    <Content Include="Assets\Client\less\font-awesome.less" />
+    <Content Include="Assets\Client\less\icons.less" />
+    <Content Include="Assets\Client\less\larger.less" />
+    <Content Include="Assets\Client\less\list.less" />
+    <Content Include="Assets\Client\less\mixins.less" />
+    <Content Include="Assets\Client\less\path.less" />
+    <Content Include="Assets\Client\less\rotated-flipped.less" />
+    <Content Include="Assets\Client\less\screen-reader.less" />
+    <Content Include="Assets\Client\less\stacked.less" />
+    <Content Include="Assets\Client\less\variables.less" />
+    <Content Include="Assets\Client\scss\font-awesome.scss" />
+    <Content Include="Assets\Client\scss\_animated.scss" />
+    <Content Include="Assets\Client\scss\_bordered-pulled.scss" />
+    <Content Include="Assets\Client\scss\_core.scss" />
+    <Content Include="Assets\Client\scss\_fixed-width.scss" />
+    <Content Include="Assets\Client\scss\_icons.scss" />
+    <Content Include="Assets\Client\scss\_larger.scss" />
+    <Content Include="Assets\Client\scss\_list.scss" />
+    <Content Include="Assets\Client\scss\_mixins.scss" />
+    <Content Include="Assets\Client\scss\_path.scss" />
+    <Content Include="Assets\Client\scss\_rotated-flipped.scss" />
+    <Content Include="Assets\Client\scss\_screen-reader.scss" />
+    <Content Include="Assets\Client\scss\_stacked.scss" />
+    <Content Include="Assets\Client\scss\_variables.scss" />
     <Content Include="Views\Account\_ExternalLoginPartial.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\ErrorHandler\Index.cshtml" />
     <Content Include="Views\Shared\Templates\ProductListTemplate.cshtml" />
     <Content Include="Views\Payment\ConfirmPaymentClient.cshtml" />
+    <None Include="Properties\PublishProfiles\coffeeshopstore - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\KCoffee - Web Deploy.pubxml" />
     <Content Include="Views\Shared\Templates\OrderConfirmationTemplate.cshtml" />
@@ -2413,9 +2457,6 @@
     <Content Include="AppSettings.config" />
     <Content Include="Assets\Client\css\style.css.map" />
     <Content Include="Assets\Client\css\style.scss" />
-    <Content Include="Assets\Client\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Assets\Client\fonts\fontawesome-webfont.woff" />
-    <Content Include="Assets\Client\fonts\fontawesome-webfont.woff2" />
     <Content Include="Assets\Admin\lib\jquery-ui-1.13.1.custom\package.json" />
     <Content Include="Assets\Admin\lib\jquery\jquery-3.4.1.min.map" />
     <Content Include="Assets\Admin\lib\jquery\jquery-3.4.1.slim.min.map" />
@@ -2513,6 +2554,10 @@
     <Content Include="Views\Product\Detail.cshtml" />
     <Content Include="Views\Page\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.vi.Designer.cs</LastGenOutput>
@@ -2563,10 +2608,22 @@
       <Version>6.4.4</Version>
     </PackageReference>
     <PackageReference Include="EPPlus">
-      <Version>6.0.5</Version>
+      <Version>6.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="Haukcode.WkHtmlToPdfDotNet">
+      <Version>1.5.82</Version>
+    </PackageReference>
+    <PackageReference Include="HtmlRenderer.Core">
+      <Version>1.5.0.6</Version>
     </PackageReference>
     <PackageReference Include="HtmlRenderer.PdfSharp">
       <Version>1.5.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="itext7">
+      <Version>7.2.3</Version>
+    </PackageReference>
+    <PackageReference Include="itext7.pdfhtml">
+      <Version>4.0.3</Version>
     </PackageReference>
     <PackageReference Include="jQuery">
       <Version>3.6.0</Version>
@@ -2659,6 +2716,12 @@
     </PackageReference>
     <PackageReference Include="Owin.Security.Providers">
       <Version>2.26.0</Version>
+    </PackageReference>
+    <PackageReference Include="PdfSharp">
+      <Version>1.32.3057</Version>
+    </PackageReference>
+    <PackageReference Include="Select.HtmlToPdf.NetCore">
+      <Version>22.1.0</Version>
     </PackageReference>
     <PackageReference Include="System.Data.SQLite.Core">
       <Version>1.0.116</Version>
