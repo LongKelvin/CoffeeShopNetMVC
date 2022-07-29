@@ -12,7 +12,7 @@
     
   </p>
   <p align="center">
-   [Demo Link] https://kcoffee.azurewebsites.net/
+   [Demo Link] https://coffeeshopdevtest.azurewebsites.net/
   </p>
  
 </div>
