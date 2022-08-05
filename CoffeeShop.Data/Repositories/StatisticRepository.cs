@@ -1,9 +1,14 @@
 ﻿using CoffeeShop.Common.ViewModel;
 using CoffeeShop.Data.Insfrastructure;
 
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
+
+using static log4net.Appender.RollingFileAppender;
 
 namespace CoffeeShop.Data.Repositories
 {
@@ -19,16 +24,18 @@ namespace CoffeeShop.Data.Repositories
         }
 
         public List<RevenueStatisticViewModel> GetRevenueStatistic(string fromDate, string toDate)
-        {
+{
+            var frDate = DateTime.Parse(fromDate).ToString("yyyy/MM/dd");
+            var tDate = DateTime.Parse(toDate).ToString("yyyy/MM/dd"); ;
             var parameters = new SqlParameter[]{
                 new SqlParameter() {
                     ParameterName = "@fromDate",
-                    Value = fromDate,
-                },
+                    Value = frDate
+            },
                 new SqlParameter()
                 {
                     ParameterName = "@toDate",
-                    Value = toDate,
+                    Value = tDate
                 }
             };
 
