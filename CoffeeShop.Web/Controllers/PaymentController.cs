@@ -117,7 +117,8 @@ namespace CoffeeShop.Web.Controllers
                     Quantity = item.Quantity,
                     UnitPrice = item.Product.Price,
                     ProductName = item.Product.Name,
-                    TotalPrice = item.Product.Price * item.Quantity
+                    TotalPrice = item.Product.Price * item.Quantity,
+                    ProductImage = item.Product.Images
                 });
 
                 isSuccessSelling = _productServices.SellProduct(item.ProductID, item.Quantity);

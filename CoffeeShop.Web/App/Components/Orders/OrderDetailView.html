@@ -34,32 +34,29 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Mã đơn hàng <span class="text-danger">*</span> </label>
-                                <input type="text" ng-model="product.Name" required name="pName"
-                                       class="form-control" placeholder="Tên danh mục ..."
-                                       ng-change="getSeoTitle()">
+                                <input type="text" ng-model="orderDetail.ID" required name="pName"
+                                       class="form-control">
                                 <span class="text-danger" ng-show="frmUpdateProduct.pName.$touched && frmUpdateProduct.pName.$invalid">Bạn chưa nhập tên danh mục</span>
                             </div>
 
                             <div class="form-group">
                                 <label>Ngày tạo</label>
-                                <input ng-model="product.DisplayOrder" type="number" class="form-control"
-                                       placeholder="Hiển thị ở vị trí 1 2 3 ...">
+                                <input ng-model="orderDetail.CreatedDate" type="date" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label>Tên khách hàng <span class="text-danger">*</span> </label>
-                                <input type="text" ng-model="product.Name" required name="pName"
-                                       class="form-control" placeholder="Tên danh mục ..."
-                                       ng-change="getSeoTitle()">
+                                <input type="text" ng-model="orderDetail.CustomerName" required name="pName"
+                                       class="form-control">
                                 <span class="text-danger" ng-show="frmUpdateProduct.pName.$touched && frmUpdateProduct.pName.$invalid">Bạn chưa nhập tên danh mục</span>
                             </div>
                             <div class="form-group">
                                 <label>Trạng thái đơn hàng <span class="text-danger">*</span></label>
-                                <input ng-model="product.OriginalPrice" type="number" class="form-control"
-                                       name="pOriginalPrice" required
-                                       value="0"
-                                       placeholder="Giá nhập">
-                                <span class="text-danger" ng-show="frmAddproduct.pOriginalPrice.$touched && frmAddproduct.pOriginalPrice.$invalid">Giá sản phẩm là bắt buộc</span>
+                                <select ng-model="orderDetail.OrderStatus"
+                                        class=" form-control w-100"
+                                        required name="pCategoryId"
+                                        ng-options="option.ID as option.StatusName for option in listOrderStatus">
+                                </select>
                             </div>
 
                         </div>
@@ -73,44 +70,37 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Tên khách hàng <span class="text-danger">*</span> </label>
-                                <input type="text" ng-model="product.Name" required name="pName"
-                                       class="form-control" placeholder="Tên danh mục ..."
-                                       ng-change="getSeoTitle()">
+                                <input type="text" ng-model="orderDetail.CustomerName" required name="pName"
+                                       class="form-control" >
                                 <span class="text-danger" ng-show="frmUpdateProduct.pName.$touched && frmUpdateProduct.pName.$invalid">Bạn chưa nhập tên danh mục</span>
                             </div>
                             <div class="form-group">
                                 <label>Số điện thoại <span class="text-danger">*</span> </label>
-                                <input type="text" ng-model="product.Name" required name="pName"
-                                       class="form-control" placeholder="Tên danh mục ..."
-                                       ng-change="getSeoTitle()">
+                                <input type="text" ng-model="orderDetail.CustomerMobile" required name="pName"
+                                       class="form-control">
                                 <span class="text-danger" ng-show="frmUpdateProduct.pName.$touched && frmUpdateProduct.pName.$invalid">Bạn chưa nhập tên danh mục</span>
                             </div>
 
 
                             <div class="form-group">
                                 <label>Địa chỉ Email</label>
-                                <input ng-model="product.DisplayOrder" type="number" class="form-control"
-                                       placeholder="Hiển thị ở vị trí 1 2 3 ...">
+                                <input ng-model="orderDetail.CustomerEmail" type="email" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label>Địa chỉ đặt hàng <span class="text-danger">*</span> </label>
-                                <input type="text" ng-model="product.Name" required name="pName"
-                                       class="form-control" placeholder="Tên danh mục ..."
-                                       ng-change="getSeoTitle()">
+                                <input type="text" ng-model="orderDetail.CustomerAddress" required name="pName"
+                                       class="form-control" >
                                 <span class="text-danger" ng-show="frmUpdateProduct.pName.$touched && frmUpdateProduct.pName.$invalid">Bạn chưa nhập tên danh mục</span>
                             </div>
                             <div class="form-group">
                                 <label>Địa chỉ giao hàng <span class="text-danger">*</span></label>
-                                <input ng-model="product.OriginalPrice" type="number" class="form-control"
-                                       name="pOriginalPrice" required
-                                       value="0"
-                                       placeholder="Giá nhập">
+                                <input ng-model="orderDetail.CustomerAddress" type="text" class="form-control">
                                 <span class="text-danger" ng-show="frmAddproduct.pOriginalPrice.$touched && frmAddproduct.pOriginalPrice.$invalid">Giá sản phẩm là bắt buộc</span>
                             </div>
                             <div class="form-group">
                                 <label>Ghi chú của khách hàng</label>
-                                <textarea ng-model="product.Description"
+                                <textarea ng-model="orderDetail.Note"
                                           class="form-control" rows="2"
                                           placeholder="Ghi chú"></textarea>
                             </div>
@@ -132,35 +122,32 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Tổng giá trị đơn hàng <span class="text-danger">*</span></label>
-                                        <input type="text" ng-model="product.Alias" class="form-control" placeholder="Tiêu đề SEO ..." name="pAlias" required>
-                                        <span class="text-danger" ng-show="frmUpdateProduct.pAlias.$touched && frmUpdateProduct.pAlias.$invalid">Bạn chưa nhập tiêu đề SEO</span>
+                                        <label>Tổng giá trị đơn hàng (VND)<span class="text-danger">*</span></label>
+                                        <input type="text" ng-model="orderDetail.TotalItemPriceF" class="form-control">
+                                       
                                     </div>
                                     <!-- text input -->
                                     <div class="form-group">
-                                        <label>Phí vận chuyển</label>
-                                        <input ng-model="product.MetaKeyword"
-                                               type="text" class="form-control"
-                                               placeholder="Chọn vài từ để làm từ khóa ...">
+                                        <label>Phí vận chuyển (VND)</label>
+                                        <input ng-model="orderDetail.ShippingFeeF"
+                                               type="text" class="form-control">
                                     </div>
                                     <!-- text input -->
                                     <div class="form-group">
-                                        <label>Thuế</label>
-                                        <input ng-model="product.MetaDescription"
+                                        <label>Thuế (VND)</label>
+                                        <input 
                                                type="text" class="form-control"
-                                               placeholder="Từ khóa mô tả về danh mục ...">
+                                               placeholder="Thuế đơn hàng">
                                     </div>
                                     <div class="form-group">
-                                        <label>Giảm giá</label>
-                                        <input ng-model="product.TagsString"
-                                               type="text" class="form-control"
-                                               placeholder="Tags liên quan ...">
+                                        <label>Giảm giá (VND)</label>
+                                        <input ng-model="orderDetail.PromotionF"
+                                               type="text" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label>Tổng số tiền phải trả</label>
-                                        <input ng-model="product.TagsString"
-                                               type="text" class="form-control"
-                                               placeholder="Tags liên quan ...">
+                                        <label>Tổng số tiền phải trả (VND)</label>
+                                        <input ng-model="orderDetail.TotalAmountF"
+                                               type="text" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -179,22 +166,29 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Trạng thái đơn hàng <span class="text-danger">*</span></label>
-                                        <input type="text" ng-model="product.Alias" class="form-control" placeholder="Tiêu đề SEO ..." name="pAlias" required>
-                                        <span class="text-danger" ng-show="frmUpdateProduct.pAlias.$touched && frmUpdateProduct.pAlias.$invalid">Bạn chưa nhập tiêu đề SEO</span>
+                                        <select ng-model="orderDetail.OrderStatus"
+                                                class=" form-control w-100"
+                                                required name="pCategoryId"
+                                                ng-options="option.ID as option.StatusName for option in listOrderStatus">
+                                        </select>
                                     </div>
                                     <!-- text input -->
                                     <div class="form-group">
                                         <label>Trạng thái vận chuyển</label>
-                                        <input ng-model="product.MetaKeyword"
-                                               type="text" class="form-control"
-                                               placeholder="Chọn vài từ để làm từ khóa ...">
+                                        <select ng-model="orderDetail.ShippingStatus"
+                                                class=" form-control w-100"
+                                                required name="pCategoryId"
+                                                ng-options="option.ID as option.StatusName for option in listShippingStatus">
+                                        </select>
                                     </div>
                                     <!-- text input -->
                                     <div class="form-group">
                                         <label>Trạng thái thanh toán</label>
-                                        <input ng-model="product.MetaDescription"
-                                               type="text" class="form-control"
-                                               placeholder="Từ khóa mô tả về danh mục ...">
+                                        <select ng-model="orderDetail.PaymentStatus"
+                                                class=" form-control w-100"
+                                                required name="pCategoryId"
+                                                ng-options="option.ID as option.StatusName for option in listPaymentStatus">
+                                        </select>
                                     </div>
 
                                 </div>
@@ -219,73 +213,44 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th class="selectedItem" style="width: 10px">
+                                <th class="selectedItem" style="width: 5px">
                                     Chọn
                                 </th>
-                                <th style="width: 10px">
+                                <th style="width: 5px">
                                     STT
                                 </th>
-                                <th style="width: 10%">Hình ảnh</th>
-                                <th class="optional-sm" style="width: 10%">Tên sản phẩm</th>
+                                <th style="width: 20%">Hình ảnh</th>
+                                <th  style="width: 20%">Tên sản phẩm</th>
                                 <th style="width: 10%">Giá</th>
                                 <th style="width: 10%">Số lượng</th>
-                                <th style="width: 15%">Giảm giá</th>
-                                <th class="optional-sm" style="width: 10%">Tổng tiền</th>
-                                <th style="width: 15%">Thao tác</th>
+                                <th style="width: 10%">Giảm giá</th>
+                                <th style="width: 10%">Tổng tiền</th>
+                                <th style="width: 10%">Thao tác</th>
                                
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="item in orders">
+                            <tr ng-repeat="item in orderDetail.OrderDetails">
 
                                 <td>
                                     <input type="checkbox" class="checkBox"
                                            value="{{item.ID}}" onclick="GetTotalSelectedItems()" />
                                 </td>
                                 <td>{{$index+1}}</td>
-                                <td>{{item.ID}}</td>
                                 <td>
-                                    <span ng-class="getOrderStatusStyle({{item.OrderStatus}})" style="font-size:14px; color:white">
-                                        {{item.OrderStatus | orderStatusFilter}}
-                                    </span>
+                                    <img ng-src="{{item.ProductImage}}" width="64" height="64"/>
                                 </td>
-
-                                <td style="color:white">
-                                    <span ng-class="getPaymentStatusStyle({{item.PaymentStatus}})" style="font-size:14px; color:white">
-                                        {{item.PaymentStatus | paymentStatusFilter}}
-                                    </span>
+                                <td><a>{{item.ProductName}}</a></td>
+                                <td><strong>{{item.UnitPrice | currency:'₫':0}}</strong></td>
+                                <td>{{item.Quantity}}</td>
+                                <td>              
                                 </td>
-
+                                <td><strong>{{item.TotalPrice | currency:'₫':0}}</strong></td>
                                 <td>
-                                    <span ng-class="getShippingStatusStyle({{item.ShippingStatus}})" style="font-size:14px; color:white">
-                                        {{item.ShippingStatus | shippingStatusFilter}}
-                                    </span>
-                                </td>
-
-                                <td>
-                                    <a href="mailto:{{item.CustomerEmail}}"> {{item.CustomerEmail}}</a>
-                                </td>
-                                <td class="optional-sm">
-                                    {{item.CreatedDate | date:'dd/MM/yyyy'}}
-                                </td>
-                                <td><strong>{{item.TotalAmount | currency:'₫':0}}</strong></td>
-
-                                <td>
-                                    <button ui-sref="OrderDetail({id:item.ID})" class="btn btn-sm btn-outline-primary"><i class="fa fa-eye"></i></button>
                                     <button ui-sref="OrderEdit({id:item.ID})" class="btn btn-sm btn-outline-primary"><i class="fa fa-pencil"></i></button>
                                     <button ng-click="showDeleteDialog(item.ID)" class="btn  btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
                                 </td>
-                                <td>
-                                    <button ng-if="item.OrderStatus == 0" ng-click="showOrderUpdateConfirmStatusModal(item.ID)" type="button" class="btn btn-outline-success btn-sm">
-                                        Xác nhận
-                                    </button>
-                                    <button ng-if="item.OrderStatus == 1 || item.OrderStatus == 2 || item.OrderStatus == 3" ng-click="showOrderUpdateStatusModal(item.ID)" type="button" class="btn btn-primary btn-sm">
-                                        Cập nhật
-                                    </button>
-                                </td>
-                                <td>
-                                    <button ng-click="createInvoice(item.ID)" class="btn  btn-sm btn-outline-success"><i class="fa fa-download"></i></button>
-                                </td>
+
                             </tr>
                         </tbody>
                     </table>
@@ -294,8 +259,8 @@
             </div>
 
             <div class="card-footer mb-5">
-                <button type="submit" ng-disabled="frmUpdateProduct.$invalid" class="btn btn-primary">Cập nhật đơn hàng</button>
-                <button ui-sref="Products" class="btn btn-outline-secondary space-around">Hủy bỏ</button>
+                <!--<button type="submit" ng-disabled="frmUpdateProduct.$invalid" class="btn btn-primary">Cập nhật đơn hàng</button>-->
+                <button ui-sref="Orders" class="btn btn-primary">Quay về mục Danh sách đơn hàng</button>
             </div>
         </form>
 
@@ -315,15 +280,15 @@
         //$('#categoryIdDropdown').trigger('change'); // Notify any JS components that the value changed
 
         //var editor = CKEDITOR.replace('ckEditorContent');
-        CKEDITOR.replace('ckEditorContentEdit', {
-            filebrowserBrowseUrl: '/Assets/Admin/lib/ckfinder/ckfinder.html',
-            filebrowserImageBrowseUrl: '/Assets/Admin/lib/ckfinder/ckfinder.html?Type=Images',
-            filebrowserUploadUrl: '/Assets/Admin/lib/ckfinder/core/connector//aspx/connector.aspx?command=QuickUpload&type=Files',
-            filebrowserImageUploadUrl: '/Assets/Admin/lib/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images',
+        //CKEDITOR.replace('ckEditorContentEdit', {
+        //    filebrowserBrowseUrl: '/Assets/Admin/lib/ckfinder/ckfinder.html',
+        //    filebrowserImageBrowseUrl: '/Assets/Admin/lib/ckfinder/ckfinder.html?Type=Images',
+        //    filebrowserUploadUrl: '/Assets/Admin/lib/ckfinder/core/connector//aspx/connector.aspx?command=QuickUpload&type=Files',
+        //    filebrowserImageUploadUrl: '/Assets/Admin/lib/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images',
 
-            filebrowserWindowHeight: '1000',
-            filebrowserWindowWidth: '1000'
-        });
+        //    filebrowserWindowHeight: '1000',
+        //    filebrowserWindowWidth: '1000'
+        //});
 
         //var editor = $('#ckEditorContent');
         //CKFinder.setupCKEditor(editor, '/Assets/Admin/lib/ckfinder/');

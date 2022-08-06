@@ -27,6 +27,7 @@ namespace CoffeeShop.Web.Models
         public virtual Product Product { get; set; }
 
         public string ProductName { get; set; }
+        public string ProductImage { get; set; }
 
         public decimal TotalPrice { get; set; }
 

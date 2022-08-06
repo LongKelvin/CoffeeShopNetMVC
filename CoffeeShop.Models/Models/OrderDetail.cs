@@ -27,6 +27,8 @@ namespace CoffeeShop.Models.Models
 
         public decimal TotalPrice { get; set; }
 
+        public string ProductImage { get; set; } // nvarchar(500), null
+
         public virtual Order Order { get; set; }
 
         public virtual Product Product { get; set; }

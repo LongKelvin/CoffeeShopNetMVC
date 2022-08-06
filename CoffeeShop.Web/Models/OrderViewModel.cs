@@ -69,7 +69,7 @@ namespace CoffeeShop.Web.Models
         [Required(ErrorMessage = "Shipping Status is required")]
         public int ShippingStatus { get; set; }
 
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<OrderDetailViewModel> OrderDetails { get; set; }
         public bool Status { get; set; }
 
         [StringLength(128)]

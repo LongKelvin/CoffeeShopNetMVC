@@ -80,6 +80,60 @@ namespace CoffeeShop.Web.Api
             });
         }
 
+
+        [HttpGet]
+        [Route("GetListShippingStatus")]
+        public HttpResponseMessage GetListShippingStatus(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                List<ShippingStatus> listShippingStatus = new List<ShippingStatus>();
+                foreach (CommonConstants.ShippingStatus status in (CommonConstants.ShippingStatus[])Enum.GetValues(typeof(CommonConstants.ShippingStatus)))
+                {
+                    if ((int)status == (int)CommonConstants.ShippingStatus.Canceled)
+                        continue;
+
+                    listShippingStatus.Add(new ShippingStatus
+                    {
+                        ID = (int)status,
+                        StatusCode = (int)status,
+                        StatusName = status.ToString(),
+                        StatusDescription = "Default status " + status.ToString(),
+                        IsActive = true,
+                        IsCanDelete = false,
+                    });
+                }
+                return request.CreateResponse(HttpStatusCode.OK, listShippingStatus);
+            });
+        }
+
+
+        [HttpGet]
+        [Route("GetListPaymentStatus")]
+        public HttpResponseMessage GetListPaymentStatus(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                List<PaymentStatus> listPaymentStatus = new List<PaymentStatus>();
+                foreach (CommonConstants.PaymentStatus status in (CommonConstants.PaymentStatus[])Enum.GetValues(typeof(CommonConstants.PaymentStatus)))
+                {
+                    if ((int)status == (int)CommonConstants.PaymentStatus.Canceled)
+                        continue;
+
+                    listPaymentStatus.Add(new PaymentStatus
+                    {
+                        ID = (int)status,
+                        StatusCode = (int)status,
+                        StatusName = status.ToString(),
+                        StatusDescription = "Default status " + status.ToString(),
+                        IsActive = true,
+                        IsCanDelete = false,
+                    });
+                }
+                return request.CreateResponse(HttpStatusCode.OK, listPaymentStatus);
+            });
+        }
+
         [HttpGet]
         [Route("GetOrderStatus/{id:int}")]
         public HttpResponseMessage GetOrderStatusById(HttpRequestMessage request, int id)
