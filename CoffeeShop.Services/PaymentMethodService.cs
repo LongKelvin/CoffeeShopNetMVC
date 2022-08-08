@@ -38,7 +38,8 @@ namespace CoffeeShop.Services
 
         public List<PaymentMethod> GetAll()
         {
-            return _paymentMethodRepository.GetAll().ToList();
+            var result = _paymentMethodRepository.GetAll();
+            return result.Where(x => x.Status == true).ToList();
         }
 
         public PaymentMethod GetByCode(int code)
