@@ -17,8 +17,8 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            AutomaticMigrationDataLossAllowed = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(CoffeeShop.Data.CoffeeShopDbContext context)
