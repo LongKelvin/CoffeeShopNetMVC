@@ -1,3 +1,4 @@
+[![Build Status](https://dev.azure.com/LongKelvin/KCoffeeShop/_apis/build/status/LongKelvin.CoffeeShopNetMVC?branchName=azure-pipelines-4)](https://dev.azure.com/LongKelvin/KCoffeeShop/_build/latest?definitionId=4&branchName=azure-pipelines-4)
 <div id="top"></div>
 
 <!-- PROJECT LOGO -->
