@@ -37,19 +37,13 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     testAssemblyVer2: |
-     **\*Tests*.dll
+     **\*tests*.dll
      !**\*TestAdapter.dll
      !**\obj\**
      !**\bin\**\ref\**
     diagnosticsEnabled: True
     
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'XUnit'
-    testResultsFiles: '**/TEST-*.xml'
-    mergeTestResults: true
-    failTaskOnFailedTests: true
-    testRunTitle: 'Getting test result'
+
 
 - task: PublishBuildArtifacts@1
   inputs:
