@@ -51,3 +51,8 @@ steps:
     failTaskOnFailedTests: true
     testRunTitle: 'Getting test result'
 
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
