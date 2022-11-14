@@ -18,12 +18,14 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
+  displayName: "Restore Nuget package"
 
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
 
 - task: VSBuild@1
+  displayName: "Build project"
   inputs:
     solution: '$(solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
@@ -40,3 +42,12 @@ steps:
      !**\obj\**
      !**\bin\**\ref\**
     diagnosticsEnabled: True
+    
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'XUnit'
+    testResultsFiles: '**/TEST-*.xml'
+    mergeTestResults: true
+    failTaskOnFailedTests: true
+    testRunTitle: 'Getting test result'
+
