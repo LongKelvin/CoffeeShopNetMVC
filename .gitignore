@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 CoffeeShop.Web/UploadFiles/images/
 CoffeeShop.Web/UploadFiles/
+/BUILD_LOG_FILE.txt
