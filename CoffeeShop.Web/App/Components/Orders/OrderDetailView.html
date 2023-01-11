@@ -1,21 +1,296 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-    <h1>DETAIL ORDERS</h1>
-    <div class="form-control">
-        <div>
-            <h3>{{orderDetail.CustomerName}}</h3>
-            <h3>{{orderDetail.ID}}</h3>
-            <h3>{{orderDetail.CustomerMobile}}</h3>
-            <h3>{{orderDetail.TotalAmount}}</h3>
-            <h3>{{orderDetail.OrderDetails.ProductName}}</h3>
-            <h3>{{orderDetail.OrderDetails.UnitPrice}}</h3>
-            <h3>{{orderDetail.OrderDetails.Quantity}}</h3>
+﻿  <!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><strong>Chi tiết đơn hàng</strong></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="Home">Trang chủ</a></li>
+                    <li class="breadcrumb-item "><a ui-sref="Products">Đơn hàng</a></li>
+                    <li class="breadcrumb-item active">Chi tiết đơn hàng</li>
+                </ol>
+            </div>
         </div>
     </div>
-</body>
-</html>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <form name="frmUpdateProduct" role="form" ng-submit="UpdateProduct()" novalidate>
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-6">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin đơn hàng</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Mã đơn hàng <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="orderDetail.ID" required name="pName"
+                                       class="form-control">
+                                <span class="text-danger" ng-show="frmUpdateProduct.pName.$touched && frmUpdateProduct.pName.$invalid">Bạn chưa nhập tên danh mục</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Ngày tạo</label>
+                                <input ng-model="orderDetail.CreatedDate" type="date" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tên khách hàng <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="orderDetail.CustomerName" required name="pName"
+                                       class="form-control">
+                                <span class="text-danger" ng-show="frmUpdateProduct.pName.$touched && frmUpdateProduct.pName.$invalid">Bạn chưa nhập tên danh mục</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Trạng thái đơn hàng <span class="text-danger">*</span></label>
+                                <select ng-model="orderDetail.OrderStatus"
+                                        class=" form-control w-100"
+                                        required name="pCategoryId"
+                                        ng-options="option.ID as option.StatusName for option in listOrderStatus">
+                                </select>
+                            </div>
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                    <div class="card card-success ">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin Khách hàng</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Tên khách hàng <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="orderDetail.CustomerName" required name="pName"
+                                       class="form-control" >
+                                <span class="text-danger" ng-show="frmUpdateProduct.pName.$touched && frmUpdateProduct.pName.$invalid">Bạn chưa nhập tên danh mục</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Số điện thoại <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="orderDetail.CustomerMobile" required name="pName"
+                                       class="form-control">
+                                <span class="text-danger" ng-show="frmUpdateProduct.pName.$touched && frmUpdateProduct.pName.$invalid">Bạn chưa nhập tên danh mục</span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Địa chỉ Email</label>
+                                <input ng-model="orderDetail.CustomerEmail" type="email" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Địa chỉ đặt hàng <span class="text-danger">*</span> </label>
+                                <input type="text" ng-model="orderDetail.CustomerAddress" required name="pName"
+                                       class="form-control" >
+                                <span class="text-danger" ng-show="frmUpdateProduct.pName.$touched && frmUpdateProduct.pName.$invalid">Bạn chưa nhập tên danh mục</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Địa chỉ giao hàng <span class="text-danger">*</span></label>
+                                <input ng-model="orderDetail.CustomerAddress" type="text" class="form-control">
+                                <span class="text-danger" ng-show="frmAddproduct.pOriginalPrice.$touched && frmAddproduct.pOriginalPrice.$invalid">Giá sản phẩm là bắt buộc</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Ghi chú của khách hàng</label>
+                                <textarea ng-model="orderDetail.Note"
+                                          class="form-control" rows="2"
+                                          placeholder="Ghi chú"></textarea>
+                            </div>
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <!-- general form elements disabled -->
+                    <div class="card card-lightblue">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin Hóa đơn</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Tổng giá trị đơn hàng (VND)<span class="text-danger">*</span></label>
+                                        <input type="text" ng-model="orderDetail.TotalItemPriceF" class="form-control">
+                                       
+                                    </div>
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Phí vận chuyển (VND)</label>
+                                        <input ng-model="orderDetail.ShippingFeeF"
+                                               type="text" class="form-control">
+                                    </div>
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Thuế (VND)</label>
+                                        <input 
+                                               type="text" class="form-control"
+                                               placeholder="Thuế đơn hàng">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Giảm giá (VND)</label>
+                                        <input ng-model="orderDetail.PromotionF"
+                                               type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tổng số tiền phải trả (VND)</label>
+                                        <input ng-model="orderDetail.TotalAmountF"
+                                               type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+
+                    <div class="card card-cyan ">
+                        <div class="card-header">
+                            <h3 class="card-title">Trạng thái đơn hàng</h3>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Trạng thái đơn hàng <span class="text-danger">*</span></label>
+                                        <select ng-model="orderDetail.OrderStatus"
+                                                class=" form-control w-100"
+                                                required name="pCategoryId"
+                                                ng-options="option.ID as option.StatusName for option in listOrderStatus">
+                                        </select>
+                                    </div>
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Trạng thái vận chuyển</label>
+                                        <select ng-model="orderDetail.ShippingStatus"
+                                                class=" form-control w-100"
+                                                required name="pCategoryId"
+                                                ng-options="option.ID as option.StatusName for option in listShippingStatus">
+                                        </select>
+                                    </div>
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Trạng thái thanh toán</label>
+                                        <select ng-model="orderDetail.PaymentStatus"
+                                                class=" form-control w-100"
+                                                required name="pCategoryId"
+                                                ng-options="option.ID as option.StatusName for option in listPaymentStatus">
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- general form elements disabled -->
+
+                </div>
+                <!--/.col (right) -->
+            </div>
+
+
+            <div class="card card-dark mb-5">
+                <div class="card-header">
+                    <h3 class="card-title">Chi tiết đơn hàng</h3>
+                </div>
+                <!--/.card-header-->
+                <div class="card-body">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="selectedItem" style="width: 5px">
+                                    Chọn
+                                </th>
+                                <th style="width: 5px">
+                                    STT
+                                </th>
+                                <th style="width: 20%">Hình ảnh</th>
+                                <th  style="width: 20%">Tên sản phẩm</th>
+                                <th style="width: 10%">Giá</th>
+                                <th style="width: 10%">Số lượng</th>
+                                <th style="width: 10%">Giảm giá</th>
+                                <th style="width: 10%">Tổng tiền</th>
+                                <th style="width: 10%">Thao tác</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in orderDetail.OrderDetails">
+
+                                <td>
+                                    <input type="checkbox" class="checkBox"
+                                           value="{{item.ID}}" onclick="GetTotalSelectedItems()" />
+                                </td>
+                                <td>{{$index+1}}</td>
+                                <td>
+                                    <img ng-src="{{item.ProductImage}}" width="64" height="64"/>
+                                </td>
+                                <td><a>{{item.ProductName}}</a></td>
+                                <td><strong>{{item.UnitPrice | currency:'₫':0}}</strong></td>
+                                <td>{{item.Quantity}}</td>
+                                <td>              
+                                </td>
+                                <td><strong>{{item.TotalPrice | currency:'₫':0}}</strong></td>
+                                <td>
+                                    <button ui-sref="OrderEdit({id:item.ID})" class="btn btn-sm btn-outline-primary"><i class="fa fa-pencil"></i></button>
+                                    <button ng-click="showDeleteDialog(item.ID)" class="btn  btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--/.card-body-->
+            </div>
+
+            <div class="card-footer mb-5">
+                <!--<button type="submit" ng-disabled="frmUpdateProduct.$invalid" class="btn btn-primary">Cập nhật đơn hàng</button>-->
+                <button ui-sref="Orders" class="btn btn-primary">Quay về mục Danh sách đơn hàng</button>
+            </div>
+        </form>
+
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+<script>
+
+    $(document).ready(function () {
+        //$('#categoryIdDropdown').select2({
+        //    theme: 'bootstrap4'
+        //});
+
+        //$('#categoryIdDropdown').val('Chọn danh mục'); // Select the option with a default value
+        //$('#categoryIdDropdown').trigger('change'); // Notify any JS components that the value changed
+
+        //var editor = CKEDITOR.replace('ckEditorContent');
+        //CKEDITOR.replace('ckEditorContentEdit', {
+        //    filebrowserBrowseUrl: '/Assets/Admin/lib/ckfinder/ckfinder.html',
+        //    filebrowserImageBrowseUrl: '/Assets/Admin/lib/ckfinder/ckfinder.html?Type=Images',
+        //    filebrowserUploadUrl: '/Assets/Admin/lib/ckfinder/core/connector//aspx/connector.aspx?command=QuickUpload&type=Files',
+        //    filebrowserImageUploadUrl: '/Assets/Admin/lib/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images',
+
+        //    filebrowserWindowHeight: '1000',
+        //    filebrowserWindowWidth: '1000'
+        //});
+
+        //var editor = $('#ckEditorContent');
+        //CKFinder.setupCKEditor(editor, '/Assets/Admin/lib/ckfinder/');
+    });
+</script>

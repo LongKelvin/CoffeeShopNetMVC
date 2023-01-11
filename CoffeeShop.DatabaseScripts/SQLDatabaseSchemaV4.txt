@@ -1,0 +1,1744 @@
+/****** Object:  Database [CoffeeShopMVC]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE DATABASE [CoffeeShopMVC]  (EDITION = 'Standard', SERVICE_OBJECTIVE = 'S0', MAXSIZE = 1 GB) WITH CATALOG_COLLATION = SQL_Latin1_General_CP1_CI_AS;
+GO
+ALTER DATABASE [CoffeeShopMVC] SET COMPATIBILITY_LEVEL = 150
+GO
+ALTER DATABASE [CoffeeShopMVC] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [CoffeeShopMVC] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [CoffeeShopMVC] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [CoffeeShopMVC] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [CoffeeShopMVC] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [CoffeeShopMVC] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [CoffeeShopMVC] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [CoffeeShopMVC] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [CoffeeShopMVC] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [CoffeeShopMVC] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [CoffeeShopMVC] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [CoffeeShopMVC] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [CoffeeShopMVC] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [CoffeeShopMVC] SET ALLOW_SNAPSHOT_ISOLATION ON 
+GO
+ALTER DATABASE [CoffeeShopMVC] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [CoffeeShopMVC] SET READ_COMMITTED_SNAPSHOT ON 
+GO
+ALTER DATABASE [CoffeeShopMVC] SET  MULTI_USER 
+GO
+ALTER DATABASE [CoffeeShopMVC] SET ENCRYPTION ON
+GO
+ALTER DATABASE [CoffeeShopMVC] SET QUERY_STORE = ON
+GO
+ALTER DATABASE [CoffeeShopMVC] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 100, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
+GO
+/*** The scripts of database scoped configurations in Azure should be executed inside the target database connection. ***/
+GO
+-- ALTER DATABASE SCOPED CONFIGURATION SET MAXDOP = 8;
+GO
+/****** Object:  UserDefinedFunction [dbo].[fn_diagramobjects]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+	CREATE FUNCTION [dbo].[fn_diagramobjects]() 
+	RETURNS int
+	WITH EXECUTE AS N'dbo'
+	AS
+	BEGIN
+		declare @id_upgraddiagrams		int
+		declare @id_sysdiagrams			int
+		declare @id_helpdiagrams		int
+		declare @id_helpdiagramdefinition	int
+		declare @id_creatediagram	int
+		declare @id_renamediagram	int
+		declare @id_alterdiagram 	int 
+		declare @id_dropdiagram		int
+		declare @InstalledObjects	int
+
+		select @InstalledObjects = 0
+
+		select 	@id_upgraddiagrams = object_id(N'dbo.sp_upgraddiagrams'),
+			@id_sysdiagrams = object_id(N'dbo.sysdiagrams'),
+			@id_helpdiagrams = object_id(N'dbo.sp_helpdiagrams'),
+			@id_helpdiagramdefinition = object_id(N'dbo.sp_helpdiagramdefinition'),
+			@id_creatediagram = object_id(N'dbo.sp_creatediagram'),
+			@id_renamediagram = object_id(N'dbo.sp_renamediagram'),
+			@id_alterdiagram = object_id(N'dbo.sp_alterdiagram'), 
+			@id_dropdiagram = object_id(N'dbo.sp_dropdiagram')
+
+		if @id_upgraddiagrams is not null
+			select @InstalledObjects = @InstalledObjects + 1
+		if @id_sysdiagrams is not null
+			select @InstalledObjects = @InstalledObjects + 2
+		if @id_helpdiagrams is not null
+			select @InstalledObjects = @InstalledObjects + 4
+		if @id_helpdiagramdefinition is not null
+			select @InstalledObjects = @InstalledObjects + 8
+		if @id_creatediagram is not null
+			select @InstalledObjects = @InstalledObjects + 16
+		if @id_renamediagram is not null
+			select @InstalledObjects = @InstalledObjects + 32
+		if @id_alterdiagram  is not null
+			select @InstalledObjects = @InstalledObjects + 64
+		if @id_dropdiagram is not null
+			select @InstalledObjects = @InstalledObjects + 128
+		
+		return @InstalledObjects 
+	END
+	
+GO
+/****** Object:  Table [dbo].[__MigrationHistory]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[__MigrationHistory](
+	[MigrationId] [nvarchar](150) NOT NULL,
+	[ContextKey] [nvarchar](300) NOT NULL,
+	[Model] [varbinary](max) NOT NULL,
+	[ProductVersion] [nvarchar](32) NOT NULL,
+ CONSTRAINT [PK_dbo.__MigrationHistory] PRIMARY KEY CLUSTERED 
+(
+	[MigrationId] ASC,
+	[ContextKey] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ApplicationGroups]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ApplicationGroups](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](250) NULL,
+	[Description] [nvarchar](250) NULL,
+	[RowVersion] [timestamp] NOT NULL,
+ CONSTRAINT [PK_dbo.ApplicationGroups] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ApplicationNotifications]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ApplicationNotifications](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Message] [nvarchar](max) NULL,
+	[Url] [nvarchar](max) NULL,
+	[Status] [bit] NOT NULL,
+	[IsReaded] [bit] NOT NULL,
+	[Type] [nvarchar](max) NULL,
+	[RowVersion] [timestamp] NOT NULL,
+	[ExtraValue] [nvarchar](max) NULL,
+	[DateCreated] [datetime] NOT NULL,
+ CONSTRAINT [PK_dbo.ApplicationNotifications] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ApplicationPermissions]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ApplicationPermissions](
+	[Name] [nvarchar](max) NOT NULL,
+	[Module] [nvarchar](max) NOT NULL,
+	[Type] [nvarchar](max) NOT NULL,
+	[Description] [nvarchar](max) NOT NULL,
+	[IsSystemProtected] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+	[Id] [nvarchar](128) NOT NULL,
+ CONSTRAINT [PK_dbo.ApplicationPermissions] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ApplicationRoleClaims]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ApplicationRoleClaims](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RoleId] [nvarchar](128) NULL,
+	[ClaimType] [nvarchar](max) NULL,
+	[ClaimValue] [nvarchar](max) NULL,
+ CONSTRAINT [PK_dbo.ApplicationRoleClaims] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ApplicationRoleGroups]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ApplicationRoleGroups](
+	[GroupId] [int] NOT NULL,
+	[RoleId] [nvarchar](128) NOT NULL,
+ CONSTRAINT [PK_dbo.ApplicationRoleGroups] PRIMARY KEY CLUSTERED 
+(
+	[GroupId] ASC,
+	[RoleId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ApplicationRolePermissions]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ApplicationRolePermissions](
+	[PermissionId] [nvarchar](128) NOT NULL,
+	[RoleId] [nvarchar](128) NOT NULL,
+ CONSTRAINT [PK_dbo.ApplicationRolePermissions] PRIMARY KEY CLUSTERED 
+(
+	[PermissionId] ASC,
+	[RoleId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ApplicationRoles]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ApplicationRoles](
+	[Id] [nvarchar](128) NOT NULL,
+	[Name] [nvarchar](max) NULL,
+	[Description] [nvarchar](250) NULL,
+	[Discriminator] [nvarchar](128) NOT NULL,
+	[IsSystemProtected] [bit] NULL,
+ CONSTRAINT [PK_dbo.ApplicationRoles] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ApplicationUserClaims]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ApplicationUserClaims](
+	[Id] [int] NOT NULL,
+	[UserId] [nvarchar](128) NOT NULL,
+	[ClaimType] [nvarchar](max) NULL,
+	[ClaimValue] [nvarchar](max) NULL,
+	[Discriminator] [nvarchar](128) NOT NULL,
+	[ApplicationUser_Id] [nvarchar](128) NULL,
+ CONSTRAINT [PK_dbo.ApplicationUserClaims] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC,
+	[Id] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ApplicationUserGroups]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ApplicationUserGroups](
+	[UserId] [nvarchar](128) NOT NULL,
+	[GroupId] [int] NOT NULL,
+ CONSTRAINT [PK_dbo.ApplicationUserGroups] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC,
+	[GroupId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ApplicationUserLogins]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ApplicationUserLogins](
+	[UserId] [nvarchar](128) NOT NULL,
+	[LoginProvider] [nvarchar](max) NULL,
+	[ProviderKey] [nvarchar](max) NULL,
+	[ApplicationUser_Id] [nvarchar](128) NULL,
+ CONSTRAINT [PK_dbo.ApplicationUserLogins] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ApplicationUserPermissions]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ApplicationUserPermissions](
+	[UserId] [nvarchar](128) NOT NULL,
+	[PermissionId] [nvarchar](128) NOT NULL,
+	[RoleName] [nvarchar](max) NULL,
+	[RoleId] [nvarchar](128) NOT NULL,
+ CONSTRAINT [PK_dbo.ApplicationUserPermissions] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC,
+	[PermissionId] ASC,
+	[RoleId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ApplicationUserRoles]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ApplicationUserRoles](
+	[UserId] [nvarchar](128) NOT NULL,
+	[RoleId] [nvarchar](128) NOT NULL,
+	[IdentityRole_Id] [nvarchar](128) NULL,
+	[ApplicationUser_Id] [nvarchar](128) NULL,
+ CONSTRAINT [PK_dbo.ApplicationUserRoles] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC,
+	[RoleId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ApplicationUsers]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ApplicationUsers](
+	[Id] [nvarchar](128) NOT NULL,
+	[FullName] [nvarchar](256) NULL,
+	[Address] [nvarchar](256) NULL,
+	[BirthDay] [datetime] NULL,
+	[Email] [nvarchar](max) NULL,
+	[EmailConfirmed] [bit] NOT NULL,
+	[PasswordHash] [nvarchar](max) NULL,
+	[SecurityStamp] [nvarchar](max) NULL,
+	[PhoneNumber] [nvarchar](max) NULL,
+	[PhoneNumberConfirmed] [bit] NOT NULL,
+	[TwoFactorEnabled] [bit] NOT NULL,
+	[LockoutEndDateUtc] [datetime] NULL,
+	[LockoutEnabled] [bit] NOT NULL,
+	[AccessFailedCount] [int] NOT NULL,
+	[UserName] [nvarchar](max) NULL,
+	[CreatedDate] [datetime] NULL,
+	[Sex] [int] NOT NULL,
+	[ProfileImage] [nvarchar](max) NULL,
+	[AdminAccessPermission] [bit] NOT NULL,
+ CONSTRAINT [PK_dbo.ApplicationUsers] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Errors]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Errors](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Message] [nvarchar](max) NULL,
+	[StackTrace] [nvarchar](max) NULL,
+	[CreatedDate] [datetime] NOT NULL,
+ CONSTRAINT [PK_dbo.Errors] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Feedbacks]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Feedbacks](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+	[Email] [nvarchar](max) NOT NULL,
+	[EmailSubject] [nvarchar](max) NULL,
+	[Message] [nvarchar](max) NOT NULL,
+	[CreatedDate] [datetime] NOT NULL,
+	[Status] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+ CONSTRAINT [PK_dbo.Feedbacks] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Footers]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Footers](
+	[ID] [varchar](128) NOT NULL,
+	[Content] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_dbo.Footers] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MenuGroups]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MenuGroups](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+ CONSTRAINT [PK_dbo.MenuGroups] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Menus]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Menus](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+	[URL] [nvarchar](max) NOT NULL,
+	[DisplayOrder] [int] NULL,
+	[GroupID] [int] NOT NULL,
+	[Target] [varchar](max) NULL,
+	[Status] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+ CONSTRAINT [PK_dbo.Menus] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OrderDetails]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OrderDetails](
+	[OrderID] [int] NOT NULL,
+	[ProductID] [int] NOT NULL,
+	[Quantity] [int] NULL,
+	[UnitPrice] [decimal](18, 2) NOT NULL,
+	[ProductName] [nvarchar](max) NULL,
+	[TotalPrice] [decimal](18, 2) NOT NULL,
+	[ProductImage] [nvarchar](max) NULL,
+ CONSTRAINT [PK_dbo.OrderDetails] PRIMARY KEY CLUSTERED 
+(
+	[OrderID] ASC,
+	[ProductID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OrderInvoices]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OrderInvoices](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[InvoiceCode] [nvarchar](max) NULL,
+	[CreatedDate] [datetime] NOT NULL,
+	[Cashier] [nvarchar](max) NULL,
+	[OrderId] [int] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+	[Status] [bit] NOT NULL,
+ CONSTRAINT [PK_dbo.OrderInvoices] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Orders]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Orders](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[CustomerName] [nvarchar](250) NOT NULL,
+	[CustomerAddress] [nvarchar](250) NOT NULL,
+	[CustomerEmail] [nvarchar](250) NOT NULL,
+	[CustomerMobile] [nvarchar](50) NOT NULL,
+	[CustomerMessage] [nvarchar](500) NULL,
+	[PaymentStatus] [int] NOT NULL,
+	[Status] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+	[CreatedDate] [datetime] NULL,
+	[CreatedBy] [nvarchar](50) NULL,
+	[CustomerId] [nvarchar](128) NULL,
+	[PaymentMethodID] [int] NOT NULL,
+	[TotalAmount] [decimal](18, 2) NULL,
+	[TotalItemPrice] [decimal](18, 2) NULL,
+	[ShippingFee] [decimal](18, 2) NULL,
+	[OrderStatus] [int] NOT NULL,
+	[ShippingStatus] [int] NOT NULL,
+	[Note] [nvarchar](max) NULL,
+ CONSTRAINT [PK_dbo.Orders] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OrderStatus]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OrderStatus](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[StatusCode] [int] NOT NULL,
+	[StatusName] [nvarchar](max) NOT NULL,
+	[StatusDescription] [nvarchar](max) NULL,
+	[IsCanDelete] [bit] NOT NULL,
+	[IsActive] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+ CONSTRAINT [PK_dbo.OrderStatus] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Pages]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Pages](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](250) NULL,
+	[Content] [nvarchar](max) NULL,
+	[Status] [bit] NOT NULL,
+	[MetaKeyword] [nvarchar](250) NULL,
+	[MetaDescription] [nvarchar](250) NULL,
+	[RowVersion] [timestamp] NOT NULL,
+	[Alias] [nvarchar](250) NULL,
+ CONSTRAINT [PK_dbo.Pages] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PaymentMethod]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PaymentMethod](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[PaymentName] [nvarchar](max) NOT NULL,
+	[PaymentCode] [int] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+	[Status] [bit] NOT NULL,
+	[LogoImage] [nvarchar](max) NULL,
+ CONSTRAINT [PK_dbo.PaymentMethod] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PaymentStatus]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PaymentStatus](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[StatusCode] [int] NOT NULL,
+	[StatusName] [nvarchar](max) NOT NULL,
+	[StatusDescription] [nvarchar](max) NULL,
+	[IsCanDelete] [bit] NOT NULL,
+	[IsActive] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+ CONSTRAINT [PK_dbo.PaymentStatus] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PostCategories]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PostCategories](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Alias] [varchar](250) NOT NULL,
+	[ParentID] [int] NULL,
+	[DisplayOrder] [int] NULL,
+	[MetaKeyword] [nvarchar](250) NULL,
+	[MetaDescription] [nvarchar](250) NULL,
+	[Status] [bit] NOT NULL,
+	[HomeFlag] [bit] NULL,
+	[Images] [nvarchar](500) NULL,
+	[Description] [nvarchar](500) NULL,
+	[Name] [nvarchar](250) NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+	[CreatedDate] [datetime] NULL,
+	[CreatedBy] [nvarchar](50) NULL,
+	[UpdatedDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](50) NULL,
+ CONSTRAINT [PK_dbo.PostCategories] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Posts]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Posts](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](250) NOT NULL,
+	[Alias] [varchar](250) NOT NULL,
+	[MetaKeyword] [nvarchar](250) NULL,
+	[MetaDescription] [nvarchar](250) NULL,
+	[Status] [bit] NOT NULL,
+	[HomeFlag] [bit] NOT NULL,
+	[Images] [nvarchar](500) NULL,
+	[CategoryID] [int] NULL,
+	[HotFlag] [bit] NULL,
+	[ViewCount] [int] NULL,
+	[MoreImages] [nvarchar](max) NULL,
+	[Description] [nvarchar](500) NULL,
+	[Content] [nvarchar](max) NULL,
+	[RowVersion] [timestamp] NOT NULL,
+	[CreatedDate] [datetime] NULL,
+	[CreatedBy] [nvarchar](50) NULL,
+	[UpdatedDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_dbo.Posts] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PostTags]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PostTags](
+	[PostID] [int] NOT NULL,
+	[TagID] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_dbo.PostTags] PRIMARY KEY CLUSTERED 
+(
+	[PostID] ASC,
+	[TagID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ProductCategories]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ProductCategories](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](250) NOT NULL,
+	[Alias] [varchar](250) NOT NULL,
+	[ParentID] [int] NULL,
+	[DisplayOrder] [int] NULL,
+	[MetaKeyword] [nvarchar](250) NULL,
+	[MetaDescription] [nvarchar](250) NULL,
+	[Status] [bit] NOT NULL,
+	[HomeFlag] [bit] NULL,
+	[Images] [nvarchar](500) NULL,
+	[Description] [nvarchar](500) NULL,
+	[RowVersion] [timestamp] NOT NULL,
+	[CreatedDate] [datetime] NULL,
+	[CreatedBy] [nvarchar](50) NULL,
+	[UpdatedDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](50) NULL,
+ CONSTRAINT [PK_dbo.ProductCategories] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Products]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Products](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](250) NOT NULL,
+	[Alias] [varchar](250) NOT NULL,
+	[MetaKeyword] [nvarchar](250) NULL,
+	[MetaDescription] [nvarchar](250) NULL,
+	[Status] [bit] NOT NULL,
+	[HomeFlag] [bit] NOT NULL,
+	[Images] [nvarchar](500) NULL,
+	[CategoryID] [int] NULL,
+	[HotFlag] [bit] NULL,
+	[ViewCount] [int] NULL,
+	[MoreImages] [nvarchar](max) NULL,
+	[Description] [nvarchar](500) NULL,
+	[Content] [nvarchar](max) NULL,
+	[Price] [decimal](18, 2) NOT NULL,
+	[Warranty] [int] NULL,
+	[RowVersion] [timestamp] NOT NULL,
+	[CreatedDate] [datetime] NULL,
+	[CreatedBy] [nvarchar](50) NULL,
+	[UpdatedDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](50) NULL,
+	[PromotionPrice] [decimal](18, 2) NULL,
+	[ManufacturingDate] [datetime] NULL,
+	[ExpireDate] [datetime] NULL,
+	[Quantity] [int] NOT NULL,
+	[OriginalPrice] [decimal](18, 2) NOT NULL,
+ CONSTRAINT [PK_dbo.Products] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ProductTags]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ProductTags](
+	[ProductID] [int] NOT NULL,
+	[TagID] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_dbo.ProductTags] PRIMARY KEY CLUSTERED 
+(
+	[ProductID] ASC,
+	[TagID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ShippingStatus]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ShippingStatus](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[StatusCode] [int] NOT NULL,
+	[StatusName] [nvarchar](max) NOT NULL,
+	[StatusDescription] [nvarchar](max) NULL,
+	[IsCanDelete] [bit] NOT NULL,
+	[IsActive] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+ CONSTRAINT [PK_dbo.ShippingStatus] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ShopInfo]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ShopInfo](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+	[Logo] [nvarchar](max) NULL,
+	[Address] [nvarchar](max) NOT NULL,
+	[Address2] [nvarchar](max) NULL,
+	[Telephone] [nvarchar](max) NOT NULL,
+	[Email] [nvarchar](max) NOT NULL,
+	[Email2] [nvarchar](max) NULL,
+	[Status] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+	[Code] [nvarchar](max) NULL,
+	[MobilePhone1] [nvarchar](max) NULL,
+	[MobilePhone2] [nvarchar](max) NULL,
+	[Website] [nvarchar](max) NULL,
+	[Latitude] [float] NOT NULL,
+	[Longitude] [float] NOT NULL,
+	[Other] [nvarchar](max) NULL,
+ CONSTRAINT [PK_dbo.ShopInfo] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ShopPayment]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ShopPayment](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[BankName] [nvarchar](max) NOT NULL,
+	[BankType] [nvarchar](max) NULL,
+	[CardNumner] [nvarchar](max) NOT NULL,
+	[CardNumLimit] [int] NOT NULL,
+	[AccountName] [nvarchar](max) NOT NULL,
+	[CardPhone] [nvarchar](max) NULL,
+	[Status] [nvarchar](max) NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+ CONSTRAINT [PK_dbo.ShopPayment] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Slide]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Slide](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Images] [nvarchar](500) NOT NULL,
+	[Description] [nvarchar](250) NULL,
+	[URL] [nvarchar](500) NOT NULL,
+	[Status] [bit] NOT NULL,
+	[DisplayOrder] [int] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+	[ActionName] [nvarchar](50) NOT NULL,
+	[Title] [nvarchar](250) NOT NULL,
+ CONSTRAINT [PK_dbo.Slide] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SupportOnlines]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SupportOnlines](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](250) NULL,
+	[Skype] [nvarchar](250) NULL,
+	[Facebook] [nvarchar](250) NULL,
+	[Email] [nvarchar](250) NULL,
+	[Zalo] [nvarchar](250) NULL,
+	[Status] [bit] NULL,
+	[Department] [nvarchar](250) NULL,
+	[RowVersion] [timestamp] NOT NULL,
+ CONSTRAINT [PK_dbo.SupportOnlines] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[sysdiagrams]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[sysdiagrams](
+	[name] [sysname] NOT NULL,
+	[principal_id] [int] NOT NULL,
+	[diagram_id] [int] IDENTITY(1,1) NOT NULL,
+	[version] [int] NULL,
+	[definition] [varbinary](max) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[diagram_id] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [UK_principal_name] UNIQUE NONCLUSTERED 
+(
+	[principal_id] ASC,
+	[name] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SystemConfigs]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SystemConfigs](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Code] [nvarchar](50) NULL,
+	[ValueString] [nvarchar](250) NULL,
+	[ValueInt] [int] NULL,
+	[RowVersion] [timestamp] NOT NULL,
+ CONSTRAINT [PK_dbo.SystemConfigs] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Tags]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tags](
+	[ID] [varchar](50) NOT NULL,
+	[Name] [nvarchar](50) NULL,
+	[Type] [varchar](50) NULL,
+ CONSTRAINT [PK_dbo.Tags] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[VisitorStatistics]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[VisitorStatistics](
+	[ID] [uniqueidentifier] NOT NULL,
+	[VisitedDate] [datetime] NOT NULL,
+	[IPAddress] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_dbo.VisitorStatistics] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_RoleId]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_RoleId] ON [dbo].[ApplicationRoleClaims]
+(
+	[RoleId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_GroupId]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_GroupId] ON [dbo].[ApplicationRoleGroups]
+(
+	[GroupId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_RoleId]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_RoleId] ON [dbo].[ApplicationRoleGroups]
+(
+	[RoleId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_PermissionId]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_PermissionId] ON [dbo].[ApplicationRolePermissions]
+(
+	[PermissionId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_RoleId]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_RoleId] ON [dbo].[ApplicationRolePermissions]
+(
+	[RoleId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_ApplicationUser_Id]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_ApplicationUser_Id] ON [dbo].[ApplicationUserClaims]
+(
+	[ApplicationUser_Id] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_GroupId]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_GroupId] ON [dbo].[ApplicationUserGroups]
+(
+	[GroupId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_UserId]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[ApplicationUserGroups]
+(
+	[UserId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_ApplicationUser_Id]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_ApplicationUser_Id] ON [dbo].[ApplicationUserLogins]
+(
+	[ApplicationUser_Id] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_PermissionId]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_PermissionId] ON [dbo].[ApplicationUserPermissions]
+(
+	[PermissionId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_RoleId]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_RoleId] ON [dbo].[ApplicationUserPermissions]
+(
+	[RoleId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_UserId]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[ApplicationUserPermissions]
+(
+	[UserId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_ApplicationUser_Id]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_ApplicationUser_Id] ON [dbo].[ApplicationUserRoles]
+(
+	[ApplicationUser_Id] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_IdentityRole_Id]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_IdentityRole_Id] ON [dbo].[ApplicationUserRoles]
+(
+	[IdentityRole_Id] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_GroupID]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_GroupID] ON [dbo].[Menus]
+(
+	[GroupID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_OrderID]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_OrderID] ON [dbo].[OrderDetails]
+(
+	[OrderID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_ProductID]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_ProductID] ON [dbo].[OrderDetails]
+(
+	[ProductID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_OrderId]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_OrderId] ON [dbo].[OrderInvoices]
+(
+	[OrderId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_CustomerId]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_CustomerId] ON [dbo].[Orders]
+(
+	[CustomerId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_PaymentMethodID]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_PaymentMethodID] ON [dbo].[Orders]
+(
+	[PaymentMethodID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_CategoryID]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_CategoryID] ON [dbo].[Posts]
+(
+	[CategoryID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_PostID]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_PostID] ON [dbo].[PostTags]
+(
+	[PostID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_TagID]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_TagID] ON [dbo].[PostTags]
+(
+	[TagID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_CategoryID]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_CategoryID] ON [dbo].[Products]
+(
+	[CategoryID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_ProductID]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_ProductID] ON [dbo].[ProductTags]
+(
+	[ProductID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_TagID]    Script Date: 8/8/2022 11:21:13 AM ******/
+CREATE NONCLUSTERED INDEX [IX_TagID] ON [dbo].[ProductTags]
+(
+	[TagID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[ApplicationNotifications] ADD  DEFAULT ('1900-01-01T00:00:00.000') FOR [DateCreated]
+GO
+ALTER TABLE [dbo].[ApplicationPermissions] ADD  DEFAULT ((0)) FOR [IsSystemProtected]
+GO
+ALTER TABLE [dbo].[ApplicationRoles] ADD  DEFAULT ('') FOR [Discriminator]
+GO
+ALTER TABLE [dbo].[ApplicationUserClaims] ADD  DEFAULT ('') FOR [UserId]
+GO
+ALTER TABLE [dbo].[ApplicationUserClaims] ADD  DEFAULT ('') FOR [Discriminator]
+GO
+ALTER TABLE [dbo].[ApplicationUserPermissions] ADD  DEFAULT ('') FOR [RoleId]
+GO
+ALTER TABLE [dbo].[ApplicationUsers] ADD  DEFAULT ((0)) FOR [Sex]
+GO
+ALTER TABLE [dbo].[ApplicationUsers] ADD  DEFAULT ((0)) FOR [AdminAccessPermission]
+GO
+ALTER TABLE [dbo].[OrderDetails] ADD  DEFAULT ((0)) FOR [UnitPrice]
+GO
+ALTER TABLE [dbo].[OrderDetails] ADD  DEFAULT ((0)) FOR [TotalPrice]
+GO
+ALTER TABLE [dbo].[OrderInvoices] ADD  DEFAULT ((0)) FOR [Status]
+GO
+ALTER TABLE [dbo].[Orders] ADD  DEFAULT ((0)) FOR [PaymentMethodID]
+GO
+ALTER TABLE [dbo].[Orders] ADD  DEFAULT ((0)) FOR [OrderStatus]
+GO
+ALTER TABLE [dbo].[Orders] ADD  DEFAULT ((0)) FOR [ShippingStatus]
+GO
+ALTER TABLE [dbo].[PaymentMethod] ADD  DEFAULT ((0)) FOR [Status]
+GO
+ALTER TABLE [dbo].[Posts] ADD  DEFAULT ('') FOR [UpdatedBy]
+GO
+ALTER TABLE [dbo].[Products] ADD  DEFAULT ((0)) FOR [Quantity]
+GO
+ALTER TABLE [dbo].[Products] ADD  DEFAULT ((0)) FOR [OriginalPrice]
+GO
+ALTER TABLE [dbo].[ShopInfo] ADD  DEFAULT ((0)) FOR [Latitude]
+GO
+ALTER TABLE [dbo].[ShopInfo] ADD  DEFAULT ((0)) FOR [Longitude]
+GO
+ALTER TABLE [dbo].[Slide] ADD  DEFAULT ('') FOR [ActionName]
+GO
+ALTER TABLE [dbo].[Slide] ADD  DEFAULT ('') FOR [Title]
+GO
+ALTER TABLE [dbo].[ApplicationRoleClaims]  WITH CHECK ADD  CONSTRAINT [FK_dbo.ApplicationRoleClaims_dbo.ApplicationRoles_RoleId] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[ApplicationRoles] ([Id])
+GO
+ALTER TABLE [dbo].[ApplicationRoleClaims] CHECK CONSTRAINT [FK_dbo.ApplicationRoleClaims_dbo.ApplicationRoles_RoleId]
+GO
+ALTER TABLE [dbo].[ApplicationRoleGroups]  WITH CHECK ADD  CONSTRAINT [FK_dbo.ApplicationRoleGroups_dbo.ApplicationGroups_GroupId] FOREIGN KEY([GroupId])
+REFERENCES [dbo].[ApplicationGroups] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ApplicationRoleGroups] CHECK CONSTRAINT [FK_dbo.ApplicationRoleGroups_dbo.ApplicationGroups_GroupId]
+GO
+ALTER TABLE [dbo].[ApplicationRoleGroups]  WITH CHECK ADD  CONSTRAINT [FK_dbo.ApplicationRoleGroups_dbo.ApplicationRoles_RoleId] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[ApplicationRoles] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ApplicationRoleGroups] CHECK CONSTRAINT [FK_dbo.ApplicationRoleGroups_dbo.ApplicationRoles_RoleId]
+GO
+ALTER TABLE [dbo].[ApplicationRolePermissions]  WITH CHECK ADD  CONSTRAINT [FK_dbo.ApplicationRolePermissions_dbo.ApplicationPermissions_RoleId] FOREIGN KEY([PermissionId])
+REFERENCES [dbo].[ApplicationPermissions] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ApplicationRolePermissions] CHECK CONSTRAINT [FK_dbo.ApplicationRolePermissions_dbo.ApplicationPermissions_RoleId]
+GO
+ALTER TABLE [dbo].[ApplicationRolePermissions]  WITH CHECK ADD  CONSTRAINT [FK_dbo.ApplicationRolePermissions_dbo.ApplicationRoles_PermissionId] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[ApplicationRoles] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ApplicationRolePermissions] CHECK CONSTRAINT [FK_dbo.ApplicationRolePermissions_dbo.ApplicationRoles_PermissionId]
+GO
+ALTER TABLE [dbo].[ApplicationUserGroups]  WITH CHECK ADD  CONSTRAINT [FK_dbo.ApplicationUserGroups_dbo.ApplicationGroups_GroupId] FOREIGN KEY([GroupId])
+REFERENCES [dbo].[ApplicationGroups] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ApplicationUserGroups] CHECK CONSTRAINT [FK_dbo.ApplicationUserGroups_dbo.ApplicationGroups_GroupId]
+GO
+ALTER TABLE [dbo].[ApplicationUserGroups]  WITH CHECK ADD  CONSTRAINT [FK_dbo.ApplicationUserGroups_dbo.ApplicationUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[ApplicationUsers] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ApplicationUserGroups] CHECK CONSTRAINT [FK_dbo.ApplicationUserGroups_dbo.ApplicationUsers_UserId]
+GO
+ALTER TABLE [dbo].[ApplicationUserLogins]  WITH CHECK ADD  CONSTRAINT [FK_dbo.ApplicationUserLogins_dbo.ApplicationUsers_ApplicationUser_Id] FOREIGN KEY([ApplicationUser_Id])
+REFERENCES [dbo].[ApplicationUsers] ([Id])
+GO
+ALTER TABLE [dbo].[ApplicationUserLogins] CHECK CONSTRAINT [FK_dbo.ApplicationUserLogins_dbo.ApplicationUsers_ApplicationUser_Id]
+GO
+ALTER TABLE [dbo].[ApplicationUserPermissions]  WITH CHECK ADD  CONSTRAINT [FK_dbo.ApplicationUserPermissions_dbo.ApplicationPermissions_PermissionId] FOREIGN KEY([PermissionId])
+REFERENCES [dbo].[ApplicationPermissions] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ApplicationUserPermissions] CHECK CONSTRAINT [FK_dbo.ApplicationUserPermissions_dbo.ApplicationPermissions_PermissionId]
+GO
+ALTER TABLE [dbo].[ApplicationUserPermissions]  WITH CHECK ADD  CONSTRAINT [FK_dbo.ApplicationUserPermissions_dbo.ApplicationRoles_RoleId] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[ApplicationRoles] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ApplicationUserPermissions] CHECK CONSTRAINT [FK_dbo.ApplicationUserPermissions_dbo.ApplicationRoles_RoleId]
+GO
+ALTER TABLE [dbo].[ApplicationUserPermissions]  WITH CHECK ADD  CONSTRAINT [FK_dbo.ApplicationUserPermissions_dbo.ApplicationUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[ApplicationUsers] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ApplicationUserPermissions] CHECK CONSTRAINT [FK_dbo.ApplicationUserPermissions_dbo.ApplicationUsers_UserId]
+GO
+ALTER TABLE [dbo].[ApplicationUserRoles]  WITH CHECK ADD  CONSTRAINT [FK_dbo.ApplicationUserRoles_dbo.ApplicationRoles_IdentityRole_Id] FOREIGN KEY([IdentityRole_Id])
+REFERENCES [dbo].[ApplicationRoles] ([Id])
+GO
+ALTER TABLE [dbo].[ApplicationUserRoles] CHECK CONSTRAINT [FK_dbo.ApplicationUserRoles_dbo.ApplicationRoles_IdentityRole_Id]
+GO
+ALTER TABLE [dbo].[ApplicationUserRoles]  WITH CHECK ADD  CONSTRAINT [FK_dbo.ApplicationUserRoles_dbo.ApplicationUsers_ApplicationUser_Id] FOREIGN KEY([ApplicationUser_Id])
+REFERENCES [dbo].[ApplicationUsers] ([Id])
+GO
+ALTER TABLE [dbo].[ApplicationUserRoles] CHECK CONSTRAINT [FK_dbo.ApplicationUserRoles_dbo.ApplicationUsers_ApplicationUser_Id]
+GO
+ALTER TABLE [dbo].[Menus]  WITH CHECK ADD  CONSTRAINT [FK_dbo.Menus_dbo.MenuGroups_GroupID] FOREIGN KEY([GroupID])
+REFERENCES [dbo].[MenuGroups] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Menus] CHECK CONSTRAINT [FK_dbo.Menus_dbo.MenuGroups_GroupID]
+GO
+ALTER TABLE [dbo].[OrderDetails]  WITH CHECK ADD  CONSTRAINT [FK_dbo.OrderDetails_dbo.Orders_OrderID] FOREIGN KEY([OrderID])
+REFERENCES [dbo].[Orders] ([ID])
+GO
+ALTER TABLE [dbo].[OrderDetails] CHECK CONSTRAINT [FK_dbo.OrderDetails_dbo.Orders_OrderID]
+GO
+ALTER TABLE [dbo].[OrderDetails]  WITH CHECK ADD  CONSTRAINT [FK_dbo.OrderDetails_dbo.Products_ProductID] FOREIGN KEY([ProductID])
+REFERENCES [dbo].[Products] ([ID])
+GO
+ALTER TABLE [dbo].[OrderDetails] CHECK CONSTRAINT [FK_dbo.OrderDetails_dbo.Products_ProductID]
+GO
+ALTER TABLE [dbo].[OrderInvoices]  WITH CHECK ADD  CONSTRAINT [FK_dbo.OrderInvoices_dbo.Orders_OrderId] FOREIGN KEY([OrderId])
+REFERENCES [dbo].[Orders] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[OrderInvoices] CHECK CONSTRAINT [FK_dbo.OrderInvoices_dbo.Orders_OrderId]
+GO
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_dbo.Orders_dbo.ApplicationUsers_CustomerId] FOREIGN KEY([CustomerId])
+REFERENCES [dbo].[ApplicationUsers] ([Id])
+GO
+ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_dbo.Orders_dbo.ApplicationUsers_CustomerId]
+GO
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_dbo.Orders_dbo.PaymentMethod_PaymentMethodCode] FOREIGN KEY([PaymentMethodID])
+REFERENCES [dbo].[PaymentMethod] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_dbo.Orders_dbo.PaymentMethod_PaymentMethodCode]
+GO
+ALTER TABLE [dbo].[Posts]  WITH CHECK ADD  CONSTRAINT [FK_dbo.Posts_dbo.PostCategories_CategoryID] FOREIGN KEY([CategoryID])
+REFERENCES [dbo].[PostCategories] ([ID])
+GO
+ALTER TABLE [dbo].[Posts] CHECK CONSTRAINT [FK_dbo.Posts_dbo.PostCategories_CategoryID]
+GO
+ALTER TABLE [dbo].[PostTags]  WITH CHECK ADD  CONSTRAINT [FK_dbo.PostTags_dbo.Posts_PostID] FOREIGN KEY([PostID])
+REFERENCES [dbo].[Posts] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[PostTags] CHECK CONSTRAINT [FK_dbo.PostTags_dbo.Posts_PostID]
+GO
+ALTER TABLE [dbo].[PostTags]  WITH CHECK ADD  CONSTRAINT [FK_dbo.PostTags_dbo.Tags_TagID] FOREIGN KEY([TagID])
+REFERENCES [dbo].[Tags] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[PostTags] CHECK CONSTRAINT [FK_dbo.PostTags_dbo.Tags_TagID]
+GO
+ALTER TABLE [dbo].[Products]  WITH CHECK ADD  CONSTRAINT [FK_dbo.Products_dbo.ProductCategories_CategoryID] FOREIGN KEY([CategoryID])
+REFERENCES [dbo].[ProductCategories] ([ID])
+GO
+ALTER TABLE [dbo].[Products] CHECK CONSTRAINT [FK_dbo.Products_dbo.ProductCategories_CategoryID]
+GO
+ALTER TABLE [dbo].[ProductTags]  WITH CHECK ADD  CONSTRAINT [FK_dbo.ProductTags_dbo.Products_ProductID] FOREIGN KEY([ProductID])
+REFERENCES [dbo].[Products] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ProductTags] CHECK CONSTRAINT [FK_dbo.ProductTags_dbo.Products_ProductID]
+GO
+ALTER TABLE [dbo].[ProductTags]  WITH CHECK ADD  CONSTRAINT [FK_dbo.ProductTags_dbo.Tags_TagID] FOREIGN KEY([TagID])
+REFERENCES [dbo].[Tags] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ProductTags] CHECK CONSTRAINT [FK_dbo.ProductTags_dbo.Tags_TagID]
+GO
+/****** Object:  StoredProcedure [dbo].[GetRevenueStatistic]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GetRevenueStatistic]
+    @fromDate [nvarchar](max),
+    @toDate [nvarchar](max)
+AS
+BEGIN
+    
+    SELECT CONVERT(VARCHAR(10), o.CreatedDate, 111) AS Date,
+    sum(od.Quantity*od.UnitPrice) AS Revenues,
+    sum((od.Quantity*od.UnitPrice)-(od.Quantity*p.OriginalPrice)) AS Benefit
+    FROM Orders o
+    INNER JOIN OrderDetails od ON o.ID = od.OrderId
+    INNER JOIN Products p ON od.ProductID = p.ID
+    WHERE o.CreatedDate <= TRY_CAST(@toDate as date)
+    AND o.CreatedDate >= TRY_CAST(@fromDate as date)
+    GROUP BY CONVERT(varchar(10), o.CreatedDate, 111)
+    ORDER BY CONVERT(varchar(10), o.CreatedDate, 111)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetRevenueStatistic1]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GetRevenueStatistic1]
+(
+     @fromDate [nvarchar](max),
+    @toDate [nvarchar](max)
+)
+AS
+BEGIN
+    select CONVERT(VARCHAR(10),   o.CreatedDate, 111) AS Date,
+    sum(od.Quantity*od.UnitPrice) as Revenues,
+    sum((od.Quantity*od.UnitPrice)-(od.Quantity*p.OriginalPrice)) as Benefit
+    from Orders o
+    inner join OrderDetails od
+    on o.ID = od.OrderId
+    inner join Products p
+    on od.ProductID  = p.ID
+    where o.CreatedDate <= cast(@toDate as date) and o.CreatedDate >= cast(@fromDate as date)
+   GROUP BY 
+  CONVERT(varchar(10), o.CreatedDate, 111) 
+ORDER BY 
+  CONVERT(varchar(10), o.CreatedDate, 111) 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_alterdiagram]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+	CREATE PROCEDURE [dbo].[sp_alterdiagram]
+	(
+		@diagramname 	sysname,
+		@owner_id	int	= null,
+		@version 	int,
+		@definition 	varbinary(max)
+	)
+	WITH EXECUTE AS 'dbo'
+	AS
+	BEGIN
+		set nocount on
+	
+		declare @theId 			int
+		declare @retval 		int
+		declare @IsDbo 			int
+		
+		declare @UIDFound 		int
+		declare @DiagId			int
+		declare @ShouldChangeUID	int
+	
+		if(@diagramname is null)
+		begin
+			RAISERROR ('Invalid ARG', 16, 1)
+			return -1
+		end
+	
+		execute as caller;
+		select @theId = DATABASE_PRINCIPAL_ID();	 
+		select @IsDbo = IS_MEMBER(N'db_owner'); 
+		if(@owner_id is null)
+			select @owner_id = @theId;
+		revert;
+	
+		select @ShouldChangeUID = 0
+		select @DiagId = diagram_id, @UIDFound = principal_id from dbo.sysdiagrams where principal_id = @owner_id and name = @diagramname 
+		
+		if(@DiagId IS NULL or (@IsDbo = 0 and @theId <> @UIDFound))
+		begin
+			RAISERROR ('Diagram does not exist or you do not have permission.', 16, 1);
+			return -3
+		end
+	
+		if(@IsDbo <> 0)
+		begin
+			if(@UIDFound is null or USER_NAME(@UIDFound) is null) -- invalid principal_id
+			begin
+				select @ShouldChangeUID = 1 ;
+			end
+		end
+
+		-- update dds data			
+		update dbo.sysdiagrams set definition = @definition where diagram_id = @DiagId ;
+
+		-- change owner
+		if(@ShouldChangeUID = 1)
+			update dbo.sysdiagrams set principal_id = @theId where diagram_id = @DiagId ;
+
+		-- update dds version
+		if(@version is not null)
+			update dbo.sysdiagrams set version = @version where diagram_id = @DiagId ;
+
+		return 0
+	END
+	
+GO
+/****** Object:  StoredProcedure [dbo].[sp_creatediagram]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+	CREATE PROCEDURE [dbo].[sp_creatediagram]
+	(
+		@diagramname 	sysname,
+		@owner_id		int	= null, 	
+		@version 		int,
+		@definition 	varbinary(max)
+	)
+	WITH EXECUTE AS 'dbo'
+	AS
+	BEGIN
+		set nocount on
+	
+		declare @theId int
+		declare @retval int
+		declare @IsDbo	int
+		declare @userName sysname
+		if(@version is null or @diagramname is null)
+		begin
+			RAISERROR (N'E_INVALIDARG', 16, 1);
+			return -1
+		end
+	
+		execute as caller;
+		select @theId = DATABASE_PRINCIPAL_ID(); 
+		select @IsDbo = IS_MEMBER(N'db_owner');
+		revert; 
+		
+		if @owner_id is null
+		begin
+			select @owner_id = @theId;
+		end
+		else
+		begin
+			if @theId <> @owner_id
+			begin
+				if @IsDbo = 0
+				begin
+					RAISERROR (N'E_INVALIDARG', 16, 1);
+					return -1
+				end
+				select @theId = @owner_id
+			end
+		end
+		-- next 2 line only for test, will be removed after define name unique
+		if EXISTS(select diagram_id from dbo.sysdiagrams where principal_id = @theId and name = @diagramname)
+		begin
+			RAISERROR ('The name is already used.', 16, 1);
+			return -2
+		end
+	
+		insert into dbo.sysdiagrams(name, principal_id , version, definition)
+				VALUES(@diagramname, @theId, @version, @definition) ;
+		
+		select @retval = @@IDENTITY 
+		return @retval
+	END
+	
+GO
+/****** Object:  StoredProcedure [dbo].[sp_dropdiagram]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+	CREATE PROCEDURE [dbo].[sp_dropdiagram]
+	(
+		@diagramname 	sysname,
+		@owner_id	int	= null
+	)
+	WITH EXECUTE AS 'dbo'
+	AS
+	BEGIN
+		set nocount on
+		declare @theId 			int
+		declare @IsDbo 			int
+		
+		declare @UIDFound 		int
+		declare @DiagId			int
+	
+		if(@diagramname is null)
+		begin
+			RAISERROR ('Invalid value', 16, 1);
+			return -1
+		end
+	
+		EXECUTE AS CALLER;
+		select @theId = DATABASE_PRINCIPAL_ID();
+		select @IsDbo = IS_MEMBER(N'db_owner'); 
+		if(@owner_id is null)
+			select @owner_id = @theId;
+		REVERT; 
+		
+		select @DiagId = diagram_id, @UIDFound = principal_id from dbo.sysdiagrams where principal_id = @owner_id and name = @diagramname 
+		if(@DiagId IS NULL or (@IsDbo = 0 and @UIDFound <> @theId))
+		begin
+			RAISERROR ('Diagram does not exist or you do not have permission.', 16, 1)
+			return -3
+		end
+	
+		delete from dbo.sysdiagrams where diagram_id = @DiagId;
+	
+		return 0;
+	END
+	
+GO
+/****** Object:  StoredProcedure [dbo].[sp_helpdiagramdefinition]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+	CREATE PROCEDURE [dbo].[sp_helpdiagramdefinition]
+	(
+		@diagramname 	sysname,
+		@owner_id	int	= null 		
+	)
+	WITH EXECUTE AS N'dbo'
+	AS
+	BEGIN
+		set nocount on
+
+		declare @theId 		int
+		declare @IsDbo 		int
+		declare @DiagId		int
+		declare @UIDFound	int
+	
+		if(@diagramname is null)
+		begin
+			RAISERROR (N'E_INVALIDARG', 16, 1);
+			return -1
+		end
+	
+		execute as caller;
+		select @theId = DATABASE_PRINCIPAL_ID();
+		select @IsDbo = IS_MEMBER(N'db_owner');
+		if(@owner_id is null)
+			select @owner_id = @theId;
+		revert; 
+	
+		select @DiagId = diagram_id, @UIDFound = principal_id from dbo.sysdiagrams where principal_id = @owner_id and name = @diagramname;
+		if(@DiagId IS NULL or (@IsDbo = 0 and @UIDFound <> @theId ))
+		begin
+			RAISERROR ('Diagram does not exist or you do not have permission.', 16, 1);
+			return -3
+		end
+
+		select version, definition FROM dbo.sysdiagrams where diagram_id = @DiagId ; 
+		return 0
+	END
+	
+GO
+/****** Object:  StoredProcedure [dbo].[sp_helpdiagrams]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+	CREATE PROCEDURE [dbo].[sp_helpdiagrams]
+	(
+		@diagramname sysname = NULL,
+		@owner_id int = NULL
+	)
+	WITH EXECUTE AS N'dbo'
+	AS
+	BEGIN
+		DECLARE @user sysname
+		DECLARE @dboLogin bit
+		EXECUTE AS CALLER;
+			SET @user = USER_NAME();
+			SET @dboLogin = CONVERT(bit,IS_MEMBER('db_owner'));
+		REVERT;
+		SELECT
+			[Database] = DB_NAME(),
+			[Name] = name,
+			[ID] = diagram_id,
+			[Owner] = USER_NAME(principal_id),
+			[OwnerID] = principal_id
+		FROM
+			sysdiagrams
+		WHERE
+			(@dboLogin = 1 OR USER_NAME(principal_id) = @user) AND
+			(@diagramname IS NULL OR name = @diagramname) AND
+			(@owner_id IS NULL OR principal_id = @owner_id)
+		ORDER BY
+			4, 5, 1
+	END
+	
+GO
+/****** Object:  StoredProcedure [dbo].[sp_renamediagram]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+	CREATE PROCEDURE [dbo].[sp_renamediagram]
+	(
+		@diagramname 		sysname,
+		@owner_id		int	= null,
+		@new_diagramname	sysname
+	
+	)
+	WITH EXECUTE AS 'dbo'
+	AS
+	BEGIN
+		set nocount on
+		declare @theId 			int
+		declare @IsDbo 			int
+		
+		declare @UIDFound 		int
+		declare @DiagId			int
+		declare @DiagIdTarg		int
+		declare @u_name			sysname
+		if((@diagramname is null) or (@new_diagramname is null))
+		begin
+			RAISERROR ('Invalid value', 16, 1);
+			return -1
+		end
+	
+		EXECUTE AS CALLER;
+		select @theId = DATABASE_PRINCIPAL_ID();
+		select @IsDbo = IS_MEMBER(N'db_owner'); 
+		if(@owner_id is null)
+			select @owner_id = @theId;
+		REVERT;
+	
+		select @u_name = USER_NAME(@owner_id)
+	
+		select @DiagId = diagram_id, @UIDFound = principal_id from dbo.sysdiagrams where principal_id = @owner_id and name = @diagramname 
+		if(@DiagId IS NULL or (@IsDbo = 0 and @UIDFound <> @theId))
+		begin
+			RAISERROR ('Diagram does not exist or you do not have permission.', 16, 1)
+			return -3
+		end
+	
+		-- if((@u_name is not null) and (@new_diagramname = @diagramname))	-- nothing will change
+		--	return 0;
+	
+		if(@u_name is null)
+			select @DiagIdTarg = diagram_id from dbo.sysdiagrams where principal_id = @theId and name = @new_diagramname
+		else
+			select @DiagIdTarg = diagram_id from dbo.sysdiagrams where principal_id = @owner_id and name = @new_diagramname
+	
+		if((@DiagIdTarg is not null) and  @DiagId <> @DiagIdTarg)
+		begin
+			RAISERROR ('The name is already used.', 16, 1);
+			return -2
+		end		
+	
+		if(@u_name is null)
+			update dbo.sysdiagrams set [name] = @new_diagramname, principal_id = @theId where diagram_id = @DiagId
+		else
+			update dbo.sysdiagrams set [name] = @new_diagramname where diagram_id = @DiagId
+		return 0
+	END
+	
+GO
+/****** Object:  StoredProcedure [dbo].[sp_upgraddiagrams]    Script Date: 8/8/2022 11:21:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+	CREATE PROCEDURE [dbo].[sp_upgraddiagrams]
+	AS
+	BEGIN
+		IF OBJECT_ID(N'dbo.sysdiagrams') IS NOT NULL
+			return 0;
+	
+		CREATE TABLE dbo.sysdiagrams
+		(
+			name sysname NOT NULL,
+			principal_id int NOT NULL,	-- we may change it to varbinary(85)
+			diagram_id int PRIMARY KEY IDENTITY,
+			version int,
+	
+			definition varbinary(max)
+			CONSTRAINT UK_principal_name UNIQUE
+			(
+				principal_id,
+				name
+			)
+		);
+
+
+		/* Add this if we need to have some form of extended properties for diagrams */
+		/*
+		IF OBJECT_ID(N'dbo.sysdiagram_properties') IS NULL
+		BEGIN
+			CREATE TABLE dbo.sysdiagram_properties
+			(
+				diagram_id int,
+				name sysname,
+				value varbinary(max) NOT NULL
+			)
+		END
+		*/
+
+		IF OBJECT_ID(N'dbo.dtproperties') IS NOT NULL
+		begin
+			insert into dbo.sysdiagrams
+			(
+				[name],
+				[principal_id],
+				[version],
+				[definition]
+			)
+			select	 
+				convert(sysname, dgnm.[uvalue]),
+				DATABASE_PRINCIPAL_ID(N'dbo'),			-- will change to the sid of sa
+				0,							-- zero for old format, dgdef.[version],
+				dgdef.[lvalue]
+			from dbo.[dtproperties] dgnm
+				inner join dbo.[dtproperties] dggd on dggd.[property] = 'DtgSchemaGUID' and dggd.[objectid] = dgnm.[objectid]	
+				inner join dbo.[dtproperties] dgdef on dgdef.[property] = 'DtgSchemaDATA' and dgdef.[objectid] = dgnm.[objectid]
+				
+			where dgnm.[property] = 'DtgSchemaNAME' and dggd.[uvalue] like N'_EA3E6268-D998-11CE-9454-00AA00A3F36E_' 
+			return 2;
+		end
+		return 1;
+	END
+	
+GO
+EXEC sys.sp_addextendedproperty @name=N'microsoft_database_tools_support', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'sysdiagrams'
+GO
+ALTER DATABASE [CoffeeShopMVC] SET  READ_WRITE 
+GO

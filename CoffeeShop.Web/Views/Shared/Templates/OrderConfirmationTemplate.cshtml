@@ -132,7 +132,7 @@
                                                         <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:0px 10px 10px 15px;font-family:'Montserrat',sans-serif;" align="left">
 
                                                             <div class="v-text-align" style="color: #34495e; line-height: 150%; text-align: left; word-wrap: break-word;">
-                                                                <p style="font-size: 14px; line-height: 150%;">We thank you for your order No. @Model.Order.ID dated @Model.Order.CreatedDate for various goods. The order is in the process of execution and it will be dispatched on 8th September, by our delivery unit. We have taken special care for the quality and packing of the items and we hope that you will find them highly satisfactory.</p>
+                                                                <p style="font-size: 14px; line-height: 150%;">We thank you for your order No. @Model.Order.ID dated @Model.Order.CreatedDate for various goods. The order is in the process of execution and it will be dispatched as soon as possible, by our delivery unit. We have taken special care for the quality and packing of the items and we hope that you will find them highly satisfactory.</p>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -359,7 +359,7 @@
                                                         <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:0px 15px 5px;font-family:'Montserrat',sans-serif;" align="left">
 
                                                             <div class="v-text-align" style="line-height: 140%; text-align: right; word-wrap: break-word;">
-                                                                <p style="font-size: 14px; line-height: 140%;"><span style="color: #0d83dd; font-size: 14px; line-height: 19.6px;"><strong><span style="font-size: 20px; line-height: 28px;">@Model.Order.TotalAmount </span></strong></span></p>
+                                                                <p style="font-size: 14px; line-height: 140%;"><span style="color: #0d83dd; font-size: 14px; line-height: 19.6px;"><strong><span style="font-size: 20px; line-height: 28px;">@String.Format(culInfo, "{0:c0}", Model.Order.TotalAmount) </span></strong></span></p>
                                                             </div>
                                                         </td>
                                                     </tr>

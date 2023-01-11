@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Globalization;
 
 namespace CoffeeShop.Common.ViewModel
 {
     public class RevenueStatisticViewModel
     {
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
 
         public decimal Revenues { get; set; }
 

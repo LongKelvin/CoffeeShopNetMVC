@@ -19,6 +19,9 @@
 
         $scope.orderDetail = {}
         $scope.listOrderStatus = [];
+        $scope.listPaymentStatus = [];
+        $scope.listShippingStatus = [];
+
         $scope.orderStatus = {};
         $scope.orderStatusBeforeChange = {};
 
@@ -26,6 +29,8 @@
         $scope.getShippingStatusStyle = getShippingStatusStyle;
         $scope.getOrderStatusStyle = getOrderStatusStyle;
         $scope.loadListOrderStatus = loadListOrderStatus;
+        $scope.loadListPaymentStatus = loadListPaymentStatus;
+        $scope.loadListShippingStatus = loadListShippingStatus;
 
         $scope.setOrderStatusBeforeChange = setOrderStatusBeforeChange;
         $scope.updateOrderStatus = updateOrderStatus;
@@ -38,8 +43,13 @@
             ApiServices.get('api/Order/GetOrderDetail/' + $stateParams.id, null, function (response) {
                 console.log('detail ', response)
                 $scope.orderDetail = response.data;
+                $scope.orderDetail.CreatedDate = new Date($scope.orderDetail.CreatedDate);
+                //Format currency 
+                $scope.orderDetail.TotalAmountF = $scope.orderDetail.TotalAmount.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+                $scope.orderDetail.TotalItemPriceF = $scope.orderDetail.TotalItemPrice.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+                $scope.orderDetail.ShippingFeeF = $scope.orderDetail.ShippingFee.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
 
-                console.log('order detials: ', $scope.orderDetail)
+                console.log('order detail: ', $scope.orderDetail)
             }, function (error) {
                 NotificationService.displayError(error.data);
             });
@@ -50,6 +60,22 @@
                 $scope.listOrderStatus = response.data;
             }, function () {
                 NotificationService.displayError('Không thể load trạng thái đơn hàng');
+            })
+        }
+
+        function loadListPaymentStatus() {
+            ApiServices.get('api/Order/GetListPaymentStatus', null, function (response) {
+                $scope.listPaymentStatus = response.data;
+            }, function () {
+                NotificationService.displayError('Không thể load trạng thái thanh toán');
+            })
+        }
+
+        function loadListShippingStatus() {
+            ApiServices.get('api/Order/GetListShippingStatus', null, function (response) {
+                $scope.listShippingStatus = response.data;
+            }, function () {
+                NotificationService.displayError('Không thể load trạng thái vận chuyển ');
             })
         }
 
@@ -169,7 +195,9 @@
             }
         }
 
-        //$scope.loadListOrderStatus();
+        $scope.loadListOrderStatus();
+        $scope.loadListPaymentStatus();
+        $scope.loadListShippingStatus();
         $scope.loadOrderDetail();
     }
 })(angular.module('CoffeeShop.Orders'));

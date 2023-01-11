@@ -377,6 +377,14 @@
     <Compile Include="Migrations\202207110942289_UpdateChanges.designer.cs">
       <DependentUpon>202207110942289_UpdateChanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208050149225_ModifyRevenuesStatistic.cs" />
+    <Compile Include="Migrations\202208050149225_ModifyRevenuesStatistic.designer.cs">
+      <DependentUpon>202208050149225_ModifyRevenuesStatistic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208060234213_update-orderDetaislModel.cs" />
+    <Compile Include="Migrations\202208060234213_update-orderDetaislModel.designer.cs">
+      <DependentUpon>202208060234213_update-orderDetaislModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
@@ -627,6 +635,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207110942289_UpdateChanges.resx">
       <DependentUpon>202207110942289_UpdateChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208050149225_ModifyRevenuesStatistic.resx">
+      <DependentUpon>202208050149225_ModifyRevenuesStatistic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208060234213_update-orderDetaislModel.resx">
+      <DependentUpon>202208060234213_update-orderDetaislModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

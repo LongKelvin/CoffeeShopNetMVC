@@ -372,8 +372,8 @@
                 ApiServices.get('api/Invoice/ExportInvoice/' + orderId, null, function (response) {
                     if (response.status = 200) {
                         NotificationService.displaySuccess('Đã tạo hóa đơn cho đơn hàng #' + orderId);
-                        console.log('url path:', response)
-                        window.location.href = response.data;
+                        var downloadUrl = window.location.origin + response.data;
+                        window.open(downloadUrl, '_blank');
                     }
                 }, function (error) {
                     NotificationService.displayError('Tạo hóa đơn thất bạ');

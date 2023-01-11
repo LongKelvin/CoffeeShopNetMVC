@@ -183,10 +183,9 @@
             }
 
             ApiServices.get('api/Product/ExportToPdf', config, function (response) {
-                //console.log('url path:', response)
                 if (response.status = 200) {
-                    console.log('url path:', response)
-                    window.location.href = response.data;
+                    var downloadUrl = window.location.origin + response.data;
+                    window.open(downloadUrl, '_blank');
                 }
             }, function (error) {
                 console.log('url path error:', error)
