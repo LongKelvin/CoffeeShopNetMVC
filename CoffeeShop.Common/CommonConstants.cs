@@ -64,6 +64,17 @@
         public const string MOMO_IPN_URL = "MOMO_IPN_URL";
         public const string MOMO_PAYMENT_INFO = "MOMO_PAYMENT_INFO";
 
+        //Search sorting config
+        public const string SEARCH_POPULAR = "popular";
+        public const string SEARCH_DISCOUNT = "discount";
+        public const string SEARCH_PRICE_LOW_TO_HIGH = "priceLowHigh";
+        public const string SEARCH_PRICE_HIGH_TO_LOW = "priceHighLow";
+
+
+
+
+
+
         public enum Sex
         {
             Male = 0,

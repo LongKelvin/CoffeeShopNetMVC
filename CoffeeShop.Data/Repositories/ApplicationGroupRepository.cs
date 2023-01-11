@@ -32,13 +32,13 @@ namespace CoffeeShop.Data.Repositories
 
         public List<ApplicationUser> GetListUserByGroupId(int groupId)
         {
-            var query = from g in DbContext.ApplicationGroups
-                        join ug in DbContext.ApplicationUserGroups
-                        on g.ID equals ug.GroupId
-                        join u in DbContext.Users
-                        on ug.UserId equals u.Id
-                        where ug.GroupId == groupId
-                        select u;
+            IQueryable<ApplicationUser> query = from g in DbContext.ApplicationGroups
+                                                join ug in DbContext.ApplicationUserGroups
+                                                on g.ID equals ug.GroupId
+                                                join u in DbContext.Users
+                                                on ug.UserId equals u.Id
+                                                where ug.GroupId == groupId
+                                                select u;
             return query.ToList();
         }
     }

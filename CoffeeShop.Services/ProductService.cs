@@ -171,19 +171,19 @@ namespace CoffeeShop.Services
 
             switch (sort)
             {
-                case "popular":
+                case Common.CommonConstants.SEARCH_POPULAR:
                     query = query.OrderByDescending(x => x.ViewCount);
                     break;
 
-                case "discount":
+                case Common.CommonConstants.SEARCH_DISCOUNT:
                     query = query.OrderByDescending(x => x.PromotionPrice.HasValue);
                     break;
 
-                case "priceLowHigh":
+                case Common.CommonConstants.SEARCH_PRICE_LOW_TO_HIGH:
                     query = query.OrderBy(x => x.Price);
                     break;
 
-                case "priceHighLow":
+                case Common.CommonConstants.SEARCH_PRICE_HIGH_TO_LOW:
                     query = query.OrderByDescending(x => x.Price);
                     break;
 
