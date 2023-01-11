@@ -3,7 +3,6 @@
     using CoffeeShop.Common;
     using CoffeeShop.Models.Models;
 
-
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -60,7 +59,6 @@
                         IsActive = true,
                         IsCanDelete = false,
                     });
-
                 }
                 context.ShippingStatus.AddRange(listShippingStatus);
                 context.SaveChanges();
@@ -83,7 +81,6 @@
                         IsActive = true,
                         IsCanDelete = false,
                     });
-
                 }
                 context.PaymentStatus.AddRange(listPaymentStatus);
                 context.SaveChanges();
@@ -106,8 +103,8 @@
                         IsActive = true,
                         IsCanDelete = false,
                     });
-
                 }
+
                 context.OrderStatus.AddRange(listOrderStatus);
                 context.SaveChanges();
             }
